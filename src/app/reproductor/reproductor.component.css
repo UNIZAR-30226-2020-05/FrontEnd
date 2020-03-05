@@ -1,0 +1,12 @@
+div {
+  font-family: Roboto, serif;
+  color: aliceblue;
+  position: fixed;
+  bottom: 2%;
+  left: 40%;
+}
+
+td{
+  border: aquamarine;
+  border-style: double;
+}
