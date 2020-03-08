@@ -7,6 +7,5 @@ div {
 }
 
 td{
-  border: aquamarine;
-  border-style: double;
+  border: double aquamarine;
 }
