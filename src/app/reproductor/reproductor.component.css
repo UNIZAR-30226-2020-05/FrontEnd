@@ -1,5 +1,6 @@
 div {
   font-family: Roboto, serif;
+  background-color: #0b1d19;
   color: aliceblue;
   position: fixed;
   bottom: 2%;
@@ -8,4 +9,8 @@ div {
 
 td{
   border: double aquamarine;
+}
+
+.icono-repr{
+  width: 40px;
 }

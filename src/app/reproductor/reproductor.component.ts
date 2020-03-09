@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReproductorComponent implements OnInit {
 
+  activo;
   constructor() { }
 
   ngOnInit(): void {
+    this.activo = false;
   }
 
 }

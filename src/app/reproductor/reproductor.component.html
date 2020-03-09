@@ -1,5 +1,11 @@
 <div>
   <table>
-    <td>PAUSA/PLAY</td><td>SIGUIENTE </td><td> FAVORITO.</td><td> VOL.CONTROL</td>
+    <td><img *ngIf="activo==false" class=icono-repr src="../../assets/play.png" (click)="activo=true" />
+        <img *ngIf="activo==true" class=icono-repr src="../../assets/pause.png" (click)="activo=false" />
+
+    </td>
+    <td> </td>
+    <td> {{ activo }}.</td><td> VOL.CONTROL</td>
+<th>REPRODUCCIÓN ACTIVA: {{ activo }}</th>
   </table>
 </div>
