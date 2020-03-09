@@ -9,8 +9,7 @@ export class ReproductorComponent implements OnInit {
 
   activo; // Indica si hay una cancion en reproducción activa
   tituloActual;
-  volumenAux; //Borrar
-  volumen : number; // Valor de 0 a 100 de volumen
+  volumenAux;
   ruta;
   cancion = new Audio();
   constructor() { }
@@ -58,26 +57,23 @@ export class ReproductorComponent implements OnInit {
 
   bajarVolumen(){
     if (this.cancion.volume > 0.0){
-
       this.cancion.volume-=0.2;
-      this.volumen = this.cancion.volume;
     }
   }
 
   subirVolumen(){
     if (this.cancion.volume < 1.0){
       this.cancion.volume+=0.2;
-      this.volumen = this.cancion.volume;
     }
   }
 
   muteVolumen(){
-    if (this.volumenAux!=0){
-      this.volumenAux = this.volumen;
-      this.cancion.volume = 0.0;
+    if (this.cancion.volume < 0.01){
+      this.cancion.volume = this.volumenAux;
     }
     else {
-      this.volumen = this.volumenAux;
+      this.volumenAux = this.cancion.volume;
+      this.cancion.volume = 0.0;
     }
 
   }
