@@ -36,7 +36,6 @@ export class ReproductorComponent implements OnInit {
 
   ngOnInit(): void {
     this.activo = false;
-    this.volumen = 1.0;
     this.gestionSonido();
   }
 
