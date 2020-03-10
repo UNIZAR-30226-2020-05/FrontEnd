@@ -1,6 +1,6 @@
 
   <p class="info-inferior">REPRODUCCIÓN ACTIVA: {{ activo }} <br/>
-    Tema en cola: {{tituloActual}}.mp3 <br/>
+    Tema en cola: {{temaEnCola}}.mp3 <br/>
     Lista de reproducción: sin implementar<br/>
     Timestamp: {{  cancion.currentTime }}<br/>
     Factor volumen: {{ cancion.volume }}
@@ -9,8 +9,8 @@
   <table>
     <td>
       <img class=icono-repr src="../../assets/previous.png" title="Anterior" (click)="avanzarLista()"/>
-      <img *ngIf="activo==false" class=icono-repr src="../../assets/play.png" title="Reproducir" (click)="playPause()" />
-      <img *ngIf="activo==true" class=icono-repr src="../../assets/pause.png" title="Pausar" (click)="playPause()" />
+      <img *ngIf="cancion.paused" class=icono-repr src="../../assets/play.png" title="Reproducir" (click)="playPause()" />
+      <img *ngIf="cancion.paused==false" class=icono-repr src="../../assets/pause.png" title="Pausar" (click)="playPause()" />
       <img class=icono-repr src="../../assets/next.png" title="Siguiente" (click)="avanzarLista()"/>
     </td>
     <td>

@@ -8,27 +8,32 @@ import { Component, OnInit } from '@angular/core';
 export class ReproductorComponent implements OnInit {
 
   activo; // Indica si hay una cancion en reproducción activa
-  tituloActual;
+  temaEnCola;
   volumenAux;
   ruta;
   cancion = new Audio();
   constructor() { }
 
   gestionSonido(){
-    this.cancion.src = "../../assets/media/test.mp3";
-    this.tituloActual = "Test";
+    this.cancion.src = '../../assets/media/test.mp3';
+    this.temaEnCola = 'TestLong';
     this.cancion.load();
   }
 
   avanzarLista(){
-    if (this.tituloActual=="TestLong"){
-      this.cancion.src = "../../assets/media/test.mp3";
-      this.tituloActual = "Test";
+    if (this.temaEnCola == 'Test'){
+      this.cancion.src = '../../assets/media/test.mp3';
+      this.temaEnCola = "TestLong"; //Siguiente a cargar
+      this.activo = true;
+    }
+    if (this.temaEnCola == 'TestRemoto'){
+      this.cancion.src = 'https://ro01-sycdn.kuwo.cn/resource/n3/83/80/1909245563.mp3';
+      this.temaEnCola = 'Test';
       this.activo = true;
     }
     else {
       this.cancion.src = "../../assets/media/testLong.mp3";
-      this.tituloActual = "TestLong";
+      this.temaEnCola = "TestRemoto";
       this.activo = true;
     }
 
