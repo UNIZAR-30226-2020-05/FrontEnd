@@ -24,10 +24,12 @@ export class ReproductorComponent implements OnInit {
     if (this.tituloActual=="TestLong"){
       this.cancion.src = "../../assets/media/test.mp3";
       this.tituloActual = "Test";
+      this.activo = true;
     }
     else {
       this.cancion.src = "../../assets/media/testLong.mp3";
       this.tituloActual = "TestLong";
+      this.activo = true;
     }
 
     this.cancion.load();

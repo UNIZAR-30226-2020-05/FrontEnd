@@ -1,0 +1,16 @@
+.panel-social{
+  font-family: Roboto, serif;
+  color: aliceblue;
+  border: dashed antiquewhite;
+  position: absolute;
+  height: 80vh;
+  width: 40vh;
+  top: 2%;
+  right: 0.5%;
+
+}
+
+.nombre-user{
+  text-align: center;
+  border: solid whitesmoke;
+}

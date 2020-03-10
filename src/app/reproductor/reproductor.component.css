@@ -1,14 +1,21 @@
-div {
+
+.info-inferior{
+  font-family: Roboto, serif;
+  color: aliceblue;
+  position: fixed;
+  bottom: 10%;
+  left: 40%;
+}
+td{
+  border: double aquamarine;
+}
+
+.barra-inferior{
   font-family: Roboto, serif;
   background-color: #0b1d19;
-  color: aliceblue;
   position: fixed;
   bottom: 2%;
   left: 40%;
-}
-
-td{
-  border: double aquamarine;
 }
 
 .icono-repr{
