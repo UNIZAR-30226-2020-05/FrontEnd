@@ -10,7 +10,37 @@
 
 }
 
+.foto-perfil{
+  border-radius: 50%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
+  vertical-align:middle;
+  width: 5vh;
+}
+
 .nombre-user{
   text-align: center;
   border: solid whitesmoke;
+}
+
+.boton-aux{
+  position: absolute;
+  bottom: 10%;
+  right: 5%;
+}
+
+p{
+  font-size: 24px;
+  text-align: center;
+  font-style: italic;
+}
+
+
+button {
+  transition-duration: 0.4s;
+  background-color: #358c83;
+  border-radius: 10px;
+}
+
+button:hover {
+  background-color: #347168; /* Green */
+  color: white;
 }
