@@ -1,8 +1,26 @@
+.panel{
+  font-family: Roboto;
+}
 .titleL{
   font-palette: light;
   color: aliceblue;
   position: absolute;
-  font-size: 15px;
+  font-size: 20px;
   top:200px;
   margin-left: 15px;
+}
+.CrearList{
+  font-palette: light;
+  color: aliceblue;
+  position: absolute;
+  font-size: 15px;
+  top:250px;
+  margin-left: 15px;
+  text-align: center;
+
+}
+.icono\+{
+  border-radius: 50%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
+  vertical-align:middle;
+  width: 5vh;
 }
