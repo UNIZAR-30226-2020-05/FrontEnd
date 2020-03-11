@@ -10,7 +10,6 @@ export class ReproductorComponent implements OnInit {
   activo; // Indica si hay una cancion en reproducción activa
   temaEnCola;
   volumenAux;
-  ruta;
   cancion = new Audio();
   constructor() { }
 
