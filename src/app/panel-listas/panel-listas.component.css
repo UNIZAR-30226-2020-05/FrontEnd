@@ -12,15 +12,34 @@
 .CrearList{
   font-palette: light;
   color: aliceblue;
+  float: left;
   position: absolute;
-  font-size: 15px;
-  top:250px;
-  margin-left: 15px;
-  text-align: center;
+  font-size: 16px;
+  top:240px;
+  margin-left: 40px;
 
 }
-.icono\+{
-  border-radius: 50%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
-  vertical-align:middle;
-  width: 5vh;
+.iconoAñadir{
+  border-radius: 20%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
+  vertical-align: middle;
+  width: 35px;
+  height: 35px;
+  margin-left: -27px;
+}
+.fav{
+  font-palette: light;
+  color: aliceblue;
+  float: left;
+  position: absolute;
+  font-size: 16px;
+  top:280px;
+  margin-left: 40px;
+
+}
+.iconoFav{
+  border-radius: 20%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
+  vertical-align: middle;
+  width: 35px;
+  height: 35px;
+  margin-left: -27px;
 }
