@@ -5,6 +5,23 @@
   <p *ngIf="listaVacia">Tu lista de amigos está actualmente vacía.<br/><br/>
   Puedes agregar usuarios a tu lista para compartir canciones y listas con ellos.</p>
 
-  <button title="NO IMPLEMENTADO">Buscar usuarios de CS Music</button>
+
+  <table *ngIf="!listaVacia" class="listaAmigos">
+    <tr ><td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/2.jpg"></td>
+      <td >Perico256</td>
+    </tr>
+    <tr><td>Perico Palotes</td></tr><br/>
+
+    <!-- Construir lista con un ngFor --->
+
+    <tr><td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/3.jpg"></td>
+      <td>Sara07</td>
+    </tr>
+    <tr><td>Sara Lopez</td></tr>
+    </table>
+
+
+
+  <button class="boton-aux2" title="NO IMPLEMENTADO" >Buscar usuarios de CS Music</button>
 </div>
 <button class="boton-aux" (click)="listaVacia=!listaVacia;">Alternar Lista vacía</button>

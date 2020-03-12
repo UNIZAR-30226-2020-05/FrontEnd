@@ -27,6 +27,13 @@
   right: 5%;
 }
 
+.boton-aux2{
+  position: absolute;
+  alignment: center;
+  bottom: 10%;
+  right: 17%;
+}
+
 p{
   font-size: 24px;
   text-align: center;
@@ -41,6 +48,11 @@ button {
 }
 
 button:hover {
-  background-color: #347168; /* Green */
+  background-color: #124828; /* Green */
   color: white;
+}
+
+td{
+  alignment: center;
+  margin-inside: 3px;
 }
