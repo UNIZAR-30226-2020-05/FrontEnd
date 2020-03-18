@@ -1,12 +1,11 @@
 .barraSearch{
   -webkit-appearance: textfield;
   -webkit-box-sizing: content-box;
-  font-family: inherit;
-  font-size: 100%;
-  border: solid 1px #ccc;
+  font-family: Roboto;
+  font-size: 16px;
+  color: aliceblue;
+  border: solid 2px #8eff3b;
+  background-color: #ff00ab;
   padding: 9px 18px;
   width: 200px;
-  -webkit-transition: all .5s;
-  -moz-transition: all .5s;
-  transition: all .5s;
 }
