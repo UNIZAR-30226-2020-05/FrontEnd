@@ -6,7 +6,7 @@
   color: aliceblue;
   position: absolute;
   font-size: 20px;
-  top:200px;
+  top:375px;
   margin-left: 15px;
 }
 .CrearList{
@@ -15,7 +15,7 @@
   float: left;
   position: absolute;
   font-size: 16px;
-  top:240px;
+  top:410px;
   margin-left: 40px;
 
 }
@@ -32,7 +32,7 @@
   float: left;
   position: absolute;
   font-size: 16px;
-  top:280px;
+  top:450px;
   margin-left: 40px;
 
 }
@@ -43,3 +43,92 @@
   height: 35px;
   margin-left: -27px;
 }
+.titleP{
+  font-palette: light;
+  color: aliceblue;
+  position: absolute;
+  font-size: 20px;
+  top:90px;
+  margin-left: 15px;
+}
+.ListP{
+  font-palette: light;
+  color: aliceblue;
+  float: left;
+  position: absolute;
+  font-size: 16px;
+  top:120px;
+  margin-left: 40px;
+
+}
+.addP{
+  border-radius: 20%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
+  vertical-align: middle;
+  width: 35px;
+  height: 35px;
+  margin-left: -27px;
+}
+.fave{
+  font-palette: light;
+  color: aliceblue;
+  float: left;
+  position: absolute;
+  font-size: 16px;
+  top:160px;
+  margin-left: 40px;
+
+}
+.favP{
+  border-radius: 20%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
+  vertical-align: middle;
+  width: 35px;
+  height: 35px;
+  margin-left: -27px;
+}
+
+.cuadrado {
+  width: 100vh;
+  max-width: 180px;
+  height: 100vh;
+  max-height: 180px;
+  position: absolute;
+  bottom: 60px;
+  margin-left: 175px;
+  border: aliceblue solid ;
+  background-image: url("../../assets/coronavirus.jpeg");
+  background-size: auto;
+}
+
+.titulo{
+  font-family: Roboto;
+  font-size: 16px;
+  color: aliceblue;
+  bottom: 30px;
+  float: left;
+  margin-left: 171px;
+  text-align: center;
+  position: absolute;
+}
+.heart{
+  border-radius: 20%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
+  vertical-align: middle;
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  margin-left:330px;
+  text-align: center;
+  bottom: 30px;
+}
+
+.autor{
+  font-family: Roboto;
+  font-weight: lighter;
+  font-size: 14px;
+  color: aliceblue;
+  bottom: 15px;
+  float: left;
+  margin-left: 170px;
+  text-align: center;
+  position: absolute;
+}
+
