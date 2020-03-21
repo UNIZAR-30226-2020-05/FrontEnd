@@ -2,7 +2,7 @@
 
   <p class="nombre-user">
     <img class="foto-perfil" src="../../assets/profile-pics/1.jpg"/>&nbsp;Usuario
-    &nbsp;&nbsp;<img class="icono-config" src="../../assets/ajustes.png"/> </p>
+    &nbsp;&nbsp;<img style="cursor: not-allowed"  class="icono-config" src="../../assets/ajustes.png"/> </p>
    <br/>
   <p *ngIf="listaVacia">Tu lista de amigos está actualmente vacía.<br/><br/>
   Puedes agregar usuarios a tu lista para compartir canciones y listas con ellos.</p>
@@ -54,6 +54,6 @@
 
 
 </div>
-  <button class="boton-aux2" title="NO IMPLEMENTADO" >Buscar usuarios de CS Music</button>
+  <button style="cursor: not-allowed" class="boton-aux2" title="NO IMPLEMENTADO" >Buscar usuarios de CS Music</button>
 
 <button class="boton-aux" (click)="listaVacia=!listaVacia;">Alternar Lista vacía</button>
