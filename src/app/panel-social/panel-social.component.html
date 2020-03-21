@@ -1,27 +1,59 @@
 <div class="panel-social">
 
   <p class="nombre-user">
-    <img class="foto-perfil" src="../../assets/profile-pics/1.jpg">&nbsp;Usuario</p> <br/>
+    <img class="foto-perfil" src="../../assets/profile-pics/1.jpg"/>&nbsp;Usuario
+    &nbsp;&nbsp;<img class="icono-config" src="../../assets/ajustes.png"/> </p>
+   <br/>
   <p *ngIf="listaVacia">Tu lista de amigos está actualmente vacía.<br/><br/>
   Puedes agregar usuarios a tu lista para compartir canciones y listas con ellos.</p>
 
-
+  <!-- Construir lista con un ngFor --->
   <table *ngIf="!listaVacia" class="listaAmigos">
-    <tr ><td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/2.jpg"></td>
-      <td >Perico256</td>
-    </tr>
-    <tr><td>Perico Palotes</td></tr><br/>
 
-    <!-- Construir lista con un ngFor --->
 
-    <tr><td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/3.jpg"></td>
-      <td>Sara07</td>
+    <tr>
+      <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/2.jpg"></td>
+      <td > Perico256</td>
     </tr>
-    <tr><td>Sara Lopez</td></tr>
+    <tr> <td> Perico Palotes</td> </tr>
+    <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
+      <i class="ultima-cancion"> Signs of Life · Poets of the Fall</i> </td>
+    </tr>
+
+    <br/>
+
+  <!-- Construir lista con un ngFor --->
+
+
+    <tr>
+      <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/5.jpg"></td>
+      <td > Juan1992</td>
+    </tr>
+    <tr> <td> Juan Castillo</td> </tr>
+    <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
+      <i class="ultima-cancion"> Warriors of the World · Manowar</i> </td>
+    </tr>
+
+    <br/>
+
+    <tr>
+      <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
+      <td > Sara07</td>
+    </tr>
+    <tr> <td> Sara López</td> </tr>
+    <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
+      <i class="ultima-cancion"> Rainbow · Tyfoon</i> </td>
+    </tr>
+
+    <br/>
+
+
+
+
     </table>
 
 
-
-  <button class="boton-aux2" title="NO IMPLEMENTADO" >Buscar usuarios de CS Music</button>
 </div>
+  <button class="boton-aux2" title="NO IMPLEMENTADO" >Buscar usuarios de CS Music</button>
+
 <button class="boton-aux" (click)="listaVacia=!listaVacia;">Alternar Lista vacía</button>

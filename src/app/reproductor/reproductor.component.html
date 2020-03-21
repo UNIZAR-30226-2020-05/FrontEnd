@@ -1,24 +1,28 @@
 
-  <p class="info-inferior">REPRODUCCIÓN ACTIVA: {{ activo }} <br/>
+  <p  (change)="cancion.currentTime" class="info-inferior">REPRODUCCIÓN ACTIVA: {{ activo }} <br/>
     Tema en cola: {{temaEnCola}}.mp3 <br/>
     Lista de reproducción: sin implementar<br/>
-    Timestamp: {{  cancion.currentTime }}<br/>
+    Timestamp: {{ mostrarTiempo() }}<br/>
     Factor volumen: {{ cancion.volume }}
-  </p>
-  <div class="barra-inferior" >
+  <div *ngIf="!logeado" class="barra-inferior" >
   <table>
     <td>
       <img class=icono-repr src="../../assets/previous.png" title="Anterior" (click)="avanzarLista()"/>
       <img *ngIf="cancion.paused" class=icono-repr src="../../assets/play.png" title="Reproducir" (click)="playPause()" />
       <img *ngIf="cancion.paused==false" class=icono-repr src="../../assets/pause.png" title="Pausar" (click)="playPause()" />
       <img class=icono-repr src="../../assets/next.png" title="Siguiente" (click)="avanzarLista()"/>
+
+
+
+
+
+
     </td>
     <td>
     &nbsp;&nbsp;
      <img class=icono-repr src="../../assets/volum-dwn.png" title="Bajar Volumen"(click)="bajarVolumen()" />
       <img class=icono-repr src="../../assets/volum-up.png" title="Subir Volumen" (click)="subirVolumen()" /></td>
     <td>&nbsp;&nbsp; <img class=icono-repr src="../../assets/mute.png" title="Silenciar"(click)="muteVolumen()" /></td>
-
 
   </table>
 

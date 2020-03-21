@@ -1,10 +1,11 @@
 .panel-social{
   font-family: Roboto, serif;
   color: aliceblue;
-  border: dashed antiquewhite;
+  border: solid #0b1713;
   position: absolute;
+  overflow: auto;
   height: 80vh;
-  width: 40vh;
+  width: 43vh;
   top: 2%;
   right: 0.5%;
 
@@ -13,12 +14,21 @@
 .foto-perfil{
   border-radius: 50%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
   vertical-align:middle;
+  margin-right: auto;
   width: 5vh;
 }
 
+.icono-config{
+  position: absolute;
+  right: 8%;
+  vertical-align: middle;
+  width: 30px;
+}
+
+
 .nombre-user{
   text-align: center;
-  border: solid whitesmoke;
+  border: solid #0b1713;
 }
 
 .boton-aux{
@@ -30,8 +40,8 @@
 .boton-aux2{
   position: absolute;
   alignment: center;
-  bottom: 10%;
-  right: 17%;
+  bottom: 5%;
+  right: 4%;
 }
 
 p{
@@ -55,4 +65,12 @@ button:hover {
 td{
   alignment: center;
   margin-inside: 3px;
+}
+
+.listaAmigos{
+  margin-left: 5%;
+}
+
+.ultima-cancion{
+  font-family: Calibri;
 }

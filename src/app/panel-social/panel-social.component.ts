@@ -12,7 +12,7 @@ export class PanelSocialComponent implements OnInit {
   listaVacia;
 
   ngOnInit(): void {
-    this.listaVacia=true;
+    this.listaVacia=false;
   }
 
 }

@@ -11,7 +11,8 @@ export class ReproductorComponent implements OnInit {
   temaEnCola;
   volumenAux;
   cancion = new Audio();
-  constructor() { }
+  logeado;
+  constructor() { this.logeado=false;}
 
   gestionSonido(){
     this.cancion.src = '../../assets/media/test.mp3';
@@ -43,6 +44,9 @@ export class ReproductorComponent implements OnInit {
   ngOnInit(): void {
     this.activo = false;
     this.gestionSonido();
+
+    
+
   }
 
   playPause() {
@@ -53,11 +57,14 @@ export class ReproductorComponent implements OnInit {
       this.cancion.play();
       this.activo = true;
     }
+
   }
 
+  mostrarTiempo(){
+    return this.cancion.currentTime;
+  }
 
   audioStop(){
-
     }
 
   bajarVolumen(){
