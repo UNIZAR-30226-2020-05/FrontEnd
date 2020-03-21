@@ -1,0 +1,53 @@
+<div *ngIf="registro1" class="registro"><br/><br/>
+  <img src="../../assets/logo-white.png" class="logoSuperior">
+  <button class="boton-aux" (click)="registro1=!registro1;">Cambiar a logeado</button>
+
+  <p>Registro de nuevo usuario</p>
+  <form>
+    Alias de usuario:<br/>
+    <input  type="text"> <br/><br/>
+
+    Nombre:<br/>
+    <input  type="text"><br/><br/>
+
+    Apellidos:<br/>
+    <input  type="text"><br/><br/>
+
+    Contraseña:<br/>
+    <input  type="password"><br/><br/>
+
+    Repita contraseña:<br/>
+    <input  type="password"><br/><br/>
+
+    <button (click)="registro1=false; registro2=true;">Siguiente</button><br/><br/>
+  </form>
+</div>
+
+<!--- FASE 2 ---->
+<div *ngIf="registro2" class="registro"><br/><br/>
+  <img src="../../assets/logo-white.png" class="logoSuperior">
+  <button class="boton-aux" (click)="registro1=!registro1;">Cambiar a logeado</button>
+
+  <p>Registro de nuevo usuario</p>
+  <form>
+    Elija su imagen de perfil:<br/><br/>
+
+    <img class="muestra-imagenes" src="../../assets/profile-pics/1.jpg"
+    (click)="imageSeleccion=1;"/> Genérico
+    <img class="muestra-imagenes" src="../../assets/profile-pics/2.jpg"
+    (click)="imageSeleccion=2;"/> Les Paul
+    <img class="muestra-imagenes" src="../../assets/profile-pics/3.jpg"
+     (click)="imageSeleccion=3;"/> Eiffel <br/>
+    <img class="muestra-imagenes" src="../../assets/profile-pics/4.jpg"
+     (click)="imageSeleccion=4;"/> Snoopy
+    <img class="muestra-imagenes" src="../../assets/profile-pics/5.jpg"
+     (click)="imageSeleccion=5;"/> Grim
+    <img class="muestra-imagenes" src="../../assets/profile-pics/6.jpg"
+     (click)="imageSeleccion=6;"/> Smiles
+    <br/><br/>
+    Ha seleccionado la imagen número {{imageSeleccion}}
+    <br/><br/>
+    <button style="cursor: not-allowed" (click)="registro1=false; registro2=true;">Siguiente</button><br/><br/>
+    <button (click)="registro1=false; registro2=false;">Cerrar registro</button><br/><br/>
+  </form>
+</div>
