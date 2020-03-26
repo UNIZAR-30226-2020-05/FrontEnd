@@ -6,6 +6,7 @@ import { ReproductorComponent } from './reproductor/reproductor.component';
 import { PanelSocialComponent } from './panel-social/panel-social.component';
 import { PanelListasComponent } from './panel-listas/panel-listas.component';
 import { RegistroComponent } from './registro/registro.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { RegistroComponent } from './registro/registro.component';
     PanelSocialComponent,
     PanelListasComponent,
     RegistroComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule

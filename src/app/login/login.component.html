@@ -1,0 +1,16 @@
+<div *ngIf="!logeado" class="log"><br/><br/>
+  <img src="../../assets/logo-white.png" class="logoSuperior">
+  <div class="container">
+    <label class="user"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required>
+
+    <label class="passw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required>
+
+    <button (click)="logeado=!logeado" type="submit">Login</button>
+  </div>
+
+    <button (click)="logeado=true; sendMessageFather() " type="button" class="regbtn">Registrarse</button>
+    <span class="psw"> <a href="#">password?</a></span>
+
+</div>
