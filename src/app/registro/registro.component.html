@@ -14,13 +14,16 @@
     Apellidos:<br/>
     <input  type="text"><br/><br/>
 
+    Fecha Nacimiento:<br/>
+    <input required="required" type="text"><br/><br/>
+
     Contraseña:<br/>
     <input  type="password"><br/><br/>
 
     Repita contraseña:<br/>
     <input  type="password"><br/><br/>
 
-    <button (click)="registro1=false; registro2=true;">Siguiente</button><br/><br/>
+    <button (click)="registro1=false; registro2=true; registro3=false;">Siguiente</button><br/><br/>
   </form>
 </div>
 
@@ -48,7 +51,81 @@
     <br/><br/>
     Ha seleccionado la imagen número {{imageSeleccion}}
     <br/><br/>
-    <button style="cursor: not-allowed" (click)="registro1=false; registro2=true;">Siguiente</button><br/><br/>
-    <button (click)="registro1=false; registro2=false;">Cerrar registro</button><br/><br/>
+    <button (click)="registro1=false; registro2=false; registro3=true;">Siguiente</button><br/><br/>
+  </form>
+</div>
+
+<!--- FASE 3 ---->
+<div *ngIf="registro3" class="registro"><br/><br/>
+  <img src="../../assets/logo-white.png" class="logoSuperior">
+
+  <p>Registro de nuevo usuario</p>
+
+  <p class="condiciones">
+    Terminos y condiciones de la plataforma:<br/><br/>
+
+    <!-- Bloque de condiciones de uso -->
+      El Servicio de Carol Shaw Music y el Contenido son propiedad de Carol Shaw Music o de los licenciantes de Carol Shaw Music. Le otorgamos un permiso limitado, no exclusivo y revocable para que utilice el Servicio de Carol Shaw Music, y un permiso limitado, no exclusivo y revocable para hacer un uso personal y no comercial del Contenido (conjuntamente, “Acceso”). Este Acceso permanecerá en vigor hasta o a menos que usted o Carol Shaw Music lo terminen. Usted declara y acepta que usará el Servicio de Carol Shaw Music y el Contenido para fines personales y no comerciales, y que no redistribuirá ni transferirá el Servicio de Carol Shaw Music ni su Contenido. Las aplicaciones de software de Carol Shaw Music y todo el Contenido no se le venden ni transfieren, y Carol Shaw Music y sus licenciantes conservan la titularidad de todas las copias de las aplicaciones de software de Carol Shaw Music y su Contenido, incluso después de su instalación en sus ordenadores personales, dispositivos móviles, tabletas, dispositivos portátiles, altavoces y/o cualquier otro dispositivo similar (“Dispositivos”).<br/><br/>
+
+      Todos los signos distintivos Carol Shaw Music, las marcas, las marcas de servicio, los nombres comerciales, los logotipos, los nombres de dominio y cualquier otra característica de la marca Carol Shaw Music (“Signos distintivos Spotify”) son propiedad exclusiva de Carol Shaw Music o de sus licenciantes. Los Contratos no le otorgan ningún derecho para usar los Signos Distintivos Carol Shaw Music ya sea para fines comerciales o no comerciales.<br/><br/>
+
+      Usted se obliga a respetar nuestras Normas de Usuario y no utilizar el Servicio de Carol Shaw Music, el Contenido ni ninguna parte de los mismos de ninguna forma que no esté expresamente autorizada por los Contratos. Salvo los derechos expresamente otorgados a usted mediante estos Contratos, Carol Shaw Music no le otorga derechos, títulos ni intereses respecto al Servicio de Carol Shaw Music o al Contenido.<br/><br/>
+
+      El software de terceros (por ejemplo, bibliotecas de software de código abierto) incluido en el Servicio de Carol Shaw Music se pone a su disposición en virtud de los términos de licencia de la biblioteca de terceros correspondiente, tal como se indica en la sección de ayuda o configuración de nuestro escritorio o cliente móvil y/o en nuestro sitio web.<br/><br/>
+
+      6 Aplicaciones y Dispositivos de Terceros<br/>
+      El Servicio de Carol Shaw Music está integrado o puede, de cualquier otro modo, interactuar con aplicaciones, sitios web y servicios de terceros (“Aplicaciones de Terceros”) y Dispositivos de terceros para que pongan a su disposición el Servicio de Carol Shaw Music. Estas Aplicaciones y Dispositivos de Terceros pueden tener sus propios términos y condiciones de uso y políticas de privacidad, y la utilización por su parte de estas Aplicaciones y Dispositivos de Terceros se regirá y estará sujeta a dichos términos y condiciones y políticas de privacidad. Usted comprende y acepta que Carol Shaw Music no suscribe ni es responsable de los comportamientos, características o contenidos de las Aplicaciones o Dispositivos de Terceros o de cualquier negocio jurídico que usted pueda llegar a entablar con el proveedor de cualquiera de estas Aplicaciones y Dispositivos de Terceros, ni Carol Shaw Music garantiza la compatibilidad o compatibilidad continuada de las Aplicaciones y Dispositivos de Terceros con el Servicio.<br/><br/>
+
+      7 Usted es el único responsable de todo el Contenido del Usuario que publique. Carol Shaw Music no se responsabilizará del Contenido del Usuario, ni tampoco avalará ninguna opinión contenida en cualquier Contenido del Usuario. USTED ACEPTA QUE SI ALGUIEN PRESENTA UNA RECLAMACIÓN EN CONTRA DE Carol Shaw Music RELACIONADA CON EL CONTENIDO DEL USUARIO PUBLICADO POR USTED, USTED, EN LA MEDIDA EN QUE LO PERMITA LA LEGISLACIÓN LOCAL, INDEMNIZARÁ Y EXIMIRÁ A Carol Shaw Music DE CUALESQUIERA DAÑOS, PÉRDIDAS Y GASTOS DE CUALQUIER ÍNDOLE (INCLUIDOS COSTES Y HONORARIOS RAZONABLES DE ABOGADOS) QUE PUDIERAN DERIVARSE DE DICHA RECLAMACIÓN.<br/><br/>
+
+      8 Derechos que usted nos otorga<br/>
+      Como contraprestación por los derechos que le hemos otorgado a usted en virtud de los Contratos, usted nos otorga el derecho a: (1) permitir que el Servicio de Carol Shaw Music utilice el procesador, el ancho de banda y el hardware de almacenamiento de su Dispositivo para facilitar el funcionamiento del Servicio, (2) ofrecerle publicidad y otro tipo de información, y (3) permitir que nuestros socios comerciales realicen lo mismo. En cualquier parte del Servicio de Carol Shaw Music, el Contenido al que tenga acceso, incluyendo su selección y ubicación, puede verse afectado por cuestiones comerciales, que incluyen contratos de Carol Shaw Music con terceros. Determinado Contenido licenciado por, proporcionado a, creado por o de cualquier otra forma publicado por parte de Carol Shaw Music (p.ej., podcasts) podrá contener publicidad como parte del Contenido. El Servicio de Carol Shaw Music pone dicho Contenido a su disposición sin modificarlo.<br/><br/>
+
+      Si usted aporta comentarios, ideas o sugerencias a Carol Shaw Music relacionadas con el Servicio de Carol Shaw Music o el Contenido (“Comentarios”), acepta que los Comentarios no son confidenciales, y autoriza a Carol Shaw Music a utilizarlos sin restricciones y sin que Carol Shaw Music deba abonarle ningún pago por los mismos. Los Comentarios son un tipo de Contenido del Usuario.<br/><br/>
+
+      Usted le otorga a Carol Shaw Music una licencia no exclusiva, transferible, sublicenciable, gratuita, indefinida (o en aquellas jurisdicciones que no lo permiten, durante un período equivalente a la duración que estos Contratos más veinte (20) años), irrevocable, totalmente pagada y mundial para utilizar, reproducir, poner a disposición del público (p. ej., interpretar o mostrar), publicar, traducir, modificar, crear obras derivadas y distribuir cualquier Contenido del Usuario relacionado con el Servicio a través de cualquier medio, ya sea solo o combinado con otro Contenido o material, de cualquier modo y por cualquier medio, método o tecnología, que existan actualmente o que se creen en un futuro. Además de los derechos específicamente otorgados por el presente, usted conserva la titularidad de todos los derechos, incluyendo los derechos de propiedad industrial e intelectual, del Contenido del Usuario. Si procede y la legislación aplicable lo permitiese, usted también acepta renunciar y no hacer valer cualquier “derecho moral” o derechos equivalentes, como su derecho a que lo identifiquen como el autor del Contenido del Usuario, que incluye Comentarios, y su derecho a objetar al trato despectivo de dicho Contenido del Usuario.<br/><br/>
+
+      9 Normas para el usuario<br/>
+      Carol Shaw Music respeta los derechos de propiedad industrial e intelectual y espera que usted haga lo mismo. Hemos establecido algunas reglas básicas que deberá respetar al usar el Servicio para que todos podamos seguir disfrutando de Carol Shaw Music. Usted debe respetar estas reglas y animar a otros para que hagan lo mismo. Las siguientes acciones no están permitidas bajo ninguna circunstancia:<br/><br/>
+
+      copiar, redistribuir, reproducir, “ripear” (ripping), grabar, transferir, representar o mostrar en público, retransmitir o poner a disposición del público parte alguna del Servicio de Carol Shaw Music o del Contenido, o utilizar el Servicio de Carol Shaw Music o el Contenido de cualquier otra manera que no esté expresamente permitida en virtud de estos Contratos o la ley aplicable o que, de alguna manera, viole los derechos de propiedad industrial e intelectual (tales como los derechos de autor) del Servicio de Carol Shaw Music o del Contenido o alguna parte del mismo;<br/>
+      utilizar el Servicio de Carol Shaw Music para importar o copiar archivos locales sobre los que usted no tenga un derecho legal a importar ni copiar de esta manera;<br/>
+      transferir copias del Contenido en caché desde un Dispositivo autorizado a otro Dispositivo por cualquier medio;<br/>
+      utilizar técnicas de ingeniería inversa, descompilar, desensamblar, modificar o crear obras derivadas basadas en el Servicio de Carol Shaw Music, el Contenido o alguna parte del mismo, a menos que lo permita la ley aplicable. [Si la ley aplicable le permite descompilar cualquier parte del Servicio de Carol Shaw Music o del Contenido cuando sea necesario a fin de obtener la información necesaria para crear un programa independiente que pueda funcionar con el Servicio de Carol Shaw Music o con otro programa, la información que usted obtenga de dichas actividades (a) sólo podrá ser utilizada para el objetivo anterior, (b) no podrá ser divulgada ni comunicada sin el consentimiento previo por escrito de Carol Shaw Music a ningún tercero al que no sea necesario realizar dicha divulgación o comunicación a fin de alcanzar dicho objetivo, y (c) no podrá ser utilizada para crear un software o servicio sustancialmente similar en cuanto a su expresión a cualquier parte del Servicio de Carol Shaw Music o del Contenido];<br/>
+      neutralizar cualquier tecnología utilizada por Carol Shaw Music, sus licenciantes o terceros para proteger el Contenido o el Servicio;<br/>
+      vender, alquilar, sublicenciar o arrendar cualquier parte del Servicio de Carol Shaw Music o del Contenido;<br/>
+      neutralizar las restricciones territoriales impuestas por Carol Shaw Music o sus licenciantes;<br/>
+      incrementar de manera ficticia el recuento de reproducciones, el recuento de seguidores o manipular de otra manera el Servicio mediante (i) la utilización de un bot, un script u otro proceso automatizado; (ii) la compensación o aceptación de cualquier forma de compensación (económica o de otro tipo), o (iii) cualesquiera otros medios;<br/>
+      eliminar o modificar cualesquiera indicaciones o avisos de derechos de autor, marca registrada o de otros derechos de propiedad industrial e intelectual incluidos en el Contenido o en el Servicio o proporcionados a través del mismo (incluyendo para fines relativos a la ocultación o modificación de las indicaciones de titularidad o la fuente del Contenido);<br/>
+      evitar o bloquear anuncios en el Servicio Carol Shaw Music, o crear o distribuir herramientas diseñadas para bloquear anuncios en el Servicio Carol Shaw Music<br/>
+      proporcionar su contraseña a otra persona o usar el nombre de usuario y contraseña de otra persona;<br/>
+      “rastrear” (crawling) el Servicio de Carol Shaw Music o usar medios automatizados (como, por ejemplo, bots, scrapers y spiders) para visualizar, acceder o recoger información de Carol Shaw Music o del Servicio de Carol Shaw Music;<br/>
+      vender una cuenta de usuario o lista de reproducción o aceptar u ofrecerse a aceptar cualquier compensación, pago monetario o similar para modificar el nombre de una cuenta o lista de reproducción o el contenido de una cuenta o lista de reproducción; o<br/>
+      promocionar de manera ficticia el Contenido por medios automatizados o de otra forma.<br/>
+      Respete a Carol Shaw Music, a los propietarios del Contenido y a los otros usuarios del Servicio de Carol Shaw Music. No participe en actividades, publique Contenido del Usuario, ni registre o utilice un nombre de usuario que tenga las siguientes características o que incluya material con estas características:<br/><br/>
+
+      sea ofensivo, abusivo, difamatorio, pornográfico, amenazante u obsceno;<br/>
+      sea ilegal, tenga como objetivo fomentar o cometer un acto ilegal de cualquier tipo, incluyendo infracciones de derechos de propiedad industrial e intelectual, derechos de privacidad o derechos de propiedad de Carol Shaw Music o de un tercero;<br/>
+      incluya su contraseña o incluya intencionadamente la contraseña de otro usuario o los datos personales de terceros, o tenga como objetivo solicitar dichos datos personales;<br/>
+      incluya contenido malintencionado como malware, troyanos o virus, o impida de otro modo el acceso de un usuario al Servicio;<br/>
+      tenga como fin o consiga efectivamente acosar o intimidar a otros usuarios;<br/>
+      usurpe o tergiverse su afiliación con otro usuario, persona o entidad, o resulte de otro modo fraudulenta, falsa, engañosa o errónea;<br/>
+      implique la transmisión de correos masivos no deseados u otras formas de correo masivo (“correo no deseado”), correo basura, mensajes en cadena o elementos similares, incluso a través de la bandeja de entrada de Carol Shaw Music;<br/>
+      incluya actividades comerciales o de ventas, como publicidad, promociones, concursos, sorteos o esquemas piramidales, que no estén expresamente autorizados por Carol Shaw Music;
+      incluya enlaces a referencias o promocione de otro modo productos o servicios comerciales, salvo que estén expresamente autorizados por Carol Shaw Music;<br/>
+      interfiera con el Servicio de Carol Shaw Music o de alguna manera lo perjudique, manipule, viole o intente investigar, explorar o examinar vulnerabilidades en el Servicio o en los sistemas o redes informáticas de Carol Shaw Music, en las reglas de uso o en cualquier componente de seguridad, medida de autenticación de Carol Shaw Music o cualquier otra medida de seguridad relativa al Servicio, el Contenido o una parte del mismo; o<br/>
+      contravenga lo establecido en los Contratos, según lo determine Carol Shaw Music.<br/>
+      Usted declara y acepta que publicar cualquier Contenido del Usuario que viole estas Normas del Usuario (o que Carol Shaw Music razonablemente considere contrario a estas Normas del Usuario) puede provocar la cancelación o suspensión inmediata de su cuenta Carol Shaw Music. También acepta que Carol Shaw Music pueda reclamar su nombre de usuario, cuando hacerlo nos resulte razonable, incluyendo en caso de que usted haya contravenido los Contratos.<br/><br/>
+
+      Por favor, sea considerado al utilizar el Servicio de Carol Shaw Music y lo que comparta en el mismo. El Servicio de Carol Shaw Music incluye funciones de red social e interactivas, que incluyen la posibilidad de publicar Contenido del Usuario, compartir contenidos y hacer que cierta información sobre usted devenga pública. Recuerde que la información pública o compartida la pueden utilizar o volver a compartir otros usuarios en Carol Shaw Music o en Internet, por lo que le recomendamos que use Carol Shaw Music con precaución y tenga en cuenta la configuración de su cuenta. Carol Shaw Music no es responsable de su decisión de publicar material en el Servicio.<br/><br/>
+
+      Su contraseña protege su cuenta de usuario, siendo usted el único responsable de que ésta sea segura y secreta. Usted comprende que es responsable de todo uso (incluyendo cualquier uso no autorizado) que se haga de su nombre de usuario y contraseña en el Servicio. Si pierde o le roban su nombre de usuario o contraseña, o si sospecha que alguien ha accedido a su cuenta sin autorización, debe informarnos de inmediato y cambiar su contraseña lo antes posible.
+
+  </p>
+  <form>
+   <input type="checkbox" (click)="alternarAceptado()"> Acepto las condiciones y terminos de uso <br/><br/>
+    <!--<button style="cursor: not-allowed" (click)="registro1=true; registro2=false;">Volver</button> -->
+    <button *ngIf="aceptadoT" (click)="registro1=false; registro2=false; registro3=false; ">Finalizar registro</button>
+    <button *ngIf="!aceptadoT" disabled class="denegado"> Finalizar registro</button><br/><br/>
   </form>
 </div>

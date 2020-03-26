@@ -4,11 +4,13 @@
 }
 
 .registro {
+
   display: block;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
+  bottom: 20%;
   width: 100%;
   height: 100%;
   overflow: auto;
@@ -17,7 +19,17 @@
   font-style: normal;
   font-family: Roboto, serif;
   color: aliceblue;
+
  }
+
+.condiciones{
+  margin-left: 10%;
+  margin-right: 10%;
+  font-style: normal;
+  text-align: justify-all;
+  font-family: Roboto, serif;
+  font-size: 14px;
+}
 
 p{
   font-size: 24px;
@@ -38,6 +50,16 @@ button:hover {
   color: white;
 }
 
+.denegado{
+  transition-duration: 0.4s;
+  background-color: #8c2528;
+  border-radius: 10px;
+  cursor: not-allowed;
+}
+.denegado:hover {
+  background-color: #8c2528; /* Green */
+  color: white;
+}
 input {
   font-size: 20px;
   text-align: center;
