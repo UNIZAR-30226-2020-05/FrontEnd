@@ -10,9 +10,25 @@ export class RegistroComponent implements OnInit {
   public registro2; //Flag si está en el paso dos de registro.
   public registro3; //Flag si está en el paso tres de registro.
 
-  aceptadoT;
-  imageSeleccion;
-  constructor() { }
+  public aceptadoT;
+  public imageSeleccion;
+
+  // Campos registro:
+  alias: string;
+  nombre: string;
+  apellidos: string;
+  fecha_nac: string;
+  pass: string;
+  pass2: string;
+
+  constructor() {
+    this.alias = '';
+    this.nombre = '';
+    this.apellidos = '';
+    this.fecha_nac = '';
+    this.pass = '';
+    this.pass2 = '';
+  }
 
   ngOnInit(): void {
     this.registro1 = false;
@@ -22,11 +38,18 @@ export class RegistroComponent implements OnInit {
     this.imageSeleccion = 0;
   }
 
-  receiveMessageChild($event){
+  receiveMessageChild($event) {
     this.registro1=($event);
   }
 
-  alternarAceptado(){
+  /* Función para comprobar si los datos del formulario son adecuados */
+   datosok() {
+    return (this.alias !== '' && this.nombre !== '' && this.apellidos !== '' &&
+            this.fecha_nac !== '' && this.pass !== '' && this.pass2 !== '' &&
+            this.pass === this.pass2);
+  }
+
+  alternarAceptado() {
     if (this.aceptadoT) { this.aceptadoT = false;}
     else this.aceptadoT = true;
   }

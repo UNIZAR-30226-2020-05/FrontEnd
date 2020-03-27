@@ -56,10 +56,12 @@ button:hover {
   border-radius: 10px;
   cursor: not-allowed;
 }
+
 .denegado:hover {
   background-color: #8c2528; /* Green */
-  color: white;
+  color: #747474;
 }
+
 input {
   font-size: 20px;
   text-align: center;

@@ -6,24 +6,26 @@
   <p>Registro de nuevo usuario</p>
   <form>
     Alias de usuario:<br/>
-    <input  type="text"> <br/><br/>
+    <input  type="text" id="regAlias" name="regAlias" [(ngModel)]="alias"><br/><br/>
 
     Nombre:<br/>
-    <input  type="text"><br/><br/>
+    <input  type="text" id="regNom" name="regNom" [(ngModel)]="nombre"><br/><br/>
 
     Apellidos:<br/>
-    <input  type="text"><br/><br/>
+    <input  type="text" id="regApe" name="regNom" [(ngModel)]="apellidos"><br/><br/>
 
     Fecha Nacimiento:<br/>
-    <input required="required" type="text"><br/><br/>
+    <input  type="text" id="regNac" name="regNac" [(ngModel)]="fecha_nac" placeholder="DD/MM/AAAA" ><br/><br/>
 
     Contraseña:<br/>
-    <input  type="password"><br/><br/>
+    <input  type="password" id="regPass" name="regPass" [(ngModel)]="pass"><br/><br/>
 
     Repita contraseña:<br/>
-    <input  type="password"><br/><br/>
+    <input  type="password" id="regPass2" name="regPass2" [(ngModel)]="pass2"><br/><br/>
 
-    <button (click)="registro1=false; registro2=true; registro3=false;">Siguiente</button><br/><br/>
+    <button *ngIf="datosok()" (click)="registro1=false; registro2=true; registro3=false;">Siguiente</button>
+    <button *ngIf="!datosok()" disabled class="denegado">Siguiente</button><br/><br/>
+
   </form>
 </div>
 
@@ -31,7 +33,7 @@
 <div *ngIf="registro2" class="registro"><br/><br/>
   <img src="../../assets/logo-white.png" class="logoSuperior">
   <button class="boton-aux" (click)="registro1=!registro1;">Cambiar a logeado</button>
-
+  {{fecha_nac}}
   <p>Registro de nuevo usuario</p>
   <form>
     Elija su imagen de perfil:<br/><br/>
