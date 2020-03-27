@@ -1,0 +1,145 @@
+.menuRecom {
+  margin-left: 17%;
+  margin-top: 5px;
+  width: 650px;
+  height: 100px;
+  overflow: auto;
+  position: absolute;
+}
+.menuRecom::-webkit-scrollbar-track{
+  background: #0b1d19;
+}
+
+.menuRecom::-webkit-scrollbar-track:active,
+.menuRecom::-webkit-scrollbar-track:hover{
+  background: #0b1d19;
+}
+
+.menuMusica {
+  margin-left: 17%;
+  margin-top: 150px;
+  width: 300px;
+  height: 230px;
+  overflow: auto;
+  white-space: nowrap;
+  position: absolute;
+}
+.menuMusica::-webkit-scrollbar-track{
+  background: #0b1d19;
+}
+
+.menuMusica::-webkit-scrollbar-track:active,
+.menuMusica::-webkit-scrollbar-track:hover{
+  background: #0b1d19;
+}
+
+.menuPodcast {
+  margin-left: 45%;
+  margin-top: 150px;
+  width: 300px;
+  height: 280px;
+  overflow: auto;
+  white-space: nowrap;
+  position: absolute;
+}
+.menuPodcast::-webkit-scrollbar-track{
+  background: #0b1d19;
+}
+
+.menuPodcast::-webkit-scrollbar-track:active,
+.menuPodcast::-webkit-scrollbar-track:hover{
+  background: #0b1d19;
+}
+
+.recomendaciones{
+  font-family: Roboto;
+  color: aliceblue;
+  font-size: 25px;
+  position: absolute;
+  margin-top: -25px;
+  margin-left: 17%;
+}
+
+.cabezaCanciones{
+  font-family: Roboto;
+  color: aliceblue;
+  font-size: 25px;
+  position: absolute;
+  margin-top: 120px;
+  margin-left: 17%;
+}
+
+.cabezaPodcast{
+  font-family: Roboto;
+  color: aliceblue;
+  font-size: 25px;
+  position: absolute;
+  margin-top: 120px;
+  margin-left: 45%;
+}
+
+.imagenAlbum{
+  border-radius: 10%;
+  height: 70px;
+  width: 70px;
+  position: absolute;
+  float: left;
+}
+.nombreAlbum{
+  font-family: Roboto;
+  color: aliceblue;
+  margin-left: 74px;
+  font-size: 20px;
+  position: absolute;
+  float: right;
+}
+
+.autorAlbum{
+  font-family: Roboto;
+  color: aliceblue;
+  margin-left: 74px;
+  font-size: 18px;
+  color: #919191;
+  position: absolute;
+  float: right;
+}
+.nombrePodcast{
+  font-family: Roboto;
+  color: aliceblue;
+  margin-left: 74px;
+  font-size: 20px;
+  position: absolute;
+  float: right;
+}
+
+.autorPodcast{
+  font-family: Roboto;
+  color: aliceblue;
+  margin-left: 74px;
+  font-size: 18px;
+  color: #919191;
+  position: absolute;
+  float: right;
+}
+tr.spaceUnderRecom1>td {
+  padding-bottom: 85px;
+}
+tr.spaceUnderRecom2>td {
+  padding-bottom: 15px;
+}
+tr.spaceUnder>td {
+  padding-bottom: 80px;
+}
+tr.espacioLat>td{
+  padding-right:100px;
+}
+
+
+.imagenRecomendacion{
+  margin-left: 17%;
+  border-radius: 10%;
+  height: 90px;
+  width: 90px;
+  position: absolute;
+  float: left;
+}

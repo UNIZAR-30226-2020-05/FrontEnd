@@ -8,6 +8,7 @@ import { PanelSocialComponent } from './panel-social/panel-social.component';
 import { PanelListasComponent } from './panel-listas/panel-listas.component';
 import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
+import { CentralComponent } from './central/central.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { LoginComponent } from './login/login.component';
     PanelListasComponent,
     RegistroComponent,
     LoginComponent,
+    CentralComponent,
   ],
   imports: [
     BrowserModule, FormsModule
