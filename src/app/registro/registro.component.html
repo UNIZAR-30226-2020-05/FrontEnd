@@ -23,7 +23,7 @@
     Repita contraseña:<br/>
     <input  type="password" id="regPass2" name="regPass2" [(ngModel)]="pass2"><br/><br/>
 
-    <button *ngIf="datosok()" (click)="registro1=false; registro2=true; registro3=false;">Siguiente</button>
+    <button *ngIf="datosok()" (click)="regFase2()">Siguiente</button>
     <button *ngIf="!datosok()" disabled class="denegado">Siguiente</button><br/><br/>
 
   </form>
@@ -33,28 +33,32 @@
 <div *ngIf="registro2" class="registro"><br/><br/>
   <img src="../../assets/logo-white.png" class="logoSuperior">
   <button class="boton-aux" (click)="registro1=!registro1;">Cambiar a logeado</button>
-  {{fecha_nac}}
-  <p>Registro de nuevo usuario</p>
-  <form>
-    Elija su imagen de perfil:<br/><br/>
 
-    <img class="muestra-imagenes" src="../../assets/profile-pics/1.jpg"
-    (click)="imageSeleccion=1;"/> Genérico
-    <img class="muestra-imagenes" src="../../assets/profile-pics/2.jpg"
-    (click)="imageSeleccion=2;"/> Les Paul
-    <img class="muestra-imagenes" src="../../assets/profile-pics/3.jpg"
-     (click)="imageSeleccion=3;"/> Eiffel <br/>
-    <img class="muestra-imagenes" src="../../assets/profile-pics/4.jpg"
-     (click)="imageSeleccion=4;"/> Snoopy
-    <img class="muestra-imagenes" src="../../assets/profile-pics/5.jpg"
-     (click)="imageSeleccion=5;"/> Grim
-    <img class="muestra-imagenes" src="../../assets/profile-pics/6.jpg"
-     (click)="imageSeleccion=6;"/> Smiles
-    <br/><br/>
+  <p>Registro de nuevo usuario</p>
+
+    {{nombre + " " + apellidos}}, elija su imagen de perfil:<br/><br/>
+  <table>
+    <tr>
+         <td><img class="muestra-imagenes" src="../../assets/profile-pics/1.jpg"
+                  (click)="imageSeleccion=1;"/></td><td> Genérico</td>
+         <td> <img class="muestra-imagenes" src="../../assets/profile-pics/2.jpg"
+            (click)="imageSeleccion=2;"/></td><td> Les Paul</td>
+         <td> <img class="muestra-imagenes" src="../../assets/profile-pics/3.jpg"
+            (click)="imageSeleccion=3;"/></td><td> Eiffel</td>
+    </tr>
+    <tr>
+      <td><img class="muestra-imagenes" src="../../assets/profile-pics/4.jpg"
+               (click)="imageSeleccion=4;"/></td><td> Snoopy</td>
+      <td><img class="muestra-imagenes" src="../../assets/profile-pics/5.jpg"
+       (click)="imageSeleccion=5;"/></td><td> Grim</td>
+      <td><img class="muestra-imagenes" src="../../assets/profile-pics/6.jpg"
+       (click)="imageSeleccion=6;"/></td><td> Smiles</td>
+    </tr><br/>
+  </table>
     Ha seleccionado la imagen número {{imageSeleccion}}
     <br/><br/>
-    <button (click)="registro1=false; registro2=false; registro3=true;">Siguiente</button><br/><br/>
-  </form>
+    <button (click)="regFase3()">Siguiente</button><br/><br/>
+
 </div>
 
 <!--- FASE 3 ---->
@@ -127,7 +131,7 @@
   <form>
    <input type="checkbox" (click)="alternarAceptado()"> Acepto las condiciones y terminos de uso <br/><br/>
     <!--<button style="cursor: not-allowed" (click)="registro1=true; registro2=false;">Volver</button> -->
-    <button *ngIf="aceptadoT" (click)="registro1=false; registro2=false; registro3=false; ">Finalizar registro</button>
+    <button *ngIf="aceptadoT" (click)="registrado()">Finalizar registro</button>
     <button *ngIf="!aceptadoT" disabled class="denegado"> Finalizar registro</button><br/><br/>
   </form>
 </div>

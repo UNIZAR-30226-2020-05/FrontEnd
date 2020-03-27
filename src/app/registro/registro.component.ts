@@ -42,6 +42,24 @@ export class RegistroComponent implements OnInit {
     this.registro1=($event);
   }
 
+  regFase2() {
+    this.registro1 = false;
+    this.registro2 = true;
+    this.registro3 = false;
+  }
+
+  regFase3() {
+    this.registro1 = false;
+    this.registro2 = false;
+    this.registro3 = true;
+  }
+
+  registrado() {
+    this.registro1 = false;
+    this.registro2 = false;
+    this.registro3 = false;
+  }
+
   /* Función para comprobar si los datos del formulario son adecuados */
    datosok() {
     return (this.alias !== '' && this.nombre !== '' && this.apellidos !== '' &&
