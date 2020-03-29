@@ -1,4 +1,6 @@
-import { Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output} from '@angular/core';
+import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {User, UserRequest} from '../app.component';
 
 @Component({
   selector: 'app-registro',
@@ -21,7 +23,7 @@ export class RegistroComponent implements OnInit {
   pass: string;
   pass2: string;
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.alias = '';
     this.nombre = '';
     this.apellidos = '';
@@ -36,6 +38,7 @@ export class RegistroComponent implements OnInit {
     this.registro3 = false;
     this.aceptadoT = false;
     this.imageSeleccion = 0;
+
   }
 
   receiveMessageChild($event) {
@@ -58,6 +61,17 @@ export class RegistroComponent implements OnInit {
     this.registro1 = false;
     this.registro2 = false;
     this.registro3 = false;
+
+    const nuevo: UserRequest = { // Objeto usuario en registro
+      nick: this.alias, // Nickname
+      contrasena: this.pass, // Contrasena
+      tipo_user: true, // false = usuario, true = admin
+      fecha_nacimiento: this.fecha_nac // String de fecha nacim.
+    };
+
+    // Test esto:
+    this.http.post('http://localhost:8080/user/create', nuevo).subscribe(
+      (resp: string) => { console.log(resp); } );
   }
 
   /* Función para comprobar si los datos del formulario son adecuados */

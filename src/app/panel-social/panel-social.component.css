@@ -12,7 +12,7 @@
 }
 
 .foto-perfil{
-  border-radius: 50%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
+  border-radius: 50%; /*Ajustar dependiendo del estilo. Material design dice 50%. */
   vertical-align:middle;
   margin-right: auto;
   width: 5vh;

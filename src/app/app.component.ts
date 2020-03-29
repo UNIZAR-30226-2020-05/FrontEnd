@@ -9,3 +9,21 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'FrontEnd';
 }
+
+export class User {
+  id: number;
+  nick: string;
+  contrasena: string;
+  tipo_user: boolean;
+  fecha_nacimiento: string;
+  id_ultima_reproduccion: number;
+  minuto_ultima_reproduccion: number;
+  tipo_ultima_reproduccion: number;
+}
+
+export class UserRequest {
+  nick: string;
+  contrasena: string;
+  tipo_user: boolean;
+  fecha_nacimiento: string;
+}
