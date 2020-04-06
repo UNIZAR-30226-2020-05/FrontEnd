@@ -22,8 +22,8 @@
 .iconoAñadir{
   border-radius: 20%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
   vertical-align: middle;
-  width: 35px;
-  height: 35px;
+  width: 5vh;
+  height: 5vh;
   margin-left: -27px;
 }
 .fav{
@@ -39,8 +39,8 @@
 .iconoFav{
   border-radius: 20%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
   vertical-align: middle;
-  width: 35px;
-  height: 35px;
+  width: 5vh;
+  height: 5vh;
   margin-left: -27px;
 }
 .titleP{
@@ -64,8 +64,8 @@
 .addP{
   border-radius: 20%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
   vertical-align: middle;
-  width: 35px;
-  height: 35px;
+  width: 5vh;
+  height: 5vh;
   margin-left: -27px;
 }
 .fave{
@@ -81,16 +81,16 @@
 .favP{
   border-radius: 20%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
   vertical-align: middle;
-  width: 35px;
-  height: 35px;
+  width: 5vh;
+  height: 5vh;
   margin-left: -27px;
 }
 
 .cuadrado {
-  width: 100vh;
-  max-width: 180px;
-  height: 100vh;
-  max-height: 180px;
+  width:16vh;
+  max-width: 100vh;
+  height: 16vh;
+  max-height: 100vh;
   position: absolute;
   bottom: 60px;
   margin-left: 175px;
@@ -113,8 +113,8 @@
   border-radius: 20%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
   vertical-align: middle;
   position: absolute;
-  width: 25px;
-  height: 25px;
+  width: 4vh;
+  height: 4vh;
   margin-left:330px;
   text-align: center;
   bottom: 30px;
@@ -134,21 +134,21 @@
 hr{
   position: absolute;
   top: 207px;
-  width: 135px;
+  width: 20vh;
   margin-left: 15px;
 
 }
 .linea2{
   position: absolute;
   top: 498px;
-  width: 135px;
+  width: 20vh;
   margin-left: 15px;
 
 }
 
 .vertical-menu {
-  width: 150px;
-  height: 130px;
+  width: 21vh;
+  height: 20vh;
   overflow-y: auto;
   position: absolute;
   top: 225px;
@@ -175,8 +175,8 @@ hr{
 }
 
 .vertical-menu2 {
-  width: 150px;
-  height: 130px;
+  width: 21vh;
+  height: 20vh;
   overflow-y: auto;
   position: absolute;
   top: 520px;
@@ -201,5 +201,5 @@ hr{
 .vertical-menu2::-webkit-scrollbar-track:active,
 .vertical-menu2::-webkit-scrollbar-track:hover{
   background: #0b1d19;
-  width: 10px;
+  width: 5vh;
 }
