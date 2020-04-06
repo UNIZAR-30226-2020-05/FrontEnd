@@ -1,0 +1,45 @@
+.vista-album{
+  background-color: #0b1d19;
+  width: 65%;
+  height: 60%;
+  left: 13%;
+  top: 8%;
+  z-index: 1; /* Mejor fuera */
+  position: fixed;
+
+  font-family: Trebuchet MS, serif;
+  color: aliceblue;
+}
+
+.img-album{
+  margin-left: 2%;
+  width: 7vw;
+}
+
+.etiqueta-album{
+  top: 8%;
+  left: 22%;
+  position: fixed;
+  border-style: solid;
+  border-color: #b4b4b4;
+  border-inline-start-width: 8px;
+  width: fit-content;
+}
+
+
+
+.titulo-album{
+  top: 12%;
+  left: 22%;
+  font-size: 34px;
+  display: inline-block;
+  position: fixed;
+}
+
+.artista-album{
+  top: 17%;
+  left: 22%;
+  font-size: 28px;
+  font-style: italic;
+  position: fixed;
+}

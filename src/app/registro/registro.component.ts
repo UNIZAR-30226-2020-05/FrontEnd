@@ -42,7 +42,7 @@ export class RegistroComponent implements OnInit {
   }
 
   receiveMessageChild($event) {
-    this.registro1=($event);
+    this.registro1 = ($event);
   }
 
   regFase2() {
