@@ -1,15 +1,15 @@
 <!--/********** PANEL IZQUIERDO ************/ -->
 <div class="panel">
   <p class="titleP">PODCAST</p>
-  <p class="ListP" (click)="mostrarCrear=true" type="butt">
+  <p class="ListP" (click)="mostrarCrear=true; mostrarFav=false">
     <img class="addP" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>
-  <p class="fave">
+  <p class="fave" (click)="mostrarFav=true">
     <img class= "favP" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
   <hr>
 <p class="titleL">PLAYLISTS</p>
-<p class="CrearList">
+<p class="CrearList" (click)="mostrarCrear=true;mostrarFav=false">
   <img class="iconoAñadir" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>&nbsp;
-<p class="fav">
+<p class="fav" (click)="mostrarFav=true">
   <img class= "iconoFav" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
 </div>
 
@@ -68,3 +68,38 @@
   <button (click)="mostrarCrear=false" class="cancel">Cancelar</button>
   <button (click)="mostrarCrear=false" class="aceptar">Crear</button>
 </div>
+
+
+<!--********* PANTALLA FAVORTO DE CANCIONES Y PODCAST *********-->
+<div *ngIf="mostrarFav" class= "favoritos">
+  <div class="container2">
+    <div class="misFavs"></div>
+    <div class="vertical-menu3">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+      <a href="#">Link 4</a>
+      <a href="#">Link 5</a>
+      <a href="#">Link 6</a>
+      <a href="#">Link 7</a>
+      <a href="#">Link 8</a>
+      <a href="#">Link 9</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+    </div>
+    <label class="tusFavs"><b>Tus favoritos</b></label>
+    <button (click)="mostrarFav=false" class="atras">Atras</button>
+    <button class="rep">Reproducir</button>
+  </div>
+</div>
+
+
+
