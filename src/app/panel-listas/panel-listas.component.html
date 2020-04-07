@@ -1,7 +1,8 @@
+<!--/********** PANEL IZQUIERDO ************/ -->
 <div class="panel">
   <p class="titleP">PODCAST</p>
-  <p class="ListP">
-    <img class="addP" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>&nbsp;
+  <p class="ListP" (click)="mostrarCrear=true" type="butt">
+    <img class="addP" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>
   <p class="fave">
     <img class= "favP" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
   <hr>
@@ -11,8 +12,14 @@
 <p class="fav">
   <img class= "iconoFav" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
 </div>
+
+<!-- /**** LINEA HORIZONTAL 2 ******/ -->
 <hr class="linea2">
+
+<!-- /****** CUADRADO DE FOTO CANCION ACTUAL *****/ -->
 <div class="cuadrado"></div>
+
+<!-- /********* TABLA PARA NOMBRE CANCION Y AUTOR DE CANCION ACTUAL ***********/ -->
 <table>
   <tbody>
     <tr>
@@ -24,7 +31,7 @@
     </tr>
   </tbody>
 </table>
-
+<!--/****************** MENUS VERTICALES DE PLAYLIST Y PODCAST ********************/-->
 <div class="vertical-menu">
   <a href="#">Link 1</a>
   <a href="#">Link 2</a>
@@ -48,4 +55,16 @@
   <a href="#">Link 8</a>
   <a href="#">Link 9</a>
   <a href="#">Link 10</a>
+</div>
+
+
+<!--************* PANTALLA CREAR LISTA PLAYLIST Y PODCAST ******/-->
+
+<div *ngIf="mostrarCrear" class= "crear">
+  <div class="container">
+    <label class="nueva"><b>Crear nueva lista </b></label>
+    <input type="nombre" placeholder="Nombre nueva lista" name="name" required>
+  </div>
+  <button (click)="mostrarCrear=false" class="cancel">Cancelar</button>
+  <button (click)="mostrarCrear=false" class="aceptar">Crear</button>
 </div>

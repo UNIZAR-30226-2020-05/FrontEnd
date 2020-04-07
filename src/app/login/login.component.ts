@@ -12,7 +12,7 @@ registro:boolean=true;
   constructor() { }
 
   ngOnInit(): void {
-    this.logeado=false;
+    this.logeado=true;
   }
 
   sendMessageFather(){
