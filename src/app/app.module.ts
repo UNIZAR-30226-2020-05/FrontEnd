@@ -10,6 +10,7 @@ import { PanelListasComponent } from './panel-listas/panel-listas.component';
 import { RegistroComponent } from './registro/registro.component';
 import { LoginComponent } from './login/login.component';
 import { CentralComponent } from './central/central.component';
+import { VistaAlbumComponent } from './vista-album/vista-album.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { CentralComponent } from './central/central.component';
     RegistroComponent,
     LoginComponent,
     CentralComponent,
+    VistaAlbumComponent,
   ],
   imports: [
     BrowserModule,
