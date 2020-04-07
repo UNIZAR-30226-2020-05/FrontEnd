@@ -1,10 +1,18 @@
-<button (click)="show=!show;" >ALBUM</button>
+<button style="bottom: 12%; right: 20%; position: fixed" (click)="show=!show;" >Vista ALBUM</button>
 
 <div *ngIf="show" class="vista-album">
-
 
   <img class="img-album" src="https://i.pinimg.com/originals/a3/fa/9d/a3fa9dfd3141a9750012ec027aa71b7f.jpg"/><div class="etiqueta-album">ÁLBUM</div>
 
  <div class="titulo-album">Primo Victoria</div>
   <div class="artista-album">Sabaton</div>
+<div class="marco-tabla">
+  <table class="lista-album">
+
+    <tr *ngFor="let linea of lista; let i = index">
+      <td  class="elemento-album"><img class="img-play-album" src="../../assets/play-vector.svg"/></td>
+      <td  class="titulos-album">{{ linea }}</td><td>{{artistaAlbum}}</td><td>Pista {{i+1}}</td>
+    </tr>
+  </table>
+</div>
 </div>

@@ -13,7 +13,7 @@
 
 .img-album{
   margin-left: 2%;
-  width: 7vw;
+  width: 11%;
 }
 
 .etiqueta-album{
@@ -24,9 +24,45 @@
   border-color: #b4b4b4;
   border-inline-start-width: 8px;
   width: fit-content;
+
+}
+
+.zona-img-play{
+  alignment: right;
+}
+
+.img-play-album{
+  height: 35%;
+  padding-right: 9%;
+}
+
+.lista-album{
+
+  overflow: auto;
+  width: 90%;
+  height: 30%;
+}
+
+.marco-tabla{
+  margin-left: 3%;
+  height: 70%;
+  width: 95%;
+  overflow: auto;
+  vertical-align:middle;
 }
 
 
+
+.elemento-album{
+  vertical-align:middle;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  width: 10%;
+}
+
+.titulos-album{
+  width: 50%;
+}
 
 .titulo-album{
   top: 12%;
