@@ -1,9 +1,9 @@
 .vista-album{
   background-color: #0b1d19;
   width: 65%;
-  height: 60%;
+  height: 62%;
   left: 13%;
-  top: 8%;
+  top: 9%;
   z-index: 1; /* Mejor fuera */
   position: fixed;
 
@@ -17,7 +17,7 @@
 }
 
 .etiqueta-album{
-  top: 8%;
+  top: 9%;
   left: 22%;
   position: fixed;
   border-style: solid;
@@ -33,7 +33,6 @@
 
 .img-play-album{
   height: 35%;
-  padding-right: 9%;
 }
 
 .lista-album{
@@ -45,27 +44,28 @@
 
 .marco-tabla{
   margin-left: 3%;
-  height: 70%;
+  height: 80%;
   width: 95%;
   overflow: auto;
   vertical-align:middle;
 }
 
 
-
 .elemento-album{
   vertical-align:middle;
+  text-align:center;
   padding-top: 1%;
   padding-bottom: 1%;
   width: 10%;
 }
+
 
 .titulos-album{
   width: 50%;
 }
 
 .titulo-album{
-  top: 12%;
+  top: 13%;
   left: 22%;
   font-size: 34px;
   display: inline-block;
@@ -73,7 +73,7 @@
 }
 
 .artista-album{
-  top: 17%;
+  top: 18%;
   left: 22%;
   font-size: 28px;
   font-style: italic;
