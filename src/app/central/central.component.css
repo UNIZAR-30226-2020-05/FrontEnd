@@ -2,7 +2,7 @@
   margin-left: 17%;
   margin-top: 5px;
   width: 650px;
-  height: 100px;
+  height: 110px;
   overflow: auto;
   position: absolute;
 }
@@ -18,8 +18,8 @@
 .menuMusica {
   margin-left: 17%;
   margin-top: 150px;
-  width: 300px;
-  height: 230px;
+  width: 25%;
+  height: 280px;
   overflow: auto;
   white-space: nowrap;
   position: absolute;
@@ -36,7 +36,7 @@
 .menuPodcast {
   margin-left: 45%;
   margin-top: 150px;
-  width: 300px;
+  width: 25%;
   height: 280px;
   overflow: auto;
   white-space: nowrap;
@@ -133,7 +133,6 @@ tr.spaceUnder>td {
 tr.espacioLat>td{
   padding-right:100px;
 }
-
 
 .imagenRecomendacion{
   margin-left: 17%;
