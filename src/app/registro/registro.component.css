@@ -72,6 +72,12 @@ input {
   border: 2px solid #124828;
   border-radius: 4px;
   margin: 2px 0;
+  width: 20%;
+  box-sizing: border-box;
+}
+
+input[type=checkbox]{
+  width: 2%;
   box-sizing: border-box;
 }
 
@@ -84,6 +90,10 @@ table{
   text-align: left;
   position: relative;
   left: 32vw;
+}
+
+input[type=date]{
+  padding-left: 3%;
 }
 
 

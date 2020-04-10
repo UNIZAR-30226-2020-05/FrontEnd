@@ -1,5 +1,5 @@
 import {Component, OnInit, Input, Output} from '@angular/core';
-import {HttpClient, HttpClientModule} from '@angular/common/http';
+import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
 import {User, UserRequest} from '../app.component';
 
 @Component({
@@ -14,6 +14,9 @@ export class RegistroComponent implements OnInit {
 
   public aceptadoT;
   public imageSeleccion;
+
+
+  public URL_API = 'http://localhost:8080';
 
   // Campos registro:
   alias: string;
@@ -70,8 +73,12 @@ export class RegistroComponent implements OnInit {
     };
 
     // Test esto:
-    this.http.post('http://localhost:8080/user/create', nuevo).subscribe(
-      (resp: string) => { console.log(resp); } );
+
+    this.http.post(this.URL_API + '/user/create', nuevo).subscribe(
+     (resp: string) => { console.log(resp); } );
+
+
+
   }
 
   /* Función para comprobar si los datos del formulario son adecuados */
@@ -85,4 +92,22 @@ export class RegistroComponent implements OnInit {
     if (this.aceptadoT) { this.aceptadoT = false;}
     else this.aceptadoT = true;
   }
+
+  test() {
+
+    const nuevo: UserRequest = { // Objeto usuario en registro
+      nick: this.alias, // Nickname
+      contrasena: this.pass, // Contrasena
+      tipo_user: true, // false = usuario, true = admin
+      fecha_nacimiento: this.fecha_nac // String de fecha nacim.
+    };
+
+    const params = new HttpParams().set('nick', 'a');
+     this.http.get(this.URL_API + '/get', {params: params}).subscribe(
+       (resp: string) => { console.log(resp); } );
+
+    this.http.post(this.URL_API + '/user/create', nuevo).subscribe(
+      (resp: string) => { console.log(resp); } );
+  }
+
 }

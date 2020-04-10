@@ -19,6 +19,7 @@ export class User {
   id_ultima_reproduccion: number;
   minuto_ultima_reproduccion: number;
   tipo_ultima_reproduccion: number;
+  amigos: Array<User>;
 }
 
 export class UserRequest {

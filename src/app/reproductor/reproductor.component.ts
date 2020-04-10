@@ -14,6 +14,7 @@ export class ReproductorComponent implements OnInit {
   logeado;
   constructor() { this.logeado=false;}
 
+
   gestionSonido(){
     this.cancion.src = '../../assets/media/test.mp3';
     this.temaEnCola = 'TestLong';
@@ -45,7 +46,7 @@ export class ReproductorComponent implements OnInit {
     this.activo = false;
     this.gestionSonido();
 
-    
+
 
   }
 

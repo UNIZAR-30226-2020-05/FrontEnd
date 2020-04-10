@@ -74,3 +74,16 @@ td{
 .ultima-cancion{
   font-family: Calibri;
 }
+
+.agregar-amigos{
+  background-color: #0c2925;
+  width: 65%;
+  height: 62%;
+  left: 13%;
+  top: 9%;
+  z-index: 1; /* Mejor fuera */
+  position: fixed;
+
+  font-family: Trebuchet MS, serif;
+  color: aliceblue;
+}

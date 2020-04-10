@@ -54,6 +54,17 @@
 
 
 </div>
-  <button style="cursor: not-allowed" class="boton-aux2" title="NO IMPLEMENTADO" >Buscar usuarios de CS Music</button>
+  <button class="boton-aux2" (click)="activarBusqueda()">Buscar usuarios de CS Music</button>
 
 <button class="boton-aux" (click)="listaVacia=!listaVacia;">Alternar Lista vacía</button>
+
+
+<!-- Busqueda de amigos --->
+
+<div *ngIf="mostarBusquedaAmigos" class="agregar-amigos">
+  <button class="boton-aux" (click)="cerrarBusqueda()">Cerrar Busqueda</button>
+
+  Introduzca Nick del usuario a buscar <input type="text" [(ngModel)]="nickBusca">
+
+  <button class="boton-aux" (click)="buscarAmigo()">Buscar</button>
+</div>
