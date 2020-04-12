@@ -1,0 +1,54 @@
+.editar{
+  background-color: #0b1d19;
+  width: 53%;
+  height: 64%;
+  left: 17%;
+  top: 8%;
+  z-index: 1; /* Mejor fuera */
+  position: fixed;
+  color: aliceblue;
+  float: left;
+  padding-left: 2%;
+}
+
+.muestra-imagenes{
+  width: 80px;
+  margin-left: 1vw;
+}
+
+input {
+  font-size: 20px;
+  font-style: normal;
+  font-family: Roboto, serif;
+  background-color: #358c83;
+  color: white;
+  border: 2px solid #124828;
+  border-radius: 4px;
+  margin-top: 2px;
+  width: 20%;
+  box-sizing: border-box;
+}
+
+.botonCancelar{
+  transition-duration: 0.4s;
+  background-color: #8c2528;
+  border-radius: 10px;
+  margin-bottom: 2%;
+  float: left;
+}
+.botonCancelar:hover{
+  background-color: indianred;
+}
+
+.botonConfirmar{
+  transition-duration: 0.4s;
+  background-color: #358c83;
+  border-radius: 10px;
+  margin-right: 2%;
+  margin-bottom: 0%;
+  float: right;
+}
+.botonConfirmar:hover {
+  background-color: #124828;
+  color: white;
+}

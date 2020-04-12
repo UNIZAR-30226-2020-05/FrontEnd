@@ -1,0 +1,29 @@
+<app-panel-social (messageEvent)="receiveMessageChild($event)"></app-panel-social>
+<div *ngIf="mostrar" class="editar"><br/><br/>
+  <table>
+    <tr>
+      <td><img class="muestra-imagenes" src="../../assets/profile-pics/1.jpg"
+               (click)="imageSeleccion=1;"/></td><td> Genérico</td>
+      <td> <img class="muestra-imagenes" src="../../assets/profile-pics/2.jpg"
+                (click)="imageSeleccion=2;"/></td><td> Les Paul</td>
+      <td> <img class="muestra-imagenes" src="../../assets/profile-pics/3.jpg"
+                (click)="imageSeleccion=3;"/></td><td> Eiffel</td>
+    </tr>
+    <tr>
+      <td><img class="muestra-imagenes" src="../../assets/profile-pics/4.jpg"
+               (click)="imageSeleccion=4;"/></td><td> Snoopy</td>
+      <td><img class="muestra-imagenes" src="../../assets/profile-pics/5.jpg"
+               (click)="imageSeleccion=5;"/></td><td> Grim</td>
+      <td><img class="muestra-imagenes" src="../../assets/profile-pics/6.jpg"
+               (click)="imageSeleccion=6;"/></td><td> Smiles</td>
+    </tr><br/>
+  </table>
+  Ha seleccionado la imagen número {{imageSeleccion}}<br/><br/>
+  Nueva contraseña:<br/>
+  <input  type="password" id="regPass" name="regPass"><br/><br/>
+
+  Repita la contraseña:<br/>
+  <input  type="password" id="regPass2" name="regPass2"><br/><br/>
+  <button (click)="cancelarEdit()" class="botonCancelar">Cancelar</button>
+  <button (click)="finalizarEdit()" class="botonConfirmar" align="right">Confirmar</button>
+</div>
