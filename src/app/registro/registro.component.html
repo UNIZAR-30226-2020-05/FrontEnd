@@ -5,7 +5,6 @@
 
   <p>Registro de nuevo usuario</p>
   <form>
-    <button (click)="test()"></button>
     Alias de usuario:<br/>
     <input  type="text" id="regAlias" name="regAlias" [(ngModel)]="alias"><br/><br/>
 
@@ -24,7 +23,7 @@
     Repita contraseña:<br/>
     <input  type="password" id="regPass2" name="regPass2" [(ngModel)]="pass2"><br/><br/>
 
-    <button *ngIf="!datosok()" (click)="regFase2()">Siguiente</button>
+    <button *ngIf="datosok()" (click)="regFase2()">Siguiente</button>
     <button *ngIf="!datosok()" disabled class="denegado">Siguiente</button><br/><br/>
 
   </form>
@@ -131,7 +130,6 @@
   </p>
   <form>
    <input type="checkbox" (click)="alternarAceptado()"> Acepto las condiciones y terminos de uso <br/><br/>
-    <!--<button style="cursor: not-allowed" (click)="registro1=true; registro2=false;">Volver</button> -->
     <button *ngIf="aceptadoT" (click)="registrado()">Finalizar registro</button>
     <button *ngIf="!aceptadoT" disabled class="denegado"> Finalizar registro</button><br/><br/>
   </form>

@@ -4,8 +4,8 @@
   border: solid #0b1713;
   position: absolute;
   overflow: auto;
-  height: 80vh;
-  width: 43vh;
+  height: 70%;
+  width: 20%;
   top: 2%;
   right: 0.5%;
 
@@ -31,16 +31,17 @@
   border: solid #0b1713;
 }
 
-.boton-aux{
-  position: absolute;
-  bottom: 10%;
-  right: 5%;
+.boton-busqueda{
+  position: fixed;
+  display: inline-block;
+  margin-left: 1.5%;
+  vertical-align: center;
 }
 
 .boton-aux2{
   position: absolute;
   alignment: center;
-  bottom: 5%;
+  bottom: 10%;
   right: 4%;
 }
 
@@ -78,7 +79,7 @@ td{
 .agregar-amigos{
   background-color: #0c2925;
   width: 65%;
-  height: 62%;
+  height: 65%;
   left: 13%;
   top: 9%;
   z-index: 1; /* Mejor fuera */
@@ -87,3 +88,24 @@ td{
   font-family: Trebuchet MS, serif;
   color: aliceblue;
 }
+
+.text-busqu{
+  margin-left: 6%;
+  margin-top: 6%;
+}
+
+input {
+  font-size: 20px;
+  text-align: center;
+  font-style: normal;
+  font-family: Roboto, serif;
+  background-color: #358c83;
+  color: white;
+  border: 2px solid #124828;
+  border-radius: 4px;
+  alignment: center;
+  width: 23%;
+  margin-left: 38%;
+  box-sizing: border-box;
+}
+

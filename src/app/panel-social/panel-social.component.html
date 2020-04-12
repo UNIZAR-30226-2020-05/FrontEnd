@@ -2,27 +2,27 @@
 
   <p class="nombre-user">
     <img class="foto-perfil" src="../../assets/profile-pics/1.jpg"/>&nbsp;Usuario
-    &nbsp;&nbsp;<input type="image" (click)="sendMessageFather()" class="icono-config" src="../../assets/ajustes.png"/> </p>
-   <br/>
+    &nbsp;&nbsp;<img (click)="sendMessageFather()"  class="icono-config" src="../../assets/ajustes.png"/> </p>
+  <br/>
   <p *ngIf="listaVacia">Tu lista de amigos está actualmente vacía.<br/><br/>
-  Puedes agregar usuarios a tu lista para compartir canciones y listas con ellos.</p>
+    Puedes agregar usuarios a tu lista desde el botón inferior.</p>
 
-  <!-- Construir lista con un ngFor --->
-  <table *ngIf="!listaVacia" class="listaAmigos">
+  <!-- Construir lista con un ngFor  *ngIf="!listaVacia" class="listaAmigos"--->
+  <table >
 
-
+    <tbody > <!--*ngFor="let usu of usuario.amigos"--->
     <tr>
       <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/2.jpg"></td>
-      <td > Perico256</td>
+      <td> usu.nick </td>
     </tr>
-    <tr> <td> Perico Palotes</td> </tr>
+    <tr> <td>  usu.nombre; usuario.apellidos;  </td> </tr>
     <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
-      <i class="ultima-cancion"> Signs of Life · Poets of the Fall</i> </td>
+      <i class="ultima-cancion">Signs of Life · Poets of the Fall</i> </td>
     </tr>
-
+    </tbody>
     <br/>
 
-  <!-- Construir lista con un ngFor --->
+    <!-- Construir lista con un ngFor --->
 
 
     <tr>
@@ -50,11 +50,11 @@
 
 
 
-    </table>
+  </table>
 
 
 </div>
-  <button class="boton-aux2" (click)="activarBusqueda()">Buscar usuarios de CS Music</button>
+<button class="boton-aux2" (click)="activarBusqueda()">Buscar usuarios de CS Music</button>
 
 <button class="boton-aux" (click)="listaVacia=!listaVacia;">Alternar Lista vacía</button>
 
@@ -64,7 +64,34 @@
 <div *ngIf="mostarBusquedaAmigos" class="agregar-amigos">
   <button class="boton-aux" (click)="cerrarBusqueda()">Cerrar Busqueda</button>
 
-  Introduzca Nick del usuario a buscar <input type="text" [(ngModel)]="nickBusca">
+  <p class="text-busqu"> Introduzca el alias (Nick) del usuario a buscar</p>
+  <input type="text" [(ngModel)]="nickBusca">
 
-  <button class="boton-aux" (click)="buscarAmigo()">Buscar</button>
+  <button  class="boton-busqueda" (click)="buscarAmigo()">Buscar</button>
+  <p *ngIf="noEncuentra">
+    El usuario especificado no se ha encontrado en la aplicación.
+  </p>
+
+  <!-- caso que encuentra el usuario -->
+
+
+  <br/>
+
+  <!-- caso que encuentra el usuario -->
+  <table style="padding-left: 20%" *ngIf="!noEncuentra && busqIniciada">
+    <tr>
+      <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
+      <td>{{usuario.nick}}</td>
+    </tr>
+    <tr> <td> Sara López</td> </tr>
+    <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
+      <i class="ultima-cancion"> · Tyfoon</i> </td>
+    </tr>
+    <tr><p><button (click)="agregarAmigo()">Agregar amigo</button></p></tr>
+  </table>
+
+  <!-- caso que encuentra el usuario -->
+
+
+  <!-- caso que encuentra el usuario -->
 </div>

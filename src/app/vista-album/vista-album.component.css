@@ -1,12 +1,11 @@
 .vista-album{
   background-color: #0b1d19;
-  width: 65%;
+  width: 63%;
   height: 62%;
   left: 13%;
   top: 9%;
   z-index: 1; /* Mejor fuera */
   position: fixed;
-
   font-family: Trebuchet MS, serif;
   color: aliceblue;
 }
