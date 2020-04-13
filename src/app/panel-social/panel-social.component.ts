@@ -29,22 +29,24 @@ export class PanelSocialComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
+    this.cargarUsuario('new');
     this.listaVacia = true;
     this.mostarBusquedaAmigos = false;
     this.busqIniciada = false;
     this.usuarioLogeado = new User();
-    this.usuarioLogeado.id = 1;
     this.displayFlag = 'block';
-    this.cargarUsuario('new');
   }
 
-  cargarUsuario(alias: string){
+  cargarUsuario(alias: string) {
     const params = new HttpParams()
       .set('nick', alias);
 
     this.http.get(this.URL_API + '/user/get', {params})
       .subscribe(
-        (resp: User) => {  this.usuarioLogeado = resp; console.log(resp.nick); }
+        (resp: User) => {
+          this.usuarioLogeado = resp; console.log(resp.nick);
+          this.checkListaVacia();
+        }
       );
   }
 
@@ -86,7 +88,7 @@ export class PanelSocialComponent implements OnInit {
 
 
   checkListaVacia()  {
-    this.listaVacia = (this.usuarioLogeado.amigos.length == 0);
+    this.listaVacia = (this.usuarioLogeado.amigos.length === 0);
   }
 
 }

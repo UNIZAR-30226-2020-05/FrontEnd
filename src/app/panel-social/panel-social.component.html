@@ -1,5 +1,4 @@
 <div class="panel-social">
-
   <hr>
   <p class="nombre-user">
     <img class="foto-perfil" src="../../assets/profile-pics/1.jpg"/>&nbsp;Usuario
@@ -7,15 +6,15 @@
   </p>
   <hr>
   <br/>
-  <p style="display:none">Tu lista de amigos está actualmente vacía.<br/><br/>
+  <p *ngIf="usuarioLogeado.amigos.length==0">Tu lista de amigos está actualmente vacía.<br/><br/>
 
     Puedes agregar usuarios a tu lista desde el botón inferior.</p>
 
   <!-- Construir lista con un ngFor  *ngIf="!listaVacia" class="listaAmigos"--->
-  <div *ngIf="!listaVacia"class="contenido-amigos">
-  <table>
+  <div class="contenido-amigos">
+  <table *ngFor="let usu of usuarioLogeado.amigos">
 
-    <tbody *ngFor="let usu of usuarioLogeado.amigos"> <!--*ngFor="let usu of usuario.amigos"--->
+      <!--*ngFor="let usu of usuario.amigos"--->
     <tr>
       <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
       <td> {{usu.nick}} </td>
@@ -24,10 +23,20 @@
     <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
       <i class="ultima-cancion"> Signs of Life · Poets of the Fall</i> </td>
     </tr><br/>
-    </tbody>
+
+
+
 
 
     <!-- Construir lista con un ngFor
+<tr>
+      <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
+      <td> usu.nick </td>
+    </tr>
+    <tr>usu.nombre}} usu.apellidos}}<td></td> </tr>
+    <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
+      <i class="ultima-cancion"> Signs of Life · Poets of the Fall</i> </td>
+    </tr><br/>
 
 
     <tr>
