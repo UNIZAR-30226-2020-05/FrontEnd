@@ -66,13 +66,15 @@ export class RegistroComponent implements OnInit {
     this.registro3 = false;
 
     const nuevo: UserRequest = { // Objeto usuario en registro
+      nombre: this.nombre,
+      apellidos: this.apellidos,
       nick: this.alias, // Nickname
       contrasena: this.pass, // Contrasena
       tipo_user: true, // false = usuario, true = admin
       fecha_nacimiento: this.fecha_nac // String de fecha nacim.
     };
 
-    // Test esto:
+
 
     this.http.post(this.URL_API + '/user/create', nuevo).subscribe(
      (resp: string) => { console.log(resp); } );
@@ -96,6 +98,8 @@ export class RegistroComponent implements OnInit {
   test() {
 
     const nuevo: UserRequest = { // Objeto usuario en registro
+      nombre: this.nombre,
+      apellidos: this.apellidos,
       nick: this.alias, // Nickname
       contrasena: this.pass, // Contrasena
       tipo_user: true, // false = usuario, true = admin

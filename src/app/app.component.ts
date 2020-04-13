@@ -12,6 +12,8 @@ export class AppComponent {
 
 export class User {
   id: number;
+  nombre: string;
+  apellidos: string;
   nick: string;
   contrasena: string;
   tipo_user: boolean;
@@ -19,10 +21,20 @@ export class User {
   id_ultima_reproduccion: number;
   minuto_ultima_reproduccion: number;
   tipo_ultima_reproduccion: number;
+
+  lista_cancion: Array<String>;
   amigos: Array<User>;
+
+
+  constructor() {
+  this.amigos = new Array<User>();
+  }
+
 }
 
 export class UserRequest {
+  nombre: string;
+  apellidos: string;
   nick: string;
   contrasena: string;
   tipo_user: boolean;

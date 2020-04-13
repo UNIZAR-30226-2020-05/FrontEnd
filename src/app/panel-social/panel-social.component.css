@@ -3,7 +3,7 @@
   color: aliceblue;
   border: solid #0b1713;
   position: absolute;
-  overflow: auto;
+
   height: 70%;
   width: 20%;
   top: 2%;
@@ -11,10 +11,33 @@
 
 }
 
+hr {
+  display: block;
+  border-style: wave;
+  border-width: 2px;
+}
+
+.tabla-busq{
+  width: 40%;
+  margin-left: 40%;
+}
+.contenido-amigos{
+  margin-left: 2%;
+  height: 75%;
+  overflow: auto;
+}
+
 .foto-perfil{
   border-radius: 50%; /*Ajustar dependiendo del estilo. Material design dice 50%. */
   vertical-align:middle;
-  margin-right: auto;
+  margin-right: 2%;
+  width: 5vh;
+}
+
+.foto-perfil-busq{
+  border-radius: 50%; /*Ajustar dependiendo del estilo. Material design dice 50%. */
+  vertical-align:middle;
+  margin-right: 1%;
   width: 5vh;
 }
 
@@ -26,11 +49,9 @@
 }
 
 
-.nombre-user{
+.nombre-user {
   text-align: center;
-  border: solid #0b1713;
 }
-
 .boton-busqueda{
   position: fixed;
   display: inline-block;
@@ -76,8 +97,12 @@ td{
   font-family: Calibri;
 }
 
+.boton-cierra-busq{
+
+}
+
 .agregar-amigos{
-  background-color: #0c2925;
+  background-color: #0b1d19;
   width: 65%;
   height: 65%;
   left: 13%;

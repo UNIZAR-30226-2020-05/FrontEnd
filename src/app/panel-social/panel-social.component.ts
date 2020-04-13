@@ -8,12 +8,14 @@ import {error} from '@angular/compiler/src/util';
   templateUrl: './panel-social.component.html',
   styleUrls: ['./panel-social.component.css']
 })
+
 export class PanelSocialComponent implements OnInit {
 
   public URL_API = 'http://localhost:8080';
 
 
   editarUsuario = true;
+  displayFlag: string;
   @Output() messageEvent = new EventEmitter<boolean>();
 
   listaVacia: boolean;
@@ -21,15 +23,29 @@ export class PanelSocialComponent implements OnInit {
   nickBusca: string;
   busqIniciada: boolean;
   noEncuentra: boolean;
-  usuarioLogeado: User;
+  usuarioLogeado: User; // Objeto usuario de quien está en la plataforma
   usuario: User;
 
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.listaVacia = false;
+    this.listaVacia = true;
     this.mostarBusquedaAmigos = false;
     this.busqIniciada = false;
+    this.usuarioLogeado = new User();
+    this.usuarioLogeado.id = 1;
+    this.displayFlag = 'block';
+    this.cargarUsuario('new');
+  }
+
+  cargarUsuario(alias: string){
+    const params = new HttpParams()
+      .set('nick', alias);
+
+    this.http.get(this.URL_API + '/user/get', {params})
+      .subscribe(
+        (resp: User) => {  this.usuarioLogeado = resp; console.log(resp.nick); }
+      );
   }
 
   activarBusqueda() {
@@ -49,18 +65,28 @@ export class PanelSocialComponent implements OnInit {
         (resp: User) => { this.busqIniciada = true; this.noEncuentra = false; this.usuario = resp; console.log(resp.nick); },
         (erroro: string) => {this.busqIniciada = true; this.noEncuentra = true; }
       );
+
+
   }
-
+  /* Utiliza el objeto usuario, que contiene el usuario objetivo a ser agregado */
   agregarAmigo() {
-    const params = new HttpParams()
-      .set('id2', this.usuario.id.toString());
+      this.http.patch(this.URL_API + '/user/addAmigo/' + this.usuario.id, this.usuarioLogeado.id )
+      .subscribe((resp: User) => {
+        this.usuarioLogeado.amigos.push(this.usuario); console.log(resp.nick);
+      } );
 
-    this.http.patch(this.URL_API + '/user/addAmigo{id1}', {params})
-      .subscribe((resp: User) => { this.usuario = resp; console.log(resp.nick); } );
+      this.cargarUsuario(this.usuarioLogeado.nick);
+      this.checkListaVacia();
+
   }
 
   sendMessageFather() {
     this.messageEvent.emit(this.editarUsuario);
+  }
+
+
+  checkListaVacia()  {
+    this.listaVacia = (this.usuarioLogeado.amigos.length == 0);
   }
 
 }
