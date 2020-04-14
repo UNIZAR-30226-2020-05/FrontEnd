@@ -97,8 +97,10 @@
     <tr>
       <td></td>
       <td>
-      <button *ngIf="!existeAmigo(usuarioBuscado.nick)" (click)="agregarAmigo()">Agregar amigo</button>
-      <i *ngIf="existeAmigo(usuarioBuscado.nick)">En la lista de amigos</i>
+        <button *ngIf="!existeAmigo(usuarioBuscado.nick) && !esAutoBusqueda()"
+                (click)="agregarAmigo()">Agregar amigo</button>
+        <i *ngIf="existeAmigo(usuarioBuscado.nick)">En la lista de amigos</i>
+       <i *ngIf="esAutoBusqueda()">No puedes añadirte a ti mismo</i>
       </td>
     </tr>
   </table>

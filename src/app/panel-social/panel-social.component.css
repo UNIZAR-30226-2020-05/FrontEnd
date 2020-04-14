@@ -19,6 +19,7 @@ hr {
   width: 40%;
   margin-left: 40%;
 }
+
 .contenido-amigos{
   margin-left: 2%;
   height: 75%;
@@ -46,10 +47,10 @@ hr {
   width: 30px;
 }
 
-
 .nombre-user {
   text-align: center;
 }
+
 .boton-busqueda{
   position: fixed;
   display: inline-block;
@@ -69,7 +70,6 @@ p{
   text-align: center;
   font-style: italic;
 }
-
 
 button {
   transition-duration: 0.4s;
@@ -96,7 +96,9 @@ td{
 }
 
 .boton-cierra-busq{
-
+  right: 8%;
+  top: 3%;
+  position: absolute;
 }
 
 .agregar-amigos{

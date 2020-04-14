@@ -23,7 +23,7 @@ export class PanelSocialComponent implements OnInit {
   nickBusca: string;
   busqIniciada: boolean;
   noEncuentra: boolean;
-  usuarioLogeado: User; // Objeto usuario de quien está en la plataforma
+  usuarioLogeado: User; // Quien está en la plataforma
   usuarioBuscado: User;
 
   constructor(private http: HttpClient) { }
@@ -35,14 +35,16 @@ export class PanelSocialComponent implements OnInit {
     this.busqIniciada = false;
   }
 
-
-
   activarBusqueda() {
     this.mostarBusquedaAmigos = true;
   }
 
   cerrarBusqueda() {
     this.mostarBusquedaAmigos = false;
+  }
+
+  esAutoBusqueda() {
+    return (this.usuarioBuscado.nick == this.usuarioLogeado.nick);
   }
 
   existeAmigo(nick: string) {
@@ -61,6 +63,8 @@ export class PanelSocialComponent implements OnInit {
   return this.usuarioLogeado.amigos.includes(this.usuarioBuscado);
 }
 
+
+  /* --- Servicio de API --- */
   buscarAmigo() {
     const params = new HttpParams()
       .set('nick', this.nickBusca);
@@ -73,6 +77,7 @@ export class PanelSocialComponent implements OnInit {
 
 
   }
+
 
   /* --- Servicio de API --- */
   cargarUsuario(alias: string) {
