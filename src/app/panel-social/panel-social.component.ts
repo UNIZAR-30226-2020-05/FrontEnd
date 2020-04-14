@@ -24,7 +24,7 @@ export class PanelSocialComponent implements OnInit {
   busqIniciada: boolean;
   noEncuentra: boolean;
   usuarioLogeado: User; // Objeto usuario de quien está en la plataforma
-  usuario: User;
+  usuarioBuscado: User;
 
   constructor(private http: HttpClient) { }
 
@@ -33,22 +33,9 @@ export class PanelSocialComponent implements OnInit {
     this.listaVacia = true;
     this.mostarBusquedaAmigos = false;
     this.busqIniciada = false;
-    this.usuarioLogeado = new User();
-    this.displayFlag = 'block';
   }
 
-  cargarUsuario(alias: string) {
-    const params = new HttpParams()
-      .set('nick', alias);
 
-    this.http.get(this.URL_API + '/user/get', {params})
-      .subscribe(
-        (resp: User) => {
-          this.usuarioLogeado = resp; console.log(resp.nick);
-          this.checkListaVacia();
-        }
-      );
-  }
 
   activarBusqueda() {
     this.mostarBusquedaAmigos = true;
@@ -58,28 +45,55 @@ export class PanelSocialComponent implements OnInit {
     this.mostarBusquedaAmigos = false;
   }
 
+  existeAmigo(nick: string) {
+  /*let aux;
+    this.http.get(this.URL_API + '/user/get', nick})
+      .subscribe(
+        (resp: User) => {
+          let aux = resp; console.log(resp.nick);
+        }
+      );
+
+    let str = this.usuarioBuscado;
+    return this.usuarioLogeado.amigos.filter(function(usuarioLogeado) {
+      return usuarioLogeado.nick === str;
+    });*/
+  return this.usuarioLogeado.amigos.includes(this.usuarioBuscado);
+}
+
   buscarAmigo() {
     const params = new HttpParams()
       .set('nick', this.nickBusca);
 
     this.http.get(this.URL_API + '/user/get', {params})
       .subscribe(
-        (resp: User) => { this.busqIniciada = true; this.noEncuentra = false; this.usuario = resp; console.log(resp.nick); },
+        (resp: User) => { this.busqIniciada = true; this.noEncuentra = false; this.usuarioBuscado = resp; console.log(resp.nick); },
         (erroro: string) => {this.busqIniciada = true; this.noEncuentra = true; }
       );
 
 
   }
+
+  /* --- Servicio de API --- */
+  cargarUsuario(alias: string) {
+    const params = new HttpParams()
+      .set('nick', alias);
+
+    this.http.get(this.URL_API + '/user/get', {params})
+      .subscribe(
+        (resp: User) => {
+          this.usuarioLogeado = resp; console.log(resp.nick);
+        }
+      );
+  }
+
+  /* --- Servicio de API --- */
   /* Utiliza el objeto usuario, que contiene el usuario objetivo a ser agregado */
   agregarAmigo() {
-      this.http.patch(this.URL_API + '/user/addAmigo/' + this.usuario.id, this.usuarioLogeado.id )
+      this.http.patch(this.URL_API + '/user/addAmigo/' + this.usuarioBuscado.id, this.usuarioLogeado.id )
       .subscribe((resp: User) => {
-        this.usuarioLogeado.amigos.push(this.usuario); console.log(resp.nick);
+        this.usuarioLogeado.amigos.push(this.usuarioBuscado); console.log(resp.nick);
       } );
-
-      this.cargarUsuario(this.usuarioLogeado.nick);
-      this.checkListaVacia();
-
   }
 
   sendMessageFather() {
@@ -87,8 +101,6 @@ export class PanelSocialComponent implements OnInit {
   }
 
 
-  checkListaVacia()  {
-    this.listaVacia = (this.usuarioLogeado.amigos.length === 0);
-  }
+
 
 }

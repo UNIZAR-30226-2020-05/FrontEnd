@@ -1,7 +1,7 @@
 <div class="panel-social">
   <hr>
   <p class="nombre-user">
-    <img class="foto-perfil" src="../../assets/profile-pics/1.jpg"/>&nbsp;Usuario
+    <img class="foto-perfil" src="../../assets/profile-pics/1.jpg"/>&nbsp;{{usuarioLogeado.nick}}
     &nbsp;&nbsp;<img (click)="sendMessageFather()"  class="icono-config" src="../../assets/ajustes.png"/>
   </p>
   <hr>
@@ -68,7 +68,7 @@
 </div>
 
 </div>
-<button class="boton-aux2" (click)="activarBusqueda()">{{usuarioLogeado.amigos.length}} Buscar usuarios de CS Music</button>
+<button class="boton-aux2" (click)="activarBusqueda()">Buscar usuarios de CS Music</button>
 
 
 <!-- Busqueda de amigos --->
@@ -88,14 +88,18 @@
   <table class="tabla-busq" *ngIf="!noEncuentra && busqIniciada">
     <tr>
       <td rowspan="2" ><img class="foto-perfil-busq" src="../../assets/profile-pics/4.jpg"></td>
-      <td>{{usuario.nick}}</td>
+      <td>{{usuarioBuscado.nick}}</td>
     </tr>
-    <tr> <td>{{usuario.nombre}} {{usuario.apellidos}}</td> </tr>
+    <tr> <td>{{usuarioBuscado.nombre}} {{usuarioBuscado.apellidos}}</td> </tr>
     <tr colspan="2"> <td></td> <td> <img width="4%"  src="../../assets/last.png">
-      <i class="ultima-cancion"> · Tyfoon</i> </td>
+      <i class="ultima-cancion"> Ultima reproducción</i> </td>
     </tr>
     <tr>
-      <td></td><td><button (click)="agregarAmigo()">Agregar amigo</button></td>
+      <td></td>
+      <td>
+      <button *ngIf="!existeAmigo(usuarioBuscado.nick)" (click)="agregarAmigo()">Agregar amigo</button>
+      <i *ngIf="existeAmigo(usuarioBuscado.nick)">En la lista de amigos</i>
+      </td>
     </tr>
   </table>
 

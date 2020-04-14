@@ -69,7 +69,7 @@ export class RegistroComponent implements OnInit {
       nombre: this.nombre,
       apellidos: this.apellidos,
       nick: this.alias, // Nickname
-      contrasena: this.pass, // Contrasena
+      contrasena: btoa(this.pass), // Contrasena
       tipo_user: true, // false = usuario, true = admin
       fecha_nacimiento: this.fecha_nac // String de fecha nacim.
     };
@@ -78,8 +78,6 @@ export class RegistroComponent implements OnInit {
 
     this.http.post(this.URL_API + '/user/create', nuevo).subscribe(
      (resp: string) => { console.log(resp); } );
-
-
 
   }
 
@@ -93,25 +91,6 @@ export class RegistroComponent implements OnInit {
   alternarAceptado() {
     if (this.aceptadoT) { this.aceptadoT = false;}
     else this.aceptadoT = true;
-  }
-
-  test() {
-
-    const nuevo: UserRequest = { // Objeto usuario en registro
-      nombre: this.nombre,
-      apellidos: this.apellidos,
-      nick: this.alias, // Nickname
-      contrasena: this.pass, // Contrasena
-      tipo_user: true, // false = usuario, true = admin
-      fecha_nacimiento: this.fecha_nac // String de fecha nacim.
-    };
-
-    const params = new HttpParams().set('nick', 'a');
-     this.http.get(this.URL_API + '/get', {params: params}).subscribe(
-       (resp: string) => { console.log(resp); } );
-
-    this.http.post(this.URL_API + '/user/create', nuevo).subscribe(
-      (resp: string) => { console.log(resp); } );
   }
 
 }
