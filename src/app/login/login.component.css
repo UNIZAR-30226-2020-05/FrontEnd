@@ -109,3 +109,14 @@ span.psw {
     width:50%;
   }
 }
+
+.datosMal{
+  position: absolute;
+  bottom: 265px;
+  margin-left: 615px;
+  color: red;
+}
+
+.error{
+  color:red;
+}
