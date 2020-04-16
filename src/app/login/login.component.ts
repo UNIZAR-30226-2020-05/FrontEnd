@@ -13,18 +13,19 @@ export class LoginComponent implements OnInit {
   aviso:boolean=false;
 
   // campos de login
-  nomUsario:string;
+  nomUsuario:string;
   contrasena:string;
-  correcto:string;
+  correctoNick:string;
+  correctoPass: string;
 
 
-  public URL_API = 'http://localhost:3308';
+  public URL_API = 'http://localhost:8080';
 
 
   @Output() messageEvent = new EventEmitter<boolean>();
 
   constructor(private http: HttpClient) {
-    this.nomUsario='';
+    this.nomUsuario='';
     this.contrasena='';
   }
 
@@ -36,16 +37,21 @@ export class LoginComponent implements OnInit {
     this.messageEvent.emit(this.registro);
   }
 
+  usuario:User;
   comprobar(){
-    const params= new HttpParams().set('usuario',this.nomUsario).set('pass',btoa(this.contrasena));
-    this.http.get(this.URL_API + '/user/logIn',{params}). subscribe(
-      (resp: string) => { this.correcto= resp } );
-    if(this.correcto != "OK"){  /*AQUI ANTES PONIA != 'ok' U FUNCIONABA CUANDO NO ESTABA EN BASE DE DATAOS*/
-      this.aviso=true;
-    }
+    const params= new HttpParams().set('nick',this.nomUsuario).set('contrasena',btoa(this.contrasena));
+    this.http.get(this.URL_API + '/user/logIn',{params}).subscribe(
+      (resp:User) => { this.logeado=true; this.correctoNick= resp.nick;console.log(resp.nick);},
+      (error:string)=> {this.aviso=true;});
+
+    /*subscribe(
+      data => { console.log(data.nick);this.correctoNick=data.nick;this.correctoPass=data.contrasena});
+    if( this.correctoNick != this.nomUsuario || atob(this.correctoPass)!= this.contrasena){  /*AQUI ANTES PONIA != 'ok' U FUNCIONABA CUANDO NO ESTABA EN BASE DE DATAOS*/
+     /* this.aviso=true;*/
+   /* }
     else{
-      this.logeado=true;
-    }
+     /* this.logeado=true;
+    }*/
 
   }
 }
