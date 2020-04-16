@@ -75,7 +75,6 @@ export class PanelSocialComponent implements OnInit {
         (erroro: string) => {this.busqIniciada = true; this.noEncuentra = true; }
       );
 
-
   }
 
 
