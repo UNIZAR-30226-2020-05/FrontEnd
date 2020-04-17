@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit,Input, Output} from '@angular/core';
 
 @Component({
   selector: 'app-vista-album',
@@ -14,8 +14,12 @@ export class VistaAlbumComponent implements OnInit {
   contador: number = 0;
   artistaAlbum: string = 'Sabaton'
   constructor() { }
-  show = false;
+
+  @Input() show:boolean;
   ngOnInit(): void {
+  }
+  receiveMessageListas($event) {
+    this.show = ($event);
   }
 
 }
