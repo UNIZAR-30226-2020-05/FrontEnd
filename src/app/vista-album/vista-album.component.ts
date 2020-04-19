@@ -1,4 +1,5 @@
 import {Component, OnInit,Input, Output} from '@angular/core';
+import {ServicioComponentesService} from "../servicio-componentes.service";
 
 @Component({
   selector: 'app-vista-album',
@@ -13,13 +14,12 @@ export class VistaAlbumComponent implements OnInit {
   //
   contador: number = 0;
   artistaAlbum: string = 'Sabaton'
-  constructor() { }
+  constructor(private Servicio: ServicioComponentesService) { }
 
-  @Input() show:boolean;
+  show:boolean;
   ngOnInit(): void {
+    this.Servicio.sharedMessage3.subscribe(message3 => this.show=message3);
   }
-  receiveMessageListas($event) {
-    this.show = ($event);
-  }
+
 
 }
