@@ -1,7 +1,8 @@
-import { Component,Output,EventEmitter,OnInit} from '@angular/core';
+import {Component, Output, EventEmitter, OnInit, Input} from '@angular/core';
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
 import {User, UserRequest} from '../app.component';
-import {observable} from "rxjs";
+import {ServicioComponentesService} from "../servicio-componentes.service";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -24,13 +25,15 @@ export class LoginComponent implements OnInit {
 
   @Output() messageEvent = new EventEmitter<boolean>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private Servicio: ServicioComponentesService) {
     this.nomUsuario='';
     this.contrasena='';
   }
 
   ngOnInit(): void {
     this.logeado=false;
+    this.Servicio.nextMessage(this.usuario);
+    this.Servicio.sharedMessage2.subscribe(message2 => this.logeado=message2);
   }
 
   sendMessageFather(){
@@ -41,17 +44,9 @@ export class LoginComponent implements OnInit {
   comprobar(){
     const params= new HttpParams().set('nick',this.nomUsuario).set('pass',btoa(this.contrasena));
     this.http.get(this.URL_API + '/user/logIn',{params}).subscribe(
-      (resp:User) => { this.logeado=true; this.correctoNick= resp.nick;console.log(resp.nick);},
+      (resp:User) => { this.logeado=true;this.usuario=resp;this.correctoNick= resp.nick;console.log(resp.nick);},
       (error:string)=> {this.aviso=true;});
 
-    /*subscribe(
-      data => { console.log(data.nick);this.correctoNick=data.nick;this.correctoPass=data.contrasena});
-    if( this.correctoNick != this.nomUsuario || atob(this.correctoPass)!= this.contrasena){  /*AQUI ANTES PONIA != 'ok' U FUNCIONABA CUANDO NO ESTABA EN BASE DE DATAOS*/
-     /* this.aviso=true;*/
-   /* }
-    else{
-     /* this.logeado=true;
-    }*/
-
   }
+
 }

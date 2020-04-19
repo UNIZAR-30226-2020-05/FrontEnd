@@ -1,6 +1,7 @@
-import {Component, OnInit, Input, Output} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
 import {User, UserRequest} from '../app.component';
+import {ServicioComponentesService} from "../servicio-componentes.service";
 
 @Component({
   selector: 'app-registro',
@@ -11,6 +12,7 @@ export class RegistroComponent implements OnInit {
   @Input() registro1; //Flag si se solicita proceso de registro
   public registro2; //Flag si está en el paso dos de registro.
   public registro3; //Flag si está en el paso tres de registro.
+  public login:boolean=true;
 
   public aceptadoT;
   public imageSeleccion;
@@ -26,7 +28,7 @@ export class RegistroComponent implements OnInit {
   pass: string;
   pass2: string;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,private Servicio:ServicioComponentesService) {
     this.alias = '';
     this.nombre = '';
     this.apellidos = '';
@@ -41,6 +43,7 @@ export class RegistroComponent implements OnInit {
     this.registro3 = false;
     this.aceptadoT = false;
     this.imageSeleccion = 0;
+    this.Servicio.sharedMessage2.subscribe(message2 => this.login=message2);
 
   }
 
@@ -93,4 +96,7 @@ export class RegistroComponent implements OnInit {
     else this.aceptadoT = true;
   }
 
+  newToLogin(){
+     this.Servicio.nextMessage2(this.login);
+  }
 }

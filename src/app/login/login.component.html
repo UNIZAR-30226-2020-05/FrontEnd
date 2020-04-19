@@ -1,3 +1,4 @@
+
 <div *ngIf="!logeado" class="log"><br/><br/>
   <img src="../../assets/logo-white.png" class="logoSuperior">
   <div class="container">
@@ -11,7 +12,7 @@
   </div>
 
     <button (click)="logeado=true; sendMessageFather() " type="button" class="regbtn">Registrarse</button>
-    <span class="psw"> <a href="#">contraseña?</a></span>
+   <!-- <span class="psw"> <a href="#">contraseña?</a></span> -->
 
   <div *ngIf="aviso" class="datosMal">
       <label class="error">Usuario o contraseña incorrecta</label>

@@ -1,7 +1,7 @@
 <app-login (messageEvent)="receiveMessageChild($event)"></app-login>
 <div *ngIf="registro1" class="registro"><br/><br/>
   <img src="../../assets/logo-white.png" class="logoSuperior">
-  <button class="boton-aux" (click)="registro1=false">Cancelar</button>
+  <button class="boton-aux" (click)="registro1=false;newToLogin()">Cancelar</button>
 
   <p>Registro de nuevo usuario</p>
   <form>

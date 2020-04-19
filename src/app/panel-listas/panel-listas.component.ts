@@ -1,4 +1,6 @@
 import {Component, Output,EventEmitter, OnInit} from '@angular/core';
+import {ServicioComponentesService} from "../servicio-componentes.service";
+import {User} from "../app.component";
 
 @Component({
   selector: 'app-panel-listas',
@@ -11,13 +13,18 @@ export class PanelListasComponent implements OnInit {
   mostrarCrear:boolean=false;
   mostrarFav:boolean=false;
   okVista:boolean=true;
+  usuario: User;
 
   sendMessageAlbum(){
     this.messageEvent2.emit(this.okVista);
   }
-  constructor() { }
+  constructor(private Servicio: ServicioComponentesService) { }
 
   ngOnInit(): void {
+    this.Servicio.sharedMessage.subscribe(message => this.usuario=message)
+  }
+  newMessage() {
+    this.Servicio.nextMessage(this.usuario);
   }
 
 }
