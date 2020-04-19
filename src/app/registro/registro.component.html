@@ -6,7 +6,8 @@
   <p>Registro de nuevo usuario</p>
   <form>
     Alias de usuario:<i style="color: red;" *ngIf="nickCorrecto()">Ya existe este usuario</i><br/>
-    <input  type="text" id="regAlias" name="regAlias" [(ngModel)]="alias" (focusout)="existeUsuario()"><br/><br/>
+    <input  type="text" id="regAlias" name="regAlias" [(ngModel)]="alias" (focusin)="existeUsuario()"
+            (focusout)="existeUsuario()"><br/><br/>
 
     Nombre:<br/>
     <input  type="text" id="regNom" name="regNom" [(ngModel)]="nombre"><br/><br/>

@@ -118,6 +118,6 @@ export class RegistroComponent implements OnInit {
   }
 
   nickCorrecto(){
-    return !this.usuarioUnico && this.alias!='';
+    return !this.usuarioUnico && this.alias != '';
   }
 }
