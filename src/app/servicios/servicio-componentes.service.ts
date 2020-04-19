@@ -58,7 +58,7 @@ export class ServicioComponentesService {
   cargarLogin() {
     return this.nuevo;
   }
-  
+
   /*nextMessageCentral(messageCentral) {
     this.messageCentral.next(messageCentral);
   }*/

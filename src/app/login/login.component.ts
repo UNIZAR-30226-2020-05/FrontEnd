@@ -45,9 +45,12 @@ export class LoginComponent implements OnInit {
     const params= new HttpParams().set('nick',this.nomUsuario).set('pass',btoa(this.contrasena));
     this.http.get(this.URL_API + '/user/logIn',{params}).subscribe(
       (resp:User) => { this.logeado=true;this.usuario=resp;this.correctoNick= resp.nick;console.log(resp.nick);
+        this.Servicio.establecerLogin(resp);
 
         },
       (error:string)=> {this.aviso=true;});
+
+
   }
 
 }

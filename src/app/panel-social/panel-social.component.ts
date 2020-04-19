@@ -31,15 +31,15 @@ export class PanelSocialComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cargarUsuario('new');
     this.listaVacia = true;
     this.mostarBusquedaAmigos = false;
     this.busqIniciada = false;
-
+    this.refrescarLogin();
   }
 
   activarBusqueda() {
     this.mostarBusquedaAmigos = true;
+    this.refrescarLogin();
   }
 
   cerrarBusqueda() {
@@ -117,5 +117,9 @@ export class PanelSocialComponent implements OnInit {
   enviarToEdit() {
     this.Servicio.nextMessageEdit(this.editarUsuario);
     this.Servicio.nextMessage3(!this.editarUsuario);
+  }
+
+  refrescarLogin(){
+    this.usuarioLogeado = this.Servicio.cargarLogin();
   }
 }
