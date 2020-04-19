@@ -28,7 +28,9 @@ export class RegistroComponent implements OnInit {
   pass: string;
   pass2: string;
 
-  constructor(private http: HttpClient,private Servicio:ServicioComponentesService) {
+  usuarioUnico: boolean;
+
+  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
     this.alias = '';
     this.nombre = '';
     this.apellidos = '';
@@ -86,7 +88,7 @@ export class RegistroComponent implements OnInit {
 
   /* Función para comprobar si los datos del formulario son adecuados */
    datosok() {
-    return (this.alias !== '' && this.nombre !== '' && this.apellidos !== '' &&
+    return (this.usuarioUnico && this.alias !== '' && this.nombre !== '' && this.apellidos !== '' &&
             this.fecha_nac !== '' && this.pass !== '' && this.pass2 !== '' &&
             this.pass === this.pass2);
   }
@@ -98,5 +100,24 @@ export class RegistroComponent implements OnInit {
 
   newToLogin(){
      this.Servicio.nextMessage2(this.login);
+  }
+
+  existeUsuario(){
+    const params = new HttpParams()
+      .set('nick', this.alias);
+
+    this.http.get(this.URL_API + '/user/get', {params})
+      .subscribe(
+        (resp: User) => {
+          this.usuarioUnico = false;
+        },
+        (erroro: string) => {
+          this.usuarioUnico = true;
+        }
+      );
+  }
+
+  nickCorrecto(){
+    return !this.usuarioUnico && this.alias!='';
   }
 }

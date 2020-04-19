@@ -1,5 +1,5 @@
 import {Component, OnInit,Input, Output} from '@angular/core';
-import {ServicioComponentesService} from "../servicio-componentes.service";
+import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
 
 @Component({
   selector: 'app-vista-album',
