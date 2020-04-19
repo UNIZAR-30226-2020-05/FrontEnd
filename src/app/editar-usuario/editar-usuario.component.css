@@ -49,7 +49,8 @@ input {
   float: left;
 }
 .botonBorrar:hover{
-  background-color: darkred;
+  background-color: #5a0000;
+  color: aliceblue;
 }
 
 .botonConfirmar{
@@ -80,3 +81,7 @@ input {
   color: white;
 }
 
+.textoBorrar{
+  text-align: center;
+  font-size: 25px;
+}

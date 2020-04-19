@@ -29,3 +29,15 @@
   <button *ngIf="!contrasenaBien()" disabled class="denegado">Confirmar</button>
   <button (click)="cancelarEdit()" class="botonCancelar">Cancelar</button>
 </div>
+
+<div *ngIf="aBorrar" class="editar">
+  <p class="textoBorrar">¿Seguro que desea eliminar su cuenta?</p>
+  <p class="textoBorrar">Esta acción no se puede deshacer.</p>
+  <button (click)="confirmaBorrado()" class="botonConfirmar">Confirmar</button>
+  <button (click)="cancelaBorrado()" class="botonBorrar">Cancelar</button>
+</div>
+
+<div *ngIf="passCambiada" class="editar">
+  <p class="textoBorrar">Su contraseña ha sido modificada correctamente</p>
+  <button (click)="finalCambio()" class="botonConfirmar">Aceptar</button>
+</div>
