@@ -34,10 +34,22 @@ input {
   background-color: #8c2528;
   border-radius: 10px;
   margin-bottom: 2%;
-  float: left;
+  margin-right: 1%;
+  float: right;
 }
 .botonCancelar:hover{
   background-color: indianred;
+}
+
+.botonBorrar{
+  transition-duration: 0.4s;
+  background-color: #8c2528;
+  border-radius: 10px;
+  margin-bottom: 2%;
+  float: left;
+}
+.botonBorrar:hover{
+  background-color: darkred;
 }
 
 .botonConfirmar{
@@ -45,10 +57,26 @@ input {
   background-color: #358c83;
   border-radius: 10px;
   margin-right: 2%;
-  margin-bottom: 0%;
+  margin-bottom: 2%;
   float: right;
 }
 .botonConfirmar:hover {
   background-color: #124828;
   color: white;
 }
+
+.denegado{
+  transition-duration: 0.4s;
+  background-color: #358c83;
+  border-radius: 10px;
+  cursor: not-allowed;
+  margin-right: 2%;
+  margin-bottom: 2%;
+  float: right;
+}
+
+.denegado:hover {
+  background-color: #124828; /* Green */
+  color: white;
+}
+

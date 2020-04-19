@@ -20,10 +20,12 @@
   </table>
   Ha seleccionado la imagen número {{imageSeleccion}}<br/><br/>
   Nueva contraseña:<br/>
-  <input  type="password" id="regPass" name="regPass"><br/><br/>
+  <input  type="password" id="regPass" name="regPass" [(ngModel)]="passN"><br/><br/>
 
   Repita la contraseña:<br/>
-  <input  type="password" id="regPass2" name="regPass2"><br/><br/>
+  <input  type="password" id="regPass2" name="regPass2" [(ngModel)]="passN2"><br/><br/>
+  <button (click)="borrarUsuario()" class="botonBorrar">Borrar usuario</button>
+  <button *ngIf="contrasenaBien()" (click)="cambio()" class="botonConfirmar">Confirmar</button>
+  <button *ngIf="!contrasenaBien()" disabled class="denegado">Confirmar</button>
   <button (click)="cancelarEdit()" class="botonCancelar">Cancelar</button>
-  <button (click)="finalizarEdit()" class="botonConfirmar" align="right">Confirmar</button>
 </div>
