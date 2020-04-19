@@ -114,7 +114,8 @@ export class PanelSocialComponent implements OnInit {
       });
   }
 
-  sendMessageFather() {
-    this.messageEvent.emit(this.editarUsuario);
+  enviarToEdit() {
+    this.Servicio.nextMessageEdit(this.editarUsuario);
+    this.Servicio.nextMessage3(!this.editarUsuario);
   }
 }
