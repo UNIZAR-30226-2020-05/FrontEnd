@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
 
   @Output() messageEvent = new EventEmitter<boolean>();
 
-  constructor(private http: HttpClient,private Servicio: ServicioComponentesService) {
+  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
     this.nomUsuario='';
     this.contrasena='';
   }
@@ -44,9 +44,10 @@ export class LoginComponent implements OnInit {
   comprobar(){
     const params= new HttpParams().set('nick',this.nomUsuario).set('pass',btoa(this.contrasena));
     this.http.get(this.URL_API + '/user/logIn',{params}).subscribe(
-      (resp:User) => { this.logeado=true;this.usuario=resp;this.correctoNick= resp.nick;console.log(resp.nick);},
-      (error:string)=> {this.aviso=true;});
+      (resp:User) => { this.logeado=true;this.usuario=resp;this.correctoNick= resp.nick;console.log(resp.nick);
 
+        },
+      (error:string)=> {this.aviso=true;});
   }
 
 }

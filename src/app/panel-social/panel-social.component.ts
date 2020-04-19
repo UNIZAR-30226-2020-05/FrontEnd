@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HttpClient, HttpParams, HttpClientModule, HttpResponse, HttpErrorResponse} from '@angular/common/http';
 import {User} from '../app.component';
 import {error} from '@angular/compiler/src/util';
+import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
 
 @Component({
   selector: 'app-panel-social',
@@ -26,7 +27,7 @@ export class PanelSocialComponent implements OnInit {
   usuarioLogeado: User; // Quien está en la plataforma
   usuarioBuscado: User;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class PanelSocialComponent implements OnInit {
     this.listaVacia = true;
     this.mostarBusquedaAmigos = false;
     this.busqIniciada = false;
+
   }
 
   activarBusqueda() {
