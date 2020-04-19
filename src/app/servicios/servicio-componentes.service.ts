@@ -51,6 +51,14 @@ export class ServicioComponentesService {
     this.messageEdit.next(messageEdit);
   }
 
+  establecerLogin(usuario: User) {
+    this.nuevo = usuario;
+  }
+
+  cargarLogin() {
+    return this.nuevo;
+  }
+  
   /*nextMessageCentral(messageCentral) {
     this.messageCentral.next(messageCentral);
   }*/
