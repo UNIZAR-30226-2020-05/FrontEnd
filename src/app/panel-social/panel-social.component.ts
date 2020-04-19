@@ -26,7 +26,8 @@ export class PanelSocialComponent implements OnInit {
   usuarioLogeado: User; // Quien está en la plataforma
   usuarioBuscado: User;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   ngOnInit(): void {
     this.cargarUsuario('new');
@@ -48,20 +49,20 @@ export class PanelSocialComponent implements OnInit {
   }
 
   existeAmigo(nick: string) {
-  /*let aux;
-    this.http.get(this.URL_API + '/user/get', nick})
-      .subscribe(
-        (resp: User) => {
-          let aux = resp; console.log(resp.nick);
-        }
-      );
+    /*let aux;
+      this.http.get(this.URL_API + '/user/get', nick})
+        .subscribe(
+          (resp: User) => {
+            let aux = resp; console.log(resp.nick);
+          }
+        );
 
-    let str = this.usuarioBuscado;
-    return this.usuarioLogeado.amigos.filter(function(usuarioLogeado) {
-      return usuarioLogeado.nick === str;
-    });*/
-  return this.usuarioLogeado.amigos.includes(this.usuarioBuscado);
-}
+      let str = this.usuarioBuscado;
+      return this.usuarioLogeado.amigos.filter(function(usuarioLogeado) {
+        return usuarioLogeado.nick === str;
+      });*/
+    return this.usuarioLogeado.amigos.includes(this.usuarioBuscado);
+  }
 
 
   /* --- Servicio de API --- */
@@ -71,8 +72,16 @@ export class PanelSocialComponent implements OnInit {
 
     this.http.get(this.URL_API + '/user/get', {params})
       .subscribe(
-        (resp: User) => { this.busqIniciada = true; this.noEncuentra = false; this.usuarioBuscado = resp; console.log(resp.nick); },
-        (erroro: string) => {this.busqIniciada = true; this.noEncuentra = true; }
+        (resp: User) => {
+          this.busqIniciada = true;
+          this.noEncuentra = false;
+          this.usuarioBuscado = resp;
+          console.log(resp.nick);
+        },
+        (erroro: string) => {
+          this.busqIniciada = true;
+          this.noEncuentra = true;
+        }
       );
 
   }
@@ -86,25 +95,24 @@ export class PanelSocialComponent implements OnInit {
     this.http.get(this.URL_API + '/user/get', {params})
       .subscribe(
         (resp: User) => {
-          this.usuarioLogeado = resp; console.log(resp.nick);
+          this.usuarioLogeado = resp;
+          console.log(resp.nick);
         }
       );
   }
 
   /* --- Servicio de API --- */
+
   /* Utiliza el objeto usuario, que contiene el usuario objetivo a ser agregado */
   agregarAmigo() {
-      this.http.patch(this.URL_API + '/user/addAmigo/' + this.usuarioBuscado.id, this.usuarioLogeado.id )
+    this.http.patch(this.URL_API + '/user/addAmigo/' + this.usuarioBuscado.id, this.usuarioLogeado.id)
       .subscribe((resp: User) => {
-        this.usuarioLogeado.amigos.push(this.usuarioBuscado); console.log(resp.nick);
-      } );
+        this.usuarioLogeado.amigos.push(this.usuarioBuscado);
+        console.log(resp.nick);
+      });
   }
 
   sendMessageFather() {
     this.messageEvent.emit(this.editarUsuario);
   }
-
-
-
-
 }

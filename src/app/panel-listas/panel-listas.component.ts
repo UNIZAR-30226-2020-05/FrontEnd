@@ -1,5 +1,5 @@
 import {Component, Output,EventEmitter, OnInit} from '@angular/core';
-import {ServicioComponentesService} from "../servicio-componentes.service";
+import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
 import {User} from "../app.component";
 
 @Component({

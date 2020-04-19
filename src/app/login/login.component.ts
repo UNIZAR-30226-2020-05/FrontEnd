@@ -1,7 +1,7 @@
 import {Component, Output, EventEmitter, OnInit, Input} from '@angular/core';
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
 import {User, UserRequest} from '../app.component';
-import {ServicioComponentesService} from "../servicio-componentes.service";
+import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
 
 @Component({
   selector: 'app-login',
