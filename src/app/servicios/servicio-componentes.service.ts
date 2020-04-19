@@ -10,6 +10,7 @@ export class ServicioComponentesService {
    nuevo: User;
    login:boolean=false;
    vistaAlbum:boolean;
+   editUser:boolean;
 
   /* Mensaje para pasar usuario */
   private message = new BehaviorSubject(this.nuevo);
@@ -23,6 +24,10 @@ export class ServicioComponentesService {
   private message3= new BehaviorSubject(this.vistaAlbum);
   sharedMessage3= this.message3.asObservable();
 
+  /* Mensaje para pasar variable a editar usuario */
+  private messageEdit= new BehaviorSubject(this.editUser);
+  sharedMessageEdit= this.messageEdit.asObservable();
+
   constructor() { }
 
   nextMessage(message) {
@@ -35,6 +40,10 @@ export class ServicioComponentesService {
 
   nextMessage3(message3){
     this.message3.next(message3);
+  }
+
+  nextMessageEdit(messageEdit){
+    this.messageEdit.next(messageEdit);
   }
 
 }
