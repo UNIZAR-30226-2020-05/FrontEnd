@@ -116,6 +116,7 @@
   position: absolute;
   float: right;
 }
+
 tr.spaceUnderRecom1>td {
   padding-bottom: 85px;
 }
@@ -130,7 +131,7 @@ tr.espacioLat>td{
 }
 
 .imagenRecomendacion{
-  margin-left: 17%;
+  margin-left: 0%;
   border-radius: 10%;
   height: 90px;
   width: 90px;

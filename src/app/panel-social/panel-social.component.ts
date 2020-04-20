@@ -119,5 +119,5 @@ export class PanelSocialComponent implements OnInit {
     this.Servicio.nextMessageEdit(this.editarUsuario);
     this.Servicio.nextMessage3(!this.editarUsuario);
   }
-  
+
 }
