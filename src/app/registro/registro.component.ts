@@ -12,7 +12,7 @@ export class RegistroComponent implements OnInit {
   @Input() registro1; //Flag si se solicita proceso de registro
   public registro2; //Flag si está en el paso dos de registro.
   public registro3; //Flag si está en el paso tres de registro.
-  public login:boolean=true;
+  public login = true;
 
   public aceptadoT;
   public imageSeleccion;
@@ -66,6 +66,8 @@ export class RegistroComponent implements OnInit {
   }
 
   registrado() {
+    //Después del registro, vuelve a la pantalla de login
+    this.Servicio.nextMessage2(this.login);
     this.registro1 = false;
     this.registro2 = false;
     this.registro3 = false;

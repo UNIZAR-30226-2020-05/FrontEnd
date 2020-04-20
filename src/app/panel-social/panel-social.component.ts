@@ -25,6 +25,7 @@ export class PanelSocialComponent implements OnInit {
   busqIniciada: boolean;
   noEncuentra: boolean;
   usuarioLogeado: User; // Quien está en la plataforma
+
   usuarioBuscado: User;
 
   constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
@@ -34,12 +35,12 @@ export class PanelSocialComponent implements OnInit {
     this.listaVacia = true;
     this.mostarBusquedaAmigos = false;
     this.busqIniciada = false;
-    this.refrescarLogin();
+    //Recibe el objeto usuario, y actualiza cuando se cambia.
+    this.Servicio.sharedMessage.subscribe(message => this.usuarioLogeado = message);
   }
 
   activarBusqueda() {
     this.mostarBusquedaAmigos = true;
-    this.refrescarLogin();
   }
 
   cerrarBusqueda() {
@@ -118,8 +119,5 @@ export class PanelSocialComponent implements OnInit {
     this.Servicio.nextMessageEdit(this.editarUsuario);
     this.Servicio.nextMessage3(!this.editarUsuario);
   }
-
-  refrescarLogin(){
-    this.usuarioLogeado = this.Servicio.cargarLogin();
-  }
+  
 }
