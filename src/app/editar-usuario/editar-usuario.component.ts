@@ -1,6 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
+import {User} from "../app.component";
 
 @Component({
   selector: 'app-editar-usuario',
@@ -18,6 +19,7 @@ export class EditarUsuarioComponent implements OnInit {
 
   public URL_API = 'http://localhost:8080';
 
+  usuarioLog:User;
   // Atributo a cambiar
   passN: string;
   passN2: string;
@@ -25,7 +27,7 @@ export class EditarUsuarioComponent implements OnInit {
   constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
     this.passN = '';
     this.passN2 = '';
-    this.id = 11;
+
   }
   // Se muestra al pulsar en el engranaje de panel social
   receiveMessageChild($event) {
@@ -47,8 +49,10 @@ export class EditarUsuarioComponent implements OnInit {
     this.mostrar = true;
     this.aBorrar = false;
   }
+
   // Borra el usuario y vuelve a la pantalla de login
   confirmaBorrado() {
+    this.id= this.usuarioLog.id;
     this.http.delete(this.URL_API + '/user/delete/' + this.id).subscribe(
       (resp: string) => { console.log(resp); } );
     this.Servicio.nextMessage2(this.login);
@@ -61,6 +65,7 @@ export class EditarUsuarioComponent implements OnInit {
   }
   // Cambia la contraseña del usuario
   cambio() {
+    this.id= this.usuarioLog.id;
     this.http.patch(this.URL_API + '/user/modifyPass/' + this.id, btoa(this.passN)).subscribe(
       (resp: string) => { console.log(resp); } );
     this.mostrar = false;
@@ -75,5 +80,9 @@ export class EditarUsuarioComponent implements OnInit {
     this.aBorrar = false;
     this.passCambiada = false;
     this.Servicio.sharedMessageEdit.subscribe(messageEdit => this.mostrar = messageEdit);
+    this.Servicio.sharedMessage.subscribe(message => this.usuarioLog= message);
+
+
+
   }
 }
