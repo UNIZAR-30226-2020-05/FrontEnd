@@ -1,13 +1,13 @@
 <!--/********** PANEL IZQUIERDO ************/ -->
 <div class="panel">
   <p class="titleP">PODCAST</p>
-  <p class="ListP" (click)="mostrarCrear=true; mostrarFav=false">
+  <p class="ListP" (click)="mostrarCrearP=true; mostrarFav=false">
     <img class="addP" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>
   <p class="fave" (click)="mostrarFav=true">
     <img class= "favP" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
   <hr>
 <p class="titleL">PLAYLISTS</p>
-<p class="CrearList" (click)="mostrarCrear=true;mostrarFav=false">
+<p class="CrearList" (click)="mostrarCrearC=true;mostrarFav=false">
   <img class="iconoAñadir" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>&nbsp;
 <p class="fav" (click)="mostrarFav=true">
   <img class= "iconoFav" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
@@ -58,15 +58,26 @@
 </div>
 
 
-<!--************* PANTALLA CREAR LISTA PLAYLIST Y PODCAST ******/-->
+<!--************* PANTALLA CREAR LISTA PLAYLIST ******/-->
 
-<div *ngIf="mostrarCrear" class= "crear">
+<div *ngIf="mostrarCrearC" class= "crear">
+  <div class="container">
+    <label class="nueva"><b>Crear nueva lista </b></label>
+    <input type="nombre" placeholder="Nombre nueva lista" name="name" required [(ngModel)]="nombreLista">
+  </div>
+  <button (click)="mostrarCrearC=false" class="cancel">Cancelar</button>
+  <button (click)="mostrarCrearC=false; nuevaListaCanciones()" class="aceptar">Crear</button>
+</div>
+
+<!--************* PANTALLA CREAR LISTA PODCAST ******/-->
+
+<div *ngIf="mostrarCrearP" class= "crear">
   <div class="container">
     <label class="nueva"><b>Crear nueva lista </b></label>
     <input type="nombre" placeholder="Nombre nueva lista" name="name" required>
   </div>
-  <button (click)="mostrarCrear=false" class="cancel">Cancelar</button>
-  <button (click)="mostrarCrear=false" class="aceptar">Crear</button>
+  <button (click)="mostrarCrearP=false" class="cancel">Cancelar</button>
+  <button (click)="mostrarCrearP=false" class="aceptar">Crear</button>
 </div>
 
 
