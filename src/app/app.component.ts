@@ -22,13 +22,13 @@ export class User {
   minuto_ultima_reproduccion: number;
   tipo_ultima_reproduccion: number;
 
-  lista_cancion: Array<ListaCancionRequest>;
+  lista_cancion: Array<ListaCancion>;
   amigos: Array<User>;
 
 
   constructor() {
   this.amigos = new Array<User>();
-  this.lista_cancion = new Array<ListaCancionRequest>();
+  this.lista_cancion = new Array<ListaCancion>();
   }
 
 }
@@ -43,6 +43,20 @@ export class UserRequest {
 }
 
 export class ListaCancionRequest {
-  id_user: number;
+  id_usuario: number;
   nombre: string;
+}
+
+export class ListaCancion {
+  id_usuario: number;
+  nombre: string;
+  canciones: Array<canciones>;
+}
+
+export class canciones {
+  nombre: string;
+  fecha_subida: number;
+  album: string;
+  artistas: Array<string>;
+
 }

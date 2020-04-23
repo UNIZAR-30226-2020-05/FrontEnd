@@ -33,8 +33,9 @@
 </table>
 <!--/****************** MENUS VERTICALES DE PLAYLIST Y PODCAST ********************/-->
 <div class="vertical-menu">
-  <a href="#"  (click)="enviarToAlbum()">Rock</a>
-  <a href="#">Link 2</a>
+
+  <a href="#"> {{this.usuario.id}}</a>
+  <!--<a href="#">Link 2</a>
   <a href="#">Link 3</a>
   <a href="#">Link 4</a>
   <a href="#">Link 5</a>
@@ -42,19 +43,13 @@
   <a href="#">Link 7</a>
   <a href="#">Link 8</a>
   <a href="#">Link 9</a>
-  <a href="#">Link 10</a>
+  <a href="#">Link 10</a> -->
 </div>
-<div class="vertical-menu2">
-  <a href="#">Link 1</a>
-  <a href="#">Link 2</a>
-  <a href="#">Link 3</a>
-  <a href="#">Link 4</a>
-  <a href="#">Link 5</a>
-  <a href="#">Link 6</a>
-  <a href="#">Link 7</a>
-  <a href="#">Link 8</a>
-  <a href="#">Link 9</a>
-  <a href="#">Link 10</a>
+
+<!-- Lista de playlist -->
+<div class="vertical-menu2" *ngFor="let playlist of usuario.lista_cancion">
+  <a href="#" (click)="enviarToAlbum()">{{playlist.nombre}}</a>
+
 </div>
 
 

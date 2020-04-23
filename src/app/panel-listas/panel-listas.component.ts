@@ -1,6 +1,6 @@
 import {Component, Output,EventEmitter, OnInit} from '@angular/core';
 import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
-import {ListaCancionRequest, User} from "../app.component";
+import {ListaCancionRequest, User, ListaCancion} from "../app.component";
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
 
 @Component({
@@ -16,6 +16,7 @@ export class PanelListasComponent implements OnInit {
   okVista:boolean=true;
   usuario: User;
   nombreLista: string;
+  listaOk: ListaCancion;
 
   public URL_API = 'http://localhost:8080';
 
@@ -36,14 +37,19 @@ export class PanelListasComponent implements OnInit {
 
   nuevaListaCanciones(){
     const lista: ListaCancionRequest = {
-      id_user: this.usuario.id,
+      id_usuario: this.usuario.id,
       nombre: this.nombreLista,
     };
 
     this.http.post(this.URL_API + '/listaCancion/create', lista).subscribe(
-      (resp: string) => { console.log(resp); } );
+      (resp: ListaCancion) => { console.log(resp); this.listaOk= resp;});
 
 
+  }
+
+  nombresListaCanciones(): string {
+
+    return
 
   }
 }
