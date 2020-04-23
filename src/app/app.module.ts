@@ -13,6 +13,7 @@ import { CentralComponent } from './central/central.component';
 import { VistaAlbumComponent } from './vista-album/vista-album.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
+import { PanelAdminComponent } from './panel-admin/panel-admin.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.componen
     VistaAlbumComponent,
     BusquedaComponent,
     EditarUsuarioComponent,
+    PanelAdminComponent,
   ],
   imports: [
     BrowserModule,

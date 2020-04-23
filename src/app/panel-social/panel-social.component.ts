@@ -36,7 +36,7 @@ export class PanelSocialComponent implements OnInit {
     this.mostarBusquedaAmigos = false;
     this.busqIniciada = false;
     //Recibe el objeto usuario, y actualiza cuando se cambia.
-    this.Servicio.sharedMessage.subscribe(message => this.usuarioLogeado = message);
+    this.Servicio.sharedMessage.subscribe(userRecibido => this.usuarioLogeado = userRecibido);
   }
 
   activarBusqueda() {

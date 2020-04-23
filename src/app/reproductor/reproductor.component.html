@@ -1,4 +1,9 @@
   <div *ngIf="!logeado" class="barra-inferior" >
+   <div (change)="cancion.currentTime" class="barra-progreso">
+     <p>{{cancion.currentTime/60}}</p><input class="slider" type="range" min="0" [(ngModel)]="cancion.currentTime"
+                                          value="{{cancion.currentTime}}" max="{{cancion.duration}}">
+     <p>{{cancion.duration/60}}</p>
+   </div>
   <table>
     <td>
       <img class=icono-repr src="../../assets/previous.png" title="Anterior" (click)="avanzarLista()"/>
@@ -8,13 +13,10 @@
 
     </td>
     <td>
-    &nbsp;&nbsp;
+      &nbsp;&nbsp; <img class=icono-repr src="../../assets/mute.png" title="Silenciar"(click)="muteVolumen()" />
+     </td>
+    <td><input class="slider" type="range" min="0" max="1" step=".10" [(ngModel)]="cancion.volume"></td>
 
-     <img  class=icono-repr src="../../assets/volum-dwn.png" title="Bajar Volumen"(click)="bajarVolumen()" />
-      <img class=icono-repr src="../../assets/volum-up.png" title="Subir Volumen" (click)="subirVolumen()" /></td>
-    <td>&nbsp;&nbsp; <img class=icono-repr src="../../assets/mute.png" title="Silenciar"(click)="muteVolumen()" /></td>
-    <!--
-  <input type="range" min="0" max="1" step="0.05" value="0.5" >  -->
 
   </table>
 

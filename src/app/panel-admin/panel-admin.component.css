@@ -1,0 +1,32 @@
+.logoSuperior {
+  width: 15%;
+  left: 1%;
+}
+
+
+.vista-admin{
+  display: block;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  bottom: 20%;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: #1d051c;
+  text-align: center;
+  font-style: normal;
+  font-family: Roboto, serif;
+  color: aliceblue;
+}
+
+p{
+  font-size: 24px;
+  text-align: center;
+  font-style: normal;
+  font-family: Roboto, serif;
+  color: aliceblue;
+}
+
+
