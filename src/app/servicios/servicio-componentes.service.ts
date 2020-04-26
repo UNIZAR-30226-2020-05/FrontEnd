@@ -17,7 +17,7 @@ export class ServicioComponentesService {
   private message = new BehaviorSubject(this.nuevo);
   sharedMessage = this.message.asObservable();
 
-  /*Mensaje para pasar variable de login */
+  /* Mensaje para pasar variable de login */
   private message2 = new BehaviorSubject(this.login);
   sharedMessage2 = this.message2.asObservable();
 

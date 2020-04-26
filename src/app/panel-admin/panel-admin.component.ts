@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {User} from '../app.component';
+import {Album, User} from '../app.component';
 import {HttpClient} from '@angular/common/http';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
 
@@ -11,6 +11,8 @@ import {ServicioComponentesService} from '../servicios/servicio-componentes.serv
 export class PanelAdminComponent implements OnInit {
 
   usuarioLogeadoAd: User;
+
+  albumNuevo: Album;
 
   constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
 

@@ -13,6 +13,7 @@ export class ReproductorComponent implements OnInit {
   volumenAux;
   cancion = new Audio();
   logeado;
+  posicionActual;
   constructor() { this.logeado=false;}
 
 
@@ -46,9 +47,6 @@ export class ReproductorComponent implements OnInit {
   ngOnInit(): void {
     this.activo = false;
     this.gestionSonido();
-
-
-
   }
 
   playPause() {
@@ -89,6 +87,9 @@ export class ReproductorComponent implements OnInit {
       this.volumenAux = this.cancion.volume;
       this.cancion.volume = 0.0;
     }
+  }
 
+  refrescar(){
+    this.posicionActual = this.cancion.currentTime;
   }
 }
