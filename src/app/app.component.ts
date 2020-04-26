@@ -11,7 +11,9 @@ export class AppComponent {
 }
 
 
-/* Definición de modelos del sistema */
+/* DEFINICIÓN DE MODELOS DEL SISTEMA */
+
+/* Clase User - equivalente a UsuarioDTO en backend */
 export class User {
   id: number;
   nombre: string;
@@ -24,12 +26,12 @@ export class User {
   minuto_ultima_reproduccion: number;
   tipo_ultima_reproduccion: number;
 
-  lista_cancion: Array<String>;
-  amigos: Array<User>;
+  lista_cancion: Array<ListaCancion>;
+  amigos: Array<Amigo>;
 
 
   constructor() {
-  this.amigos = new Array<User>();
+  this.amigos = new Array<Amigo>();
   }
 
 }
@@ -43,18 +45,17 @@ export class UserRequest {
   fecha_nacimiento: string;
 }
 
+/* Clase Cancion - equivalente a CancionDTO en backend */
 export class Cancion {
   id: number;
   nombre: string;
   fecha_subida: Date;
   duracion: number; //Duración de la canción (en segundos)
-  album: Album;
-  artistas: Array<Artista>;
-  cancionDeListas: Array<ListaCancion>;
+  album: string;
+  artistas: Array<string>;
 
   constructor() {
-    this.artistas = new Array<Artista>();
-    this.cancionDeListas = new Array<ListaCancion>();
+    this.artistas = new Array<string>();
   }
 }
 
@@ -64,10 +65,11 @@ export class CancionRequest {
   duracion: number; //Duración de la canción (en segundos)
 }
 
+/* Clase ListaCancion - equivalente a ListaCancionDTO en backend */
 export class ListaCancion {
   id: number;
+  id_usuario: number;
   nombre: string;
-  usuario: User;
   canciones: Array<Cancion>;
 
   constructor() {
@@ -76,18 +78,26 @@ export class ListaCancion {
 
 }
 
+/* Clase Artista - equivalente a ArtistaDTO en backend */
 export class Artista {
-
   id: number;
   nombre: string;
   imagen: string;
-  albumes: Array<Album>;
-  canciones: Array<Cancion>;
+  albumes: Array<string>;
+  canciones: Array<string>;
 
   constructor() {
-    this.albumes = new Array<Album>();
-    this.canciones = new Array<Cancion>();
+    this.albumes = new Array<string>();
+    this.canciones = new Array<string>();
   }
+}
+
+export class Amigo {
+  id: number;
+  nick: string;
+  nombre: string;
+  apellidos: string;
+  ultimaCancion: string;
 }
 
 export class Album {

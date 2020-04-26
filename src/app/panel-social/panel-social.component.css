@@ -29,7 +29,7 @@ hr {
 .foto-perfil{
   border-radius: 50%; /*Ajustar dependiendo del estilo. Material design dice 50%. */
   vertical-align:middle;
-  margin-right: 2%;
+  margin-right: 5%;
   width: 5vh;
 }
 
@@ -69,6 +69,14 @@ p{
   font-size: 24px;
   text-align: center;
   font-style: italic;
+}
+
+.icono-papelera {
+  right: 4%;
+  position: absolute;
+  width: 16px;
+  vertical-align: center;
+  cursor: pointer;
 }
 
 button {
