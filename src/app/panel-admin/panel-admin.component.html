@@ -1,10 +1,31 @@
 <div *ngIf="esAdminLogeado()" class="vista-admin">
   <img class="logoSuperior" src="../../assets/logo-white.png" >
-
-
   <p> - Panel de administrador - Operador:
     {{this.usuarioLogeadoAd.nombre}}  {{this.usuarioLogeadoAd.apellidos}} </p>
-  <p>Añadir ARTISTA nuevo: </p>
-  <p>Añadir ÁLBUM nuevo: </p>
-  <p>Añadir CANCIONES:</p>
+  <button  (click)="vistaArtista()">ARTISTAS</button> &nbsp;
+  <button (click)="vistaAlbum()">ÁLBUMES</button> &nbsp;
+  <button (click)="vistaCancion()">CANCIONES</button>
+</div>
+<div class="admin-artista" *ngIf="gestArtista">
+  <p>Gestión de ARTISTAS</p>
+  Añadir nuevo:
+
+  Nombre:<i style="color: red;" *ngIf="existeArtista()">Artista ya incluído</i><br/>
+  <input  type="text" [(ngModel)]="nuevoArtNom" (focusin)="existeArtista()"
+          (focusout)="existeArtista()"><br/><br/>
+
+ URL imagen: <br/>
+  <input  type="text" [(ngModel)]="nuevoArtImg"><br/><br/>
+  <img src="{{nuevoArtImg}}" class="img-artista"/><br/><br/>
+
+  <button *ngIf="!nuevoAgregado" (click)="agregarArtista()">Añadir</button> &nbsp;
+  <i *ngIf="nuevoAgregado">{{nuevoArtNom}} agregado al sistema</i>
+</div>
+
+<div *ngIf="gestAlbum">
+  <p>Gestión de ARTISTAS</p>
+</div>
+
+<div *ngIf="gestCancion">
+  <p>Gestión de ARTISTAS</p>
 </div>

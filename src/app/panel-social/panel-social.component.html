@@ -17,8 +17,9 @@
       <!--*ngFor="let usu of usuario.amigos"--->
     <tr>
       <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
-      <td> {{usu.nick}} </td><td rowspan="2"><img  class="icono-papelera" src="../../assets/trash.png"
-                                                   (click)="quitarAmigo(usu.id)"></td>
+      <td> {{usu.nick}} </td><td rowspan="2">
+        <img  class="icono-papelera" src="../../assets/trash.png" title="Eliminar amigo"(click)="quitarAmigo(usu.id)">
+      </td>
     </tr>
     <tr>{{usu.nombre}} {{usu.apellidos}}<td></td> </tr>
     <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">

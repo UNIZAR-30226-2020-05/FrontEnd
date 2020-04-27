@@ -21,12 +21,40 @@
   color: aliceblue;
 }
 
+.admin-artista {
+  display: block;
+  position: fixed;
+  z-index: 1;
+  top: 30%;
+  left: 40%;
+  color: aliceblue;
+}
+
+
 p{
-  font-size: 24px;
-  text-align: center;
+  font-size: 20px;
   font-style: normal;
   font-family: Roboto, serif;
   color: aliceblue;
+}
+
+.img-artista {
+  width: 20%;
+  border-radius: 20%;
+  alignment: center;
+  position: relative;
+}
+
+button {
+  transition-duration: 0.4s;
+  background-color: #999999;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+
+button:hover {
+  background-color: rgba(145, 145, 145, 0.55);
+  color: white;
 }
 
 

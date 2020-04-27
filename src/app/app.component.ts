@@ -92,6 +92,12 @@ export class Artista {
   }
 }
 
+/* Clase Artista - para nuevas creaciones en backend */
+export class ArtistaRequest {
+  nombre: string;
+  imagen: string;
+}
+
 export class Amigo {
   id: number;
   nick: string;

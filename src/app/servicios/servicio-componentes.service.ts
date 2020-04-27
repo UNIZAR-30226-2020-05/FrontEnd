@@ -11,6 +11,7 @@ export class ServicioComponentesService {
    login = false;
    vistaAlbum: boolean;
    editUser: boolean;
+   URL_API: string;
    //central: boolean;
 
   /* Mensaje para pasar usuario */
@@ -33,7 +34,9 @@ export class ServicioComponentesService {
   /*private messageCentral = new BehaviorSubject(this.central);
   sharedMessageCentral = this.messageCentral.asObservable();*/
 
-  constructor() { }
+  constructor() {
+    this.URL_API = 'http://localhost:8080';
+  }
 
   nextMessage(message) {
     this.message.next(message);
