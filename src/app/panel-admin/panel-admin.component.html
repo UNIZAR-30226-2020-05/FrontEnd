@@ -5,10 +5,10 @@
   <button  (click)="vistaArtista()">ARTISTAS</button> &nbsp;
   <button (click)="vistaAlbum()">ÁLBUMES</button> &nbsp;
   <button (click)="vistaCancion()">CANCIONES</button>
-</div>
-<div class="admin-artista" *ngIf="gestArtista">
+
+<div *ngIf="gestArtista">
   <p>Gestión de ARTISTAS</p>
-  Añadir nuevo:
+  Añadir nuevo:<br/>
 
   Nombre:<i style="color: red;" *ngIf="existeArtista()">Artista ya incluído</i><br/>
   <input  type="text" [(ngModel)]="nuevoArtNom" (focusin)="existeArtista()"
@@ -22,10 +22,42 @@
   <i *ngIf="nuevoAgregado">{{nuevoArtNom}} agregado al sistema</i>
 </div>
 
-<div *ngIf="gestAlbum">
-  <p>Gestión de ARTISTAS</p>
+<div  *ngIf="gestAlbum">
+  <p>Gestión de ÁLBUMS</p>
+
+  Añadir nuevo:<br/>
+
+  Artista autor(ahora id):<i style="color: red;" *ngIf="existeArtista()">Artista ya incluído</i><br/>
+  <input  type="text" [(ngModel)]="nuevoAlbAutor" (focusin)="existeArtista()"
+          (focusout)="existeArtista()"><br/><br/>
+
+  Titulo del álbum;<br/>
+  <input  type="text" [(ngModel)]="nuevoAlbTitulo" (focusin)="existeArtista()"
+          (focusout)="existeArtista()"><br/><br/>
+
+  URL Caratula: <br/>
+  <input  type="text" [(ngModel)]="nuevoAlbCarat"><br/>
+  <img src="{{nuevoArtImg}}" class="img-artista"/>
+
+  Establecer canciones que contiene ({{nuevoAlbCanc.length}} actualmente)<br/>
+
+  Titulo canción:<br/>
+  <input  type="text" [(ngModel)]="cancionTitulo"><br/>
+
+  Duración:<br/>
+  <input  type="time" [(ngModel)]="cancionDuracion">{{transformarDuracion(cancionDuracion)}}<br/>
+
+  Fecha Subida:<br/>
+  <input  type="date" [(ngModel)]="cancionFecha"><br/>
+  <button (click)="agregarUnaCancion()">Añadir Cancion</button> &nbsp;
+
+  <button  (click)="agregarAlbum()">Añadir</button> &nbsp;
+  <i *ngIf="nuevoAgregado">{{nuevoArtNom}} agregado al sistema</i>
+
+
 </div>
 
 <div *ngIf="gestCancion">
   <p>Gestión de ARTISTAS</p>
+</div>
 </div>

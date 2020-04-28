@@ -22,7 +22,7 @@ export class ServicioComponentesService {
   private message2 = new BehaviorSubject(this.login);
   sharedMessage2 = this.message2.asObservable();
 
-  /* Mensaje para variable vista de album */
+  /* Mensaje para activar vista de album */
   private message3 = new BehaviorSubject(this.vistaAlbum);
   sharedMessage3 = this.message3.asObservable();
 

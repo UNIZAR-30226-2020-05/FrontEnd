@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Album, Artista, ArtistaRequest, User, UserRequest} from '../app.component';
+import {Album, AlbumRequest, Artista, ArtistaRequest, CancionRequest, User, UserRequest} from '../app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
 
@@ -15,15 +15,25 @@ export class PanelAdminComponent implements OnInit {
   gestArtista: boolean;
   gestAlbum: boolean;
   gestCancion: boolean;
-  albumNuevo: Album;
+  AgregadoNuevoAlbum: boolean;
 
   nuevoArtNom: string;
   nuevoArtImg: string;
   nuevoAgregado: boolean;
 
+
+  nuevoAlbAutor: string;
+  nuevoAlbTitulo: string;
+  nuevoAlbCarat: string;
+  nuevoAlbCanc: Array<CancionRequest>;
+
+  cancionTitulo: string;
+  cancionDuracion: string; // Se convierte en segundos.
+  cancionFecha: Date;
+
   constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
-
-
+    this.nuevoAlbCanc = new Array<CancionRequest>();
+    this.cancionFecha = new Date();
   }
 
   ngOnInit(): void {
@@ -76,11 +86,46 @@ export class PanelAdminComponent implements OnInit {
     nuevo.nombre = this.nuevoArtNom;
     nuevo.imagen = this.nuevoArtImg;
     */
-    const nuevo: ArtistaRequest = { // Objeto usuario en registro
+    const nuevo: ArtistaRequest = {
       nombre: this.nuevoArtNom,
       imagen: this.nuevoArtImg
     };
     this.http.post(this.Servicio.URL_API + '/artist/add', nuevo).subscribe(
       (resp: string) => { this.nuevoAgregado = true; } );
+  }
+
+  agregarUnaCancion() {
+    const nueva: CancionRequest = {
+      nombre: this.cancionTitulo,
+      fecha_subida: this.cancionFecha,
+      duracion: this.transformarDuracion(this.cancionDuracion)// this.cancionDuracion PASAR A ENTERO
+    };
+    this.nuevoAlbCanc.push(nueva);
+    //Limpiar param de cancion i.
+    this.cancionTitulo = '';
+    this.cancionDuracion = '';
+  }
+
+  agregarAlbum() {
+    const nuevoAlbum: AlbumRequest = {
+      id_artista: 15, // sacar ID DE this.nuevoAlbAutor,
+      titulo: this.nuevoAlbTitulo,
+      caratula: this.nuevoAlbCarat,
+      canciones: this.nuevoAlbCanc
+    }
+
+    this.http.post(this.Servicio.URL_API + '/album/add', nuevoAlbum).subscribe(
+      (resp: string) => { this.AgregadoNuevoAlbum = true; } );
+  }
+
+  transformarDuracion(s: string) {
+    const part = s.split(':');
+    return (Number(part[0]) * 60 + Number(part[1]));
+  }
+
+  fchaActual() {
+    const d = new Date();
+    return d.getFullYear().toString() + '-' + d.getMonth().toString()
+      + '-' + d.getDay().toString();
   }
 }

@@ -18,7 +18,7 @@ export class VistaAlbumComponent implements OnInit {
 
   show:boolean;
   ngOnInit(): void {
-    this.Servicio.sharedMessage3.subscribe(message3 => this.show=message3);
+    this.Servicio.sharedMessage3.subscribe(message3 => this.show = message3);
   }
 
 

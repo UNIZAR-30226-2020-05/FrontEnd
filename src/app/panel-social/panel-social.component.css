@@ -44,6 +44,7 @@ hr {
   position: absolute;
   right: 8%;
   vertical-align: middle;
+  cursor: pointer;
   width: 30px;
 }
 

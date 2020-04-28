@@ -114,8 +114,9 @@ export class Album {
   canciones: Array<Cancion>;
 }
 
+/* Clase Album - para nuevas creaciones en backend */
 export class AlbumRequest {
-  id: number;
+  id_artista: number;
   titulo: string;
   caratula: string;
   canciones: CancionRequest[];
