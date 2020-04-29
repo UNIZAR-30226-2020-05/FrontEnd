@@ -3,6 +3,7 @@ import {Album, AlbumRequest, Artista, ArtistaRequest, CancionRequest, User, User
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
 
+
 @Component({
   selector: 'app-panel-admin',
   templateUrl: './panel-admin.component.html',
@@ -17,15 +18,21 @@ export class PanelAdminComponent implements OnInit {
   gestCancion: boolean;
   AgregadoNuevoAlbum: boolean;
 
+  /* Pestaña artista */
   nuevoArtNom: string;
   nuevoArtImg: string;
   nuevoAgregado: boolean;
+  artistaUnico: boolean;
 
-
+  /* Pestaña album */
   nuevoAlbAutor: string;
+  nuevoAlbAutorExiste: boolean;
   nuevoAlbTitulo: string;
   nuevoAlbCarat: string;
   nuevoAlbCanc: Array<CancionRequest>;
+  nuevoAlbumAgregado: boolean;
+
+  infoAgregado: string; //Almacena info de album agregado.
 
   cancionTitulo: string;
   cancionDuracion: string; // Se convierte en segundos.
@@ -34,6 +41,7 @@ export class PanelAdminComponent implements OnInit {
   constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
     this.nuevoAlbCanc = new Array<CancionRequest>();
     this.cancionFecha = new Date();
+    this.artistaUnico = true;
   }
 
   ngOnInit(): void {
@@ -58,6 +66,11 @@ export class PanelAdminComponent implements OnInit {
     this.gestCancion = false;
     this.gestAlbum = true;
     this.gestArtista = false;
+
+    this.nuevoAlbAutor = '';
+    this.nuevoAlbAutorExiste = true;
+    this.nuevoAlbTitulo = '';
+    this.nuevoAlbCarat = '';
   }
 
   vistaCancion() {
@@ -66,19 +79,53 @@ export class PanelAdminComponent implements OnInit {
     this.gestArtista = false;
   }
 
-  existeArtista(){
-    /*const params = new HttpParams()
-      .set('nick', this.alias);
+  existeArtista() {
+    const params = new HttpParams()
+      .set('name', this.nuevoArtNom);
 
-    this.http.get(this.Servicio.URL_API + '/artist/get', {params})
+    this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
       .subscribe(
         (resp: User) => {
-          this.usuarioUnico = false;
+          this.artistaUnico = false;
         },
         (erroro: string) => {
-          this.usuarioUnico = true;
+          this.artistaUnico = true;
         }
-      );*/
+      );
+  }
+
+  artistaOk() {
+    return this.nuevoArtNom != '' && this.nuevoArtImg != '' && this.artistaUnico;
+  }
+
+  albumOk() {
+    if (this.nuevoAlbAutor != '' && this.nuevoAlbAutorExiste && this.nuevoAlbTitulo != ''
+      && this.nuevoAlbCarat != '' && this.nuevoAlbCanc.length > 0) return true;
+    else {return false; }
+  }
+  generarInfoAlbum() {
+    this.infoAgregado = 'Agregado al sistema: < br /> Álbum ' + this.nuevoAlbTitulo + ' de '
+    + this.nuevoAlbAutor + '< br /> que contiene:< br />';
+    const i = 0;
+    for (const cancion of this.nuevoAlbCanc) {
+      this.infoAgregado += 'Pista '+ i + cancion.nombre + ' - ' + cancion.duracion
+        + 's.< br />';
+    }
+  }
+
+  existeAutor() {
+    const params = new HttpParams()
+      .set('name', this.nuevoAlbAutor);
+
+    this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
+      .subscribe(
+        (resp: User) => {
+          this.nuevoAlbAutorExiste = true;
+        },
+        (erroro: string) => {
+          this.nuevoAlbAutorExiste = false;
+        }
+      );
   }
 
   agregarArtista() {
@@ -114,6 +161,8 @@ export class PanelAdminComponent implements OnInit {
       canciones: this.nuevoAlbCanc
     }
 
+    this.generarInfoAlbum();
+    this.nuevoAlbumAgregado = true;
     this.http.post(this.Servicio.URL_API + '/album/add', nuevoAlbum).subscribe(
       (resp: string) => { this.AgregadoNuevoAlbum = true; } );
   }

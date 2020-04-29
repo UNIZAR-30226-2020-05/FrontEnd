@@ -53,6 +53,19 @@ input[type=time]{
   padding-left: 5%;
 }
 
+.denegado{
+  transition-duration: 0.4s;
+  background-color: #8c2528;
+  color: white;
+  border-radius: 10px;
+  cursor: not-allowed;
+}
+
+.denegado:hover {
+  background-color: #8c2528; /* Green */
+  color: #747474;
+}
+
 p{
   font-size: 20px;
   font-style: normal;
