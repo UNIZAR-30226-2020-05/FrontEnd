@@ -47,10 +47,17 @@
 </div>
 
 <!-- Lista de playlist -->
-<div class="vertical-menu2" *ngFor="let playlist of usuario.lista_cancion">
-  <a href="#" (click)="enviarToAlbum()">{{playlist.nombre}}</a>
+<!--<div class="vertical-menu2" *ngFor="let playlist of usuario.lista_cancion" >
+    <a href="#" (click)="enviarToAlbum()">
+      {{playlist.nombre}}
+    </a>
+</div>-->
 
-</div>
+<ul class="vertical-menu2" >
+  <li  *ngFor="let playlist of usuario.lista_cancion">
+  <a (click)="enviarToAlbum()"> {{playlist.nombre}}</a>
+  </li>
+</ul>
 
 
 <!--************* PANTALLA CREAR LISTA PLAYLIST ******/-->

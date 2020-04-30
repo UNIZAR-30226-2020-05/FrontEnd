@@ -50,8 +50,6 @@ export class LoginComponent implements OnInit {
         },
       (error:string)=> {this.aviso=true;});
 
-
-
   }
 
 }

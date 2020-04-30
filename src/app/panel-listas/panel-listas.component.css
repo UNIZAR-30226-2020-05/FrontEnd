@@ -187,14 +187,23 @@ hr{
   overflow-y: auto;
   position: absolute;
   top: 520px;
+  list-style: none;
+  cursor: pointer;
+  background-color: #0b1d19;
+  margin-left: -2%;
+
+
 }
 
 .vertical-menu2 a {
-  background-color:#0b1d19;
+  background-color: #0b1d19;
+  font-family: Roboto, serif;
   color: aliceblue;
   display: block;
-  padding: 8px 20px;
   text-decoration: none;
+  list-style: none;
+  cursor: pointer;
+  padding: 8% 10%;
 }
 
 
@@ -361,4 +370,12 @@ button:hover {
   margin-top: 300px;
   font-size: 30px;
   position: absolute;
+}
+
+.button{
+  font-family: Roboto;
+}
+
+.li{
+  display: list-item;
 }
