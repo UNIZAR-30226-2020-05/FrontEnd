@@ -46,18 +46,18 @@ input {
 }
 
 input[type=date]{
-  padding-left: 5%;
+  padding-left: 4%;
 }
 
 input[type=time]{
-  padding-left: 5%;
+  padding-left: 2%;
 }
 
 .denegado{
   transition-duration: 0.4s;
   background-color: #8c2528;
   color: white;
-  border-radius: 10px;
+  border-radius: 4px;
   cursor: not-allowed;
 }
 
@@ -90,6 +90,12 @@ button {
 button:hover {
   background-color: rgba(145, 145, 145, 0.55);
   color: white;
+}
+.img-crea-album {
+  width: 10%;
+  border-radius: 12%;
+  alignment: center;
+  position: relative;
 }
 
 

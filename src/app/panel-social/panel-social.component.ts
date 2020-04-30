@@ -28,7 +28,7 @@ export class PanelSocialComponent implements OnInit {
 
   usuarioBuscado: User;
 
-  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
+  constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
   }
 
   ngOnInit(): void {
@@ -37,6 +37,7 @@ export class PanelSocialComponent implements OnInit {
     this.busqIniciada = false;
     //Recibe el objeto usuario, y actualiza cuando se cambia.
     this.Servicio.sharedMessage.subscribe(userRecibido => this.usuarioLogeado = userRecibido);
+
   }
 
   activarBusqueda() {

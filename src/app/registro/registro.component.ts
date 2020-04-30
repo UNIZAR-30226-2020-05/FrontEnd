@@ -81,10 +81,8 @@ export class RegistroComponent implements OnInit {
       fecha_nacimiento: this.fecha_nac // String de fecha nacim.
     };
 
-
-
     this.http.post(this.URL_API + '/user/create', nuevo).subscribe(
-     (resp: string) => { console.log(resp); } );
+     (resp: string) => {} );
 
   }
 

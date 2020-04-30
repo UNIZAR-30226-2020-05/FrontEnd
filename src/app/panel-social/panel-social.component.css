@@ -58,6 +58,10 @@ hr {
   margin-left: 1.5%;
   vertical-align: center;
 }
+.enlace:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
 
 .boton-aux2{
   position: absolute;

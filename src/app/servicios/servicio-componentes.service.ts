@@ -1,18 +1,24 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {User, UserRequest} from '../app.component';
+import {Album, User, UserRequest} from '../app.component';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServicioComponentesService {
 
-   nuevo: User;
-   login = false;
-   vistaAlbum: boolean;
-   editUser: boolean;
-   URL_API: string;
-   //central: boolean;
+  URL_API: string;
+
+  nuevo: User;
+  login = false;
+
+  vistaAlbum: boolean;
+  albumActiv: Album;
+
+  editUser: boolean;
+
+  //central: boolean;
 
   /* Mensaje para pasar usuario */
   private message = new BehaviorSubject(this.nuevo);
@@ -22,9 +28,17 @@ export class ServicioComponentesService {
   private message2 = new BehaviorSubject(this.login);
   sharedMessage2 = this.message2.asObservable();
 
+  /* RELACIONADOS CON ALBUM */
+
   /* Mensaje para activar vista de album */
   private message3 = new BehaviorSubject(this.vistaAlbum);
   sharedMessage3 = this.message3.asObservable();
+
+  /* Mensaje para pasar el objeto album */
+  private albumObj = new BehaviorSubject(this.albumActiv);
+  albumActivo = this.albumObj.asObservable();
+
+  /* ----------------------------------------------*/
 
   /* Mensaje para pasar variable a editar usuario */
   private messageEdit = new BehaviorSubject(this.editUser);
@@ -34,7 +48,7 @@ export class ServicioComponentesService {
   /*private messageCentral = new BehaviorSubject(this.central);
   sharedMessageCentral = this.messageCentral.asObservable();*/
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.URL_API = 'http://localhost:8080';
   }
 
@@ -48,6 +62,19 @@ export class ServicioComponentesService {
 
   nextMessage3(message3) {
     this.message3.next(message3);
+  }
+
+  cargarAlbum(nombre) {
+    const params = new HttpParams()
+      .set('nameAlbum', nombre);
+    this.http.get(this.URL_API + '/album/getByName', {params})
+      .subscribe(
+        (album: Album[]) => {
+          this.albumObj.next(album[0]);
+        },
+        (erroro: string) => {
+        }
+      );
   }
 
   nextMessageEdit(messageEdit) {

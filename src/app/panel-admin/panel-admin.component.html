@@ -8,7 +8,7 @@
 
 <div *ngIf="gestArtista">
   <p>Gestión de ARTISTAS</p>
-  Añadir nuevo:<br/>
+  Añadir nuevo artista:<br/><br/>
 
   Nombre:<i style="color: red;" *ngIf="!artistaUnico">Artista ya incluído</i><br/>
   <input  type="text" [(ngModel)]="nuevoArtNom" (focusin)="existeArtista()"
@@ -18,7 +18,7 @@
   <input  type="text" [(ngModel)]="nuevoArtImg"><br/><br/>
   <img src="{{nuevoArtImg}}" class="img-artista"/><br/><br/>
 
-  <button class="denegado" *ngIf="!nuevoAgregado && !artistaOk()" (click)="agregarArtista()">Añadir</button>
+  <button class="denegado" *ngIf="!nuevoAgregado && !artistaOk()">Añadir</button>
   <button *ngIf="!nuevoAgregado && artistaOk()" (click)="agregarArtista()">Añadir</button> &nbsp;
   <i *ngIf="nuevoAgregado">{{nuevoArtNom}} agregado al sistema</i>
 </div>
@@ -26,22 +26,20 @@
 <div  *ngIf="gestAlbum">
   <div *ngIf="!nuevoAlbumAgregado">
   <p>Gestión de ÁLBUMS</p>
+  Añadir nuevo:<br/><br/>
 
-  Añadir nuevo:<br/>
-
-  Artista autor(ahora id):<i *ngIf="!nuevoAlbAutorExiste" style="color: red;">Artista no encontrado</i><br/>
+  Artista autor:<i *ngIf="!nuevoAlbAutorExiste" style="color: red;">Artista no encontrado</i><br/>
   <input  type="text" [(ngModel)]="nuevoAlbAutor" (focusin)="existeAutor()"
-          (focusout)="existeAutor()"><br/><br/>
+          (focusout)="existeAutor()"><br/>
 
   Titulo del álbum:<br/>
   <input  type="text" [(ngModel)]="nuevoAlbTitulo" (focusin)="existeArtista()"
-          (focusout)="existeArtista()"><br/><br/>
+          (focusout)="existeArtista()"><br/>
 
   URL Caratula: <br/>
-  <input  type="text" [(ngModel)]="nuevoAlbCarat"><br/>
-  <img src="{{nuevoArtImg}}" class="img-artista"/>
+  <input  type="text" [(ngModel)]="nuevoAlbCarat"><br/><br/>
 
-  Establecer canciones que contiene ({{nuevoAlbCanc.length}} actualmente)<br/>
+  Establecer canciones que contiene ({{nuevoAlbCanc.length}} actualmente)<br/><br/>
 
   Titulo canción:<br/>
   <input  type="text" [(ngModel)]="cancionTitulo"><br/>
@@ -50,7 +48,7 @@
   <input  type="time" [(ngModel)]="cancionDuracion"><br/>
 
   Fecha Subida:<br/>
-  <input  type="date" [(ngModel)]="cancionFecha"><br/>
+  <input  type="date" [(ngModel)]="cancionFecha"><br/><br/>
   <button (click)="agregarUnaCancion()">Añadir Cancion</button> &nbsp;
 
 
@@ -58,7 +56,9 @@
   <button *ngIf="albumOk()" (click)="agregarAlbum()">Añadir</button> &nbsp;
   </div>
   <div *ngIf="nuevoAlbumAgregado"><br/>
-    Agregado al sistema: <br/> Álbum <i>{{nuevoAlbTitulo}}</i> de
+    Agregado al sistema: <br/>
+    <img src="{{nuevoAlbCarat}}" class="img-crea-album"/><br/><br/>
+    Álbum <i>{{nuevoAlbTitulo}}</i> de
     <i>{{nuevoAlbAutor}}</i><br/>
     que contiene:<br/>
     <i *ngFor=" let cancion of nuevoAlbCanc; let i = index">

@@ -26,6 +26,7 @@ export class PanelAdminComponent implements OnInit {
 
   /* Pestaña album */
   nuevoAlbAutor: string;
+  nuevoAlbAutorID: number;
   nuevoAlbAutorExiste: boolean;
   nuevoAlbTitulo: string;
   nuevoAlbCarat: string;
@@ -119,8 +120,9 @@ export class PanelAdminComponent implements OnInit {
 
     this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
       .subscribe(
-        (resp: User) => {
+        (resp: Artista) => {
           this.nuevoAlbAutorExiste = true;
+          this.nuevoAlbAutorID = resp.id;
         },
         (erroro: string) => {
           this.nuevoAlbAutorExiste = false;
@@ -155,7 +157,7 @@ export class PanelAdminComponent implements OnInit {
 
   agregarAlbum() {
     const nuevoAlbum: AlbumRequest = {
-      id_artista: 15, // sacar ID DE this.nuevoAlbAutor,
+      id_artista: this.nuevoAlbAutorID,
       titulo: this.nuevoAlbTitulo,
       caratula: this.nuevoAlbCarat,
       canciones: this.nuevoAlbCanc
