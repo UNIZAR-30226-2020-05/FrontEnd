@@ -8,14 +8,25 @@ p{
 .barra-inferior{
   font-family: Roboto, serif white;
   background-color: #0b1d19;
+  color: white;
   vertical-align: center;
   position: fixed;
   bottom: 4%;
   left: 40%;
 }
+barra-rep{
+  alignment: center;
+  position: fixed;
+  display: inline-block;
+  bottom: 12%;
+  left: 31%;
+  width: 100%;
+}
+
 
 td{
   vertical-align: middle;
+  text-align: center;
 }
 
 .icono-repr{
@@ -30,9 +41,14 @@ td{
 
 .barra-progreso{
   position: fixed;
-  bottom: 9%;
-  left: 36%;
-  width: 25%;
+  display: inline-block;
+  bottom: 12%;
+  left: 31%;
+  width: 100%;
+}
+
+table{
+
 }
 
 .slider {
@@ -45,6 +61,7 @@ td{
   -webkit-transition: .2s;
   transition: opacity .2s;
 }
+
 
 .slider:hover {
   opacity: 1;

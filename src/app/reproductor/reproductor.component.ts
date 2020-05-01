@@ -12,9 +12,20 @@ export class ReproductorComponent implements OnInit {
   temaEnCola;
   volumenAux;
   cancion = new Audio();
+  posActual;
+  duracionActual;
   logeado;
   posicionActual;
-  constructor() { this.logeado=false;}
+
+  a = false;
+  constructor() {
+    this.logeado=false;
+    /* Se establecen variables que deben actualizar por sí solas */
+    setInterval(() => {
+      this.posActual = this.cancion.currentTime;
+      this.duracionActual = this.cancion.duration;
+    }, 200);
+  }
 
 
   gestionSonido(){
@@ -60,9 +71,7 @@ export class ReproductorComponent implements OnInit {
 
   }
 
-  mostrarTiempo(){
-    return this.cancion.currentTime;
-  }
+
 
   audioStop(){
     }
@@ -89,7 +98,17 @@ export class ReproductorComponent implements OnInit {
     }
   }
 
-  refrescar(){
-    this.posicionActual = this.cancion.currentTime;
+  sacarTiempo(n: number){
+    let s = '';
+    let auxMin; let auxSeg;
+    auxMin = Math.floor(n / 60);
+    auxSeg = Math.floor(n % 60);
+    if (auxMin < 10) { s += '0'; }
+    s += auxMin.toString() + ':';
+    if (auxSeg < 10) { s += '0'; }
+    s += auxSeg.toString();
+    return s;
   }
+
+
 }
