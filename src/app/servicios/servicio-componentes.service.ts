@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {User, UserRequest} from '../app.component';
+import {User, UserRequest,ListaCancion} from '../app.component';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,7 @@ export class ServicioComponentesService {
    login = false;
    vistaAlbum: boolean;
    editUser: boolean;
+   lista: ListaCancion;
    //central: boolean;
 
   /* Mensaje para pasar usuario */
@@ -32,6 +33,10 @@ export class ServicioComponentesService {
   /* Mensaje para pasar variable a la vista central */
   /*private messageCentral = new BehaviorSubject(this.central);
   sharedMessageCentral = this.messageCentral.asObservable();*/
+
+  /*Mensaje para pasar variable de lista nueva  */
+  private messageList= new BehaviorSubject(this.lista);
+  sharedMessageList = this.messageList.asObservable();
 
   constructor() { }
 
@@ -57,6 +62,10 @@ export class ServicioComponentesService {
 
   cargarLogin() {
     return this.nuevo;
+  }
+
+  nextMessageList(messageList){
+    this.messageList.next(messageList);
   }
 
   /*nextMessageCentral(messageCentral) {

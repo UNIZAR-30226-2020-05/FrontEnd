@@ -17,6 +17,7 @@ export class PanelListasComponent implements OnInit {
   usuario: User;
   nombreLista: string;
   listaOk: ListaCancion;
+  cancion: ListaCancion;
 
   public URL_API = 'http://localhost:8080';
 
@@ -25,6 +26,8 @@ export class PanelListasComponent implements OnInit {
   ngOnInit(): void {
     this.Servicio.sharedMessage.subscribe(message => this.usuario=message);
     this.Servicio.sharedMessage3.subscribe(message3 => this.okVista=message3);
+    /*this.Servicio.sharedMessageList.subscribe( messageList => this.usuario.lista_cancion= new HttpParams()
+      .append( this.cancion,messageList));*/
   }
   newMessage() {
     this.Servicio.nextMessage(this.usuario);

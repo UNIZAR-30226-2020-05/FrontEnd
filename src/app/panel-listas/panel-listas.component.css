@@ -1,5 +1,5 @@
 .panel{
-  font-family: Roboto;
+  font-family: Roboto, serif;
 }
 .titleL{
   font-palette: light;
@@ -100,7 +100,7 @@
 }
 
 .titulo{
-  font-family: Roboto;
+  font-family: Roboto, serif;
   font-size: 16px;
   color: aliceblue;
   bottom: 30px;
@@ -121,7 +121,7 @@
 }
 
 .autor{
-  font-family: Roboto;
+  font-family: Roboto, serif;
   font-weight: lighter;
   font-size: 14px;
   color: aliceblue;
@@ -186,11 +186,11 @@ hr{
   height: 20vh;
   overflow-y: auto;
   position: absolute;
-  top: 520px;
+  top: 69%;
   list-style: none;
   cursor: pointer;
   background-color: #0b1d19;
-  margin-left: -2%;
+  margin-left: -1.7%;
 
 
 }
@@ -203,7 +203,7 @@ hr{
   text-decoration: none;
   list-style: none;
   cursor: pointer;
-  padding: 8% 10%;
+  padding: 5% 4%;
 }
 
 
