@@ -4,7 +4,7 @@
   border: solid #0b1713;
   position: absolute;
   height: 70%;
-  width: 20%;
+  width: 24%;
   top: 2%;
   right: 0.5%;
 }
@@ -42,7 +42,15 @@ hr {
 
 .icono-config{
   position: absolute;
-  right: 8%;
+  right: 15%;
+  vertical-align: middle;
+  cursor: pointer;
+  width: 30px;
+}
+
+.icono-logout{
+  position: absolute;
+  right: 2%;
   vertical-align: middle;
   cursor: pointer;
   width: 30px;
@@ -116,7 +124,7 @@ td{
 
 .agregar-amigos{
   background-color: #0b1d19;
-  width: 65%;
+  width: 62%;
   height: 65%;
   left: 13%;
   top: 9%;

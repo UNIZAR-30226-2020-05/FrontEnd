@@ -122,4 +122,8 @@ export class PanelSocialComponent implements OnInit {
     this.Servicio.nextMessage3(!this.editarUsuario);
   }
 
+  mostrarLogin() {
+    this.Servicio.nextMessage2(false);
+  }
+
 }

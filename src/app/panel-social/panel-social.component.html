@@ -1,8 +1,9 @@
 <div class="panel-social">
   <hr>
   <p class="nombre-user">
-    <img class="foto-perfil" src="../../assets/profile-pics/1.jpg"/>&nbsp;{{usuarioLogeado.nick}}
+    <img class="foto-perfil" src="../../assets/profile-pics/1.jpg"/>{{usuarioLogeado.nick}}
     &nbsp;&nbsp;<img (click)="enviarToEdit()" title="Editar cuenta" class="icono-config" src="../../assets/ajustes.png"/>
+    <img (click)="mostrarLogin()" title="Cerrar Sesión" class="icono-logout" src="../../assets/logout.png"/>
   </p>
   <hr>
   <br/>
