@@ -1,13 +1,13 @@
 <!--/********** PANEL IZQUIERDO ************/ -->
 <div class="panel">
   <p class="titleP">PODCAST</p>
-  <p class="ListP" (click)="mostrarCrear=true; mostrarFav=false">
+  <p class="ListP" (click)="mostrarCrearP=true; mostrarFav=false">
     <img class="addP" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>
   <p class="fave" (click)="mostrarFav=true">
     <img class= "favP" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
   <hr>
 <p class="titleL">PLAYLISTS</p>
-<p class="CrearList" (click)="mostrarCrear=true;mostrarFav=false">
+<p class="CrearList" (click)="mostrarCrearC=true;mostrarFav=false">
   <img class="iconoAñadir" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>&nbsp;
 <p class="fav" (click)="mostrarFav=true">
   <img class= "iconoFav" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
@@ -33,8 +33,9 @@
 </table>
 <!--/****************** MENUS VERTICALES DE PLAYLIST Y PODCAST ********************/-->
 <div class="vertical-menu">
-  <a href="#"  (click)="enviarToAlbum()">Rock</a>
-  <a href="#">Link 2</a>
+
+  <a href="#"> {{this.usuario.id}}</a>
+  <!--<a href="#">Link 2</a>
   <a href="#">Link 3</a>
   <a href="#">Link 4</a>
   <a href="#">Link 5</a>
@@ -42,31 +43,43 @@
   <a href="#">Link 7</a>
   <a href="#">Link 8</a>
   <a href="#">Link 9</a>
-  <a href="#">Link 10</a>
-</div>
-<div class="vertical-menu2">
-  <a href="#">Link 1</a>
-  <a href="#">Link 2</a>
-  <a href="#">Link 3</a>
-  <a href="#">Link 4</a>
-  <a href="#">Link 5</a>
-  <a href="#">Link 6</a>
-  <a href="#">Link 7</a>
-  <a href="#">Link 8</a>
-  <a href="#">Link 9</a>
-  <a href="#">Link 10</a>
+  <a href="#">Link 10</a> -->
 </div>
 
+<!-- Lista de playlist -->
+<!--<div class="vertical-menu2" *ngFor="let playlist of usuario.lista_cancion" >
+    <a href="#" (click)="enviarToAlbum()">
+      {{playlist.nombre}}
+    </a>
+</div>-->
 
-<!--************* PANTALLA CREAR LISTA PLAYLIST Y PODCAST ******/-->
+<ul class="vertical-menu2" >
+  <li  *ngFor="let playlist of usuario.lista_cancion; first as primero;trackBy: funcionTrackBy">
+  <a *ngIf="!primero" (click)="enviarToAlbum()"> {{playlist.nombre}}</a>
+  </li>
+</ul>
 
-<div *ngIf="mostrarCrear" class= "crear">
+
+<!--************* PANTALLA CREAR LISTA PLAYLIST ******/-->
+
+<div *ngIf="mostrarCrearC" class= "crear">
+  <div class="container">
+    <label class="nueva"><b>Crear nueva lista </b></label>
+    <input type="nombre" placeholder="Nombre nueva lista" name="name" required [(ngModel)]="nombreLista">
+  </div>
+  <button (click)="mostrarCrearC=false" class="cancel">Cancelar</button>
+  <button (click)="mostrarCrearC=false; nuevaListaCanciones()" class="aceptar">Crear</button>
+</div>
+
+<!--************* PANTALLA CREAR LISTA PODCAST ******/-->
+
+<div *ngIf="mostrarCrearP" class= "crear">
   <div class="container">
     <label class="nueva"><b>Crear nueva lista </b></label>
     <input type="nombre" placeholder="Nombre nueva lista" name="name" required>
   </div>
-  <button (click)="mostrarCrear=false" class="cancel">Cancelar</button>
-  <button (click)="mostrarCrear=false" class="aceptar">Crear</button>
+  <button (click)="mostrarCrearP=false" class="cancel">Cancelar</button>
+  <button (click)="mostrarCrearP=false" class="aceptar">Crear</button>
 </div>
 
 

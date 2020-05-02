@@ -1,22 +1,24 @@
 .panel{
-  font-family: Roboto;
+  font-family: Roboto, serif;
+  cursor: pointer;
 }
 .titleL{
   font-palette: light;
   color: aliceblue;
   position: absolute;
-  font-size: 20px;
-  top:375px;
-  margin-left: 15px;
+  font-size: 121%;
+  top:53%;
+  margin-left: 1.1%;
+  cursor: default;
 }
 .CrearList{
   font-palette: light;
   color: aliceblue;
   float: left;
   position: absolute;
-  font-size: 16px;
-  top:410px;
-  margin-left: 40px;
+  font-size:100%;
+  top:57%;
+  margin-left: 0.8%;
 
 }
 .iconoAñadir{
@@ -24,16 +26,16 @@
   vertical-align: middle;
   width: 5vh;
   height: 5vh;
-  margin-left: -27px;
+
 }
 .fav{
   font-palette: light;
   color: aliceblue;
   float: left;
   position: absolute;
-  font-size: 16px;
-  top:450px;
-  margin-left: 40px;
+  font-size: 100%;
+  top:62.5%;
+  margin-left: 0.8%;
 
 }
 .iconoFav{
@@ -41,24 +43,27 @@
   vertical-align: middle;
   width: 5vh;
   height: 5vh;
-  margin-left: -27px;
 }
+
+/* Parte del panel de podcast */
 .titleP{
   font-palette: light;
   color: aliceblue;
   position: absolute;
-  font-size: 20px;
-  top:90px;
-  margin-left: 15px;
+  font-size: 121%;
+  top:12.9%;
+  margin-left: 1.1%;
+  cursor: default;
 }
 .ListP{
   font-palette: light;
   color: aliceblue;
   float: left;
   position: absolute;
-  font-size: 16px;
-  top:120px;
-  margin-left: 40px;
+  font-size: 100%;
+  top:17%;
+  margin-left: 0.8%;
+  cursor: pointer;
 
 }
 .addP{
@@ -66,16 +71,15 @@
   vertical-align: middle;
   width: 5vh;
   height: 5vh;
-  margin-left: -27px;
 }
 .fave{
   font-palette: light;
   color: aliceblue;
   float: left;
   position: absolute;
-  font-size: 16px;
-  top:160px;
-  margin-left: 40px;
+  font-size: 100%;
+  top:22.5%;
+  margin-left: 0.8%;
 
 }
 .favP{
@@ -83,7 +87,6 @@
   vertical-align: middle;
   width: 5vh;
   height: 5vh;
-  margin-left: -27px;
 }
 
 .cuadrado {
@@ -92,20 +95,20 @@
   height: 16vh;
   max-height: 100vh;
   position: absolute;
-  bottom: 60px;
-  margin-left: 265px;
+  bottom: 8%;
+  margin-left:17.4%;
   border: aliceblue solid ;
   background-image: url("../../assets/coronavirus.jpeg");
   background-size: cover;
 }
 
 .titulo{
-  font-family: Roboto;
-  font-size: 16px;
+  font-family: Roboto, serif;
+  font-size: 105%;
   color: aliceblue;
-  bottom: 30px;
+  bottom: 4%;
   float: left;
-  margin-left: 265px;
+  margin-left: 17.3%;
   text-align: center;
   position: absolute;
 }
@@ -115,19 +118,20 @@
   position: absolute;
   width: 4vh;
   height: 4vh;
-  margin-left:410px;
+  margin-left:27%;
   text-align: center;
-  bottom: 30px;
+  bottom: 4%;
+  cursor: pointer;
 }
 
 .autor{
-  font-family: Roboto;
+  font-family: Roboto, serif;
   font-weight: lighter;
-  font-size: 14px;
+  font-size: 100%;
   color: aliceblue;
-  bottom: 15px;
+  bottom: 2%;
   float: left;
-  margin-left: 265px;
+  margin-left: 17.3%;
   text-align: center;
   position: absolute;
 }
@@ -186,15 +190,24 @@ hr{
   height: 20vh;
   overflow-y: auto;
   position: absolute;
-  top: 520px;
+  top: 69%;
+  list-style: none;
+  cursor: pointer;
+  background-color: #0b1d19;
+  margin-left: -1.7%;
+
+
 }
 
 .vertical-menu2 a {
-  background-color:#0b1d19;
+  background-color: #0b1d19;
+  font-family: Roboto, serif;
   color: aliceblue;
   display: block;
-  padding: 8px 20px;
   text-decoration: none;
+  list-style: none;
+  cursor: pointer;
+  padding: 5% 4%;
 }
 
 
@@ -267,6 +280,7 @@ button:hover {
   border: none;
   font-size: 20px;
   color: aliceblue;
+  cursor: pointer;
 }
 
 .aceptar{
@@ -277,6 +291,7 @@ button:hover {
   border: none;
   font-size: 20px;
   color: aliceblue;
+  cursor: pointer;
 }
 
 /* Pantalla de lista de favoritos canciones o podcast */
@@ -342,6 +357,7 @@ button:hover {
   font-size: 20px;
   color: aliceblue;
   position: absolute;
+  cursor: pointer;
 }
 
 .rep{
@@ -354,6 +370,7 @@ button:hover {
   color: aliceblue;
   position: absolute;
   top: 500px;
+  cursor:pointer;
 }
 
 .tusFavs{
@@ -361,4 +378,12 @@ button:hover {
   margin-top: 300px;
   font-size: 30px;
   position: absolute;
+}
+
+.button{
+  font-family: Roboto;
+}
+
+.li{
+  display: list-item;
 }
