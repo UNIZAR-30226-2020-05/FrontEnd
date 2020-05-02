@@ -26,8 +26,7 @@ export class PanelListasComponent implements OnInit {
   ngOnInit(): void {
     this.Servicio.sharedMessage.subscribe(message => this.usuario=message);
     this.Servicio.sharedMessage3.subscribe(message3 => this.okVista=message3);
-    /*this.Servicio.sharedMessageList.subscribe( messageList => this.usuario.lista_cancion= new HttpParams()
-      .append( this.cancion,messageList));*/
+    /*this.Servicio.sharedMessageList.subscribe( messageList => this.usuario.lista_cancion.concat(this.usuario.lista_cancion,messageList));*/
   }
   newMessage() {
     this.Servicio.nextMessage(this.usuario);
@@ -48,12 +47,12 @@ export class PanelListasComponent implements OnInit {
       (resp: ListaCancion) => { console.log(resp); this.listaOk= resp;});
 
 
-  }
 
-  nombresListaCanciones(): string {
-
-    return
 
   }
+
+  funcionTrackBy(index:number,aux:ListaCancion): ListaCancion { return aux;}
+
+
 }
 
