@@ -2,6 +2,7 @@ body{
   background-color: #0b1d19;
   width: border-box;
   height: 97vh;
+  overflow: hidden;
 }
 
 

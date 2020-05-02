@@ -80,7 +80,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.aBorrar = false;
     this.passCambiada = false;
     this.Servicio.sharedMessageEdit.subscribe(messageEdit => this.mostrar = messageEdit);
-    this.Servicio.sharedMessage.subscribe(message => this.usuarioLog= message);
+    this.Servicio.sharedMessage.subscribe(message => this.usuarioLog = message);
 
 
 

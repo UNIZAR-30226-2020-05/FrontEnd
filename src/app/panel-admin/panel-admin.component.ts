@@ -1,0 +1,182 @@
+import { Component, OnInit } from '@angular/core';
+import {Album, AlbumRequest, Artista, ArtistaRequest, CancionRequest, User, UserRequest} from '../app.component';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
+
+
+@Component({
+  selector: 'app-panel-admin',
+  templateUrl: './panel-admin.component.html',
+  styleUrls: ['./panel-admin.component.css']
+})
+export class PanelAdminComponent implements OnInit {
+
+
+  usuarioLogeadoAd: User;
+  gestArtista: boolean;
+  gestAlbum: boolean;
+  gestCancion: boolean;
+  AgregadoNuevoAlbum: boolean;
+
+  /* Pestaña artista */
+  nuevoArtNom: string;
+  nuevoArtImg: string;
+  nuevoAgregado: boolean;
+  artistaUnico: boolean;
+
+  /* Pestaña album */
+  nuevoAlbAutor: string;
+  nuevoAlbAutorID: number;
+  nuevoAlbAutorExiste: boolean;
+  nuevoAlbTitulo: string;
+  nuevoAlbCarat: string;
+  nuevoAlbCanc: Array<CancionRequest>;
+  nuevoAlbumAgregado: boolean;
+
+  infoAgregado: string; //Almacena info de album agregado.
+
+  cancionTitulo: string;
+  cancionDuracion: string; // Se convierte en segundos.
+  cancionFecha: Date;
+
+  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
+    this.nuevoAlbCanc = new Array<CancionRequest>();
+    this.cancionFecha = new Date();
+    this.artistaUnico = true;
+  }
+
+  ngOnInit(): void {
+    //Recibe el objeto usuario, y actualiza cuando se cambia.
+    this.Servicio.sharedMessage.subscribe(message => this.usuarioLogeadoAd = message);
+  }
+
+  esAdminLogeado() {
+    return !this.usuarioLogeadoAd.tipo_user;
+  }
+
+  vistaArtista() {
+    this.gestCancion = false;
+    this.gestAlbum = false;
+    this.gestArtista = true;
+    this.nuevoArtNom = '';
+    this.nuevoArtImg = '';
+    this.nuevoAgregado = false;
+  }
+
+  vistaAlbum() {
+    this.gestCancion = false;
+    this.gestAlbum = true;
+    this.gestArtista = false;
+
+    this.nuevoAlbAutor = '';
+    this.nuevoAlbAutorExiste = true;
+    this.nuevoAlbTitulo = '';
+    this.nuevoAlbCarat = '';
+  }
+
+  vistaCancion() {
+    this.gestCancion = true;
+    this.gestAlbum = false;
+    this.gestArtista = false;
+  }
+
+  existeArtista() {
+    const params = new HttpParams()
+      .set('name', this.nuevoArtNom);
+
+    this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
+      .subscribe(
+        (resp: User) => {
+          this.artistaUnico = false;
+        },
+        (erroro: string) => {
+          this.artistaUnico = true;
+        }
+      );
+  }
+
+  artistaOk() {
+    return this.nuevoArtNom != '' && this.nuevoArtImg != '' && this.artistaUnico;
+  }
+
+  albumOk() {
+    if (this.nuevoAlbAutor != '' && this.nuevoAlbAutorExiste && this.nuevoAlbTitulo != ''
+      && this.nuevoAlbCarat != '' && this.nuevoAlbCanc.length > 0) return true;
+    else {return false; }
+  }
+  generarInfoAlbum() {
+    this.infoAgregado = 'Agregado al sistema: < br /> Álbum ' + this.nuevoAlbTitulo + ' de '
+    + this.nuevoAlbAutor + '< br /> que contiene:< br />';
+    const i = 0;
+    for (const cancion of this.nuevoAlbCanc) {
+      this.infoAgregado += 'Pista '+ i + cancion.nombre + ' - ' + cancion.duracion
+        + 's.< br />';
+    }
+  }
+
+  existeAutor() {
+    const params = new HttpParams()
+      .set('name', this.nuevoAlbAutor);
+
+    this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
+      .subscribe(
+        (resp: Artista) => {
+          this.nuevoAlbAutorExiste = true;
+          this.nuevoAlbAutorID = resp.id;
+        },
+        (erroro: string) => {
+          this.nuevoAlbAutorExiste = false;
+        }
+      );
+  }
+
+  agregarArtista() {
+    /*let nuevo = new ArtistaRequest();
+    nuevo.nombre = this.nuevoArtNom;
+    nuevo.imagen = this.nuevoArtImg;
+    */
+    const nuevo: ArtistaRequest = {
+      nombre: this.nuevoArtNom,
+      imagen: this.nuevoArtImg
+    };
+    this.http.post(this.Servicio.URL_API + '/artist/add', nuevo).subscribe(
+      (resp: string) => { this.nuevoAgregado = true; } );
+  }
+
+  agregarUnaCancion() {
+    const nueva: CancionRequest = {
+      nombre: this.cancionTitulo,
+      fecha_subida: this.cancionFecha,
+      duracion: this.transformarDuracion(this.cancionDuracion)// this.cancionDuracion PASAR A ENTERO
+    };
+    this.nuevoAlbCanc.push(nueva);
+    //Limpiar param de cancion i.
+    this.cancionTitulo = '';
+    this.cancionDuracion = '';
+  }
+
+  agregarAlbum() {
+    const nuevoAlbum: AlbumRequest = {
+      id_artista: this.nuevoAlbAutorID,
+      titulo: this.nuevoAlbTitulo,
+      caratula: this.nuevoAlbCarat,
+      canciones: this.nuevoAlbCanc
+    }
+
+    this.generarInfoAlbum();
+    this.nuevoAlbumAgregado = true;
+    this.http.post(this.Servicio.URL_API + '/album/add', nuevoAlbum).subscribe(
+      (resp: string) => { this.AgregadoNuevoAlbum = true; } );
+  }
+
+  transformarDuracion(s: string) {
+    const part = s.split(':');
+    return (Number(part[0]) * 60 + Number(part[1]));
+  }
+
+  fchaActual() {
+    const d = new Date();
+    return d.getFullYear().toString() + '-' + d.getMonth().toString()
+      + '-' + d.getDay().toString();
+  }
+}

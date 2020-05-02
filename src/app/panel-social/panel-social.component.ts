@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HttpClient, HttpParams, HttpClientModule, HttpResponse, HttpErrorResponse} from '@angular/common/http';
-import {User} from '../app.component';
+import {User, Amigo} from '../app.component';
 import {error} from '@angular/compiler/src/util';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
 
@@ -28,7 +28,7 @@ export class PanelSocialComponent implements OnInit {
 
   usuarioBuscado: User;
 
-  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
+  constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
   }
 
   ngOnInit(): void {
@@ -36,7 +36,8 @@ export class PanelSocialComponent implements OnInit {
     this.mostarBusquedaAmigos = false;
     this.busqIniciada = false;
     //Recibe el objeto usuario, y actualiza cuando se cambia.
-    this.Servicio.sharedMessage.subscribe(message => this.usuarioLogeado = message);
+    this.Servicio.sharedMessage.subscribe(userRecibido => this.usuarioLogeado = userRecibido);
+
   }
 
   activarBusqueda() {
@@ -52,19 +53,12 @@ export class PanelSocialComponent implements OnInit {
   }
 
   existeAmigo(nick: string) {
-    /*let aux;
-      this.http.get(this.URL_API + '/user/get', nick})
-        .subscribe(
-          (resp: User) => {
-            let aux = resp; console.log(resp.nick);
-          }
-        );
-
-      let str = this.usuarioBuscado;
-      return this.usuarioLogeado.amigos.filter(function(usuarioLogeado) {
-        return usuarioLogeado.nick === str;
-      });*/
-    return this.usuarioLogeado.amigos.includes(this.usuarioBuscado);
+    for (const usu of this.usuarioLogeado.amigos) {
+      if (usu.nick === this.usuarioBuscado.nick) {
+          return true;
+      }
+    }
+    return false;
   }
 
 
@@ -108,16 +102,28 @@ export class PanelSocialComponent implements OnInit {
 
   /* Utiliza el objeto usuario, que contiene el usuario objetivo a ser agregado */
   agregarAmigo() {
-    this.http.patch(this.URL_API + '/user/addAmigo/' + this.usuarioBuscado.id, this.usuarioLogeado.id)
+    this.http.patch(this.URL_API + '/user/addAmigo/' + this.usuarioLogeado.id, this.usuarioBuscado.id)
       .subscribe((resp: User) => {
-        this.usuarioLogeado.amigos.push(this.usuarioBuscado);
-        console.log(resp.nick);
+        //Actualiza el usuario logeado con el nuevo estado.
+        this.Servicio.nextMessage(resp);
+      });
+  }
+
+  quitarAmigo(id: number) {
+    this.http.patch(this.URL_API + '/user/deleteAmigo/' + this.usuarioLogeado.id, id)
+      .subscribe((resp: User) => {
+        //Actualiza el usuario logeado con el nuevo estado.
+        this.Servicio.nextMessage(resp);
       });
   }
 
   enviarToEdit() {
     this.Servicio.nextMessageEdit(this.editarUsuario);
     this.Servicio.nextMessage3(!this.editarUsuario);
+  }
+
+  mostrarLogin() {
+    this.Servicio.nextMessage2(false);
   }
 
 }

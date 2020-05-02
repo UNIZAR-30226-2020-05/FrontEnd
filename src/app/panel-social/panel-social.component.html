@@ -1,8 +1,9 @@
 <div class="panel-social">
   <hr>
   <p class="nombre-user">
-    <img class="foto-perfil" src="../../assets/profile-pics/1.jpg"/>&nbsp;{{usuarioLogeado.nick}}
-    &nbsp;&nbsp;<img (click)="enviarToEdit()"  class="icono-config" src="../../assets/ajustes.png"/>
+    <img class="foto-perfil" src="../../assets/profile-pics/1.jpg"/>{{usuarioLogeado.nick}}
+    &nbsp;&nbsp;<img (click)="enviarToEdit()" title="Editar cuenta" class="icono-config" src="../../assets/ajustes.png"/>
+    <img (click)="mostrarLogin()" title="Cerrar Sesión" class="icono-logout" src="../../assets/logout.png"/>
   </p>
   <hr>
   <br/>
@@ -17,11 +18,14 @@
       <!--*ngFor="let usu of usuario.amigos"--->
     <tr>
       <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
-      <td> {{usu.nick}} </td>
+      <td> {{usu.nick}} </td><td rowspan="2">
+        <img  class="icono-papelera" src="../../assets/trash.png" title="Eliminar amigo"(click)="quitarAmigo(usu.id)">
+      </td>
     </tr>
     <tr>{{usu.nombre}} {{usu.apellidos}}<td></td> </tr>
     <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
-      <i class="ultima-cancion"> Ultima Canción · Ultimo Artista</i> </td>
+      <i class="ultima-cancion"> &nbsp;<span class="enlace"  (click)="Servicio.cargarAlbum('Waidman');
+       Servicio.nextMessage3(true);">Ultima Canción</span> · Ultimo Artista</i> </td>
     </tr><br/>
 
 

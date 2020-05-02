@@ -1,5 +1,6 @@
 import {Component, OnInit,Input, Output} from '@angular/core';
 import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
+import {Album} from '../app.component';
 
 @Component({
   selector: 'app-vista-album',
@@ -12,13 +13,18 @@ export class VistaAlbumComponent implements OnInit {
     'Purple Heart', 'Metal Machine','Counterstrike 2', 'Metal Machine','Counterstrike 2','Counterstrike 2', 'Metal Machine'];
 
   //
+  albActivo: Album;
   contador: number = 0;
   artistaAlbum: string = 'Sabaton'
   constructor(private Servicio: ServicioComponentesService) { }
 
   show:boolean;
   ngOnInit(): void {
-    this.Servicio.sharedMessage3.subscribe(message3 => this.show=message3);
+    //Flag para saber cuando activar la vista de album
+    this.Servicio.sharedMessage3.subscribe(message3 => this.show = message3);
+
+    //Recibe el objeto album, y actualiza cuando se cambia.
+    this.Servicio.albumActivo.subscribe(albumObj => this.albActivo = albumObj);
   }
 
 

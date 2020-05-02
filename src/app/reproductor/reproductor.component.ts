@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
+
 @Component({
   selector: 'app-reproductor',
   templateUrl: './reproductor.component.html',
@@ -11,8 +12,20 @@ export class ReproductorComponent implements OnInit {
   temaEnCola;
   volumenAux;
   cancion = new Audio();
+  posActual;
+  duracionActual;
   logeado;
-  constructor() { this.logeado=false;}
+  posicionActual;
+
+  a = false;
+  constructor() {
+    this.logeado=false;
+    /* Se establecen variables que deben actualizar por sí solas */
+    setInterval(() => {
+      this.posActual = this.cancion.currentTime;
+      this.duracionActual = this.cancion.duration;
+    }, 200);
+  }
 
 
   gestionSonido(){
@@ -45,9 +58,6 @@ export class ReproductorComponent implements OnInit {
   ngOnInit(): void {
     this.activo = false;
     this.gestionSonido();
-
-
-
   }
 
   playPause() {
@@ -61,9 +71,7 @@ export class ReproductorComponent implements OnInit {
 
   }
 
-  mostrarTiempo(){
-    return this.cancion.currentTime;
-  }
+
 
   audioStop(){
     }
@@ -88,6 +96,19 @@ export class ReproductorComponent implements OnInit {
       this.volumenAux = this.cancion.volume;
       this.cancion.volume = 0.0;
     }
-
   }
+
+  sacarTiempo(n: number){
+    let s = '';
+    let auxMin; let auxSeg;
+    auxMin = Math.floor(n / 60);
+    auxSeg = Math.floor(n % 60);
+    if (auxMin < 10) { s += '0'; }
+    s += auxMin.toString() + ':';
+    if (auxSeg < 10) { s += '0'; }
+    s += auxSeg.toString();
+    return s;
+  }
+
+
 }
