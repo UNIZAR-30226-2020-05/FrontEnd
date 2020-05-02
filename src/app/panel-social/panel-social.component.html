@@ -14,8 +14,6 @@
   <!-- Construir lista con un ngFor  *ngIf="!listaVacia" class="listaAmigos"--->
   <div class="contenido-amigos">
   <table *ngFor="let usu of usuarioLogeado.amigos">
-
-      <!--*ngFor="let usu of usuario.amigos"--->
     <tr>
       <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
       <td> {{usu.nick}} </td><td rowspan="2">
@@ -24,48 +22,9 @@
     </tr>
     <tr>{{usu.nombre}} {{usu.apellidos}}<td></td> </tr>
     <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
-      <i class="ultima-cancion"> &nbsp;<span class="enlace"  (click)="Servicio.cargarAlbum('Waidman');
+      <i class="ultima-cancion"> &nbsp;<span class="enlace"  (click)="Servicio.cargarAlbum('Waidmans');
        Servicio.nextMessage3(true);">Ultima Canción</span> · Ultimo Artista</i> </td>
     </tr><br/>
-
-
-
-
-
-    <!-- Construir lista con un ngFor
-<tr>
-      <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
-      <td> usu.nick </td>
-    </tr>
-    <tr>usu.nombre}} usu.apellidos}}<td></td> </tr>
-    <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
-      <i class="ultima-cancion"> Signs of Life · Poets of the Fall</i> </td>
-    </tr><br/>
-
-
-    <tr>
-      <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/5.jpg"></td>
-      <td > Juan1992</td>
-    </tr>
-    <tr> <td> Juan Castillo</td> </tr>
-    <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
-      <i class="ultima-cancion"> Warriors of the World · Manowar</i> </td>
-    </tr>
-
-    <br/>
-
-    <tr>
-      <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
-      <td > Sara07</td>
-    </tr>
-    <tr> <td> Sara López</td> </tr>
-    <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
-      <i class="ultima-cancion"> Rainbow · Tyfoon</i> </td>
-    </tr>
-
-    <br/>
-
---->
 
 
   </table>

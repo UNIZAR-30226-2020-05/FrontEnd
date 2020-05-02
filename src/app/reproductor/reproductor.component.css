@@ -19,12 +19,13 @@ barra-rep{
   position: fixed;
   display: inline-block;
   bottom: 12%;
-  left: 31%;
+  left: 30%;
   width: 100%;
 }
 
 
 td{
+
   vertical-align: middle;
   text-align: center;
 }
@@ -48,7 +49,8 @@ td{
 }
 
 table{
-
+  font-family: Roboto, serif;
+  vertical-align: middle;
 }
 
 .slider {

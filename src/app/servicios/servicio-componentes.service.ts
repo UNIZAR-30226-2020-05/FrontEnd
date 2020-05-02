@@ -67,9 +67,10 @@ export class ServicioComponentesService {
   cargarAlbum(nombre) {
     const params = new HttpParams()
       .set('nameAlbum', nombre);
+
     this.http.get(this.URL_API + '/album/getByName', {params})
       .subscribe(
-        (album: Album[]) => {
+        (album: Array<Album>) => {
           this.albumObj.next(album[0]);
         },
         (erroro: string) => {

@@ -24,7 +24,7 @@ export class ReproductorComponent implements OnInit {
     setInterval(() => {
       this.posActual = this.cancion.currentTime;
       this.duracionActual = this.cancion.duration;
-    }, 200);
+    }, 250);
   }
 
 
