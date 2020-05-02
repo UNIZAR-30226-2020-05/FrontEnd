@@ -122,3 +122,16 @@ export class AlbumRequest {
   canciones: CancionRequest[];
 }
 
+export class ListaCancionRequest {
+  id_usuario: number;
+  nombre: string;
+}
+
+
+export class canciones {
+  nombre: string;
+  fecha_subida: number;
+  album: string;
+  artistas: Array<string>;
+
+}
