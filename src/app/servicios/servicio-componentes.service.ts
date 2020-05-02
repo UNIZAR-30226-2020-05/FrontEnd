@@ -18,7 +18,7 @@ export class ServicioComponentesService {
 
   editUser: boolean;
 
-  //central: boolean;
+  // central: boolean;
 
   /* Mensaje para pasar usuario */
   private message = new BehaviorSubject(this.nuevo);
