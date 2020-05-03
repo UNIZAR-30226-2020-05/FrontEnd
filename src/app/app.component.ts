@@ -31,6 +31,7 @@ export class User {
 
 
   constructor() {
+    this.tipo_user = true; // Usuario por defecto
     this.amigos = new Array<Amigo>();
   }
 
@@ -48,7 +49,7 @@ export class UserRequest {
 /* Clase Cancion - equivalente a CancionDTO en backend */
 export class Cancion {
   id: number;
-  nombre: string;
+  name: string;
   fecha_subida: Date;
   duracion: number; //Duración de la canción (en segundos)
   album: string;
@@ -81,8 +82,8 @@ export class ListaCancion {
 /* Clase Artista - equivalente a ArtistaDTO en backend */
 export class Artista {
   id: number;
-  nombre: string;
-  imagen: string;
+  name: string;
+  image_path: string;
   albumes: Array<string>;
   canciones: Array<string>;
 

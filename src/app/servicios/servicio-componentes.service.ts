@@ -56,6 +56,8 @@ export class ServicioComponentesService {
 
   constructor(private http: HttpClient) {
     this.URL_API = 'http://localhost:8080';
+    this.nuevo = new User();
+
   }
 
   nextMessage(message) {
@@ -72,9 +74,9 @@ export class ServicioComponentesService {
 
   cargarAlbum(nombre) {
     const params = new HttpParams()
-      .set('nameAlbum', nombre);
+      .set('titulo', nombre);
 
-    this.http.get(this.URL_API + '/album/getByName', {params})
+    this.http.get(this.URL_API + '/album/getByTitulo', {params})
       .subscribe(
         (album: Array<Album>) => {
           this.albumObj.next(album[0]);

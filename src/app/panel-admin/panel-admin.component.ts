@@ -13,14 +13,23 @@ export class PanelAdminComponent implements OnInit {
 
 
   usuarioLogeadoAd: User;
+
+  /* Controles interfaz */
+
   gestArtista: boolean;
+  gestArtistaAdd: boolean;
+  gestArtistaDel: boolean;
+
   gestAlbum: boolean;
   gestCancion: boolean;
+
   AgregadoNuevoAlbum: boolean;
 
   /* Pestaña artista */
   nuevoArtNom: string;
   nuevoArtImg: string;
+  delArtisID: number;
+  artistaEliminado: boolean;
   nuevoAgregado: boolean;
   artistaUnico: boolean;
 
@@ -41,6 +50,7 @@ export class PanelAdminComponent implements OnInit {
 
   constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
     this.nuevoAlbCanc = new Array<CancionRequest>();
+    this.usuarioLogeadoAd = new User();
     this.cancionFecha = new Date();
     this.artistaUnico = true;
   }
@@ -86,11 +96,21 @@ export class PanelAdminComponent implements OnInit {
 
     this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
       .subscribe(
-        (resp: User) => {
-          this.artistaUnico = false;
-        },
-        (erroro: string) => {
-          this.artistaUnico = true;
+        (resp: Array<Artista>) => {
+          let encontrado = false;
+          for (const artist of resp) {
+            if (!encontrado) {
+              if (artist.name == this.nuevoArtNom) {
+                this.artistaUnico = false;
+                this.delArtisID = artist.id;
+                encontrado = true;
+              }
+              else  {
+                this.artistaUnico = true;
+              }
+            }
+          }
+
         }
       );
   }
@@ -120,13 +140,23 @@ export class PanelAdminComponent implements OnInit {
 
     this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
       .subscribe(
-        (resp: Artista) => {
-          this.nuevoAlbAutorExiste = true;
-          this.nuevoAlbAutorID = resp.id;
+        (resp: Array<Artista>) => {
+          let encontrado = false;
+          for (const artist of resp) {
+            if (!encontrado) {
+              if (artist.name == this.nuevoAlbAutor) {
+                this.nuevoAlbAutorID = artist.id;
+                this.nuevoAlbAutorExiste = true;
+                encontrado = true;
+              }
+              else {
+                this.nuevoAlbAutorExiste = false;
+              }
+            }
+
+          }
         },
-        (erroro: string) => {
-          this.nuevoAlbAutorExiste = false;
-        }
+        (erroro: string) => {}
       );
   }
 
@@ -141,6 +171,11 @@ export class PanelAdminComponent implements OnInit {
     };
     this.http.post(this.Servicio.URL_API + '/artist/add', nuevo).subscribe(
       (resp: string) => { this.nuevoAgregado = true; } );
+  }
+
+  eliminarArtista() {
+    this.http.delete(this.Servicio.URL_API + '/artist/delete/'+ this.delArtisID).subscribe(
+      (resp: string) => { this.artistaEliminado = true; } );
   }
 
   agregarUnaCancion() {
@@ -178,5 +213,10 @@ export class PanelAdminComponent implements OnInit {
     const d = new Date();
     return d.getFullYear().toString() + '-' + d.getMonth().toString()
       + '-' + d.getDay().toString();
+  }
+
+  mostrarLogin() {
+    this.usuarioLogeadoAd.tipo_user = true;
+    this.Servicio.nextMessage2(false);
   }
 }
