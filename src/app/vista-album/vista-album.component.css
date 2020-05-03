@@ -31,7 +31,8 @@
 }
 
 .img-play-album{
-  height: 35%;
+  width: 1.5vw;
+  vertical-align: middle;
 }
 
 .lista-album{

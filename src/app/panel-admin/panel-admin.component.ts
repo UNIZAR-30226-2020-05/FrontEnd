@@ -86,11 +86,20 @@ export class PanelAdminComponent implements OnInit {
 
     this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
       .subscribe(
-        (resp: User) => {
-          this.artistaUnico = false;
-        },
-        (erroro: string) => {
-          this.artistaUnico = true;
+        (resp: Array<Artista>) => {
+          let encontrado = false;
+          for (const artist of resp) {
+            if (!encontrado) {
+              if (artist.name == this.nuevoArtNom) {
+                this.artistaUnico = false;
+                encontrado = true;
+              }
+              else  {
+                this.artistaUnico = true;
+              }
+            }
+          }
+
         }
       );
   }
@@ -120,13 +129,23 @@ export class PanelAdminComponent implements OnInit {
 
     this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
       .subscribe(
-        (resp: Artista) => {
-          this.nuevoAlbAutorExiste = true;
-          this.nuevoAlbAutorID = resp.id;
+        (resp: Array<Artista>) => {
+          let encontrado = false;
+          for (const artist of resp) {
+            if (!encontrado) {
+              if (artist.name == this.nuevoAlbAutor) {
+                this.nuevoAlbAutorID = artist.id;
+                this.nuevoAlbAutorExiste = true;
+                encontrado = true;
+              }
+              else {
+                this.nuevoAlbAutorExiste = false;
+              }
+            }
+
+          }
         },
-        (erroro: string) => {
-          this.nuevoAlbAutorExiste = false;
-        }
+        (erroro: string) => {}
       );
   }
 

@@ -14,7 +14,6 @@ export class VistaAlbumComponent implements OnInit {
 
   //
   albActivo: Album;
-  contador: number = 0;
   artistaAlbum: string = 'Sabaton'
   constructor(private Servicio: ServicioComponentesService) { }
 
@@ -27,5 +26,15 @@ export class VistaAlbumComponent implements OnInit {
     this.Servicio.albumActivo.subscribe(albumObj => this.albActivo = albumObj);
   }
 
-
+  sacarTiempo(n: number){
+    let s = '';
+    let auxMin; let auxSeg;
+    auxMin = Math.floor(n / 60);
+    auxSeg = Math.floor(n % 60);
+    if (auxMin < 10) { s += '0'; }
+    s += auxMin.toString() + ':';
+    if (auxSeg < 10) { s += '0'; }
+    s += auxSeg.toString();
+    return s;
+  }
 }
