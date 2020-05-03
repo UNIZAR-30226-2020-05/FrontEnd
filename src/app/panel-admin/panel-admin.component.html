@@ -1,26 +1,60 @@
 <div *ngIf="esAdminLogeado()" class="vista-admin">
   <img class="logoSuperior" src="../../assets/logo-white.png" >
+  <img (click)="mostrarLogin()" title="Cerrar Sesión" class="icono-logout" src="../../assets/logout.png"/>
   <p> - Panel de administrador - Operador:
     {{this.usuarioLogeadoAd.nombre}}  {{this.usuarioLogeadoAd.apellidos}} </p>
-  <button  (click)="vistaArtista()">ARTISTAS</button> &nbsp;
-  <button (click)="vistaAlbum()">ÁLBUMES</button> &nbsp;
-  <button (click)="vistaCancion()">CANCIONES</button>
+
+  <div class="panelAdmin">
+
+    <button  (click)="vistaArtista(); gestArtistaAdd = true; gestArtistaDel = false;">
+      ARTISTAS</button> <br/><br/>
+    <button (click)="vistaAlbum(); nuevoAlbumAgregado= false;">ÁLBUMES</button> <br/><br/>
+    <button (click)="vistaCancion(); ">CANCIONES</button>
+    <hr/><br/>
+    <i *ngIf="gestArtista || gestAlbum">    Opciones disponibles:
+    </i><br/><br/>
+
+    <button *ngIf="gestArtista" (click)="gestArtistaAdd = true; gestArtistaDel = false; vistaArtista(); existeArtista();" >
+      AGREGAR</button><br/><br/>
+    <button *ngIf="gestArtista" (click)="gestArtistaDel = true; gestArtistaAdd = false; artistaEliminado= false;
+     existeArtista();" >
+      ELIMINAR</button>
+
+    <button *ngIf="gestAlbum" >AGREGAR</button><br/><br/>
+    <button *ngIf="gestAlbum" >ELIMINAR</button>
+  </div>
 
 <div *ngIf="gestArtista">
   <p>Gestión de ARTISTAS</p>
-  Añadir nuevo artista:<br/><br/>
 
-  Nombre:<i style="color: red;" *ngIf="!artistaUnico">Artista ya incluído</i><br/>
-  <input  type="text" [(ngModel)]="nuevoArtNom" (focusin)="existeArtista()"
-          (focusout)="existeArtista()"><br/><br/>
+  <div *ngIf="gestArtistaAdd">
+    AÑADIR nuevo artista:<br/><br/>
 
- URL imagen: <br/>
-  <input  type="text" [(ngModel)]="nuevoArtImg"><br/><br/>
-  <img src="{{nuevoArtImg}}" class="img-artista"/><br/><br/>
+    Nombre:<i style="color: red;" *ngIf="!artistaUnico">Artista ya incluído</i><br/>
+    <input  type="text" [(ngModel)]="nuevoArtNom" (focusin)="existeArtista()"
+            (focusout)="existeArtista()"><br/><br/>
 
-  <button class="denegado" *ngIf="!nuevoAgregado && !artistaOk()">Añadir</button>
-  <button *ngIf="!nuevoAgregado && artistaOk()" (click)="agregarArtista()">Añadir</button> &nbsp;
-  <i *ngIf="nuevoAgregado">{{nuevoArtNom}} agregado al sistema</i>
+   URL imagen: <br/>
+    <input  type="text" [(ngModel)]="nuevoArtImg"><br/><br/>
+    <img src="{{nuevoArtImg}}" class="img-artista"/><br/><br/>
+
+    <button class="denegado" *ngIf="!nuevoAgregado && !artistaOk()">Añadir</button>
+    <button *ngIf="!nuevoAgregado && artistaOk()" (click)="agregarArtista()">Añadir</button> &nbsp;
+    <i *ngIf="nuevoAgregado">{{nuevoArtNom}} agregado al sistema</i>
+  </div>
+
+  <div *ngIf="gestArtistaDel">
+    ELIMINAR artista:<br/><br/>
+    <div *ngIf="!artistaEliminado">
+    Artista a eliminar:<i style="color: red;" *ngIf="artistaUnico && nuevoArtNom!=''"> No existe este artista en el sistema</i><br/>
+    <input  type="text" [(ngModel)]="nuevoArtNom" (ngModelChange)="existeArtista()"><br/><br/>
+    </div>
+
+    <i *ngIf="!artistaEliminado"> Se eliminará el artista y todos sus álbumes asociados.</i><br/><br/>
+    <button class="denegado" *ngIf="!artistaEliminado && artistaUnico" >Eliminar</button>
+    <button *ngIf="!artistaEliminado && !artistaUnico && nuevoArtNom!=''" (click)="eliminarArtista()">Eliminar</button> &nbsp;
+    <i *ngIf="artistaEliminado">{{nuevoArtNom}} eliminado del sistema</i>
+  </div>
 </div>
 
 <div  *ngIf="gestAlbum">

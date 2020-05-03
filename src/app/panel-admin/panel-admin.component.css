@@ -1,8 +1,24 @@
 .logoSuperior {
   width: 15%;
   left: 1%;
+  position: fixed;
 }
 
+.panelAdmin{
+  width: 15%;
+  left: 2%;
+  top: 18%;
+  position: fixed;
+}
+
+.icono-logout{
+  position: fixed;
+  top: 7%;
+  right: 5%;
+  vertical-align: middle;
+  cursor: pointer;
+  width: 30px;
+}
 
 .vista-admin{
   display: block;

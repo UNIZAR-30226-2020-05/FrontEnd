@@ -50,6 +50,8 @@ export class ServicioComponentesService {
 
   constructor(private http: HttpClient) {
     this.URL_API = 'http://localhost:8080';
+    this.nuevo = new User();
+
   }
 
   nextMessage(message) {

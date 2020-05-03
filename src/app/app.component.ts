@@ -31,6 +31,7 @@ export class User {
 
 
   constructor() {
+    this.tipo_user = true; // Usuario por defecto
     this.amigos = new Array<Amigo>();
   }
 
