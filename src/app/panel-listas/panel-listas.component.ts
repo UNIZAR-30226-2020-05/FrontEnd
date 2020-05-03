@@ -2,6 +2,7 @@ import {Component, Output,EventEmitter, OnInit} from '@angular/core';
 import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
 import {ListaCancionRequest, User, ListaCancion} from "../app.component";
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
+import {concat} from "rxjs";
 
 @Component({
   selector: 'app-panel-listas',
@@ -44,9 +45,7 @@ export class PanelListasComponent implements OnInit {
     };
 
     this.http.post(this.URL_API + '/listaCancion/create', lista).subscribe(
-      (resp: ListaCancion) => { console.log(resp); this.listaOk= resp;});
-
-
+      (resp: ListaCancion) => { console.log(resp); this.listaOk=resp; this.usuario.lista_cancion.push(resp)});
 
 
   }

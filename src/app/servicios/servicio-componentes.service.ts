@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Album, User, UserRequest} from '../app.component';
+import {Album, ListaCancion, User, UserRequest} from '../app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
@@ -17,6 +17,8 @@ export class ServicioComponentesService {
   albumActiv: Album;
 
   editUser: boolean;
+
+  lista:ListaCancion;
 
   // central: boolean;
 
@@ -43,6 +45,10 @@ export class ServicioComponentesService {
   /* Mensaje para pasar variable a editar usuario */
   private messageEdit = new BehaviorSubject(this.editUser);
   sharedMessageEdit = this.messageEdit.asObservable();
+
+  /* Mensaje para pasar variable a panel Listas de lista */
+  private messageList = new BehaviorSubject(this.lista);
+  sharedMessageList = this.messageList.asObservable();
 
   /* Mensaje para pasar variable a la vista central */
   /*private messageCentral = new BehaviorSubject(this.central);
@@ -90,6 +96,9 @@ export class ServicioComponentesService {
     return this.nuevo;
   }
 
+  enviarLista(messageList){
+    this.messageList.next(messageList);
+  }
   /*nextMessageCentral(messageCentral) {
     this.messageCentral.next(messageCentral);
   }*/

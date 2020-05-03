@@ -54,7 +54,7 @@
 </div>-->
 
 <ul class="vertical-menu2" >
-  <li  *ngFor="let playlist of usuario.lista_cancion; first as primero;trackBy: funcionTrackBy">
+  <li  *ngFor="let playlist of usuario.lista_cancion; first as primero">
   <a *ngIf="!primero" (click)="enviarToAlbum()"> {{playlist.nombre}}</a>
   </li>
 </ul>
