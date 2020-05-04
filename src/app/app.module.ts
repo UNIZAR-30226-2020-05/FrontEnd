@@ -14,6 +14,7 @@ import { VistaAlbumComponent } from './vista-album/vista-album.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { EditarUsuarioComponent } from './editar-usuario/editar-usuario.component';
 import { PanelAdminComponent } from './panel-admin/panel-admin.component';
+import { VistaListaComponent } from './vista-lista/vista-lista.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { PanelAdminComponent } from './panel-admin/panel-admin.component';
     BusquedaComponent,
     EditarUsuarioComponent,
     PanelAdminComponent,
+    VistaListaComponent,
   ],
   imports: [
     BrowserModule,

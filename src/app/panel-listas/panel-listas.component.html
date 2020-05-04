@@ -55,7 +55,7 @@
 
 <ul class="vertical-menu2" >
   <li  *ngFor="let playlist of usuario.lista_cancion; first as primero">
-  <a *ngIf="!primero" (click)="enviarToAlbum()"> {{playlist.nombre}}</a>
+  <a *ngIf="!primero" (click)="enviarToVistaLista();listaPulsada(playlist)"> {{playlist.nombre}}</a>
   </li>
 </ul>
 

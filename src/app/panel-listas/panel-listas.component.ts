@@ -2,7 +2,7 @@ import {Component, Output,EventEmitter, OnInit} from '@angular/core';
 import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
 import {ListaCancionRequest, User, ListaCancion} from "../app.component";
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
-import {concat} from "rxjs";
+
 
 @Component({
   selector: 'app-panel-listas',
@@ -26,15 +26,15 @@ export class PanelListasComponent implements OnInit {
 
   ngOnInit(): void {
     this.Servicio.sharedMessage.subscribe(message => this.usuario=message);
-    this.Servicio.sharedMessage3.subscribe(message3 => this.okVista=message3);
+    this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.okVista=messageVistaLista);
     /*this.Servicio.sharedMessageList.subscribe( messageList => this.usuario.lista_cancion.concat(this.usuario.lista_cancion,messageList));*/
   }
   newMessage() {
     this.Servicio.nextMessage(this.usuario);
   }
 
-  enviarToAlbum(){
-    this.Servicio.nextMessage3(!this.okVista);
+  enviarToVistaLista(){
+    this.Servicio.nextMessageVistaLista(!this.okVista);
   }
 
 
@@ -50,7 +50,9 @@ export class PanelListasComponent implements OnInit {
 
   }
 
-  funcionTrackBy(index:number,aux:ListaCancion): ListaCancion { return aux;}
+  listaPulsada(auxList: ListaCancion){
+    this.Servicio.nextMessageObjLista(auxList);
+  }
 
 
 }

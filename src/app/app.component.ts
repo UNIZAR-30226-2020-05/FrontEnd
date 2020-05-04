@@ -129,10 +129,10 @@ export class ListaCancionRequest {
 }
 
 
-export class canciones {
+/*export class canciones {
   nombre: string;
   fecha_subida: number;
   album: string;
   artistas: Array<string>;
 
-}
+}*/

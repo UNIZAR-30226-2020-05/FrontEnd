@@ -19,6 +19,8 @@ export class ServicioComponentesService {
   editUser: boolean;
 
   lista:ListaCancion;
+  vistaLista:boolean;
+  objLista: ListaCancion;
 
   // central: boolean;
 
@@ -49,6 +51,15 @@ export class ServicioComponentesService {
   /* Mensaje para pasar variable a panel Listas de lista */
   private messageList = new BehaviorSubject(this.lista);
   sharedMessageList = this.messageList.asObservable();
+
+  /* Mensaje para pasar variable que active o desactive la vista-lista*/
+  private messageVistaLista = new BehaviorSubject(this.vistaLista);
+  sharedMessageVistaLista= this.messageVistaLista.asObservable();
+
+  /*Mensjae para pasar objeto lista ha vista-lista */
+  private messageObjetoLista = new BehaviorSubject(this.objLista);
+  sharedMessageObjLista = this.messageObjetoLista.asObservable();
+
 
   /* Mensaje para pasar variable a la vista central */
   /*private messageCentral = new BehaviorSubject(this.central);
@@ -100,6 +111,14 @@ export class ServicioComponentesService {
 
   enviarLista(messageList){
     this.messageList.next(messageList);
+  }
+
+  nextMessageVistaLista(messageVistaLista){
+    this.messageVistaLista.next(messageVistaLista);
+  }
+
+  nextMessageObjLista(messageObjLista){
+    this.messageObjetoLista.next(messageObjLista);
   }
   /*nextMessageCentral(messageCentral) {
     this.messageCentral.next(messageCentral);

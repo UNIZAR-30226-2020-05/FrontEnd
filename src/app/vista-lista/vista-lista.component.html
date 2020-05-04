@@ -1,0 +1,20 @@
+<div *ngIf="aparecer" class="vista-lista">
+  <div *ngIf="listaMostrar.canciones.length==0">
+    <img class="img-lista" src="../../assets/ListaDefecto.png"/><div class="nombrePlaylist">PLAYLIST</div>
+  </div>
+  <div class="hayCanciones">
+    <!-- Se ha puesto la imagen por defecto, de momento, pero deberia ir la de la primera cancion. -->
+    <img class="img-lista" src="../../assets/ListaDefecto.png"/><div class="nombrePlaylist">PLAYLIST</div>
+  </div>
+  <div class="titulo-lista">{{listaMostrar.nombre}}</div>
+  <div class="artista-lista">{{usuarioLog.nombre}}</div>
+  <div class="marco-tabla">
+    <table class="lista-playlist">
+
+      <tr *ngFor="let cancion of listaMostrar.canciones">
+        <td  class="listaGen"><img class="imgGenCancion" src="../../assets/notaMusicalListas.png"/></td>
+        <!--<td  class="titulos-album">{{ cancion.nombre }}</td><td>{{listaMostrar.canciones}}</td>-->
+      </tr>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+.vista-lista{
+  background-color: #0b1d19;
+  width: 61%;
+  height: 62%;
+  left: 13%;
+  top: 9%;
+  z-index: 1; /* Mejor fuera */
+  position: fixed;
+  font-family: Trebuchet MS, serif;
+  color: aliceblue;
+}
+
+.img-lista{
+  margin-left: 2%;
+  width: 11%;
+}
+
+.nombrePlaylist{
+  top: 9%;
+  left: 22%;
+  position: fixed;
+  border-style: solid;
+  border-color: #b4b4b4;
+  border-inline-start-width: 8px;
+  width: fit-content;
+
+}
+
+.imgGenCancion{
+  width: 1.5vw;
+  vertical-align: middle;
+}
+
+.lista-album{
+
+  overflow: auto;
+  width: 90%;
+  height: 30%;
+}
+
+.marco-tabla{
+  margin-left: 3%;
+  height: 80%;
+  width: 95%;
+  overflow: auto;
+  vertical-align:middle;
+}
+
+
+.listaGen{
+  vertical-align:middle;
+  text-align:center;
+  padding-top: 1%;
+  padding-bottom: 1%;
+  width: 10%;
+}
+
+
+.titulo-lista{
+  top: 13%;
+  left: 22%;
+  font-size: 34px;
+  display: inline-block;
+  position: fixed;
+}
+
+.artista-lista{
+  top: 18%;
+  left: 22%;
+  font-size: 28px;
+  font-style: italic;
+  position: fixed;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(108, 140, 128, 0.8);
+  -webkit-box-shadow: inset 0 0 6px rgba(180, 180, 180, 0.5);
+}

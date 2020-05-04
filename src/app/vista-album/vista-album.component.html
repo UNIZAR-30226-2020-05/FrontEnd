@@ -3,16 +3,16 @@
 
   <img class="img-album" src="{{albActivo.caratula}}"/><div class="etiqueta-album">ÁLBUM</div>
 
- <div class="titulo-album">{{albActivo.titulo}}</div>
+  <div class="titulo-album">{{albActivo.titulo}}</div>
   <div class="artista-album">{{albActivo.artista}}</div>
-<div class="marco-tabla">
-  <table class="lista-album">
+  <div class="marco-tabla">
+    <table class="lista-album">
 
-    <tr *ngFor="let cancion of albActivo.canciones; let i = index">
-      <td  class="elemento-album"><img class="img-play-album" src="../../assets/play-vector.svg"/></td>
-      <td  class="titulos-album">{{ cancion.name }}</td><td>{{albActivo.artista}}</td>
-      <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
-    </tr>
-  </table>
-</div>
+      <tr *ngFor="let cancion of albActivo.canciones; let i = index">
+        <td  class="elemento-album"><img class="img-play-album" src="../../assets/play-vector.svg"/></td>
+        <td  class="titulos-album">{{ cancion.name }}</td><td>{{albActivo.artista}}</td>
+        <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
+      </tr>
+    </table>
+  </div>
 </div>
