@@ -96,6 +96,12 @@ p{
   position: relative;
 }
 
+.img-artista-peq {
+  width: 8%;
+  border-radius: 20%;
+  alignment: center;
+}
+
 button {
   transition-duration: 0.4s;
   background-color: #999999;

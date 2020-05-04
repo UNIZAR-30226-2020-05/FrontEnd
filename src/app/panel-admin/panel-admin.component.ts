@@ -21,7 +21,8 @@ export class PanelAdminComponent implements OnInit {
   gestArtistaDel: boolean;
 
   gestAlbum: boolean;
-  gestCancion: boolean;
+  gestAlbumDel: boolean;
+  gestUsuario: boolean;
 
   AgregadoNuevoAlbum: boolean;
 
@@ -41,6 +42,10 @@ export class PanelAdminComponent implements OnInit {
   nuevoAlbCarat: string;
   nuevoAlbCanc: Array<CancionRequest>;
   nuevoAlbumAgregado: boolean;
+
+  busqAlbum: Array<Album>;
+  busqTitulo: string;
+  albumEliminado: boolean;
 
   infoAgregado: string; //Almacena info de album agregado.
 
@@ -65,7 +70,7 @@ export class PanelAdminComponent implements OnInit {
   }
 
   vistaArtista() {
-    this.gestCancion = false;
+    this.gestUsuario = false;
     this.gestAlbum = false;
     this.gestArtista = true;
     this.nuevoArtNom = '';
@@ -74,7 +79,7 @@ export class PanelAdminComponent implements OnInit {
   }
 
   vistaAlbum() {
-    this.gestCancion = false;
+    this.gestUsuario = false;
     this.gestAlbum = true;
     this.gestArtista = false;
 
@@ -84,8 +89,8 @@ export class PanelAdminComponent implements OnInit {
     this.nuevoAlbCarat = '';
   }
 
-  vistaCancion() {
-    this.gestCancion = true;
+  vistaUsuario() {
+    this.gestUsuario = true;
     this.gestAlbum = false;
     this.gestArtista = false;
   }
@@ -218,5 +223,18 @@ export class PanelAdminComponent implements OnInit {
   mostrarLogin() {
     this.usuarioLogeadoAd.tipo_user = true;
     this.Servicio.nextMessage2(false);
+  }
+
+  buscarAlbum() {
+    const params = new HttpParams()
+      .set('titulo', this.busqTitulo);
+
+    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params}).subscribe(
+      (resp: Array<Album>) => { this.busqAlbum = resp; } );
+  }
+
+  eliminarAlbum(id: number) {
+    this.http.delete(this.Servicio.URL_API + '/album/delete/' + id).subscribe(
+      (resp: string) => { this.albumEliminado = true; } );
   }
 }
