@@ -105,7 +105,7 @@ export class PanelAdminComponent implements OnInit {
           let encontrado = false;
           for (const artist of resp) {
             if (!encontrado) {
-              if (artist.name == this.nuevoArtNom) {
+              if (artist.name.toLowerCase() == this.nuevoArtNom.toLowerCase()) {
                 this.artistaUnico = false;
                 this.delArtisID = artist.id;
                 encontrado = true;
@@ -166,14 +166,14 @@ export class PanelAdminComponent implements OnInit {
   }
 
   agregarArtista() {
-    /*let nuevo = new ArtistaRequest();
-    nuevo.nombre = this.nuevoArtNom;
-    nuevo.imagen = this.nuevoArtImg;
-    */
+    const s: string = this.nuevoArtNom.substring(1, 50).toLowerCase();
+    const s2: string = this.nuevoArtNom.substring(0, 1).toUpperCase();
+
     const nuevo: ArtistaRequest = {
-      nombre: this.nuevoArtNom,
+      nombre: s2 + s,
       imagen: this.nuevoArtImg
     };
+
     this.http.post(this.Servicio.URL_API + '/artist/add', nuevo).subscribe(
       (resp: string) => { this.nuevoAgregado = true; } );
   }
