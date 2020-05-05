@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 
 
 @Component({
@@ -9,13 +9,13 @@ import {HttpClient} from "@angular/common/http";
   styleUrls: ['./central.component.css']
 })
 export class CentralComponent implements OnInit {
-  //mostrar: boolean;
+  mostrar: boolean = true;
 
-  constructor(/*private http: HttpClient, private Servicio: ServicioComponentesService*/) { }
+  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) { }
 
   ngOnInit(): void {
-    /*this.mostrar = true;
-    this.Servicio.sharedMessageCentral.subscribe(messageCentral => this.mostrar = messageCentral);*/
+    this.mostrar = true;
+    this.Servicio.sharedMessageCentral.subscribe(messageCentral => this.mostrar = messageCentral);
   }
 
 }

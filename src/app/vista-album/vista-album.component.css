@@ -31,6 +31,7 @@
 }
 
 .img-play-album{
+  cursor: pointer;
   width: 1.5vw;
   vertical-align: middle;
 }

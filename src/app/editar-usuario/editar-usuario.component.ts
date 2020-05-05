@@ -17,8 +17,6 @@ export class EditarUsuarioComponent implements OnInit {
 
   @Output() messageEvent = new EventEmitter<boolean>();
 
-  public URL_API = 'http://localhost:8080';
-
   usuarioLog:User;
   // Atributo a cambiar
   passN: string;
@@ -38,6 +36,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.mostrar = false;
     this.aBorrar = false;
     this.passCambiada = false;
+    //this.Servicio.sharedMessageCentral.subscribe(messageCentral => this.mostrar = messageCentral);
   }
   // Para mostrar la pantalla de borrado de usuario
   borrarUsuario() {
@@ -53,7 +52,7 @@ export class EditarUsuarioComponent implements OnInit {
   // Borra el usuario y vuelve a la pantalla de login
   confirmaBorrado() {
     this.id= this.usuarioLog.id;
-    this.http.delete(this.URL_API + '/user/delete/' + this.id).subscribe(
+    this.http.delete(this.Servicio.URL_API + '/user/delete/' + this.id).subscribe(
       (resp: string) => { console.log(resp); } );
     this.Servicio.nextMessage2(this.login);
     this.mostrar = false;
@@ -66,7 +65,7 @@ export class EditarUsuarioComponent implements OnInit {
   // Cambia la contraseña del usuario
   cambio() {
     this.id= this.usuarioLog.id;
-    this.http.patch(this.URL_API + '/user/modifyPass/' + this.id, btoa(this.passN)).subscribe(
+    this.http.patch(this.Servicio.URL_API + '/user/modifyPass/' + this.id, btoa(this.passN)).subscribe(
       (resp: string) => { console.log(resp); } );
     this.mostrar = false;
     this.passCambiada = true;
@@ -81,6 +80,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.passCambiada = false;
     this.Servicio.sharedMessageEdit.subscribe(messageEdit => this.mostrar = messageEdit);
     this.Servicio.sharedMessage.subscribe(message => this.usuarioLog = message);
+
 
 
 

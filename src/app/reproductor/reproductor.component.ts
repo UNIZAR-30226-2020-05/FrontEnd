@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
 
 
 @Component({
@@ -18,7 +19,7 @@ export class ReproductorComponent implements OnInit {
   posicionActual;
 
   a = false;
-  constructor() {
+  constructor(private Servicio: ServicioComponentesService) {
     this.logeado=false;
     /* Se establecen variables que deben actualizar por sí solas */
     setInterval(() => {
@@ -29,14 +30,14 @@ export class ReproductorComponent implements OnInit {
 
 
   gestionSonido(){
-    this.cancion.src = '../../assets/media/test.mp3';
+    this.cancion.src = this.Servicio.URL_API + '/song/play/test';
     this.temaEnCola = 'TestLong';
     this.cancion.load();
   }
 
   avanzarLista(){
     if (this.temaEnCola == 'Test'){
-      this.cancion.src = '../../assets/media/test.mp3';
+      this.cancion.src = this.Servicio.URL_API + '/song/play/testLong';
       this.temaEnCola = "TestLong"; //Siguiente a cargar
       this.activo = true;
     }
@@ -46,7 +47,7 @@ export class ReproductorComponent implements OnInit {
       this.activo = true;
     }
     else {
-      this.cancion.src = "../../assets/media/testLong.mp3";
+      this.cancion.src = this.Servicio.URL_API + '/song/play/tulpa';
       this.temaEnCola = "TestRemoto";
       this.activo = true;
     }

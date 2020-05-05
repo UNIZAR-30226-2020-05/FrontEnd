@@ -8,21 +8,37 @@
 
     <button  (click)="vistaArtista(); gestArtistaAdd = true; gestArtistaDel = false;">
       ARTISTAS</button> <br/><br/>
-    <button (click)="vistaAlbum(); nuevoAlbumAgregado= false;">ÁLBUMES</button> <br/><br/>
-    <button (click)="vistaCancion(); ">CANCIONES</button>
+    <button (click)="vistaAlbum(); nuevoAlbumAgregado= false; albumEliminado = false;">ÁLBUMES</button> <br/><br/>
+    <button (click)="vistaUsuario(); ">USUARIOS</button>
     <hr/><br/>
-    <i *ngIf="gestArtista || gestAlbum">    Opciones disponibles:
+    <i *ngIf="gestArtista || gestAlbum || gestUsuario">    Opciones disponibles:
     </i><br/><br/>
 
-    <button *ngIf="gestArtista" (click)="gestArtistaAdd = true; gestArtistaDel = false; vistaArtista(); existeArtista();" >
+    <div *ngIf="gestArtista">
+    <button  (click)="gestArtistaAdd = true; gestArtistaDel = false; vistaArtista(); existeArtista();" >
       AGREGAR</button><br/><br/>
-    <button *ngIf="gestArtista" (click)="gestArtistaDel = true; gestArtistaAdd = false; artistaEliminado= false;
+    <button (click)="gestArtistaDel = true; gestArtistaAdd = false; artistaEliminado= false;
      existeArtista();" >
       ELIMINAR</button>
+    </div>
 
-    <button *ngIf="gestAlbum" >AGREGAR</button><br/><br/>
-    <button *ngIf="gestAlbum" >ELIMINAR</button>
+
+    <div *ngIf="gestUsuario">
+      <button  (click)="vistaUsuario();" >
+        PROMOCIONAR</button><br/><br/>
+      <button (click)="gestArtistaDel = true; gestArtistaAdd = false; artistaEliminado= false;
+     existeArtista();" >
+        ELIMINAR</button>
+    </div>
+
+    <button *ngIf="gestAlbum" (click)="gestAlbumDel=false">AGREGAR</button><br/><br/>
+    <button *ngIf="gestAlbum" (click)="gestAlbumDel=true; albumEliminado=false;busqTitulo=''" >ELIMINAR</button>
   </div>
+
+<div *ngIf="!gestArtista && !gestAlbum &&!gestUsuario"><br/><br/>Este panel permite añadir y eliminar artistas de la plataforma.<br/>
+  Crear álbumes de un artista (que debe estar registrado ya en la plataforma), eliminar álbumes.<br/>
+  Eliminar usuarios de la plataforma, y establecer usuarios como administradores.<br/>
+</div>
 
 <div *ngIf="gestArtista">
   <p>Gestión de ARTISTAS</p>
@@ -57,52 +73,74 @@
   </div>
 </div>
 
+
 <div  *ngIf="gestAlbum">
-  <div *ngIf="!nuevoAlbumAgregado">
-  <p>Gestión de ÁLBUMS</p>
-  Añadir nuevo:<br/><br/>
+  <p>Gestión de ÁLBUMES</p>
+  <div *ngIf="!gestAlbumDel">
+    <div *ngIf="!nuevoAlbumAgregado">
 
-  Artista autor:<i *ngIf="!nuevoAlbAutorExiste" style="color: red;">Artista no encontrado</i><br/>
-  <input  type="text" [(ngModel)]="nuevoAlbAutor" (focusin)="existeAutor()"
-          (focusout)="existeAutor()"><br/>
+    Añadir nuevo:<br/><br/>
 
-  Titulo del álbum:<br/>
-  <input  type="text" [(ngModel)]="nuevoAlbTitulo" (focusin)="existeArtista()"
-          (focusout)="existeArtista()"><br/>
+    Artista autor:<i *ngIf="!nuevoAlbAutorExiste" style="color: red;">Artista no encontrado</i><br/>
+    <input  type="text" [(ngModel)]="nuevoAlbAutor" (focusin)="existeAutor()"
+            (focusout)="existeAutor()"><br/>
 
-  URL Caratula: <br/>
-  <input  type="text" [(ngModel)]="nuevoAlbCarat"><br/><br/>
+    Titulo del álbum:<br/>
+    <input  type="text" [(ngModel)]="nuevoAlbTitulo" (focusin)="existeArtista()"
+            (focusout)="existeArtista()"><br/>
 
-  Establecer canciones que contiene ({{nuevoAlbCanc.length}} actualmente)<br/><br/>
+    URL Caratula: <br/>
+    <input  type="text" [(ngModel)]="nuevoAlbCarat"><br/><br/>
 
-  Titulo canción:<br/>
-  <input  type="text" [(ngModel)]="cancionTitulo"><br/>
+    Establecer canciones que contiene ({{nuevoAlbCanc.length}} actualmente)<br/><br/>
 
-  Duración:<br/>
-  <input  type="time" [(ngModel)]="cancionDuracion"><br/>
+    Titulo canción:<br/>
+    <input  type="text" [(ngModel)]="cancionTitulo"><br/>
 
-  Fecha Subida:<br/>
-  <input  type="date" [(ngModel)]="cancionFecha"><br/><br/>
-  <button (click)="agregarUnaCancion()">Añadir Cancion</button> &nbsp;
+    Duración:<br/>
+    <input  type="time" [(ngModel)]="cancionDuracion"><br/>
+
+    Fecha Subida:<br/>
+    <input  type="date" [(ngModel)]="cancionFecha"><br/><br/>
+    <button (click)="agregarUnaCancion()">Añadir Cancion</button> &nbsp;
 
 
-  <button class="denegado" *ngIf="!albumOk()">Añadir</button> &nbsp;
-  <button *ngIf="albumOk()" (click)="agregarAlbum()">Añadir</button> &nbsp;
+    <button class="denegado" *ngIf="!albumOk()">Añadir</button> &nbsp;
+    <button *ngIf="albumOk()" (click)="agregarAlbum()">Añadir</button> &nbsp;
+    </div>
+    <div *ngIf="nuevoAlbumAgregado"><br/>
+      Agregado al sistema: <br/><br/>
+      <img src="{{nuevoAlbCarat}}" class="img-crea-album"/><br/><br/>
+      Álbum <i>{{nuevoAlbTitulo}}</i> de
+      <i>{{nuevoAlbAutor}}</i><br/>
+      que contiene:<br/>
+      <i *ngFor=" let cancion of nuevoAlbCanc; let i = index">
+       Pista {{i+1}} {{cancion.nombre}} - {{cancion.duracion}}s. <br/>
+      </i>
+    </div>
   </div>
-  <div *ngIf="nuevoAlbumAgregado"><br/>
-    Agregado al sistema: <br/>
-    <img src="{{nuevoAlbCarat}}" class="img-crea-album"/><br/><br/>
-    Álbum <i>{{nuevoAlbTitulo}}</i> de
-    <i>{{nuevoAlbAutor}}</i><br/>
-    que contiene:<br/>
-    <i *ngFor=" let cancion of nuevoAlbCanc; let i = index">
-     Pista {{i+1}} {{cancion.nombre}} - {{cancion.duracion}}s. <br/>
-    </i>
+
+  <div  *ngIf="gestAlbumDel">
+
+    Album a eliminar:<br/><br/>
+    <input  type="text" [(ngModel)]="busqTitulo"><br/>
+    <button (click)="buscarAlbum(); albumEliminado = false;">Buscar</button><br/><br/>
+    <i *ngFor="let album of busqAlbum">
+      <hr style="width: 20%"/><br/>
+      <img src="{{album.caratula}}" class="img-artista-peq"/><br/><br/>
+      "{{album.titulo}}" de {{album.artista}} <br/><br/>
+      <button *ngIf="!albumEliminado" (click)="eliminarAlbum(album.id)">Eliminar</button><br/><br/>
+      <i *ngIf="albumEliminado">Album eliminado.</i>
+
+    </i><hr style="width: 20%"/>
+
   </div>
+
 
 
 </div>
 
-<div *ngIf="gestCancion">
+<div *ngIf="gestUsuario">
+  <p>Gestión de USUARIOS</p>
 </div>
 </div>

@@ -1,6 +1,6 @@
 .editar{
   background-color: #0b1d19;
-  width: 57%;
+  width: 56%;
   height: 64%;
   left: 17%;
   top: 8%;
@@ -9,6 +9,25 @@
   color: aliceblue;
   float: left;
   padding-left: 2%;
+}
+
+::-webkit-scrollbar {
+  width: 13px;
+}
+
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  background: rgba(108, 140, 128, 0.8);
+  -webkit-box-shadow: inset 0 0 6px rgba(180, 180, 180, 0.5);
 }
 
 .muestra-imagenes{

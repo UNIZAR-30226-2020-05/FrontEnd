@@ -23,7 +23,7 @@ export class ServicioComponentesService {
   objLista: ListaCancion;
   listaBorrar: ListaCancion;
 
-  // central: boolean;
+   central: boolean;
 
   /* Mensaje para pasar usuario */
   private message = new BehaviorSubject(this.nuevo);
@@ -67,11 +67,11 @@ export class ServicioComponentesService {
 
 
   /* Mensaje para pasar variable a la vista central */
-  /*private messageCentral = new BehaviorSubject(this.central);
-  sharedMessageCentral = this.messageCentral.asObservable();*/
+  private messageCentral = new BehaviorSubject(this.central);
+  sharedMessageCentral = this.messageCentral.asObservable();
 
   constructor(private http: HttpClient) {
-    this.URL_API = 'http://localhost:8080';
+    this.URL_API = 'http://3.22.247.114:8080';
     this.nuevo = new User();
     this.objLista = new ListaCancion();
 
