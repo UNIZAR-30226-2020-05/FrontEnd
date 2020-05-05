@@ -21,6 +21,7 @@ export class ServicioComponentesService {
   lista:ListaCancion;
   vistaLista:boolean;
   objLista: ListaCancion;
+  listaBorrar: ListaCancion;
 
   // central: boolean;
 
@@ -60,6 +61,10 @@ export class ServicioComponentesService {
   private messageObjetoLista = new BehaviorSubject(this.objLista);
   sharedMessageObjLista = this.messageObjetoLista.asObservable();
 
+  /*Mensaje para mandar lista que tiene que ser borrada */
+  /*private messageListaBorrar = new BehaviorSubject(this.listaBorrar);
+  sharedMessageBorrarLista = this.messageListaBorrar.asObservable();*/
+
 
   /* Mensaje para pasar variable a la vista central */
   /*private messageCentral = new BehaviorSubject(this.central);
@@ -68,6 +73,7 @@ export class ServicioComponentesService {
   constructor(private http: HttpClient) {
     this.URL_API = 'http://localhost:8080';
     this.nuevo = new User();
+    this.objLista = new ListaCancion();
 
   }
 
@@ -120,6 +126,11 @@ export class ServicioComponentesService {
   nextMessageObjLista(messageObjLista){
     this.messageObjetoLista.next(messageObjLista);
   }
+
+  /*nextMessageOrdenBorrado(messageListaBorrar){
+    this.messageListaBorrar.next(messageListaBorrar);
+  }*/
+
   /*nextMessageCentral(messageCentral) {
     this.messageCentral.next(messageCentral);
   }*/

@@ -13,21 +13,27 @@ export class PanelListasComponent implements OnInit {
 
   mostrarCrearP:boolean=false;
   mostrarCrearC:boolean=false;
-  mostrarFav:boolean=false;
+
+  mostrarFav:boolean=false; //variable de canciones
+  mostrarFavP: boolean=false; //variable de podcasts
+
   okVista:boolean=true;
+
   usuario: User;
   nombreLista: string;
   listaOk: ListaCancion;
   cancion: ListaCancion;
+  idLista: number;
 
-  public URL_API = 'http://localhost:8080';
+  listaBorrar: ListaCancion;
+
 
   constructor(private http: HttpClient,private Servicio: ServicioComponentesService) { }
 
   ngOnInit(): void {
     this.Servicio.sharedMessage.subscribe(message => this.usuario=message);
     this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.okVista=messageVistaLista);
-    /*this.Servicio.sharedMessageList.subscribe( messageList => this.usuario.lista_cancion.concat(this.usuario.lista_cancion,messageList));*/
+    this.Servicio.sharedMessageObjLista.subscribe(messageObjLista => this.listaOk = messageObjLista);
   }
   newMessage() {
     this.Servicio.nextMessage(this.usuario);
@@ -44,16 +50,18 @@ export class PanelListasComponent implements OnInit {
       nombre: this.nombreLista,
     };
 
-    this.http.post(this.URL_API + '/listaCancion/create', lista).subscribe(
-      (resp: ListaCancion) => { console.log(resp); this.listaOk=resp; this.usuario.lista_cancion.push(resp)});
+    this.http.post(this.Servicio.URL_API + '/listaCancion/create', lista).subscribe(
+      (resp: ListaCancion) => { console.log(resp); this.usuario.lista_cancion.push(resp)});
 
 
   }
 
-  listaPulsada(auxList: ListaCancion){
-    this.Servicio.nextMessageObjLista(auxList);
-  }
+  listaPulsada(id: number){
+    const param= id.toString();
+    const params= new HttpParams().set('id',param);
+    this.http.get(this.Servicio.URL_API + '/listaCancion/get', {params}).subscribe( (resp: ListaCancion) => {this.listaOk=resp; this.Servicio.nextMessageObjLista(this.listaOk);});
 
+  }
 
 }
 

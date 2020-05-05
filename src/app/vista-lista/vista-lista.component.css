@@ -1,9 +1,9 @@
 .vista-lista{
-  background-color: #0b1d19;
+  background-color:#0b1d19; /*#0b1d19*/
   width: 61%;
   height: 62%;
-  left: 13%;
-  top: 9%;
+  left: 14%;
+  top: 10.5%;
   z-index: 1; /* Mejor fuera */
   position: fixed;
   font-family: Trebuchet MS, serif;
@@ -13,16 +13,26 @@
 .img-lista{
   margin-left: 2%;
   width: 11%;
+  top: 0%;
+  position: absolute;
+}
+
+.img-papel{
+  margin-left: 95%;
+  width: 5%;
+  height: 9%;
+  cursor: pointer;
 }
 
 .nombrePlaylist{
-  top: 9%;
-  left: 22%;
+  top: 10.5%;
+  left: 24%;
   position: fixed;
   border-style: solid;
   border-color: #b4b4b4;
-  border-inline-start-width: 8px;
+  /*border-inline-start-width: 8px;*/
   width: fit-content;
+  font-size: 90%;
 
 }
 
@@ -31,7 +41,7 @@
   vertical-align: middle;
 }
 
-.lista-album{
+.lista-playlist{
 
   overflow: auto;
   width: 90%;
@@ -57,17 +67,17 @@
 
 
 .titulo-lista{
-  top: 13%;
-  left: 22%;
-  font-size: 34px;
+  top: 14%;
+  left: 24%;
+  font-size: 250%;
   display: inline-block;
   position: fixed;
 }
 
 .artista-lista{
-  top: 18%;
-  left: 22%;
-  font-size: 28px;
+  top: 20%;
+  left: 24%;
+  font-size: 100%;
   font-style: italic;
   position: fixed;
 }

@@ -1,15 +1,15 @@
 <!--/********** PANEL IZQUIERDO ************/ -->
 <div class="panel">
   <p class="titleP">PODCAST</p>
-  <p class="ListP" (click)="mostrarCrearP=true; mostrarFav=false">
+  <p class="ListP" (click)="mostrarCrearP=true; mostrarFavP=false">
     <img class="addP" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>
-  <p class="fave" (click)="mostrarFav=true">
+  <p class="fave" (click)="mostrarFavP=!mostrarFavP">
     <img class= "favP" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
   <hr>
 <p class="titleL">PLAYLISTS</p>
 <p class="CrearList" (click)="mostrarCrearC=true;mostrarFav=false">
   <img class="iconoAñadir" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>&nbsp;
-<p class="fav" (click)="mostrarFav=true">
+<p class="fav" (click)="mostrarFav=!mostrarFav">
   <img class= "iconoFav" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
 </div>
 
@@ -55,7 +55,7 @@
 
 <ul class="vertical-menu2" >
   <li  *ngFor="let playlist of usuario.lista_cancion; first as primero">
-  <a *ngIf="!primero" (click)="enviarToVistaLista();listaPulsada(playlist)"> {{playlist.nombre}}</a>
+  <a *ngIf="!primero" (click)="enviarToVistaLista();listaPulsada(playlist.id)"> {{playlist.nombre}}</a>
   </li>
 </ul>
 
@@ -109,10 +109,39 @@
       <a href="#">Link 10</a>
     </div>
     <label class="tusFavs"><b>Tus favoritos</b></label>
-    <button (click)="mostrarFav=false" class="atras">Atras</button>
+    <label class="usuario"><b>{{usuario.nick}}</b></label>
     <button class="rep">Reproducir</button>
   </div>
 </div>
 
-
+<!-- Favoritos de podcasts -->
+<div *ngIf="mostrarFavP" class= "favoritos">
+  <div class="container2">
+    <div class="misFavs"></div>
+    <div class="vertical-menu3">
+      <a href="#">Link 1</a>
+      <a href="#">Link 2</a>
+      <a href="#">Link 3</a>
+      <a href="#">Link 4</a>
+      <a href="#">Link 5</a>
+      <a href="#">Link 6</a>
+      <a href="#">Link 7</a>
+      <a href="#">Link 8</a>
+      <a href="#">Link 9</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+      <a href="#">Link 10</a>
+    </div>
+    <label class="tusFavs"><b>Tus favoritos</b></label>
+    <label class="usuario"><b>{{usuario.nick}}</b></label>
+    <button class="rep">Reproducir</button>
+  </div>
+</div>
 

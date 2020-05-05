@@ -1,13 +1,14 @@
 <div *ngIf="aparecer" class="vista-lista">
-  <div *ngIf="listaMostrar.canciones.length==0">
+  <!--<div *ngIf="listaMostrar.canciones.length==0">
     <img class="img-lista" src="../../assets/ListaDefecto.png"/><div class="nombrePlaylist">PLAYLIST</div>
-  </div>
+  </div>-->
+  <img class="img-papel" (click)="borrar()" src="../../assets/trash.png"/>
   <div class="hayCanciones">
     <!-- Se ha puesto la imagen por defecto, de momento, pero deberia ir la de la primera cancion. -->
     <img class="img-lista" src="../../assets/ListaDefecto.png"/><div class="nombrePlaylist">PLAYLIST</div>
   </div>
-  <div class="titulo-lista">{{listaMostrar.nombre}}</div>
-  <div class="artista-lista">{{usuarioLog.nombre}}</div>
+  <div class="titulo-lista">{{listaMostrar.nombre}} #{{listaMostrar.id}}</div>
+  <div class="artista-lista">{{usuarioLog.nick}}</div>
   <div class="marco-tabla">
     <table class="lista-playlist">
 
