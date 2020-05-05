@@ -38,6 +38,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.mostrar = false;
     this.aBorrar = false;
     this.passCambiada = false;
+    //this.Servicio.sharedMessageCentral.subscribe(messageCentral => this.mostrar = messageCentral);
   }
   // Para mostrar la pantalla de borrado de usuario
   borrarUsuario() {
@@ -81,6 +82,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.passCambiada = false;
     this.Servicio.sharedMessageEdit.subscribe(messageEdit => this.mostrar = messageEdit);
     this.Servicio.sharedMessage.subscribe(message => this.usuarioLog = message);
+
 
 
 

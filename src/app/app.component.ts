@@ -95,8 +95,10 @@ export class Artista {
 
 /* Clase Artista - para nuevas creaciones en backend */
 export class ArtistaRequest {
-  nombre: string;
-  imagen: string;
+  //nombre: string;
+  //imagen: string;
+  name: string;
+  image_path: string;
 }
 
 export class Amigo {
