@@ -52,7 +52,7 @@
   color: aliceblue;
   padding-left: 2%;
   width: 100%;
-
+  vertical-align: middle;
 }
 .cabecera{
   font-family: Roboto;
