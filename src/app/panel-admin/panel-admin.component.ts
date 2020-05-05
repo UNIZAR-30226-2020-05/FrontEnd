@@ -170,8 +170,8 @@ export class PanelAdminComponent implements OnInit {
     const s2: string = this.nuevoArtNom.substring(0, 1).toUpperCase();
 
     const nuevo: ArtistaRequest = {
-      nombre: s2 + s,
-      imagen: this.nuevoArtImg
+      name: s2 + s,
+      image_path: this.nuevoArtImg
     };
 
     this.http.post(this.Servicio.URL_API + '/artist/add', nuevo).subscribe(

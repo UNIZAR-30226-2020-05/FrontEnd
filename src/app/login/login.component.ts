@@ -20,8 +20,6 @@ export class LoginComponent implements OnInit {
   correctoPass: string;
 
 
-  public URL_API = 'http://localhost:8080';
-
 
   @Output() messageEvent = new EventEmitter<boolean>();
 
@@ -43,7 +41,7 @@ export class LoginComponent implements OnInit {
   usuario:User;
   comprobar(){
     const params= new HttpParams().set('nick',this.nomUsuario).set('pass',btoa(this.contrasena));
-    this.http.get(this.URL_API + '/user/logIn',{params}).subscribe(
+    this.http.get(this.Servicio.URL_API + '/user/logIn',{params}).subscribe(
       (resp:User) => { this.logeado=true;this.usuario=resp;this.correctoNick= resp.nick;console.log(resp.nick);
         //this.Servicio.establecerLogin(resp);
         this.Servicio.nextMessage(resp);

@@ -18,8 +18,6 @@ export class RegistroComponent implements OnInit {
   public imageSeleccion;
 
 
-  public URL_API = 'http://localhost:8080';
-
   // Campos registro:
   alias: string;
   nombre: string;
@@ -81,9 +79,10 @@ export class RegistroComponent implements OnInit {
       fecha_nacimiento: this.fecha_nac // String de fecha nacim.
     };
 
-    this.http.post(this.URL_API + '/user/create', nuevo).subscribe(
+    this.http.post(this.Servicio.URL_API + '/user/create', nuevo).subscribe(
      (resp: string) => {} );
 
+    this.resetCampos();
   }
 
   /* Función para comprobar si los datos del formulario son adecuados */
@@ -106,7 +105,7 @@ export class RegistroComponent implements OnInit {
     const params = new HttpParams()
       .set('nick', this.alias);
 
-    this.http.get(this.URL_API + '/user/get', {params})
+    this.http.get(this.Servicio.URL_API + '/user/get', {params})
       .subscribe(
         (resp: User) => {
           this.usuarioUnico = false;
@@ -119,5 +118,15 @@ export class RegistroComponent implements OnInit {
 
   nickCorrecto(){
     return !this.usuarioUnico && this.alias != '';
+  }
+
+  resetCampos() {
+    this.alias = '';
+    this.nombre = '';
+    this.apellidos = '';
+    this.fecha_nac = '';
+    this.pass = '';
+    this.pass2 = '';
+    this.aceptadoT = false;
   }
 }

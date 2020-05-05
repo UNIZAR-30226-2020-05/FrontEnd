@@ -26,7 +26,7 @@ export class BusquedaComponent implements OnInit {
   noEncuentraArtista: boolean;
   artistaEncontrado: Array<Artista>;
   numArtista: number;
-  public URL_API = 'http://localhost:8080';
+
   buscado: string;
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) { }
 
@@ -49,7 +49,7 @@ export class BusquedaComponent implements OnInit {
     this.mostrarBusqueda = true;
     let params = new HttpParams().set('titulo', this.buscado);
 
-    this.http.get(this.URL_API + '/album/getByTitulo', {params})
+    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
       .subscribe(
         (resp: Array<Album>) => {
           this.busquedaIniciadaAlb = true;
@@ -67,7 +67,7 @@ export class BusquedaComponent implements OnInit {
     params = new HttpParams().set('name', this.buscado);
 
 
-    this.http.get(this.URL_API + '/song/getByName', {params})
+    this.http.get(this.Servicio.URL_API + '/song/getByName', {params})
       .subscribe(
         (resp: Array<Cancion>) => {
           this.busquedaIniciadaCanc = true;
@@ -82,7 +82,7 @@ export class BusquedaComponent implements OnInit {
         }
       );
 
-    this.http.get(this.URL_API + '/artist/getByName', {params})
+    this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
       .subscribe(
         (resp: Array<Artista>) => {
           this.busquedaIniciadaArt = true;

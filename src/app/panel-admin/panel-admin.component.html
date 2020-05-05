@@ -32,7 +32,7 @@
     </div>
 
     <button *ngIf="gestAlbum" (click)="gestAlbumDel=false">AGREGAR</button><br/><br/>
-    <button *ngIf="gestAlbum" (click)="gestAlbumDel=true" >ELIMINAR</button>
+    <button *ngIf="gestAlbum" (click)="gestAlbumDel=true; albumEliminado=false;busqTitulo=''" >ELIMINAR</button>
   </div>
 
 <div *ngIf="!gestArtista && !gestAlbum &&!gestUsuario"><br/><br/>Este panel permite añadir y eliminar artistas de la plataforma.<br/>
