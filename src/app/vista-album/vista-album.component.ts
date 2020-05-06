@@ -1,6 +1,7 @@
 import {Component, OnInit,Input, Output} from '@angular/core';
 import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
-import {Album} from '../app.component';
+import {Album, User} from '../app.component';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Component({
   selector: 'app-vista-album',
@@ -15,7 +16,7 @@ export class VistaAlbumComponent implements OnInit {
   //
   albActivo: Album;
   artistaAlbum: string = 'Sabaton'
-  constructor(private Servicio: ServicioComponentesService) { }
+  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) { }
 
   show:boolean;
   ngOnInit(): void {
@@ -37,4 +38,14 @@ export class VistaAlbumComponent implements OnInit {
     s += auxSeg.toString();
     return s;
   }
+
+  anyadirAlista( id_lista:number, id_c: number) {
+    let usuarioLogeado: User;
+    this.Servicio.sharedMessage.subscribe(userRecibido => usuarioLogeado = userRecibido);
+    const params = new HttpParams()
+      .set('id_song', id_c.toString());
+    this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + usuarioLogeado.lista_cancion[1].id, {params}).subscribe(
+      (resp: string) => { console.log(resp); } );
+  }
+
 }

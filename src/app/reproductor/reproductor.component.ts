@@ -38,11 +38,11 @@ export class ReproductorComponent implements OnInit {
   avanzarLista(){
     if (this.temaEnCola == 'Test'){
       this.cancion.src = this.Servicio.URL_API + '/song/play/testLong';
-      this.temaEnCola = "TestLong"; //Siguiente a cargar
+      this.temaEnCola = 'TestRemoto'; //Siguiente a cargar
       this.activo = true;
     }
     if (this.temaEnCola == 'TestRemoto'){
-      this.cancion.src = 'https://ro01-sycdn.kuwo.cn/resource/n3/83/80/1909245563.mp3';
+      this.cancion.src = '/song/play/tulpa';
       this.temaEnCola = 'Test';
       this.activo = true;
     }

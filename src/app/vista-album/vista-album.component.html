@@ -12,7 +12,7 @@
       <td  class="elemento-album"><img title="Reproducir" class="img-play-album" src="../../assets/play-vector.svg"/></td>
       <td  class="titulos-album">{{ cancion.name }}</td><td>{{albActivo.artista}}</td>
       <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
-      <td><img class="img-play-album" title="Añadir a lista..." src="../../assets/addToList.png" ></td>
+      <td><img class="img-play-album" (click)="anyadirAlista(0,cancion.id)" title="Añadir a lista..." src="../../assets/addToList.png" ></td>
     </tr>
   </table>
 </div>
