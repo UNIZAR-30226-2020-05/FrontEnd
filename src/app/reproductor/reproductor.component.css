@@ -70,8 +70,8 @@ table{
 }
 
 .slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
+  -webkit-appearance: button;
+  appearance: auto;
   border-radius: 20%;
   width: 15px;
   height: 25px;
@@ -80,14 +80,14 @@ table{
 
 }
 
-.slider::-moz-range-thumb {
+/*.slider::-moz-range-thumb {
   width: 25px;
   height: 10px;
   background: transparent;
   cursor: pointer;
   border: #b4b4b4;
   border-radius: 10%;
-}
+}*/
 
 .slider2 {
   -webkit-appearance: none;
@@ -105,8 +105,8 @@ table{
 }
 
 .slider2::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
+  -webkit-appearance: button;
+  appearance: auto;
   border-radius: 60%;
   width: 20px;
   height: 20px;
@@ -114,7 +114,7 @@ table{
   border: #1d051c;
 
 }
-
+/*
 .slider2::-moz-range-thumb {
   width: 25px;
   height: 10px;
@@ -122,4 +122,4 @@ table{
   cursor: pointer;
   border: #b4b4b4;
   border-radius: 10%;
-}
+}*/

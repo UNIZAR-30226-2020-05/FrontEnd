@@ -12,7 +12,6 @@ import {ServicioComponentesService} from '../servicios/servicio-componentes.serv
 
 export class PanelSocialComponent implements OnInit {
 
-  public URL_API = 'http://localhost:8080';
 
 
   editarUsuario = true;
@@ -67,7 +66,7 @@ export class PanelSocialComponent implements OnInit {
     const params = new HttpParams()
       .set('nick', this.nickBusca);
 
-    this.http.get(this.URL_API + '/user/get', {params})
+    this.http.get(this.Servicio.URL_API + '/user/get', {params})
       .subscribe(
         (resp: User) => {
           this.busqIniciada = true;
@@ -89,7 +88,7 @@ export class PanelSocialComponent implements OnInit {
     const params = new HttpParams()
       .set('nick', alias);
 
-    this.http.get(this.URL_API + '/user/get', {params})
+    this.http.get(this.Servicio.URL_API + '/user/get', {params})
       .subscribe(
         (resp: User) => {
           this.usuarioLogeado = resp;
@@ -102,7 +101,7 @@ export class PanelSocialComponent implements OnInit {
 
   /* Utiliza el objeto usuario, que contiene el usuario objetivo a ser agregado */
   agregarAmigo() {
-    this.http.patch(this.URL_API + '/user/addAmigo/' + this.usuarioLogeado.id, this.usuarioBuscado.id)
+    this.http.patch(this.Servicio.URL_API + '/user/addAmigo/' + this.usuarioLogeado.id, this.usuarioBuscado.id)
       .subscribe((resp: User) => {
         //Actualiza el usuario logeado con el nuevo estado.
         this.Servicio.nextMessage(resp);
@@ -110,7 +109,7 @@ export class PanelSocialComponent implements OnInit {
   }
 
   quitarAmigo(id: number) {
-    this.http.patch(this.URL_API + '/user/deleteAmigo/' + this.usuarioLogeado.id, id)
+    this.http.patch(this.Servicio.URL_API + '/user/deleteAmigo/' + this.usuarioLogeado.id, id)
       .subscribe((resp: User) => {
         //Actualiza el usuario logeado con el nuevo estado.
         this.Servicio.nextMessage(resp);

@@ -31,6 +31,7 @@ export class ReproductorComponent implements OnInit {
 
   gestionSonido(){
     this.cancion.src = this.Servicio.URL_API + '/song/play/test';
+    this.cancion.currentTime = 62;
     this.temaEnCola = 'TestLong';
     this.cancion.load();
   }

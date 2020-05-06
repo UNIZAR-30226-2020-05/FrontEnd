@@ -26,6 +26,11 @@
 
 }
 
+.enlace:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 .zona-img-play{
   alignment: right;
 }

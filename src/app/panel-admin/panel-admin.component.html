@@ -24,9 +24,9 @@
 
 
     <div *ngIf="gestUsuario">
-      <button  (click)="vistaUsuario();" >
+      <button  (click)="vistaUsuario(); gestUserPromo=true;" >
         PROMOCIONAR</button><br/><br/>
-      <button (click)="gestArtistaDel = true; gestArtistaAdd = false; artistaEliminado= false;
+      <button (click)="gestArtistaDel = true; gestArtistaAdd = false; artistaEliminado= false; gestUserPromo=true;
      existeArtista();" >
         ELIMINAR</button>
     </div>
@@ -142,5 +142,20 @@
 
 <div *ngIf="gestUsuario">
   <p>Gestión de USUARIOS</p>
+
+  <div  *ngIf="gestUserPromo">
+
+        <button (click)="cargarTodosUsuarios(); albumEliminado = false;">Cargar Usuarios</button><br/><br/>
+    <i *ngFor="let usuario of usuarioListaTodos">
+      <hr style="width: 20%"/>
+
+      {{usuario.nick}} - {{usuario.nombre}} {{usuario.apellidos}} [{{usuario.id}}]<br/><br/>
+      <button (click)="eliminarUsuario(usuario.id)">Eliminar</button><br/><br/>
+      <i *ngIf="usuarioEliminado==usuario.id">Usuario eliminado.</i>
+
+    </i><hr style="width: 20%"/>
+
+  </div>
+
 </div>
 </div>

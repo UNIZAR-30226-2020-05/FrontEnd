@@ -53,6 +53,10 @@ export class PanelAdminComponent implements OnInit {
   cancionDuracion: string; // Se convierte en segundos.
   cancionFecha: Date;
 
+  gestUserPromo: boolean;
+  usuarioListaTodos: Array<User>;
+  usuarioEliminado: number;
+
   constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
     this.nuevoAlbCanc = new Array<CancionRequest>();
     this.usuarioLogeadoAd = new User();
@@ -236,5 +240,15 @@ export class PanelAdminComponent implements OnInit {
   eliminarAlbum(id: number) {
     this.http.delete(this.Servicio.URL_API + '/album/delete/' + id).subscribe(
       (resp: string) => { this.albumEliminado = true; } );
+  }
+
+  cargarTodosUsuarios() {
+    this.http.get(this.Servicio.URL_API + '/user/findAll').subscribe(
+      (resp: Array<User>) => { this.usuarioListaTodos = resp; } );
+  }
+
+  eliminarUsuario(id: number) {
+    this.http.delete(this.Servicio.URL_API + '/user/delete/' + id).subscribe(
+      (resp: string) => { this.usuarioEliminado = id; } );
   }
 }
