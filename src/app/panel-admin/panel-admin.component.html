@@ -8,8 +8,8 @@
 
     <button  (click)="vistaArtista(); gestArtistaAdd = true; gestArtistaDel = false;">
       ARTISTAS</button> <br/><br/>
-    <button (click)="vistaAlbum(); nuevoAlbumAgregado= false; albumEliminado = false;">ÁLBUMES</button> <br/><br/>
-    <button (click)="vistaUsuario(); ">USUARIOS</button>
+    <button (click)="vistaAlbum(); resetListaNuevoAlb(); nuevoAlbumAgregado= false; albumEliminado = false;">ÁLBUMES</button> <br/><br/>
+    <button (click)="vistaUsuario(); cargarTodosUsuarios(); gestUserPromo=false; ">USUARIOS</button>
     <hr/><br/>
     <i *ngIf="gestArtista || gestAlbum || gestUsuario">    Opciones disponibles:
     </i><br/><br/>
@@ -24,10 +24,11 @@
 
 
     <div *ngIf="gestUsuario">
-      <button  (click)="vistaUsuario(); gestUserPromo=true;" >
-        PROMOCIONAR</button><br/><br/>
-      <button (click)="gestArtistaDel = true; gestArtistaAdd = false; artistaEliminado= false; gestUserPromo=true;
-     existeArtista();" >
+      <!-- <button  (click)="vistaUsuario(); gestUserPromo=true; cargarTodosUsuarios();" >
+        PROMOCIONAR</button><br/><br/> -->
+
+      <button (click)="gestUserPromo = false; gestArtistaAdd = false; artistaEliminado= false;
+     cargarTodosUsuarios();" >
         ELIMINAR</button>
     </div>
 
@@ -142,18 +143,31 @@
 
 <div *ngIf="gestUsuario">
   <p>Gestión de USUARIOS</p>
-
+  <!---
   <div  *ngIf="gestUserPromo">
+    Los usarios seleccionados se convertirán en administradores.<br/><br/>
+    <i style="vertical-align: middle" *ngFor="let usuario of usuarioListaTodos">
+      <hr style="width: 50%"/><br/>
+      - {{usuario.nick}} - {{usuario.nombre}} {{usuario.apellidos}} [ID {{usuario.id}}]
+      &nbsp; &nbsp; &nbsp;
+      <button (click)="hacerAdmin(usuario.id)">Hacer admin</button><br/><br/>
+      <i *ngIf="usuarioEliminado==usuario.id">Usuario eliminado.</i>
 
-        <button (click)="cargarTodosUsuarios(); albumEliminado = false;">Cargar Usuarios</button><br/><br/>
-    <i *ngFor="let usuario of usuarioListaTodos">
-      <hr style="width: 20%"/>
+    </i><hr style="width: 50%"/>
 
-      {{usuario.nick}} - {{usuario.nombre}} {{usuario.apellidos}} [{{usuario.id}}]<br/><br/>
+  </div>
+  --->
+
+  <div  *ngIf="!gestUserPromo">
+    Los usarios seleccionados se eliminarán de la plataforma.<br>
+    <i style="vertical-align: middle" *ngFor="let usuario of usuarioListaTodos">
+      <hr style="width: 50%"/><br/>
+      - {{usuario.nick}} - {{usuario.nombre}} {{usuario.apellidos}} [ID {{usuario.id}}]
+      &nbsp; &nbsp; &nbsp;
       <button (click)="eliminarUsuario(usuario.id)">Eliminar</button><br/><br/>
       <i *ngIf="usuarioEliminado==usuario.id">Usuario eliminado.</i>
 
-    </i><hr style="width: 20%"/>
+    </i><hr style="width: 50%"/>
 
   </div>
 

@@ -15,8 +15,15 @@ export class VistaAlbumComponent implements OnInit {
 
   //
   albActivo: Album;
-  artistaAlbum: string = 'Sabaton'
-  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) { }
+  userActivo: User;
+
+  vistaSelCan: boolean;
+  cancionObjetivo: number;
+  vistaSelAlb: boolean;
+  constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
+    this.vistaSelCan = false;
+    this.vistaSelAlb = false;
+  }
 
   show:boolean;
   ngOnInit(): void {
@@ -25,6 +32,9 @@ export class VistaAlbumComponent implements OnInit {
 
     //Recibe el objeto album, y actualiza cuando se cambia.
     this.Servicio.albumActivo.subscribe(albumObj => this.albActivo = albumObj);
+
+    //Recbe el usuario logeado (para listas)
+    this.Servicio.sharedMessage.subscribe(userRecibido => this.userActivo = userRecibido);
   }
 
   sacarTiempo(n: number){
@@ -39,13 +49,15 @@ export class VistaAlbumComponent implements OnInit {
     return s;
   }
 
-  anyadirAlista( id_lista:number, id_c: number) {
-    let usuarioLogeado: User;
-    this.Servicio.sharedMessage.subscribe(userRecibido => usuarioLogeado = userRecibido);
-    const params = new HttpParams()
-      .set('id_song', id_c.toString());
-    this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + usuarioLogeado.lista_cancion[1].id, {params}).subscribe(
+  anyadirAlista( id_lista: number, id_c: number) {
+
+    this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + id_lista, id_c).subscribe(
       (resp: string) => { console.log(resp); } );
   }
 
+  anyadirAlbumAlista(id_lista: number){
+    this.http.patch(this.Servicio.URL_API + '/listaCancion/addByAlbum/' + this.userActivo.lista_cancion[1].id,
+      this.albActivo.id).subscribe(
+      (resp: string) => {   this.vistaSelAlb = false; } );
+  }
 }

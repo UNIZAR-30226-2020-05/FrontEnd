@@ -1,10 +1,42 @@
 <!-- <button style="bottom: 12%; right: 20%; position: fixed" (click)="show=!show;" >Vista ALBUM</button> -->
 <div *ngIf="show" class="vista-album">
 
+
+  <div *ngIf="vistaSelCan" class= "encima">
+    <div class="encuadre">
+      <label class="titulo-eleccion"><b>Añadir canción a... </b></label>
+      <i *ngFor="let lista of userActivo.lista_cancion; let i = index">
+        <hr style="width: 50%"><br/>
+        <i class="enlace" (click)="anyadirAlista(lista.id, cancionObjetivo); vistaSelCan = false;">
+          {{lista.nombre}}</i>
+      </i>
+      <hr style="width: 50%"><br/><br/>
+      <button (click)="vistaSelCan = false">Cancelar</button>
+    </div>
+
+  </div>
+
+
+  <div *ngIf="vistaSelAlb" class= "encima">
+    <div class="encuadre">
+      <label class="titulo-eleccion"><b>Añadir álbum ({{albActivo.canciones.length}} canciones) a... </b></label>
+      <i *ngFor="let lista of userActivo.lista_cancion; let i = index">
+        <hr style="width: 50%"><br/>
+        <i class="enlace" (click)="anyadirAlbumAlista(lista.id);">
+          {{lista.nombre}}</i>
+      </i>
+      <hr style="width: 50%"><br/><br/>
+      <button (click)="vistaSelAlb = false">Cancelar</button>
+    </div>
+
+  </div>
+
   <img class="img-album" src="{{albActivo.caratula}}"/><div class="etiqueta-album">ÁLBUM</div>
 
+  <!-- Contenido del album -->
  <div class="titulo-album">{{albActivo.titulo}}</div>
   <div class="artista-album"><span class="enlace">{{albActivo.artista}}</span></div>
+  <img title="Añadir album a lista..." (click)="vistaSelAlb=true;" class="img-add-album" src="../../assets/addAlbumToList.png">
 <div class="marco-tabla">
   <table class="lista-album">
 
@@ -12,7 +44,7 @@
       <td  class="elemento-album"><img title="Reproducir" class="img-play-album" src="../../assets/play-vector.svg"/></td>
       <td  class="titulos-album">{{ cancion.name }}</td><td>{{albActivo.artista}}</td>
       <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
-      <td><img class="img-play-album" (click)="anyadirAlista(0,cancion.id)" title="Añadir a lista..." src="../../assets/addToList.png" ></td>
+      <td><img class="img-play-album" (click)="vistaSelCan = true; cancionObjetivo = cancion.id;" title="Añadir a lista..." src="../../assets/addToList.png" ></td>
     </tr>
   </table>
 </div>

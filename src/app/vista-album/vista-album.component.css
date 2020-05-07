@@ -26,6 +26,37 @@
 
 }
 
+.titulo-eleccion {
+  font-size: 50px;
+}
+
+.encima{
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color:rgba(11,29,25,0.95);
+  font-family: Roboto, serif;
+}
+
+.encuadre {
+  padding: 10%;
+  color:aliceblue;
+  alignment: center;
+  text-align: center
+}
+
+
+.img-add-album {
+  width: 4%;
+  position: absolute;
+  right: 15%;
+  top: 3%;
+  cursor: pointer;
+}
+
 .enlace:hover {
   text-decoration: underline;
   cursor: pointer;

@@ -170,12 +170,12 @@ export class PanelAdminComponent implements OnInit {
   }
 
   agregarArtista() {
-    const s: string = this.nuevoArtNom.substring(1, 50).toLowerCase();
-    const s2: string = this.nuevoArtNom.substring(0, 1).toUpperCase();
+   /* const s: string = this.nuevoArtNom.substring(1, 50).toLowerCase();
+    const s2: string = this.nuevoArtNom.substring(0, 1).toUpperCase();*/
 
     const nuevo: ArtistaRequest = {
-      name: s2 + s,
-      image_path: this.nuevoArtImg
+      nombre: this.nuevoArtNom,
+      imagen: this.nuevoArtImg
     };
 
     this.http.post(this.Servicio.URL_API + '/artist/add', nuevo).subscribe(
@@ -197,6 +197,10 @@ export class PanelAdminComponent implements OnInit {
     //Limpiar param de cancion i.
     this.cancionTitulo = '';
     this.cancionDuracion = '';
+  }
+
+  resetListaNuevoAlb() {
+    this.nuevoAlbCanc.length = 0;
   }
 
   agregarAlbum() {
@@ -249,6 +253,9 @@ export class PanelAdminComponent implements OnInit {
 
   eliminarUsuario(id: number) {
     this.http.delete(this.Servicio.URL_API + '/user/delete/' + id).subscribe(
-      (resp: string) => { this.usuarioEliminado = id; } );
+      (resp: string) => { this.cargarTodosUsuarios(); } );
   }
+
+  /*hacerAdmin(id: number) {
+  }*/
 }
