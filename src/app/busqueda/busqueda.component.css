@@ -38,7 +38,7 @@
   color: aliceblue;
   float: left;
   padding-left: 2%;
-  overflow: scroll;
+  overflow: auto;
 }
 
 .foto-busqueda{

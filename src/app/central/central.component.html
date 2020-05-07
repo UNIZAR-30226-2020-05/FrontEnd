@@ -1,20 +1,68 @@
 <p class="recomendaciones">Te recomendamos</p>
-<div class="menuRecom">
+<!--<div *ngIf="numPlaylist == 0" class="menuRecom2">
+  <tr class="spaceUnder" *ngFor="let album of recomendaciones; let i = index">
+    <td rowspan="3"><img class="imagenAlbum" src="{{album.caratula}}"></td>
+    <td class="nombreAlbum" style="margin-top: 10px">{{album.titulo}}</td>
+    <td class="autorAlbum" style="margin-top: 35px">{{album.artista}}</td>
+  </tr>
+</div>-->
+<div class="menuRecom2" *ngIf="numPlaylist == 0" class="menuRecom2">
+  <table>
+  <tr>
+    <td ><img class="imagenAlbum" src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>
+    <td class="nombreAlbum" style="margin-top: 10px">Led Zeppelin IV</td>
+    <td class="autorAlbum" style="margin-top: 35px">Led Zeppelin</td>
+  </tr>
+  <tr class="spaceUnder">
+    <td ><img class="imagenAlbum" src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>
+    <td class="nombreAlbum" style="margin-top: 10px">Led Zeppelin IV</td>
+    <td class="autorAlbum" style="margin-top: 35px">Led Zeppelin</td>
+  </tr>
+  <tr class="spaceUnder">
+    <td ><img class="imagenAlbum" src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>
+    <td class="nombreAlbum" style="margin-top: 10px">Led Zeppelin IV</td>
+    <td class="autorAlbum" style="margin-top: 35px">Led Zeppelin</td>
+  </tr>
+  <tr class="spaceUnder">
+    <td ><img class="imagenAlbum" src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>
+    <td class="nombreAlbum" style="margin-top: 10px">Led Zeppelin IV</td>
+    <td class="autorAlbum" style="margin-top: 35px">Led Zeppelin</td>
+  </tr>
+  <tr class="spaceUnder">
+    <td ><img class="imagenAlbum" src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>
+    <td class="nombreAlbum" style="margin-top: 10px">Led Zeppelin IV</td>
+    <td class="autorAlbum" style="margin-top: 35px">Led Zeppelin</td>
+  </tr>
+  <tr class="spaceUnder">
+    <td ><img class="imagenAlbum" src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>
+    <td class="nombreAlbum" style="margin-top: 10px">Led Zeppelin IV</td>
+    <td class="autorAlbum" style="margin-top: 35px">Led Zeppelin</td>
+  </tr>
+  <tr class="spaceUnder">
+    <td ><img class="imagenAlbum" src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>
+    <td class="nombreAlbum" style="margin-top: 10px">Led Zeppelin IV</td>
+    <td class="autorAlbum" style="margin-top: 35px">Led Zeppelin</td>
+  </tr>
+  <tr class="spaceUnder">
+    <td ><img class="imagenAlbum" src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>
+    <td class="nombreAlbum" style="margin-top: 10px">Led Zeppelin IV</td>
+    <td class="autorAlbum" style="margin-top: 35px">Led Zeppelin</td>
+  </tr>
+  <tr class="spaceUnder">
+    <td ><img class="imagenAlbum" src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>
+    <td class="nombreAlbum" style="margin-top: 10px">Led Zeppelin IV</td>
+    <td class="autorAlbum" style="margin-top: 35px">Led Zeppelin</td>
+  </tr>
+  </table>
+</div>
+<div *ngIf="numPlaylist > 0" class="menuRecom">
     <tr class="espacioLat">
-      <td><img class="imagenRecomendacion" src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>
-      <td><img class="imagenRecomendacion" src="./../assets/album/81IoZlwP9AL._SL1500_.jpg"></td>
-      <td><img class="imagenRecomendacion" src="./../assets/album/81IoZlwP9AL._SL1500_.jpg"></td>
-      <td><img class="imagenRecomendacion" src="./../assets/album/81IoZlwP9AL._SL1500_.jpg"></td>
-      <td><img class="imagenRecomendacion" src="./../assets/album/81IoZlwP9AL._SL1500_.jpg"></td>
-      <td><img class="imagenRecomendacion" src="./../assets/album/81IoZlwP9AL._SL1500_.jpg"></td>
-      <td><img class="imagenRecomendacion" src="./../assets/album/81IoZlwP9AL._SL1500_.jpg"></td>
-      <td><img class="imagenRecomendacion" src="./../assets/album/81IoZlwP9AL._SL1500_.jpg"></td>
-      <td><img class="imagenRecomendacion" src="./../assets/album/81IoZlwP9AL._SL1500_.jpg"></td>
+      <td *ngFor="let album of recomendaciones; let i = index"><img class="imagenRecomendacion" src="{{album.caratula}}"></td>
     </tr>
 </div>
-<p class="cabezaCanciones">Tu música</p>
-<p class="cabezaPodcast">Tus podcast</p>
-<div class="menuMusica">
+<p *ngIf="numPlaylist > 0" class="cabezaCanciones">Tu música</p>
+<!--<p class="cabezaPodcast">Tus podcast</p>-->
+<div *ngIf="numPlaylist > 0" class="menuMusica">
   <table>
     <tbody>
     <tr class="spaceUnder">
@@ -50,6 +98,7 @@
     </tbody>
   </table>
 </div>
+
 <div class="menuPodcast">
   <table>
     <tr class="spaceUnder">

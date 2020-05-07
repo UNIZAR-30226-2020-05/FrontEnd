@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
-import {User} from "../app.component";
+import {User} from '../app.component';
 
 @Component({
   selector: 'app-editar-usuario',

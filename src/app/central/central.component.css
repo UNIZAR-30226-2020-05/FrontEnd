@@ -101,7 +101,7 @@
 .nombrePodcast{
   font-family: Roboto;
   color: aliceblue;
-  margin-left: 74px;
+  margin-left: 45%;
   font-size: 20px;
   position: absolute;
   float: right;
@@ -137,4 +137,14 @@ tr.espacioLat>td{
   width: 90px;
   position: absolute;
   float: left;
+}
+
+.menuRecom2{
+  margin-left: 17%;
+  overflow: auto;
+  width: 56%;
+  height: 60%;
+  margin-top: 5px;
+  white-space: nowrap;
+  position: absolute;
 }
