@@ -12,7 +12,7 @@ import {ServicioComponentesService} from '../servicios/servicio-componentes.serv
 export class PanelAdminComponent implements OnInit {
 
 
-  usuarioLogeadoAd: User;
+  usuarioLogeadoAd: User = new User();
 
   /* Controles interfaz */
 
@@ -23,6 +23,7 @@ export class PanelAdminComponent implements OnInit {
   gestAlbum: boolean;
   gestAlbumDel: boolean;
   gestUsuario: boolean;
+  gestCanciones: boolean;
 
   AgregadoNuevoAlbum: boolean;
 
@@ -53,6 +54,9 @@ export class PanelAdminComponent implements OnInit {
   cancionDuracion: string; // Se convierte en segundos.
   cancionFecha: Date;
 
+  fileCancionNom: string;
+  files: FileList;
+
   gestUserPromo: boolean;
   usuarioListaTodos: Array<User>;
   usuarioEliminado: number;
@@ -62,6 +66,7 @@ export class PanelAdminComponent implements OnInit {
     this.usuarioLogeadoAd = new User();
     this.cancionFecha = new Date();
     this.artistaUnico = true;
+    this.gestCanciones = false;
   }
 
   ngOnInit(): void {
@@ -77,9 +82,17 @@ export class PanelAdminComponent implements OnInit {
     this.gestUsuario = false;
     this.gestAlbum = false;
     this.gestArtista = true;
+    this.gestCanciones = false;
     this.nuevoArtNom = '';
     this.nuevoArtImg = '';
     this.nuevoAgregado = false;
+  }
+
+  vistaCanciones() {
+    this.gestUsuario = false;
+    this.gestAlbum = false;
+    this.gestArtista = false;
+    this.gestCanciones = true;
   }
 
   vistaAlbum() {
@@ -256,6 +269,23 @@ export class PanelAdminComponent implements OnInit {
       (resp: string) => { this.cargarTodosUsuarios(); } );
   }
 
-  /*hacerAdmin(id: number) {
-  }*/
+  subirCancion(nom: string) {
+    this.uploadAapi(this.files.item(0), nom);
+    console.log(this.files.item(0));
+  }
+
+  uploadAapi(file: File, nombre: string) {
+    const data: FormData = new FormData();
+    data.append('file', file);
+    data.append('nombre', nombre);
+    this.http.post(this.Servicio.URL_API + '/song/upload', data).subscribe(
+      (resp: string) => { console.log(resp)} );
+  }
+
+  onFileChange(event) {
+    this.files = event.target.files;
+    console.log(event);
+  }
+
+
 }

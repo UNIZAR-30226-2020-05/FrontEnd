@@ -9,6 +9,8 @@
     <button  (click)="vistaArtista(); gestArtistaAdd = true; gestArtistaDel = false;">
       ARTISTAS</button> <br/><br/>
     <button (click)="vistaAlbum(); resetListaNuevoAlb(); nuevoAlbumAgregado= false; albumEliminado = false;">ÁLBUMES</button> <br/><br/>
+    <button  (click)="vistaCanciones(); ">
+      CANCIONES</button> <br/><br/>
     <button (click)="vistaUsuario(); cargarTodosUsuarios(); gestUserPromo=false; ">USUARIOS</button>
     <hr/><br/>
     <i *ngIf="gestArtista || gestAlbum || gestUsuario">    Opciones disponibles:
@@ -36,7 +38,7 @@
     <button *ngIf="gestAlbum" (click)="gestAlbumDel=true; albumEliminado=false;busqTitulo=''" >ELIMINAR</button>
   </div>
 
-<div *ngIf="!gestArtista && !gestAlbum &&!gestUsuario"><br/><br/>Este panel permite añadir y eliminar artistas de la plataforma.<br/>
+<div *ngIf="!gestCanciones && !gestArtista && !gestAlbum &&!gestUsuario"><br/><br/>Este panel permite añadir y eliminar artistas de la plataforma.<br/>
   Crear álbumes de un artista (que debe estar registrado ya en la plataforma), eliminar álbumes.<br/>
   Eliminar usuarios de la plataforma, y establecer usuarios como administradores.<br/>
 </div>
@@ -171,5 +173,15 @@
 
   </div>
 
-</div>
+  </div>
+
+  <div *ngIf="gestCanciones">
+      <i> Subir archivo asociado a canción</i>
+    <input  type="text" [(ngModel)]="fileCancionNom"><br/>
+    <input type="file" (change)="onFileChange($event)"  >
+    <br/>
+    <button (click)="subirCancion(fileCancionNom)">Subir</button>
+  </div>
+
+
 </div>

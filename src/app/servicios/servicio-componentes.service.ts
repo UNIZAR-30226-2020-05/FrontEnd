@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Album, ListaCancion, User, UserRequest} from '../app.component';
+import {Album, Cancion, ListaCancion, User, UserRequest} from '../app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
@@ -10,7 +10,7 @@ export class ServicioComponentesService {
 
   URL_API: string;
 
-  nuevo: User;
+  nuevo: User = new User();
   login = false;
 
   vistaAlbum: boolean;
@@ -23,8 +23,16 @@ export class ServicioComponentesService {
   objLista: ListaCancion;
   listaBorrar: ListaCancion;
 
-   central: boolean;
+  central: boolean;
 
+
+   /* --- Servicio reproducción de canciones ---- */
+
+  listaReprActiva: Array<Cancion>;
+  cancionActiv: Cancion = new Cancion();
+
+
+  /* --------------------------------------------- */
   /* Mensaje para pasar usuario */
   private message = new BehaviorSubject(this.nuevo);
   sharedMessage = this.message.asObservable();
@@ -44,6 +52,11 @@ export class ServicioComponentesService {
   albumActivo = this.albumObj.asObservable();
 
   /* ----------------------------------------------*/
+  /* Mensaje para la cancion actual */
+  private cancionObj = new BehaviorSubject(this.cancionActiv);
+  cancionActiva = this.cancionObj.asObservable();
+
+
 
   /* Mensaje para pasar variable a editar usuario */
   private messageEdit = new BehaviorSubject(this.editUser);
@@ -103,6 +116,10 @@ export class ServicioComponentesService {
       );
   }
 
+  reproducirAudio(cancionObj: Cancion) {
+    this.cancionObj.next(cancionObj);
+  }
+
   nextMessageEdit(messageEdit) {
     this.messageEdit.next(messageEdit);
   }
@@ -134,5 +151,21 @@ export class ServicioComponentesService {
   /*nextMessageCentral(messageCentral) {
     this.messageCentral.next(messageCentral);
   }*/
+
+
+
+  actualizarUltimaEscucha(can: Cancion) {
+    const params = new HttpParams()
+      .set('id_play', can.id.toString())
+      .set('minuto_play', String(0))
+      .set('tipo_play', String(0));
+    let usu: User;
+    this.sharedMessage.subscribe(userRecibido => usu = userRecibido);
+    console.log(usu);
+    this.http.patch(this.URL_API + '/user/modifyLastPlay/' + usu.id, {id_play: can.id, minuto_play: 0, tipo_play: 0}).subscribe(
+      (resp: string) => { console.log(this.nuevo); } );
+
+
+  }
 
 }

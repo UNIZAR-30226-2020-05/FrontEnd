@@ -5,8 +5,8 @@
          <td>{{sacarTiempo(cancion.currentTime)}}</td>
          <!--{{(cancion.currentTime/60).toString().charAt(0)}}:{{(cancion.currentTime%60).toFixed()}} --->
     <td style="width: 30vw"><input class="slider2" type="range" min="0" [(ngModel)]="cancion.currentTime"
-                 max="{{cancion.duration}}"></td>
-         <td>&nbsp;{{sacarTiempo(cancion.duration)}}</td>
+                 max="{{cancionActual.duracion}}"></td>
+         <td>&nbsp;{{sacarTiempo(cancionActual.duracion)}}</td>
        </tr>
      </table>
    </div>

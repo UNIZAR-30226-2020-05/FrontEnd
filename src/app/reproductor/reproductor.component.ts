@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
+import {Cancion} from '../app.component';
 
 
 @Component({
@@ -16,11 +17,15 @@ export class ReproductorComponent implements OnInit {
   posActual;
   duracionActual;
   logeado;
-  posicionActual;
+
+  cancionActual: Cancion;
+  srcActual;
 
   a = false;
   constructor(private Servicio: ServicioComponentesService) {
-    this.logeado=false;
+    this.logeado = false;
+    this.cancionActual = new Cancion();
+
     /* Se establecen variables que deben actualizar por sí solas */
     setInterval(() => {
       this.posActual = this.cancion.currentTime;
@@ -29,11 +34,13 @@ export class ReproductorComponent implements OnInit {
   }
 
 
-  gestionSonido(){
-    this.cancion.src = this.Servicio.URL_API + '/song/play/test';
-    this.cancion.currentTime = 62;
+  cargarAudio(orig: Cancion) {
+    this.cancionActual = orig;
+    this.cancion.src = this.Servicio.URL_API + '/song/play/' + orig.name;
+    this.cancion.currentTime = 0;
     this.temaEnCola = 'TestLong';
     this.cancion.load();
+    this.cancion.play();
   }
 
   avanzarLista(){
@@ -59,7 +66,9 @@ export class ReproductorComponent implements OnInit {
 
   ngOnInit(): void {
     this.activo = false;
-    this.gestionSonido();
+    this.Servicio.cancionActiva.subscribe((cancionObj ) =>
+      (this.cargarAudio(cancionObj))
+    ); /*this.cancionActual = cancionObj */
   }
 
   playPause() {

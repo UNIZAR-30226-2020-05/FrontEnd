@@ -88,7 +88,7 @@ export class RegistroComponent implements OnInit {
   /* Función para comprobar si los datos del formulario son adecuados */
    datosok() {
     return (this.usuarioUnico && this.alias !== '' && this.nombre !== '' && this.apellidos !== '' &&
-            this.fecha_nac !== '' && this.pass !== '' && this.pass2 !== '' &&
+            this.fecha_nac.length <= 10 && this.fecha_nac !== '' && this.pass !== '' && this.pass2 !== '' &&
             this.pass === this.pass2);
   }
 
