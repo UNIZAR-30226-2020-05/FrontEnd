@@ -36,7 +36,7 @@ export class CentralComponent implements OnInit {
         }
       );
     //this.numPlaylist = this.usuarioLogeado.lista_cancion.length;
-  this.numPlaylist = 1;
+  //this.numPlaylist = 1;
   }
 
   enviarToVistaLista() {
