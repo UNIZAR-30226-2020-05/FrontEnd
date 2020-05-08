@@ -13,16 +13,16 @@
 
 </div>
 
-<div *ngIf="numPlaylist > 0" class="menuRecom">
+<div *ngIf="usuarioLogeado.lista_cancion.length > 0" class="menuRecom">
     <tr class="espacioLat">
       <td *ngFor="let album of recomendaciones; let i = index"><img class="imagenRecomendacion" src="{{album.caratula}}"  (click)="
       Servicio.cargarAlbum(album.titulo);
       Servicio.nextMessage3(true);"></td>
     </tr>
 </div>
-<p *ngIf="numPlaylist > 0" class="cabezaCanciones">Tu música</p>
+<p *ngIf="usuarioLogeado.lista_cancion.length > 1" class="cabezaCanciones">Tu música</p>
 <!--<p class="cabezaPodcast">Tus podcast</p>-->
-<div *ngIf="numPlaylist > 0" class="menuMusica">
+<div *ngIf="usuarioLogeado.lista_cancion.length > 1" class="menuMusica">
   <table>
     <tbody>
     <tr *ngFor="let lista of usuarioLogeado.lista_cancion, first as primero" class="spaceUnder">

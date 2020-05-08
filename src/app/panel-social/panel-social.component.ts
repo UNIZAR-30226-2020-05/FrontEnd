@@ -123,7 +123,8 @@ export class PanelSocialComponent implements OnInit {
   }
 
   mostrarLogin() {
-    this.Servicio.nextMessage2(false);
+    this.Servicio.nextMessage3(false); //Desactiva album
+    this.Servicio.nextMessage2(false); //Activa album
   }
 
 }

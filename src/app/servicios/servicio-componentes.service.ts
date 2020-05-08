@@ -155,6 +155,7 @@ export class ServicioComponentesService {
 
 
   actualizarUltimaEscucha(can: Cancion) {
+    const n: number = can.id;
     const params = new HttpParams()
       .set('id_play', can.id.toString())
       .set('minuto_play', String(0))
@@ -162,9 +163,9 @@ export class ServicioComponentesService {
     let usu: User;
     this.sharedMessage.subscribe(userRecibido => usu = userRecibido);
     console.log(usu);
-    this.http.patch(this.URL_API + '/user/modifyLastPlay/' + usu.id, {id_play: can.id, minuto_play: 0, tipo_play: 0}).subscribe(
+    this.http.patch( this.URL_API + '/user/modifyLastPlay/' + usu.id, {id_play: 12, minuto_play: 0, tipo_play: 0} ).subscribe(
       (resp: string) => { console.log(this.nuevo); } );
-
+/*{id_play: can.id, minuto_play: 0, tipo_play: 0} */
 
   }
 

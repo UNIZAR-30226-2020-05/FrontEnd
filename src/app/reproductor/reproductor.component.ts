@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
-import {Cancion} from '../app.component';
+import {Cancion, User} from '../app.component';
+import {HttpClient} from '@angular/common/http';
 
 
 @Component({
@@ -18,11 +19,12 @@ export class ReproductorComponent implements OnInit {
   duracionActual;
   logeado;
 
+  usuarioActual: User;
   cancionActual: Cancion;
   srcActual;
 
   a = false;
-  constructor(private Servicio: ServicioComponentesService) {
+  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
     this.logeado = false;
     this.cancionActual = new Cancion();
 
@@ -31,6 +33,10 @@ export class ReproductorComponent implements OnInit {
       this.posActual = this.cancion.currentTime;
       this.duracionActual = this.cancion.duration;
     }, 250);
+
+    setInterval(() => {
+      this.Servicio.actualizarUltimaEscucha(this.cancionActual);
+    }, 9999999);
   }
 
 
@@ -66,21 +72,31 @@ export class ReproductorComponent implements OnInit {
 
   ngOnInit(): void {
     this.activo = false;
+    //Recibe el objeto usuario, y actualiza cuando se cambia.
+    this.Servicio.sharedMessage.subscribe(userRecibido => {
+      if (userRecibido.id_ultima_reproduccion != null && userRecibido.minuto_ultima_reproduccion != null) {
+        console.log('con registro');
+      }
+      this.usuarioActual = userRecibido;
+    })
+
     this.Servicio.cancionActiva.subscribe((cancionObj ) =>
       (this.cargarAudio(cancionObj))
     ); /*this.cancionActual = cancionObj */
   }
 
   playPause() {
-    if (this.activo) {
-      this.cancion.pause();
-      this.activo = false;
-    } else {
+    if (this.cancion.paused) {
       this.cancion.play();
       this.activo = true;
-    }
 
+    } else {
+      this.cancion.pause();
+      this.activo = false;
+    }
+    this.Servicio.actualizarUltimaEscucha(this.cancionActual);
   }
+
 
 
 
