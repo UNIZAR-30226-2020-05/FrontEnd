@@ -80,6 +80,10 @@
   position: absolute;
   float: left;
 }
+.imagenAlbum:hover{
+  cursor: pointer;
+
+}
 .nombreAlbum{
   font-family: Roboto;
   color: aliceblue;
@@ -87,6 +91,10 @@
   font-size: 20px;
   position: absolute;
   float: right;
+}
+.nombreAlbum:hover{
+  cursor: pointer;
+
 }
 
 .autorAlbum{
@@ -98,6 +106,9 @@
   position: absolute;
   float: right;
 }
+.autorAlbum:hover{
+  cursor: pointer;
+}
 .nombrePodcast{
   font-family: Roboto;
   color: aliceblue;
@@ -105,6 +116,10 @@
   font-size: 20px;
   position: absolute;
   float: right;
+}
+.nombrePodcast:hover{
+  cursor: pointer;
+
 }
 
 .autorPodcast{
@@ -137,6 +152,10 @@ tr.espacioLat>td{
   width: 90px;
   position: absolute;
   float: left;
+}
+
+.imagenRecomendacion:hover{
+  cursor: pointer;
 }
 
 .menuRecom2{

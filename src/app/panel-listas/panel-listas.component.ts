@@ -57,8 +57,8 @@ export class PanelListasComponent implements OnInit {
   }
 
   listaPulsada(id: number){
-    const param= id.toString();
-    const params= new HttpParams().set('id',param);
+    const param = id.toString();
+    const params = new HttpParams().set('id', param);
     this.http.get(this.Servicio.URL_API + '/listaCancion/get', {params}).subscribe( (resp: ListaCancion) => {this.listaOk=resp; this.Servicio.nextMessageObjLista(this.listaOk);});
 
   }

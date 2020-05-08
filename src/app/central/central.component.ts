@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
-import {HttpClient} from '@angular/common/http';
-import {Album, User} from '../app.component';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Album, ListaCancion, User} from '../app.component';
 
 
 @Component({
@@ -15,25 +15,39 @@ export class CentralComponent implements OnInit {
   numPlaylist: number;
   recomendaciones: Array<Album>;
 
+  okVista:boolean = true;
+  listaOk: ListaCancion;
 
-  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) { }
+
+
+  constructor(private http: HttpClient, public Servicio: ServicioComponentesService) { }
 
   ngOnInit(): void {
     this.mostrar = true;
     this.Servicio.sharedMessage.subscribe(userRecibido => this.usuarioLogeado = userRecibido);
-    this.numPlaylist = this.usuarioLogeado.lista_cancion.length;
-    this.Servicio.sharedMessageCentral.subscribe(messageCentral => this.mostrar = messageCentral);
-  }
+    //this.Servicio.sharedMessageCentral.subscribe(messageCentral => this.mostrar = messageCentral);
+    let params = new HttpParams().set('titulo', '');
 
-  /*getRecomendaciones() {
-    this.http.get(this.Servicio.URL_API + ruta_a_funcion)
+    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
       .subscribe(
         (resp: Array<Album>) => {
           this.recomendaciones = resp;
-          console.log(this.recomendaciones);
-        },
+          console.log(resp);
+        }
       );
+    //this.numPlaylist = this.usuarioLogeado.lista_cancion.length;
+  this.numPlaylist = 1;
+  }
 
-  }*/
+  enviarToVistaLista() {
+    this.Servicio.nextMessageVistaLista(this.okVista);
+  }
+
+  listaPulsada(id: number) {
+    const param = id.toString();
+    const params = new HttpParams().set('id', param);
+    this.http.get(this.Servicio.URL_API + '/listaCancion/get', {params}).subscribe( (resp: ListaCancion) => {this.listaOk=resp; this.Servicio.nextMessageObjLista(this.listaOk);});
+
+  }
 
 }
