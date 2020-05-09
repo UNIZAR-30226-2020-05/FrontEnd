@@ -3,21 +3,23 @@
      <table class="barra-rep">
        <tr >
          <td  *ngIf="cancion.readyState">{{sacarTiempo(cancion.currentTime)}}</td>
-         <td style="color: lightgray"  *ngIf="!cancion.readyState">00:00</td>
+         <td style="color: darkgray"  *ngIf="!cancion.readyState">00:00</td>
          <!--{{(cancion.currentTime/60).toString().charAt(0)}}:{{(cancion.currentTime%60).toFixed()}} --->
     <td style="width: 30vw"><input class="slider2" type="range" min="0" [(ngModel)]="cancion.currentTime"
                  max="{{cancionActual.duracion}}"></td>
          <td *ngIf="cancion.readyState">&nbsp;{{sacarTiempo(cancionActual.duracion)}}</td>
-         <td style="color: lightgray"  *ngIf="!cancion.readyState">&nbsp;00:00</td>
+         <td style="color: darkgray"  *ngIf="!cancion.readyState">&nbsp;00:00</td>
        </tr>
      </table>
    </div>
   <table>
     <td>
-      <img class=icono-repr src="../../assets/previous.png" title="Anterior" (click)="avanzarLista()"/>
+      <img *ngIf="hayAtras()" class=icono-repr src="../../assets/previous.png" title="Anterior" (click)="retrocederLista()"/>
+      <img *ngIf="!hayAtras()" class="icono-repr2" src="../../assets/previous.png" title="Anterior" (click)="retrocederLista()"/>
       <img *ngIf="cancion.paused" class=icono-repr src="../../assets/play.png" title="Reproducir" (click)="playPause()" />
       <img *ngIf="cancion.paused==false" class=icono-repr src="../../assets/pause.png" title="Pausar" (click)="playPause()" />
-      <img class=icono-repr src="../../assets/next.png" title="Siguiente" (click)="avanzarLista()"/>
+      <img *ngIf="hayAdelante()" class=icono-repr src="../../assets/next.png" title="Siguiente" (click)="avanzarLista()"/>
+      <img *ngIf="!hayAdelante()"class=icono-repr2 src="../../assets/next.png" title="Siguiente" (click)="avanzarLista()"/>
 
     </td>
     <td>
@@ -32,5 +34,5 @@
 
 
   </table>
-
+<!-- Func auxiliar -->
   </div>

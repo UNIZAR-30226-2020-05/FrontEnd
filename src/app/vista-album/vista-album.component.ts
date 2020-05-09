@@ -14,8 +14,10 @@ export class VistaAlbumComponent implements OnInit {
     'Purple Heart', 'Metal Machine','Counterstrike 2', 'Metal Machine','Counterstrike 2','Counterstrike 2', 'Metal Machine'];
 
   //
-  albActivo: Album;
+  albActivo: Album = new Album();
   userActivo: User;
+
+  reproduccAlbum: string;
 
   vistaSelCan: boolean;
   cancionObjetivo: number;
@@ -23,6 +25,7 @@ export class VistaAlbumComponent implements OnInit {
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
     this.vistaSelCan = false;
     this.vistaSelAlb = false;
+    this.reproduccAlbum = '';
   }
 
   show:boolean;
@@ -31,13 +34,15 @@ export class VistaAlbumComponent implements OnInit {
     this.Servicio.sharedMessage3.subscribe(message3 => this.show = message3);
 
     //Recibe el objeto album, y actualiza cuando se cambia.
-    this.Servicio.albumActivo.subscribe(albumObj => this.albActivo = albumObj);
+    this.Servicio.albumActivo.subscribe(albumObj => {
+      this.albActivo = albumObj;
+    });
 
     //Recbe el usuario logeado (para listas)
     this.Servicio.sharedMessage.subscribe(userRecibido => this.userActivo = userRecibido);
   }
 
-  sacarTiempo(n: number){
+  sacarTiempo(n: number) {
     let s = '';
     let auxMin; let auxSeg;
     auxMin = Math.floor(n / 60);
@@ -59,5 +64,9 @@ export class VistaAlbumComponent implements OnInit {
     this.http.patch(this.Servicio.URL_API + '/listaCancion/addByAlbum/' + this.userActivo.lista_cancion[1].id,
       this.albActivo.id).subscribe(
       (resp: string) => {   this.vistaSelAlb = false; } );
+  }
+
+  repr(alb) {
+    this.Servicio.reproducirLista(alb);
   }
 }

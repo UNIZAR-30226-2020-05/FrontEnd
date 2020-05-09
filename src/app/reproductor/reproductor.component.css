@@ -35,6 +35,11 @@ td{
   cursor: pointer;
 }
 
+.icono-repr2{
+  width: 40px;
+  opacity: 70%;
+}
+
 .barra-volumen{
   vertical-align: center;
   align-content: center;

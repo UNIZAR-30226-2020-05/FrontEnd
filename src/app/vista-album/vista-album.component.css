@@ -57,6 +57,14 @@
   cursor: pointer;
 }
 
+.img-repr-album {
+  width: 4%;
+  position: absolute;
+  right: 22%;
+  top: 3%;
+  cursor: pointer;
+}
+
 .enlace:hover {
   text-decoration: underline;
   cursor: pointer;

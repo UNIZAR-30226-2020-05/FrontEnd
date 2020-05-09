@@ -121,6 +121,10 @@ export class Album {
   caratula: string;
   artista: Artista;
   canciones: Array<Cancion>;
+
+  constructor() {
+    this.canciones = new Array<Cancion>();
+  }
 }
 
 /* Clase Album - para nuevas creaciones en backend */

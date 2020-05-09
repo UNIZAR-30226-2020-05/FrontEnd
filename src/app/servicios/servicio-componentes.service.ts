@@ -31,7 +31,7 @@ export class ServicioComponentesService {
 
    /* --- Servicio reproducción de canciones ---- */
 
-  listaReprActiva: Array<Cancion>;
+  listaReprActiva: Cancion[]; // Así chuta. No tocar.
   cancionActiv: Cancion = new Cancion();
 
 
@@ -60,10 +60,12 @@ export class ServicioComponentesService {
 
   /* ----------------------------------------------*/
   /* Mensaje para la cancion actual */
-  private cancionObj = new BehaviorSubject(this.cancionActiv);
-  cancionActiva = this.cancionObj.asObservable();
+  public cancionAct = new BehaviorSubject(this.cancionActiv);
+  public canActiva = this.cancionAct.asObservable();
 
-
+  /* Mensaje para la lista de canciones actual */
+  public cancionObj = new BehaviorSubject(this.listaReprActiva);
+  public cancionActiva = this.cancionObj.asObservable();
 
   /* Mensaje para pasar variable a editar usuario */
   private messageEdit = new BehaviorSubject(this.editUser);
@@ -105,7 +107,8 @@ export class ServicioComponentesService {
     this.URL_API = 'http://3.22.247.114:8080';
     this.nuevo = new User();
     this.objLista = new ListaCancion();
-
+    this.albumActiv = new Album();
+    this.albumCancionActiva = new Album();
   }
 
   nextMessage(message) {
@@ -134,7 +137,18 @@ export class ServicioComponentesService {
       );
   }
 
-  reproducirAudio(cancionObj: Cancion) {
+  reproducirCancion(can: Cancion) {
+    const nuev = new Array<Cancion>();
+    nuev.push(can);
+    console.log(nuev);
+    this.reproducirLista(nuev);
+  }
+
+  establecerCancionActual(cancionAct) {
+    this.cancionAct.next(cancionAct);
+  }
+
+  reproducirLista(cancionObj) {
     this.cancionObj.next(cancionObj);
   }
 
@@ -183,17 +197,17 @@ export class ServicioComponentesService {
 
 
   actualizarUltimaEscucha(can: Cancion) {
-    const n: number = can.id;
-    const params = new HttpParams()
-      .set('id_play', can.id.toString())
-      .set('minuto_play', String(0))
-      .set('tipo_play', String(0));
-    let usu: User;
-    this.sharedMessage.subscribe(userRecibido => usu = userRecibido);
-    console.log(usu);
-    this.http.patch( this.URL_API + '/user/modifyLastPlay/' + usu.id, {id_play: 12, minuto_play: 0, tipo_play: 0} ).subscribe(
-      (resp: string) => { console.log(this.nuevo); } );
-/*{id_play: can.id, minuto_play: 0, tipo_play: 0} */
+    /* const n: number = can.id;
+     const params = new HttpParams()
+       .set('id_play', can.id.toString())
+       .set('minuto_play', String(0))
+       .set('tipo_play', String(0));
+     let usu: User;
+     this.sharedMessage.subscribe(userRecibido => usu = userRecibido);
+     console.log(usu);
+     this.http.patch( this.URL_API + '/user/modifyLastPlay/' + usu.id, {id_play: 12, minuto_play: 0, tipo_play: 0} ).subscribe(
+       (resp: string) => { console.log(this.nuevo); } );
+ /*{id_play: can.id, minuto_play: 0, tipo_play: 0} */
 
   }
 

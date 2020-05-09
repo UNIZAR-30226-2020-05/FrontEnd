@@ -27,22 +27,24 @@ export class PanelListasComponent implements OnInit {
 
   listaBorrar: ListaCancion;
 
-  album: Album;
+  album: Album = new Album();
   caratula: string;
 
 
-  constructor(private http: HttpClient,private Servicio: ServicioComponentesService) {
-    /*this.album.caratula="";*/
+  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
+    this.album.caratula="https://i.dlpng.com/static/png/6331252_preview.png";
   }
 
   ngOnInit(): void {
     this.Servicio.sharedMessage.subscribe(message => this.usuario=message);
     this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.okVista=messageVistaLista);
     this.Servicio.sharedMessageObjLista.subscribe(messageObjLista => this.listaOk = messageObjLista);
-    this.Servicio.cancionActiva.subscribe(cancionObj => this.cancion = cancionObj);
-    this.Servicio.albumReprod.subscribe(albumCanActv => this.album= albumCanActv);
+    this.Servicio.canActiva.subscribe((cancionObj) => this.cancion = cancionObj);
+    this.Servicio.albumReprod.subscribe((albumCanActv) => {
+      if (albumCanActv != null) { (this.album = albumCanActv); }
+    });
     this.Servicio.sharedMessageFavLista.subscribe(favLista => this.mostrarFav = favLista);
-    this.Servicio.sharedMessageFavListaP.subscribe(favListaP => this.mostrarFavP = favListaP)
+    this.Servicio.sharedMessageFavListaP.subscribe(favListaP => this.mostrarFavP = favListaP);
   }
   newMessage() {
     this.Servicio.nextMessage(this.usuario);
@@ -78,7 +80,7 @@ export class PanelListasComponent implements OnInit {
       .set('titulo', this.cancion.album);
 
     this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
-      .subscribe((album: Array<Album>) => {this.album=album[0]});
+      .subscribe((album: Array<Album>) => {this.album = album[0]});
   }
 
   addFav(){
