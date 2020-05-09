@@ -37,10 +37,10 @@
  <div class="titulo-album">{{albActivo.titulo}}</div>
   <div class="artista-album"><span class="enlace">{{albActivo.artista}}</span></div>
   <img *ngIf="reproduccAlbum!==albActivo.titulo" title="Reproducir album" (click)="repr(albActivo.canciones);
-    reproduccAlbum=albActivo.titulo;"
+    reproduccAlbum=albActivo.titulo; Servicio.enviarAlbumPlay(albActivo)"
        class="img-repr-album" src="../../assets/play-album.png">
   <img *ngIf="reproduccAlbum==albActivo.titulo"title="Reproducir album" (click)="repr(albActivo.canciones);
-    reproduccAlbum=albActivo.titulo;"
+    reproduccAlbum=albActivo.titulo; Servicio.enviarAlbumPlay(albActivo)"
        class="img-repr-album" src="../../assets/play-album-activo.png">
   <img title="Añadir album a lista..." (click)="vistaSelAlb=true;" class="img-add-album" src="../../assets/addAlbumToList.png">
 <div class="marco-tabla">
