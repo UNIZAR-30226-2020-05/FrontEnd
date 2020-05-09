@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import construct = Reflect.construct;
+import {ServicioComponentesService} from "./servicios/servicio-componentes.service";
 
 
 @Component({
@@ -8,7 +10,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'FrontEnd';
+  constructor( public Servicio: ServicioComponentesService){
+  }
+
+
 }
+
 
 
 /* DEFINICIÓN DE MODELOS DEL SISTEMA */

@@ -17,17 +17,18 @@
 <hr class="linea2">
 
 <!-- /****** CUADRADO DE FOTO CANCION ACTUAL *****/ -->
-<div class="cuadrado"></div>
+<!--<div class="cuadrado" ></div> -->
+<!--<img class="cuadrado" src="{{album.caratula}}">-->
 
 <!-- /********* TABLA PARA NOMBRE CANCION Y AUTOR DE CANCION ACTUAL ***********/ -->
 <table>
   <tbody>
     <tr>
-      <th class="titulo">It's Corona time</th>
-      <th><img class="heart" src="./../assets/icons8-me-gusta-100.png"></th>
+      <th class="titulo">{{cancion.name}}</th>
+      <th><img class="heart" (click)="addFav()" src="./../assets/icons8-me-gusta-100.png"></th>
     </tr>
     <tr>
-      <th class="autor"> Coronavirus</th>
+      <th class="autor"> {{cancion.artistas}}</th>
     </tr>
   </tbody>
 </table>
@@ -83,7 +84,7 @@
 </div>
 
 
-<!--********* PANTALLA FAVORTO DE CANCIONES Y PODCAST *********-->
+<!--********* PANTALLA FAVORTO DE CANCIONES  *********-->
 <div *ngIf="mostrarFav" class= "favoritos">
   <div class="container2">
     <div class="misFavs"></div>

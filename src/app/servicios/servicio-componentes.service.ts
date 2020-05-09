@@ -15,6 +15,7 @@ export class ServicioComponentesService {
 
   vistaAlbum: boolean;
   albumActiv: Album;
+  albumCancionActiva: Album;
 
   editUser: boolean;
 
@@ -22,6 +23,8 @@ export class ServicioComponentesService {
   vistaLista:boolean;
   objLista: ListaCancion;
   listaBorrar: ListaCancion;
+  favLista: boolean;
+  favListaP: boolean;
 
   central: boolean;
 
@@ -51,6 +54,10 @@ export class ServicioComponentesService {
   private albumObj = new BehaviorSubject(this.albumActiv);
   albumActivo = this.albumObj.asObservable();
 
+  /*Mensahe para enviar obj album a panel listas para vista de caratula pequeña */
+  private albumCanActv = new BehaviorSubject(this.albumCancionActiva);
+  albumReprod = this.albumCanActv.asObservable();
+
   /* ----------------------------------------------*/
   /* Mensaje para la cancion actual */
   private cancionObj = new BehaviorSubject(this.cancionActiv);
@@ -62,6 +69,7 @@ export class ServicioComponentesService {
   private messageEdit = new BehaviorSubject(this.editUser);
   sharedMessageEdit = this.messageEdit.asObservable();
 
+  /************RELACIONADOS CON PANEL LISTAS ****************/
   /* Mensaje para pasar variable a panel Listas de lista */
   private messageList = new BehaviorSubject(this.lista);
   sharedMessageList = this.messageList.asObservable();
@@ -74,6 +82,15 @@ export class ServicioComponentesService {
   private messageObjetoLista = new BehaviorSubject(this.objLista);
   sharedMessageObjLista = this.messageObjetoLista.asObservable();
 
+  /* Mensaje para poder ocultar vista de favoritos Canciones desde logo */
+  private messageFavLista = new BehaviorSubject(this.favLista);
+  sharedMessageFavLista = this.messageFavLista.asObservable();
+
+  /* Mensaje para poder ocultar vista de favorito Podcasts desde logo */
+  private messageFavListaP = new BehaviorSubject(this.favListaP);
+  sharedMessageFavListaP = this.messageFavListaP.asObservable();
+
+
   /*Mensaje para mandar lista que tiene que ser borrada */
   /*private messageListaBorrar = new BehaviorSubject(this.listaBorrar);
   sharedMessageBorrarLista = this.messageListaBorrar.asObservable();*/
@@ -82,6 +99,7 @@ export class ServicioComponentesService {
   /* Mensaje para pasar variable a la vista central */
   private messageCentral = new BehaviorSubject(this.central);
   sharedMessageCentral = this.messageCentral.asObservable();
+
 
   constructor(private http: HttpClient) {
     this.URL_API = 'http://3.22.247.114:8080';
@@ -132,6 +150,8 @@ export class ServicioComponentesService {
     return this.nuevo;
   }
 
+  /* Sobre listas */
+
   enviarLista(messageList){
     this.messageList.next(messageList);
   }
@@ -142,6 +162,14 @@ export class ServicioComponentesService {
 
   nextMessageObjLista(messageObjLista){
     this.messageObjetoLista.next(messageObjLista);
+  }
+
+  nextMessageFavList(favLista){
+    this.messageFavLista.next(favLista);
+  }
+
+  nextMessageFavListP(favListaP){
+    this.messageFavListaP.next(favListaP);
   }
 
   /*nextMessageOrdenBorrado(messageListaBorrar){
@@ -169,4 +197,7 @@ export class ServicioComponentesService {
 
   }
 
+  enviarAlbumPlay(albumCanActv){
+    this.albumCanActv.next(albumCanActv);
+  }
 }
