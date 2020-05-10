@@ -1,26 +1,33 @@
 <div class="barraBusqueda">
-  <input class="barra" type="text" placeholder="Búsqueda" [(ngModel)]="buscado">
-  <input type="image" class="lupa" (click)="buscarContenido()" src="./../assets/lens.png">
+  <input class="barra" type="text" placeholder="Búsqueda" [(ngModel)]="buscado" #reference>
+  <input type="image" class="lupa" (click)="buscarContenido(); reference.value=''" src="./../assets/lens.png">
 </div>
 
+<button  *ngIf="mostrarBusqueda" class="botonCancelar" (click)="cancelarBusqueda()">Cancelar búsqueda</button>
 <div *ngIf="mostrarBusqueda" class="busca">
-  <button class="botonCancelar" (click)="cancelarBusqueda()">Atrás</button>
   <p class="cabecera" *ngIf="numCancion == 1">Canción encontrada</p>
   <p class="cabecera" *ngIf="numCancion > 1">Canciones encontradas</p>
   <table *ngIf="numCancion != 0">
-    <tr *ngFor="let cancion of cancionEncontrada; let i = index">
-      <td><img class="img-play-album" src="../../assets/play-vector.svg"/></td>
+    <tr *ngFor="let cancion of cancionEncontrada; let i = index" class="loBuscado">
+      <td><img (click)="Servicio.reproducirCancion(cancion);Servicio.enviarAlbumPlay(cancion.album)"
+               title="Reproducir" class="img-play-album" src="../../assets/play-vector.svg"/></td>
       <!--<td><img class="foto-busqueda"  src="{{cancion.album.caratula}}"></td>-->
       <!--<td><img class="foto-busqueda"  src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>-->
-      <td class="texto-busqueda">{{cancion.name}}</td>
+      <td class="texto_cancion">{{cancion.name}}</td>
     </tr>
   </table>
   <p class="cabecera" *ngIf="numAlbum == 1">Álbum encontrado</p>
   <p class="cabecera" *ngIf="numAlbum > 1">Álbumes encontrados</p>
   <table *ngIf="numAlbum != 0">
     <tr *ngFor="let album of albumEncontrado; let i = index">
-      <td><img class="foto-busqueda" src="{{album.caratula}}"></td>
-      <td class="texto-busqueda">{{album.titulo}}</td>
+      <td><img class="foto-busqueda" src="{{album.caratula}}" (click)="
+      cancelarBusqueda();
+      Servicio.cargarAlbum(album.titulo);
+      Servicio.nextMessage3(true);"></td>
+      <td class="texto-busqueda" (click)="
+      cancelarBusqueda();
+      Servicio.cargarAlbum(album.titulo);
+      Servicio.nextMessage3(true);">{{album.titulo}}</td>
     </tr>
   </table>
   <p class="cabecera" *ngIf="numArtista == 1">Artista encontrado</p>
@@ -31,4 +38,5 @@
       <td class="texto-busqueda">{{artista.name}}</td>
     </tr>
   </table>
+  <p class="cabecera" *ngIf="numArtista == 0 && numAlbum == 0 && numCancion == 0">No se han encontrado resultados</p>
 </div>
