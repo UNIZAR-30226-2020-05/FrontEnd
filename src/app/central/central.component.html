@@ -1,52 +1,44 @@
-<p class="recomendaciones">Te recomendamos</p>
-
-<div class="menuRecom">
-    <tr class="espacioLat">
-      <td *ngFor="let album of recomendaciones; let i = index"><img class="imagenRecomendacion" src="{{album.caratula}}"  (click)="
+<p class="recomendaciones">Novedades para ti</p>
+<div class="menuRecom2">
+  <!--Limit {{recomendaciones}} to: 10-->
+  <tr class="spaceUnder" *ngFor="let album of recomendaciones; let i = index">
+    <td><img class="imagenAlbum" src="{{album.caratula}}" (click)="
       Servicio.cargarAlbum(album.titulo);
       Servicio.nextMessage3(true);"></td>
-    </tr>
-</div>
-<p class="cabezaCanciones">Tu música</p>
-<!--<p class="cabezaPodcast">Tus podcast</p>-->
-<div class="menuMusica">
-  <table>
-    <tbody>
-    <tr *ngFor="let lista of usuarioLogeado.lista_cancion, first as primero" class="spaceUnder">
-      <td *ngIf="primero"><img class="imagenAlbum" (click)="enviarToVistaLista();listaPulsada(lista.id)" src="./../assets/favorites.png"></td>
-      <td *ngIf="!primero"><img class="imagenAlbum" (click)="enviarToVistaLista();listaPulsada(lista.id)" src="./../assets/cancion.png"></td>
-      <td class="nombreAlbum" style="margin-top: 25px" (click)="enviarToVistaLista();listaPulsada(lista.id)">{{lista.nombre}}</td>
-    </tr>
-    </tbody>
-  </table>
+    <td class="nombreAlbum" style="margin-top: 10px" (click)="
+      Servicio.cargarAlbum(album.titulo);
+      Servicio.nextMessage3(true);">{{album.titulo}}</td>
+    <td class="autorAlbum" style="margin-top: 35px">{{album.artista}}</td>
+  </tr>
+
 </div>
 
-<!--<div class="menuPodcast">
+<div class="menuRecom3">
   <table>
     <tr class="spaceUnder">
       <td><img class="imagenAlbum" src="./../assets/podcast1.jpg"></td>
-      <td class="nombrePodcast" style="margin-top: 10px">Podcast</td>
-      <td class="autorPodcast" style="margin-top: 35px">Autor</td>
+      <td class="nombreAlbum" style="margin-top: 10px">Podcast</td>
+      <td class="autorAlbum" style="margin-top: 35px">Autor</td>
     </tr>
     <tr class="spaceUnder">
       <td><img class="imagenAlbum" src="./../assets/podcast1.jpg"></td>
-      <td class="nombrePodcast" style="margin-top: 10px">Podcast</td>
-      <td class="autorPodcast" style="margin-top: 35px">Autor</td>
+      <td class="nombreAlbum" style="margin-top: 10px">Podcast</td>
+      <td class="autorAlbum" style="margin-top: 35px">Autor</td>
     </tr>
     <tr class="spaceUnder">
       <td><img class="imagenAlbum" src="./../assets/podcast1.jpg"></td>
-      <td class="nombrePodcast" style="margin-top: 10px">Podcast</td>
-      <td class="autorPodcast" style="margin-top: 35px">Autor</td>
+      <td class="nombreAlbum" style="margin-top: 10px">Podcast</td>
+      <td class="autorAlbum" style="margin-top: 35px">Autor</td>
     </tr>
     <tr class="spaceUnder">
       <td><img class="imagenAlbum" src="./../assets/podcast1.jpg"></td>
-      <td class="nombrePodcast" style="margin-top: 10px">Podcast</td>
-      <td class="autorPodcast" style="margin-top: 35px">Autor</td>
+      <td class="nombreAlbum" style="margin-top: 10px">Podcast</td>
+      <td class="autorAlbum" style="margin-top: 35px">Autor</td>
     </tr>
     <tr class="spaceUnder">
       <td><img class="imagenAlbum" src="./../assets/podcast1.jpg"></td>
-      <td class="nombrePodcast" style="margin-top: 10px">Podcast</td>
-      <td class="autorPodcast" style="margin-top: 35px">Autor</td>
+      <td class="nombreAlbum" style="margin-top: 10px">Podcast</td>
+      <td class="autorAlbum" style="margin-top: 35px">Autor</td>
     </tr>
   </table>
-</div>-->
+</div>

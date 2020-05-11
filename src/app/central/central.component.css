@@ -115,7 +115,7 @@
   margin-left: 45%;
   font-size: 20px;
   position: absolute;
-  float: right;
+  float: left;
 }
 .nombrePodcast:hover{
   cursor: pointer;
@@ -161,7 +161,17 @@ tr.espacioLat>td{
 .menuRecom2{
   margin-left: 17%;
   overflow: auto;
-  width: 56%;
+  width: 26%;
+  height: 60%;
+  margin-top: 5px;
+  white-space: nowrap;
+  position: absolute;
+}
+
+.menuRecom3{
+  margin-left: 47%;
+  overflow: auto;
+  width: 26%;
   height: 60%;
   margin-top: 5px;
   white-space: nowrap;
