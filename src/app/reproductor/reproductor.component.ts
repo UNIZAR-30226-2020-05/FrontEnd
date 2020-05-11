@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
-import {Cancion, User} from '../app.component';
-import {HttpClient} from '@angular/common/http';
+import {Album, Cancion, User} from '../app.component';
+import {HttpClient, HttpParams} from '@angular/common/http';
 
 
 @Component({
@@ -43,13 +43,14 @@ export class ReproductorComponent implements OnInit {
     setInterval(() => {
       if ((this.posActual === this.duracionActual) && this.cancion.ended) {
         this.avanzarLista();
-        console.log('As');
       }
-    }, 1200);
+    }, 20000);
 
     setInterval(() => {
-      this.Servicio.actualizarUltimaEscucha(this.cancionActual);
-    }, 9999999);
+      if (this.activo) {
+        this.actualizarUltimaEscucha(this.cancionActual);
+      }
+    }, 12000);
 
 
   }
@@ -74,7 +75,38 @@ export class ReproductorComponent implements OnInit {
     // Recibe el objeto usuario, y actualiza cuando se cambia.
     this.Servicio.sharedMessage.subscribe(userRecibido => {
       if (userRecibido.id_ultima_reproduccion != null && userRecibido.minuto_ultima_reproduccion != null) {
-        //console.log('con registro');
+
+        const params = new HttpParams().set('name', '');
+        this.http.get(this.Servicio.URL_API + '/song/getByName', {params})
+          .subscribe(
+            (resp: Array<Cancion>) => {
+
+              let encontrado = false;
+              for (const cancionc of resp) {
+                if (!encontrado) {
+                  if (cancionc.id === userRecibido.id_ultima_reproduccion) {
+
+                    const params = new HttpParams().set('titulo', cancionc.album.toString());
+                    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
+                      .subscribe(
+                        (alb: Array<Album>) => {
+                          this.Servicio.enviarAlbumPlay(alb[0]);
+                        }
+                      );
+                    this.Servicio.enviarAlbumPlay(cancionc.album);
+                    this.Servicio.reproducirCancion(cancionc);
+                    this.cancion.src = this.Servicio.URL_API + '/song/play/' + cancionc.name;
+                    this.cancion.load();
+                    console.log(this.cancion.currentTime + ' -- ' + this.cancion.duration);
+                    this.cancion.currentTime = userRecibido.minuto_ultima_reproduccion;
+
+                    encontrado = true;
+                  }
+                }
+              }
+
+            }
+          );
       }
       this.usuarioActual = userRecibido;
     });
@@ -83,6 +115,7 @@ export class ReproductorComponent implements OnInit {
 
   }
 
+
   conector(can: Array<Cancion>) {
 
   }
@@ -90,7 +123,7 @@ export class ReproductorComponent implements OnInit {
   cargarAudio(orig: Cancion) {
 
     this.cancion.src = this.Servicio.URL_API + '/song/play/' + orig.name;
-    this.cancion.currentTime = 0;
+    //this.cancion.currentTime = 0;
     this.temaEnCola = 'TestLong';
     this.cancion.load();
     this.cancion.play();
@@ -100,7 +133,7 @@ export class ReproductorComponent implements OnInit {
   avanzarLista() { // Así no peta
     if (this.posicion + 1 < this.listaActiva.length) {
       this.posicion += 1;
-      this.cargarAudio(this.listaActiva[this.posicion])
+      this.cargarAudio(this.listaActiva[this.posicion]);
       this.cancionActual = this.listaActiva[this.posicion];
       this.cancion.load();
       this.cancion.play();
@@ -110,7 +143,7 @@ export class ReproductorComponent implements OnInit {
   retrocederLista() {
     if (this.posicion > 0) {
       this.posicion -= 1;
-      this.cargarAudio(this.listaActiva[this.posicion])
+      this.cargarAudio(this.listaActiva[this.posicion]);
       this.cancionActual = this.listaActiva[this.posicion];
       this.cancion.load();
       this.cancion.play();
@@ -126,14 +159,14 @@ export class ReproductorComponent implements OnInit {
 
   hayAdelante() {
     if  (this.listaActiva != null) {
-      if (this.posicion+1 < this.listaActiva.length) { return true; }
+      if (this.posicion + 1 < this.listaActiva.length) { return true; }
     }
     return false;
   }
 
 
   playPause() {
-    console.log(this.listaActiva)
+    console.log(this.listaActiva);
     if (this.cancion.paused) {
       this.cancion.play();
       this.activo = true;
@@ -142,38 +175,52 @@ export class ReproductorComponent implements OnInit {
       this.cancion.pause();
       this.activo = false;
     }
-    this.Servicio.actualizarUltimaEscucha(this.cancionActual);
+    this.actualizarUltimaEscucha(this.cancionActual);
+  }
+
+  actualizarUltimaEscucha(can: Cancion) {
+     const n: number = can.id;
+     const data: FormData = new FormData();
+     data.append('id_play', can.id.toString());
+     data.append('minuto_play', this.posActual.toFixed());
+     data.append('tipo_play', '0');
+     let usu: User = new User();
+     this.Servicio.sharedMessage.subscribe(userRecibido => usu = userRecibido);
+     console.log(usu);
+     this.http.patch( this.Servicio.URL_API + '/user/modifyLastPlay/' + usu.id, data ).subscribe(
+       (resp: string) => { console.log(resp); } );
+       /*{id_play: can.id, minuto_play: 0, tipo_play: 0} */
+
   }
 
 
 
 
-  audioStop(){
+  audioStop() {
     }
 
-  bajarVolumen(){
-    if (this.cancion.volume > 0.0){
-      this.cancion.volume-=0.2;
-    }
-  }
-
-  subirVolumen(){
-    if (this.cancion.volume < 1.0){
-      this.cancion.volume+=0.2;
+  bajarVolumen() {
+    if (this.cancion.volume > 0.0) {
+      this.cancion.volume -= 0.2;
     }
   }
 
-  muteVolumen(){
-    if (this.cancion.volume < 0.01){
+  subirVolumen() {
+    if (this.cancion.volume < 1.0) {
+      this.cancion.volume += 0.2;
+    }
+  }
+
+  muteVolumen() {
+    if (this.cancion.volume < 0.01) {
       this.cancion.volume = this.volumenAux;
-    }
-    else {
+    } else {
       this.volumenAux = this.cancion.volume;
       this.cancion.volume = 0.0;
     }
   }
 
-  sacarTiempo(n: number){
+  sacarTiempo(n: number) {
     let s = '';
     let auxMin; let auxSeg;
     auxMin = Math.floor(n / 60);

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import construct = Reflect.construct;
-import {ServicioComponentesService} from "./servicios/servicio-componentes.service";
+import {ServicioComponentesService} from './servicios/servicio-componentes.service';
 
 
 @Component({
@@ -66,6 +66,15 @@ export class Cancion {
   constructor() {
     this.artistas = new Array<string>();
   }
+}
+
+/* Clase Podcast - equivalente a PodcastDTO en backend */
+export class Podcast {
+  id: number;
+  name: string;
+  fecha_subida: Date;
+  duracion: number; //Duración de la canción (en segundos)
+
 }
 
 export class CancionRequest {
