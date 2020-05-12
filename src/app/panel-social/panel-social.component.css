@@ -14,7 +14,9 @@ hr {
   border-style: wave;
   border-width: 2px;
 }
-
+.tabla-amig {
+  width: 100%;
+}
 .tabla-busq{
   width: 40%;
   margin-left: 40%;
@@ -85,8 +87,8 @@ p{
 }
 
 .icono-papelera {
-  right: 4%;
-  position: absolute;
+  right: 0%;
+  position: relative;
   width: 16px;
   vertical-align: center;
   cursor: pointer;

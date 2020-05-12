@@ -18,6 +18,8 @@ export class ReproductorComponent implements OnInit {
   duracionActual;
   logeado;
 
+
+
   // Posición de la cancion
   posActual: number;
   usuarioActual: User;
@@ -28,7 +30,7 @@ export class ReproductorComponent implements OnInit {
   posicion = 0;
   cancionActual: Cancion;
   srcActual;
-
+  navVersion = navigator.userAgent.indexOf('Chrome') > -1;
   a = false;
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
     this.logeado = false;
@@ -38,13 +40,18 @@ export class ReproductorComponent implements OnInit {
     setInterval(() => {
       this.posActual = this.cancion.currentTime;
       this.duracionActual = this.cancion.duration;
+      if (this.cancion.ended && this.listaActiva.length < 2) {
+        this.cancion.currentTime = 0; // Vuelve al principio
+        this.cancion.load(); const aux = this.cancion.src;
+        this.cancion.src = aux;
+      }
     }, 300);
 
     setInterval(() => {
       if ((this.posActual === this.duracionActual) && this.cancion.ended) {
         this.avanzarLista();
       }
-    }, 20000);
+    }, 2000);
 
     setInterval(() => {
       if (this.activo) {

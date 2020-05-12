@@ -13,26 +13,26 @@
 
   <!-- Construir lista con un ngFor  *ngIf="!listaVacia" class="listaAmigos"--->
   <div class="contenido-amigos">
-  <table *ngFor="let usu of usuarioLogeado.amigos">
+  <table class="tabla-amig" *ngFor="let usu of usuarioLogeado.amigos">
     <tr>
       <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
-      <td> {{usu.nick}} </td><td rowspan="2">
-        <img  class="icono-papelera" src="../../assets/trash.png" title="Eliminar amigo"(click)="quitarAmigo(usu.id)">
+      <td> {{usu.nick}} {{obtenerCancion(usuarioLogeado.id_ultima_reproduccion)}}</td><td>
+
       </td>
     </tr>
-    <tr>{{usu.nombre}} {{usu.apellidos}}<td></td> </tr>
+    <tr>{{usu.nombre}} {{usu.apellidos}}<td><img  class="icono-papelera" src="../../assets/trash.png" title="Eliminar amigo"(click)="quitarAmigo(usu.id)"></td> </tr>
     <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
       <i class="ultima-cancion"> &nbsp;
         <span class="enlace"  (click)="
 
-        Servicio.cargarAlbum('Eurotopia');
+        Servicio.cargarAlbum(cancionAmigoActual.album);
 
        Servicio.nextMessage3(true);
 
 
 
-">If Heaven Were to Fall</span> ·
-        <span class="enlace">E-Type</span>
+">{{cancionAmigoActual.name}}</span> ·
+        <span class="enlace">{{cancionAmigoActual.artistas[0]}}</span>
       </i> </td>
     </tr><br/>
 

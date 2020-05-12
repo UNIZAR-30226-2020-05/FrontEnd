@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HttpClient, HttpParams, HttpClientModule, HttpResponse, HttpErrorResponse} from '@angular/common/http';
-import {User, Amigo} from '../app.component';
+import {User, Amigo, Cancion, Album} from '../app.component';
 import {error} from '@angular/compiler/src/util';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
 
@@ -26,6 +26,9 @@ export class PanelSocialComponent implements OnInit {
   usuarioLogeado: User; // Quien está en la plataforma
 
   usuarioBuscado: User;
+  listaCan: Array<Cancion>;
+
+  cancionAmigoActual: Cancion;
 
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
   }
@@ -36,7 +39,7 @@ export class PanelSocialComponent implements OnInit {
     this.busqIniciada = false;
     //Recibe el objeto usuario, y actualiza cuando se cambia.
     this.Servicio.sharedMessage.subscribe(userRecibido => this.usuarioLogeado = userRecibido);
-
+    this.cargarCanciones();
   }
 
   activarBusqueda() {
@@ -84,20 +87,32 @@ export class PanelSocialComponent implements OnInit {
 
 
   /* --- Servicio de API --- */
-  cargarUsuario(alias: string) {
-    const params = new HttpParams()
-      .set('nick', alias);
+  cargarCanciones() {
 
-    this.http.get(this.Servicio.URL_API + '/user/get', {params})
+    const params = new HttpParams().set('name', '');
+    this.http.get(this.Servicio.URL_API + '/song/getByName', {params})
       .subscribe(
-        (resp: User) => {
-          this.usuarioLogeado = resp;
-          console.log(resp.nick);
+        (resp: Array<Cancion>) => {
+          this.listaCan = resp;
         }
       );
+
   }
 
   /* --- Servicio de API --- */
+
+  obtenerCancion(id: number) {
+
+    let encontrado = false;
+    for (const cancionc of this.listaCan) {
+      if (!encontrado) {
+        if (id === cancionc.id) {
+          this.cancionAmigoActual = cancionc;
+          encontrado = true;
+        }
+      }
+    }
+  }
 
   /* Utiliza el objeto usuario, que contiene el usuario objetivo a ser agregado */
   agregarAmigo() {
