@@ -9,7 +9,7 @@
 <p class="titleL">PLAYLISTS</p>
 <p class="CrearList" (click)="mostrarCrearC=true;mostrarFav=false">
   <img class="iconoAñadir" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>&nbsp;
-<p class="fav" (click)="mostrarFav=!mostrarFav">
+<p class="fav" (click)="mostrarFav=!mostrarFav;Servicio.nextMessage3(false);Servicio.nextMessageVistaLista(false)">
   <img class= "iconoFav" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
 </div>
 
@@ -25,8 +25,16 @@
   <tbody>
     <tr>
       <th class="titulo">{{cancion.name}}</th>
-      <th><img class="heart" (click)="addFav()" src="./../assets/icons8-me-gusta-100.png"></th>
+      <th>
+        <img  class="heart" (click)="addFav(listaFav.id,cancion.id)" src="./../assets/icons8-me-gusta-100.png">
+      </th>
     </tr>
+   <!-- <tr>
+      <th>
+            <img *ngIf="enFav" class="heart" (click)="borrarCancion(cancion.id)" src="./../assets/icons8-Ya-me-gusta.png">
+            *ngIf="noEnFav"
+      </th>
+    </tr>-->
     <tr>
       <th class="autor"> {{cancion.artistas}}</th>
     </tr>
@@ -48,15 +56,11 @@
 </div>
 
 <!-- Lista de playlist -->
-<!--<div class="vertical-menu2" *ngFor="let playlist of usuario.lista_cancion" >
-    <a href="#" (click)="enviarToAlbum()">
-      {{playlist.nombre}}
-    </a>
-</div>-->
 
 <ul class="vertical-menu2" >
-  <li  *ngFor="let playlist of usuario.lista_cancion; first as primero">
-  <a *ngIf="!primero" (click)="enviarToVistaLista();listaPulsada(playlist.id)"> {{playlist.nombre}}</a>
+  <li  *ngFor="let playlist of listasUser; first as primero">
+  <a *ngIf="!primero" (click)="enviarToVistaLista();listaPulsada(playlist.id);Servicio.nextMessageFavList(false);
+                              Servicio.nextMessage3(false)"> {{playlist.nombre}}</a>
   </li>
 </ul>
 
@@ -84,34 +88,38 @@
 </div>
 
 
-<!--********* PANTALLA FAVORTO DE CANCIONES  *********-->
+<!--********* PANTALLA FAVORITO DE CANCIONES  *********-->
 <div *ngIf="mostrarFav" class= "favoritos">
   <div class="container2">
     <div class="misFavs"></div>
-    <div class="vertical-menu3">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-      <a href="#">Link 4</a>
-      <a href="#">Link 5</a>
-      <a href="#">Link 6</a>
-      <a href="#">Link 7</a>
-      <a href="#">Link 8</a>
-      <a href="#">Link 9</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
+    <img title="Reproducir album" (click)="reproducir(listaFav.canciones);"
+         class="img-repr-lista" src="../../assets/play-album.png">
+   <!-- <nav class="menuDesplegable">
+      <ul>
+        <li><img class="iconOrden" src="../../assets/icons8-flechas-de-ordenar-100.png">
+          <ul>
+            <li><a (click)="porFecha=true">Por fecha de subida</a></li>
+            <li><a (click)="porArtista=true">Por artista</a></li>
+            <li><a (click)="porNombre=true">Por nombre</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>-->
+    <div class="marco-tabla">
+      <table class="lista-playlist">
+        <tr *ngFor="let cancion of listaFav.canciones; let i = index">
+          <td  class="listaGen">
+            <img class="imgGenCancion" (click)="Servicio.cargarAlbum(cancion.album);Servicio.reproducirCancion(cancion);Servicio.enviarAlbumPlay(albAct)"
+                                     src="../../assets/play-vector.svg"/></td>
+          <td  class="titulos-album" (click)="Servicio.cargarAlbum(cancion.album);Servicio.nextMessage3(true);
+          Servicio.nextMessageFavList(false)">{{ cancion.name }}</td><td>{{cancion.artistas}}</td>
+          <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
+          <td><img class="img-papel" (click)="borrarCancion(cancion.id)" src="../../assets/trash.png"/></td>
+        </tr>
+      </table>
     </div>
     <label class="tusFavs"><b>Tus favoritos</b></label>
     <label class="usuario"><b>{{usuario.nick}}</b></label>
-    <button class="rep">Reproducir</button>
   </div>
 </div>
 

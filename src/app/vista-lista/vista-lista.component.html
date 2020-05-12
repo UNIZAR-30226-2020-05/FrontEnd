@@ -7,14 +7,22 @@
     <!-- Se ha puesto la imagen por defecto, de momento, pero deberia ir la de la primera cancion. -->
     <img class="img-lista" src="../../assets/ListaDefecto.png"/><div class="nombrePlaylist">PLAYLIST</div>
   </div>
+  <img title="Reproducir album" (click)="reproducir(listaMostrar.canciones);"
+       class="img-repr-lista" src="../../assets/play-album.png">
+
+
+
   <div class="titulo-lista">{{listaMostrar.nombre}} #{{listaMostrar.id}}</div>
   <div class="artista-lista">{{usuarioLog.nick}}</div>
   <div class="marco-tabla">
     <table class="lista-playlist">
-
-      <tr *ngFor="let cancion of listaMostrar.canciones">
-        <td  class="listaGen"><img class="imgGenCancion" src="../../assets/notaMusicalListas.png"/></td>
-        <!--<td  class="titulos-album">{{ cancion.nombre }}</td><td>{{listaMostrar.canciones}}</td>-->
+      <tr *ngFor="let cancion of listaMostrar.canciones; let i = index">
+        <td  class="listaGen"><img class="imgGenCancion" (click)="cargarCaratula(cancion.album);Servicio.reproducirCancion(cancion)"
+                                   src="../../assets/play-vector.svg"/></td>
+        <td  class="titulos-album" (click)="Servicio.cargarAlbum(cancion.album);Servicio.nextMessage3(true);
+          Servicio.nextMessageVistaLista(false)">{{ cancion.name }}</td><td>{{cancion.artistas}}</td>
+        <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
+        <td><img class="img-papel2" (click)="borrarCancion(cancion.id,listaMostrar.id)" src="../../assets/trash.png"/></td>
       </tr>
     </table>
   </div>

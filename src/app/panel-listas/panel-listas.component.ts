@@ -2,6 +2,7 @@ import {Component, Output,EventEmitter, OnInit} from '@angular/core';
 import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
 import {ListaCancionRequest, User, ListaCancion, Cancion, Album} from "../app.component";
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
+import {subscribeToResult} from "rxjs/internal-compatibility";
 
 
 @Component({
@@ -28,15 +29,28 @@ export class PanelListasComponent implements OnInit {
   listaBorrar: ListaCancion;
 
   album: Album = new Album();
-  caratula: string;
+  albAct:Album= new Album();
+
+  listaFav:ListaCancion;
+  listasUser;
+
+  porFecha:boolean=false;
+  porArtista:boolean=false;
+  porNombre:boolean=false;
+
+  enFav:boolean;
+  noEnFav:boolean;
 
 
-  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
+  constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
     this.album.caratula="https://i.dlpng.com/static/png/6331252_preview.png";
+
   }
 
   ngOnInit(): void {
-    this.Servicio.sharedMessage.subscribe(message => this.usuario=message);
+    this.Servicio.sharedMessage.subscribe(message => {
+      if(message != null){this.usuario=message; this.listaFav=this.usuario.lista_cancion[0];this.listasUser=this.usuario.lista_cancion}
+    });
     this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.okVista=messageVistaLista);
     this.Servicio.sharedMessageObjLista.subscribe(messageObjLista => this.listaOk = messageObjLista);
     this.Servicio.canActiva.subscribe((cancionObj) => this.cancion = cancionObj);
@@ -45,6 +59,9 @@ export class PanelListasComponent implements OnInit {
     });
     this.Servicio.sharedMessageFavLista.subscribe(favLista => this.mostrarFav = favLista);
     this.Servicio.sharedMessageFavListaP.subscribe(favListaP => this.mostrarFavP = favListaP);
+    this.Servicio.albumActivo.subscribe(album => this.albAct=album);
+    this.Servicio.sharedMessageBorrarLista.subscribe(lista => this.usuario.lista_cancion=lista);
+
   }
   newMessage() {
     this.Servicio.nextMessage(this.usuario);
@@ -75,18 +92,35 @@ export class PanelListasComponent implements OnInit {
 
   }
 
-  devuelveCaratula(){
-    const params = new HttpParams()
-      .set('titulo', this.cancion.album);
+  addFav(id_lista:number,id_cancion: number){
 
-    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
-      .subscribe((album: Array<Album>) => {this.album = album[0]});
+    this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + id_lista, id_cancion).subscribe( (resp:ListaCancion) =>{
+    console.log(resp);this.listaFav=resp});
   }
 
-  addFav(){
+  sacarTiempo(n: number) {
+    let s = '';
+    let auxMin; let auxSeg;
+    auxMin = Math.floor(n / 60);
+    auxSeg = Math.floor(n % 60);
+    if (auxMin < 10) { s += '0'; }
+    s += auxMin.toString() + ':';
+    if (auxSeg < 10) { s += '0'; }
+    s += auxSeg.toString();
+    return s;
+  }
+  reproducir(lista){
+    this.Servicio.reproducirLista(lista);
+  }
 
-    this.http.patch(this.Servicio.URL_API + '/listaCancion/add' + this.usuario.lista_cancion[0].id, this.cancion.id).subscribe( (resp:string) =>
-      console.log(resp)); //ver actualiazr lista vista de cancion
+  borrarCancion(cancion:number){
+    this.http.patch(this.Servicio.URL_API + '/listaCancion/deleteSong/' + this.listaFav.id, cancion).subscribe((resp:ListaCancion) =>
+    {console.log(resp); this.listaFav=resp});
+
+  }
+
+  comprobarSienFav(cancion:number){
+    this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + this.listaFav.id, cancion).subscribe(
+      (lista:ListaCancion) => {if(lista.nombre=='Favoritos'){this.enFav=true} else{this.noEnFav=true}});
   }
 }
-

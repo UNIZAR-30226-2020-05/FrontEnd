@@ -22,7 +22,7 @@ export class ServicioComponentesService {
   lista:ListaCancion;
   vistaLista:boolean;
   objLista: ListaCancion;
-  listaBorrar: ListaCancion;
+  listaBorrar;
   favLista: boolean;
   favListaP: boolean;
 
@@ -93,9 +93,9 @@ export class ServicioComponentesService {
   sharedMessageFavListaP = this.messageFavListaP.asObservable();
 
 
-  /*Mensaje para mandar lista que tiene que ser borrada */
-  /*private messageListaBorrar = new BehaviorSubject(this.listaBorrar);
-  sharedMessageBorrarLista = this.messageListaBorrar.asObservable();*/
+  /*Mensaje para mandar array de listas de usuario con lista  ya borrada*/
+  private messageListaBorrar = new BehaviorSubject(this.listaBorrar);
+  sharedMessageBorrarLista = this.messageListaBorrar.asObservable();
 
 
   /* Mensaje para pasar variable a la vista central */
@@ -109,6 +109,7 @@ export class ServicioComponentesService {
     this.objLista = new ListaCancion();
     this.albumActiv = new Album();
     this.albumCancionActiva = new Album();
+    this.listaBorrar = new Array(ListaCancion);
   }
 
   nextMessage(message) {
@@ -186,9 +187,9 @@ export class ServicioComponentesService {
     this.messageFavListaP.next(favListaP);
   }
 
-  /*nextMessageOrdenBorrado(messageListaBorrar){
+  nextMessageListaBorrada(messageListaBorrar){
     this.messageListaBorrar.next(messageListaBorrar);
-  }*/
+  }
 
   /*nextMessageCentral(messageCentral) {
     this.messageCentral.next(messageCentral);

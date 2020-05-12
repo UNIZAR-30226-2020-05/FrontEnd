@@ -57,13 +57,13 @@ export class VistaAlbumComponent implements OnInit {
   anyadirAlista( id_lista: number, id_c: number) {
 
     this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + id_lista, id_c).subscribe(
-      (resp: string) => { console.log(resp); } );
+      (resp: string) => { console.log(resp); this.Servicio.nextMessage(this.userActivo) } );
   }
 
   anyadirAlbumAlista(id_lista: number){
     this.http.patch(this.Servicio.URL_API + '/listaCancion/addByAlbum/' + this.userActivo.lista_cancion[1].id,
       this.albActivo.id).subscribe(
-      (resp: string) => {   this.vistaSelAlb = false; } );
+      (resp: string) => {   this.vistaSelAlb = false} );
   }
 
   repr(alb) {
