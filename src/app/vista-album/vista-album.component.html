@@ -22,7 +22,7 @@
       <label class="titulo-eleccion"><b>Añadir álbum ({{albActivo.canciones.length}} canciones) a... </b></label>
       <i *ngFor="let lista of userActivo.lista_cancion; let i = index">
         <hr style="width: 50%"><br/>
-        <i class="enlace" (click)="anyadirAlbumAlista(lista.id);">
+        <i class="enlace" (click)="anyadirAlbumAlista(lista.id); vistaSelAlb = false;">
           {{lista.nombre}}</i>
       </i>
       <hr style="width: 50%"><br/><br/>

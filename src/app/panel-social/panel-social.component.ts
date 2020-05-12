@@ -142,4 +142,21 @@ export class PanelSocialComponent implements OnInit {
     this.Servicio.nextMessage2(false); //Activa album
   }
 
+  obtenerNombreUltCancion(am: Amigo) {
+    if (am.ultimaCancion != null) {
+      return am.ultimaCancion;
+    }
+    else {
+      return 'Ultima canción';
+    }
+  }
+
+  obtenerNombreUltArista(am: Amigo) {
+    if (am.artistaUltimaCancion != null) {
+      return am.artistaUltimaCancion;
+    }
+    else {
+      return 'Ultimo artista';
+    }
+  }
 }

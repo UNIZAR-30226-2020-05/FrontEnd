@@ -1,7 +1,7 @@
 <div class="panel-social">
   <hr>
   <p class="nombre-user">
-    <img class="foto-perfil" src="../../assets/profile-pics/1.jpg"/>{{usuarioLogeado.nick}}
+    <img class="foto-perfil" src="../../assets/profile-pics/{{usuarioLogeado.nombre_avatar}}"/>{{usuarioLogeado.nick}}
     &nbsp;&nbsp;<img (click)="enviarToEdit()" title="Editar cuenta" class="icono-config" src="../../assets/ajustes.png"/>
     <img (click)="mostrarLogin()" title="Cerrar Sesión" class="icono-logout" src="../../assets/logout.png"/>
   </p>
@@ -16,23 +16,17 @@
   <table class="tabla-amig" *ngFor="let usu of usuarioLogeado.amigos">
     <tr>
       <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
-      <td> {{usu.nick}} {{obtenerCancion(usuarioLogeado.id_ultima_reproduccion)}}</td><td>
+      <td> {{usu.nick}} </td><td><!--{{obtenerCancion(usuarioLogeado.id_ultima_reproduccion)}}-->
 
       </td>
     </tr>
     <tr>{{usu.nombre}} {{usu.apellidos}}<td><img  class="icono-papelera" src="../../assets/trash.png" title="Eliminar amigo"(click)="quitarAmigo(usu.id)"></td> </tr>
     <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
       <i class="ultima-cancion"> &nbsp;
-        <span class="enlace"  (click)="
-
-        Servicio.cargarAlbum(cancionAmigoActual.album);
-
-       Servicio.nextMessage3(true);
-
-
-
-">{{cancionAmigoActual.name}}</span> ·
-        <span class="enlace">{{cancionAmigoActual.artistas[0]}}</span>
+        <span class="enlace"  (click)="Servicio.cargarAlbum(cancionAmigoActual.album);
+       Servicio.nextMessage3(true);">
+          {{obtenerNombreUltCancion(usu)}}</span> ·
+        <span class="enlace">{{obtenerNombreUltArista(usu)}}</span>
       </i> </td>
     </tr><br/>
 

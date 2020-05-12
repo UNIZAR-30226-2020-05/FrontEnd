@@ -76,7 +76,8 @@ export class RegistroComponent implements OnInit {
       nick: this.alias, // Nickname
       contrasena: btoa(this.pass), // Contrasena
       tipo_user: true, // false = usuario, true = admin
-      fecha_nacimiento: this.fecha_nac // String de fecha nacim.
+      fecha_nacimiento: this.fecha_nac, // String de fecha nacim.
+      nombre_avatar: this.imageSeleccion + '.jpg'
     };
 
     this.http.post(this.Servicio.URL_API + '/user/create', nuevo).subscribe(
