@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import construct = Reflect.construct;
-import {ServicioComponentesService} from "./servicios/servicio-componentes.service";
+import {ServicioComponentesService} from './servicios/servicio-componentes.service';
 
 
 @Component({
@@ -16,8 +16,6 @@ export class AppComponent {
 
 }
 
-
-
 /* DEFINICIÓN DE MODELOS DEL SISTEMA */
 
 /* Clase User - equivalente a UsuarioDTO en backend */
@@ -29,18 +27,19 @@ export class User {
   contrasena: string;
   tipo_user: boolean;
   fecha_nacimiento: string;
+  nombre_avatar: string;
   id_ultima_reproduccion: number;
   minuto_ultima_reproduccion: number;
   tipo_ultima_reproduccion: number;
-
   lista_cancion: Array<ListaCancion>;
+  lista_podcast: Array<ListaPodcast>;
   amigos: Array<Amigo>;
-
 
   constructor() {
     this.tipo_user = true; // Usuario por defecto
     this.amigos = new Array<Amigo>();
     this.lista_cancion = new Array<ListaCancion>();
+    this.lista_podcast = new Array<ListaPodcast>();
   }
 
 }
@@ -52,6 +51,7 @@ export class UserRequest {
   contrasena: string;
   tipo_user: boolean;
   fecha_nacimiento: string;
+  nombre_avatar: string;
 }
 
 /* Clase Cancion - equivalente a CancionDTO en backend */
@@ -66,6 +66,22 @@ export class Cancion {
   constructor() {
     this.artistas = new Array<string>();
   }
+}
+
+/* Clase Podcast - equivalente a PodcastDTO en backend */
+export class Podcast {
+  id: number;
+  name: string;
+  fecha_subida: Date;
+  duracion: number; //Duración de la canción (en segundos)
+  artista: string; //Autor del programa de podcast
+
+}
+
+export class PodcastRequest {
+  nombre: string;
+  fecha_subida: Date;
+  duracion: number; //Duración del podcast (en segundos)
 }
 
 export class CancionRequest {
@@ -83,6 +99,19 @@ export class ListaCancion {
 
   constructor() {
     this.canciones = new Array<Cancion>();
+  }
+
+}
+
+/* Clase ListaPodcast - equivalente a ListaPodcastDTO en backend */
+export class ListaPodcast {
+  id: number;
+  id_usuario: number;
+  nombre: string;
+  podcasts: Array<Podcast>;
+
+  constructor() {
+    this.podcasts = new Array<Podcast>();
   }
 
 }
@@ -113,6 +142,7 @@ export class Amigo {
   nombre: string;
   apellidos: string;
   ultimaCancion: string;
+  artistaUltimaCancion: string;
 }
 
 export class Album {
@@ -140,6 +170,10 @@ export class ListaCancionRequest {
   nombre: string;
 }
 
+export class ListaPodcastRequest {
+  id_usuario: number;
+  nombre: string;
+}
 
 /*export class canciones {
   nombre: string;

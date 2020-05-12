@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Album, Cancion, ListaCancion, User, UserRequest} from '../app.component';
+import {Album, Cancion, ListaCancion, Podcast, User, UserRequest} from '../app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
@@ -145,6 +145,21 @@ export class ServicioComponentesService {
     this.reproducirLista(nuev);
   }
 
+  reproducirPodcast(pod: Podcast) {
+    const transform: Cancion = {
+      id: pod.id,
+      name: pod.name,
+      fecha_subida: pod.fecha_subida,
+      duracion: pod.duracion,
+      artistas: new Array<string>(),
+      album: 'podcast'
+    };
+    const nuev = new Array<Cancion>();
+    nuev.push(transform);
+    console.log(nuev);
+    this.reproducirLista(nuev);
+  }
+
   establecerCancionActual(cancionAct) {
     this.cancionAct.next(cancionAct);
   }
@@ -195,22 +210,6 @@ export class ServicioComponentesService {
     this.messageCentral.next(messageCentral);
   }*/
 
-
-
-  actualizarUltimaEscucha(can: Cancion) {
-    /* const n: number = can.id;
-     const params = new HttpParams()
-       .set('id_play', can.id.toString())
-       .set('minuto_play', String(0))
-       .set('tipo_play', String(0));
-     let usu: User;
-     this.sharedMessage.subscribe(userRecibido => usu = userRecibido);
-     console.log(usu);
-     this.http.patch( this.URL_API + '/user/modifyLastPlay/' + usu.id, {id_play: 12, minuto_play: 0, tipo_play: 0} ).subscribe(
-       (resp: string) => { console.log(this.nuevo); } );
- /*{id_play: can.id, minuto_play: 0, tipo_play: 0} */
-
-  }
 
   enviarAlbumPlay(albumCanActv){
     this.albumCanActv.next(albumCanActv);

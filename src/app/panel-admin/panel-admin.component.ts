@@ -99,6 +99,7 @@ export class PanelAdminComponent implements OnInit {
     this.gestUsuario = false;
     this.gestAlbum = true;
     this.gestArtista = false;
+    this.gestCanciones = false;
 
     this.nuevoAlbAutor = '';
     this.nuevoAlbAutorExiste = true;
@@ -110,6 +111,7 @@ export class PanelAdminComponent implements OnInit {
     this.gestUsuario = true;
     this.gestAlbum = false;
     this.gestArtista = false;
+    this.gestCanciones = false;
   }
 
   existeArtista() {

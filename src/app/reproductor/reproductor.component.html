@@ -1,13 +1,13 @@
   <div *ngIf="!logeado" class="barra-inferior" >
    <div class="barra-progreso">
      <table class="barra-rep">
-       <tr >
+       <tr>
          <td  *ngIf="cancion.readyState">{{sacarTiempo(cancion.currentTime)}}</td>
          <td style="color: darkgray"  *ngIf="!cancion.readyState">00:00</td>
          <!--{{(cancion.currentTime/60).toString().charAt(0)}}:{{(cancion.currentTime%60).toFixed()}} --->
     <td style="width: 30vw"><input class="slider2" type="range" min="0" [(ngModel)]="cancion.currentTime"
-                 max="{{cancionActual.duracion}}"></td>
-         <td *ngIf="cancion.readyState">&nbsp;{{sacarTiempo(cancionActual.duracion)}}</td>
+                 max="{{(cancionActual.duracion)-3}}"></td>
+         <td *ngIf="cancion.readyState">&nbsp;{{sacarTiempo(cancionActual.duracion)}} </td>
          <td style="color: darkgray"  *ngIf="!cancion.readyState">&nbsp;00:00</td>
        </tr>
      </table>
