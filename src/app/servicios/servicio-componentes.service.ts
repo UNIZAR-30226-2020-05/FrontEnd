@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Album, Cancion, ListaCancion, Podcast, User, UserRequest} from '../app.component';
+import {Album, Cancion, ListaCancion, ListaPodcast, Podcast, User, UserRequest} from '../app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
@@ -29,6 +29,9 @@ export class ServicioComponentesService {
   central: boolean;
 
   vistaUsuario: boolean;
+
+  vistaPodcast:boolean;
+  objPodcast: ListaPodcast;
 
    /* --- Servicio reproducción de canciones ---- */
 
@@ -81,7 +84,7 @@ export class ServicioComponentesService {
   private messageVistaLista = new BehaviorSubject(this.vistaLista);
   sharedMessageVistaLista= this.messageVistaLista.asObservable();
 
-  /*Mensjae para pasar objeto lista ha vista-lista */
+  /*Mensjae para pasar objeto lista a vista-lista */
   private messageObjetoLista = new BehaviorSubject(this.objLista);
   sharedMessageObjLista = this.messageObjetoLista.asObservable();
 
@@ -107,6 +110,15 @@ export class ServicioComponentesService {
   private messageVistaUsuario = new BehaviorSubject(this.vistaUsuario);
   sharedMessageVistaUsuario = this.messageVistaUsuario.asObservable();
 
+
+  /************** PARA PODCAST******************/
+  /* Mensaje para pasar variable que active o desactive la vista-podcast*/
+  private messageVistaPodcast = new BehaviorSubject(this.vistaPodcast);
+  sharedMessageVistaPodcast= this.messageVistaPodcast.asObservable();
+
+  /*Mensjae para pasar objeto lista podcast a vista-podcast */
+  private messageObjetoPodcast = new BehaviorSubject(this.objPodcast);
+  sharedMessageObjPodcast = this.messageObjetoPodcast.asObservable();
 
   constructor(private http: HttpClient) {
     this.URL_API = 'http://3.22.247.114:8080';
@@ -197,6 +209,14 @@ export class ServicioComponentesService {
 
   nextMessageObjLista(messageObjLista){
     this.messageObjetoLista.next(messageObjLista);
+  }
+
+  nextMessageVistaPodcast(messageVistaPodcast){
+    this.messageVistaPodcast.next(messageVistaPodcast);
+  }
+
+  nextMessageObjPodcast(messageObjPodcast){
+    this.messageObjetoPodcast.next(messageObjPodcast);
   }
 
   nextMessageFavList(favLista){

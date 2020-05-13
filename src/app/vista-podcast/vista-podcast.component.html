@@ -1,0 +1,24 @@
+<div *ngIf="vistaPodcast" class="vista-podcast">
+  <img class="img-papel" (click)="borrar()" src="../../assets/trash.png"/>
+  <div class="hayCanciones">
+    <!-- Se ha puesto la imagen por defecto, de momento, pero deberia ir la de la primera cancion. -->
+    <img class="img-lista" src="../../assets/ListaDefecto.png"/><div class="nombrePlaylist">PLAYLIST</div>
+  </div>
+  <img title="Reproducir album" (click)="reproducir(listaMostrar.podcasts);"
+       class="img-repr-lista" src="../../assets/play-album.png">
+
+  <div class="titulo-lista">{{listaMostrar.nombre}} #{{listaMostrar.id}}</div>
+  <div class="artista-lista">{{usuarioLog.nick}}</div>
+  <div class="marco-tabla">
+    <table class="lista-playlist">
+      <tr *ngFor="let podcast of listaMostrar.podcasts; let i = index">
+        <td  class="listaGen"><img class="imgGenCancion" (click)="Servicio.reproducirPodcast(podcast)"
+                                   src="../../assets/play-vector.svg"/></td>
+        <td  class="titulos-album" (click)="
+          Servicio.nextMessageVistaPodcast(false)">{{ podcast.name }}</td><td>{{podcast.artista}}</td>
+        <td>{{sacarTiempo(podcast.duracion)}}</td><td>Pista {{i+1}}</td>
+        <td><img class="img-papel2" (click)="borrarPodcast(podcast.id,listaMostrar.id)" src="../../assets/trash.png"/></td>
+      </tr>
+    </table>
+  </div>
+</div>

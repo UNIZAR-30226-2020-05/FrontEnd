@@ -27,11 +27,15 @@ export class PanelListasComponent implements OnInit {
   mostrarFavP: boolean=false; //variable de podcasts
 
   okVista:boolean=true;
+  okVistaPodcast:boolean=true;
 
   usuario: User;
   nombreLista: string;
   nombreListaPodcast: string;
+
   listaOk: ListaCancion;
+  listaOkPodcast: ListaPodcast;
+
   cancion: Cancion;
   idLista: number;
 
@@ -66,6 +70,9 @@ export class PanelListasComponent implements OnInit {
     });
     this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.okVista=messageVistaLista);
     this.Servicio.sharedMessageObjLista.subscribe(messageObjLista => this.listaOk = messageObjLista);
+    this.Servicio.sharedMessageVistaPodcast.subscribe(messageVistaPodcast => this.okVistaPodcast=messageVistaPodcast);
+    this.Servicio.sharedMessageObjPodcast.subscribe(messageObjPodcast => this.listaOkPodcast = messageObjPodcast);
+
     this.Servicio.canActiva.subscribe((cancionObj) => this.cancion = cancionObj);
     this.Servicio.albumReprod.subscribe((albumCanActv) => {
       if (albumCanActv != null) { (this.album = albumCanActv); }
@@ -113,6 +120,13 @@ export class PanelListasComponent implements OnInit {
     const params = new HttpParams().set('id', param);
     this.http.get(this.Servicio.URL_API + '/listaCancion/get', {params}).subscribe( (resp: ListaCancion) =>
     {this.listaOk=resp; this.Servicio.nextMessageObjLista(this.listaOk);});
+
+  }
+  listaPulsadaPodcast(id: number){
+    const param = id.toString();
+    const params = new HttpParams().set('id', param);
+    this.http.get(this.Servicio.URL_API + '/listaPodcast/get', {params}).subscribe( (resp: ListaPodcast) =>
+    {this.listaOkPodcast=resp; this.Servicio.nextMessageObjPodcast(this.listaOkPodcast);});
 
   }
 

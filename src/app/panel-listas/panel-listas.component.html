@@ -3,7 +3,7 @@
   <p class="titleP">PODCAST</p>
   <p class="ListP" (click)="mostrarCrearP=true; mostrarFavP=false">
     <img class="addP" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>
-  <p class="fave" (click)="mostrarFavP=!mostrarFavP">
+  <p class="fave" (click)="mostrarFavP=!mostrarFavP;Servicio.nextMessage3(false);Servicio.nextMessageVistaPodcast(false)">
     <img class= "favP" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
   <hr>
 <p class="titleL">PLAYLISTS</p>
@@ -44,7 +44,7 @@
 <!-- vista lista de podcast -->
 <ul class="vertical-menu" >
   <li  *ngFor="let podcast of listasUserPodcast; first as primero">
-    <a *ngIf="!primero" (click)="listaPulsada(podcast.id);Servicio.nextMessageFavList(false);
+    <a *ngIf="!primero" (click)="listaPulsadaPodcast(podcast.id);Servicio.nextMessageVistaPodcast(!okVistaPodcast);Servicio.nextMessageFavList(false);
                               Servicio.nextMessage3(false)"> {{podcast.nombre}}</a>
   </li>
 </ul>
