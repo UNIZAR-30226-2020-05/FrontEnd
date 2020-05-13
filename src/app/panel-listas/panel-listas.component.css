@@ -393,14 +393,15 @@ button:hover {
   cursor: pointer;
 }
 
-.titulos-album{
+.titulos-album:hover{
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .img-repr-lista {
   width: 4%;
   position: absolute;
-  right: 22%;
+  right: 18%;
   top: 3%;
   cursor: pointer;
 }
@@ -413,73 +414,42 @@ button:hover {
 
 
 /********************MENU DESPLEGABLE ****************/
-.menuDesplegable ul {
-  list-style:none;
-  margin-left: 47%;
-  top: 1%;
+
+.menuCSS3{
   position: absolute;
+  top: 0%;
+  margin-left: 73%;
+  z-index: 5;
+
+
+}
+.menuCSS3 ul {
+  display: flex;
+  padding: 3%;
+  margin: 0;
+  list-style: none;
+}
+.menuCSS3 a {
+  display: block;
+  padding: 5% -1%;
+  background-color: #0b1d19;
+  text-decoration: none;
+  color: aliceblue;
+  margin-right: 3%;
+
+}
+.menuCSS3 a:hover {
+  background-color: #123531;
+}
+.menuCSS3 ul li ul {
+  display: none;
+}
+.menuCSS3 ul li a:hover + ul, .menuCSS3 ul li ul:hover {
+  display: block;
 }
 
 .iconOrden{
-  width: 47%;
-  height:47%;
-  display: block;
-
-}
-.menuDesplegable ul li {
-  background-color:#2e518b;
-
+  width: 52%;
+  height: 52%;
 }
 
-.menuDesplegable ul a {
-  display:block;
-  color:#fff;
-  text-decoration:none;
-  font-weight:400;
-  font-size:15px;
-  padding:10px;
-  font-family:Roboto, serif;
-  text-transform:uppercase;
-  letter-spacing:1px;
-}
-
-.menuDesplegable ul li {
-  position:relative;
-  float:left;
-  margin:0;
-  padding:0;
-}
-
-/* efecto al pasar el ratón por los items del menu */
-.menu ul li:hover {
-  background:#5b78a7;
-}
-
-.menuDesplegable ul ul {
-  display:none;
-  position:absolute;
-  top:100%;
-  left:0;
-  background:#eee;
-  padding:0;
-}
-
-/* items del menu desplegable */
-
-.menuDesplegable ul ul li {
-  float:none;
-  width:150px
-}
-
-/* enlaces de los items del menu desplegable */
-
-.menuDesplegable ul ul a {
-  line-height:120%;
-  padding:10px 15px;
-}
-
-/* items del menu desplegable al pasar el ratón */
-
-.menuDesplegable ul li:hover > ul {
-  display:block;
-}

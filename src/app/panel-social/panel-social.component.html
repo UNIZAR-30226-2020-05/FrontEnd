@@ -1,7 +1,7 @@
 <div class="panel-social">
   <hr>
   <p class="nombre-user">
-    <img class="foto-perfil" src="../../assets/profile-pics/{{usuarioLogeado.nombre_avatar}}"/>{{usuarioLogeado.nick}}
+    <img class="foto-perfil" (click)="Servicio.activarVistaUsuario(true)" src="../../assets/profile-pics/{{usuarioLogeado.nombre_avatar}}"/>{{usuarioLogeado.nick}}
     &nbsp;&nbsp;<img (click)="enviarToEdit()" title="Editar cuenta" class="icono-config" src="../../assets/ajustes.png"/>
     <img (click)="mostrarLogin()" title="Cerrar Sesión" class="icono-logout" src="../../assets/logout.png"/>
   </p>

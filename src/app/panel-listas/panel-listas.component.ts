@@ -48,6 +48,7 @@ export class PanelListasComponent implements OnInit {
   porFecha:boolean=false;
   porArtista:boolean=false;
   porNombre:boolean=false;
+  listaOrdenada: Array<Cancion>;
 
   enFav:boolean;
   noEnFav:boolean;
@@ -150,6 +151,12 @@ export class PanelListasComponent implements OnInit {
   borrarPodcast(podcast:number){
     this.http.patch(this.Servicio.URL_API + '/listaPodcast/deletePodcast/' + this.listaFavPodcast.id, podcast).subscribe((resp:ListaPodcast) =>
     {console.log(resp); this.listaFavPodcast=resp});
+
+  }
+
+  ordenarFecha(){
+    this.listaOrdenada=this.listaFav.canciones;
+   this.listaOrdenada=this.listaOrdenada.reverse();
 
   }
 }

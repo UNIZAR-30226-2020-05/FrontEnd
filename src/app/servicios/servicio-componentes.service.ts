@@ -28,6 +28,7 @@ export class ServicioComponentesService {
 
   central: boolean;
 
+  vistaUsuario: boolean;
 
    /* --- Servicio reproducción de canciones ---- */
 
@@ -101,6 +102,10 @@ export class ServicioComponentesService {
   /* Mensaje para pasar variable a la vista central */
   private messageCentral = new BehaviorSubject(this.central);
   sharedMessageCentral = this.messageCentral.asObservable();
+
+  /*********PARA VISTA USUARIO*************/
+  private messageVistaUsuario = new BehaviorSubject(this.vistaUsuario);
+  sharedMessageVistaUsuario = this.messageVistaUsuario.asObservable();
 
 
   constructor(private http: HttpClient) {
@@ -213,5 +218,9 @@ export class ServicioComponentesService {
 
   enviarAlbumPlay(albumCanActv){
     this.albumCanActv.next(albumCanActv);
+  }
+
+  activarVistaUsuario(vistaUsuario){
+    this.messageVistaUsuario.next(vistaUsuario);
   }
 }

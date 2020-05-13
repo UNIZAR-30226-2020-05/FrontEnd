@@ -58,11 +58,27 @@
   height: 30%;
   top: 100%;
 }
+.lista-podcast{
+
+  overflow: auto;
+  width: 90%;
+  height: 30%;
+  top: 100%;
+}
 
 .marco-tabla{
   margin-left: 3%;
   height: 80%;
-  width: 95%;
+  width: 47.5%;
+  top: 23%;
+  overflow: auto;
+  vertical-align:middle;
+  position: absolute;
+}
+.marco-tabla2{
+  margin-left: 47.5%;
+  height: 80%;
+  width: 47.5%;
   top: 23%;
   overflow: auto;
   vertical-align:middle;

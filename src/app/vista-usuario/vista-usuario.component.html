@@ -1,0 +1,27 @@
+<div *ngIf="aparecerUsuario" class="vista-lista">
+  <img class="img-Usuario" [src]="usuarioLog.nombre_avatar"/><div class="nombreUsuario">{{usuarioLog.nombre}}</div>
+  <div class="artista-lista">{{usuarioLog.nick}}</div>
+  <div class="marco-tabla">
+    <table class="lista-playlist">
+      <tr *ngFor="let lista of usuarioLog.lista_cancion; let i = index">
+        <td  class="listaGen"><img class="imgGenCancion" src="../../assets/ListaDefecto.png"/></td>
+        <td  class="titulos-album" (click)="reproducir(lista);Servicio.nextMessage3(true);
+          Servicio.nextMessageVistaLista(false)">{{ lista.nombre }}</td>
+        <td><img class="img-papel2" (click)="borrar(lista.id)" src="../../assets/trash.png"/></td>
+      </tr>
+    </table>
+  </div>
+  <div class="marco-tabla2">
+    <table class="lista-podcast">
+      <tr *ngFor="let podcast of usuarioLog.lista_podcast; let i = index">
+        <td  class="listaGen"><img class="imgGenCancion" src="../../assets/podcast1.jpg"/></td>
+        <td  class="titulos-album" (click)="Servicio.nextMessage3(true);
+          Servicio.nextMessageVistaLista(false)">{{ podcast.nombre }}</td>
+        <td><img class="img-papel2" (click)="borrarPodcast(podcast.id)" src="../../assets/trash.png"/></td>
+      </tr>
+    </table>
+  </div>
+
+
+</div>
+

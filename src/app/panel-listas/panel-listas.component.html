@@ -88,17 +88,18 @@
     <div class="misFavs"></div>
     <img title="Reproducir album" (click)="reproducir(listaFav.canciones);"
          class="img-repr-lista" src="../../assets/play-album.png">
-   <!-- <nav class="menuDesplegable">
+    <nav class="menuCSS3">
       <ul>
-        <li><img class="iconOrden" src="../../assets/icons8-flechas-de-ordenar-100.png">
+        <li><a href="#"><img class="iconOrden" src="../../assets/icons8-flechas-de-ordenar-100.png"></a>
           <ul>
-            <li><a (click)="porFecha=true">Por fecha de subida</a></li>
-            <li><a (click)="porArtista=true">Por artista</a></li>
-            <li><a (click)="porNombre=true">Por nombre</a></li>
+            <li><a href="#" (click)="porFecha=true">Últimas añadidas</a></li>
+            <li><a href="#" (click)="porArtista=true">Por artista</a></li>
+            <li><a href="#" (click)="porNombre=true">Por nombre</a></li>
           </ul>
         </li>
       </ul>
-    </nav>-->
+    </nav>
+    <div *ngIf="porFecha">{{ordenarFecha()}}</div>
     <div class="marco-tabla">
       <table class="lista-playlist">
         <tr *ngFor="let cancion of listaFav.canciones; let i = index">
