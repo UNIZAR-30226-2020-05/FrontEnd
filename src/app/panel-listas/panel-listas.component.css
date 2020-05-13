@@ -154,16 +154,26 @@ hr{
   height: 20vh;
   overflow-y: auto;
   position: absolute;
-  top: 225px;
+  top: 29%;
+  list-style: none;
+  cursor: pointer;
+  background-color:#0b1d19;
+  margin-left: -1.7%;
 }
 
+
 .vertical-menu a {
-  background-color:#0b1d19;
+  background-color: #0b1d19;
+  font-family: Roboto, serif;
   color: aliceblue;
   display: block;
-  padding: 8px 20px;
   text-decoration: none;
+  list-style: none;
+  cursor: pointer;
+  padding: 5% 4%;
 }
+
+
 ::-webkit-scrollbar {
   width: 13px;
 }

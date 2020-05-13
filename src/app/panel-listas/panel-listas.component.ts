@@ -1,6 +1,14 @@
 import {Component, Output,EventEmitter, OnInit} from '@angular/core';
 import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
-import {ListaCancionRequest, User, ListaCancion, Cancion, Album} from "../app.component";
+import {
+  ListaCancionRequest,
+  User,
+  ListaCancion,
+  Cancion,
+  Album,
+  ListaPodcastRequest,
+  ListaPodcast
+} from "../app.component";
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
 import {subscribeToResult} from "rxjs/internal-compatibility";
 
@@ -22,6 +30,7 @@ export class PanelListasComponent implements OnInit {
 
   usuario: User;
   nombreLista: string;
+  nombreListaPodcast: string;
   listaOk: ListaCancion;
   cancion: Cancion;
   idLista: number;
@@ -32,7 +41,9 @@ export class PanelListasComponent implements OnInit {
   albAct:Album= new Album();
 
   listaFav:ListaCancion;
+  listaFavPodcast:ListaPodcast;
   listasUser;
+  listasUserPodcast;
 
   porFecha:boolean=false;
   porArtista:boolean=false;
@@ -49,7 +60,8 @@ export class PanelListasComponent implements OnInit {
 
   ngOnInit(): void {
     this.Servicio.sharedMessage.subscribe(message => {
-      if(message != null){this.usuario=message; this.listaFav=this.usuario.lista_cancion[0];this.listasUser=this.usuario.lista_cancion}
+      if(message != null){this.usuario=message; this.listaFav=this.usuario.lista_cancion[0];this.listasUser=this.usuario.lista_cancion;
+      this.listaFavPodcast= this.usuario.lista_podcast[0];this.listasUserPodcast=this.usuario.lista_podcast}
     });
     this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.okVista=messageVistaLista);
     this.Servicio.sharedMessageObjLista.subscribe(messageObjLista => this.listaOk = messageObjLista);
@@ -81,6 +93,17 @@ export class PanelListasComponent implements OnInit {
     this.http.post(this.Servicio.URL_API + '/listaCancion/create', lista).subscribe(
       (resp: ListaCancion) => { console.log(resp); this.usuario.lista_cancion.push(resp)});
 
+
+  }
+
+  nuevaListaPodcast(){
+    const lista: ListaPodcastRequest = {
+      id_usuario: this.usuario.id,
+      nombre: this.nombreListaPodcast,
+    };
+
+    this.http.post(this.Servicio.URL_API + '/listaPodcast/create', lista).subscribe(
+      (resp: ListaPodcast) => { console.log(resp); this.usuario.lista_podcast.push(resp)});
 
   }
 
@@ -122,5 +145,11 @@ export class PanelListasComponent implements OnInit {
   comprobarSienFav(cancion:number){
     this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + this.listaFav.id, cancion).subscribe(
       (lista:ListaCancion) => {if(lista.nombre=='Favoritos'){this.enFav=true} else{this.noEnFav=true}});
+  }
+
+  borrarPodcast(podcast:number){
+    this.http.patch(this.Servicio.URL_API + '/listaPodcast/deletePodcast/' + this.listaFavPodcast.id, podcast).subscribe((resp:ListaPodcast) =>
+    {console.log(resp); this.listaFavPodcast=resp});
+
   }
 }

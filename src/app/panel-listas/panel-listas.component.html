@@ -41,19 +41,13 @@
   </tbody>
 </table>
 <!--/****************** MENUS VERTICALES DE PLAYLIST Y PODCAST ********************/-->
-<div class="vertical-menu">
-
-  <a href="#"> {{this.usuario.id}}</a>
-  <!--<a href="#">Link 2</a>
-  <a href="#">Link 3</a>
-  <a href="#">Link 4</a>
-  <a href="#">Link 5</a>
-  <a href="#">Link 6</a>
-  <a href="#">Link 7</a>
-  <a href="#">Link 8</a>
-  <a href="#">Link 9</a>
-  <a href="#">Link 10</a> -->
-</div>
+<!-- vista lista de podcast -->
+<ul class="vertical-menu" >
+  <li  *ngFor="let podcast of listasUserPodcast; first as primero">
+    <a *ngIf="!primero" (click)="listaPulsada(podcast.id);Servicio.nextMessageFavList(false);
+                              Servicio.nextMessage3(false)"> {{podcast.nombre}}</a>
+  </li>
+</ul>
 
 <!-- Lista de playlist -->
 
@@ -81,10 +75,10 @@
 <div *ngIf="mostrarCrearP" class= "crear">
   <div class="container">
     <label class="nueva"><b>Crear nueva lista </b></label>
-    <input type="nombre" placeholder="Nombre nueva lista" name="name" required>
+    <input type="nombre" placeholder="Nombre nueva lista" name="name" required [(ngModel)]="nombreListaPodcast">
   </div>
   <button (click)="mostrarCrearP=false" class="cancel">Cancelar</button>
-  <button (click)="mostrarCrearP=false" class="aceptar">Crear</button>
+  <button (click)="mostrarCrearP=false;nuevaListaPodcast()" class="aceptar">Crear</button>
 </div>
 
 
@@ -127,30 +121,34 @@
 <div *ngIf="mostrarFavP" class= "favoritos">
   <div class="container2">
     <div class="misFavs"></div>
-    <div class="vertical-menu3">
-      <a href="#">Link 1</a>
-      <a href="#">Link 2</a>
-      <a href="#">Link 3</a>
-      <a href="#">Link 4</a>
-      <a href="#">Link 5</a>
-      <a href="#">Link 6</a>
-      <a href="#">Link 7</a>
-      <a href="#">Link 8</a>
-      <a href="#">Link 9</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
-      <a href="#">Link 10</a>
+    <img title="Reproducir album" (click)="reproducir(listaFavPodcast.podcasts);"
+         class="img-repr-lista" src="../../assets/play-album.png">
+    <!-- <nav class="menuDesplegable">
+       <ul>
+         <li><img class="iconOrden" src="../../assets/icons8-flechas-de-ordenar-100.png">
+           <ul>
+             <li><a (click)="porFecha=true">Por fecha de subida</a></li>
+             <li><a (click)="porArtista=true">Por artista</a></li>
+             <li><a (click)="porNombre=true">Por nombre</a></li>
+           </ul>
+         </li>
+       </ul>
+     </nav>-->
+    <div class="marco-tabla">
+      <table class="lista-playlist">
+        <tr *ngFor="let podcast of listaFavPodcast.podcasts; let i = index">
+          <td  class="listaGen">
+            <img class="imgGenCancion" (click)="Servicio.reproducirPodcast(podcast)"
+                 src="../../assets/play-vector.svg"/></td>
+          <td  class="titulos-album" (click)="Servicio.nextMessage3(true);
+        Servicio.nextMessageFavList(false)">{{ podcast.name }}</td><td>{{podcast.artista}}</td>
+          <td>{{sacarTiempo(podcast.duracion)}}</td><td>Pista {{i+1}}</td>
+          <td><img class="img-papel" (click)="borrarPodcast(podcast.id)" src="../../assets/trash.png"/></td>
+        </tr>
+      </table>
     </div>
     <label class="tusFavs"><b>Tus favoritos</b></label>
     <label class="usuario"><b>{{usuario.nick}}</b></label>
-    <button class="rep">Reproducir</button>
   </div>
 </div>
 
