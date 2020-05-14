@@ -1,4 +1,4 @@
-.vista-lista{
+.vista-usuario{
   background-color:#0b1d19; /*#0b1d19*/
   width: 61%;
   height: 62%;
@@ -10,7 +10,7 @@
   color: aliceblue;
 }
 
-.img-lista{
+.img-Usuario{
   margin-left: 2%;
   width: 11%;
   top: 0%;
@@ -33,20 +33,18 @@
   cursor: pointer;
 }
 
-.nombrePlaylist{
-  top: 10.5%;
+.nombreUsuario{
+  top: 14%;
   left: 24%;
   position: fixed;
-  border-style: solid;
-  border-color: #b4b4b4;
   /*border-inline-start-width: 8px;*/
   width: fit-content;
-  font-size: 90%;
+  font-size: 200%;
 
 }
 
 .imgGenCancion{
-  width: 1.5vw;
+  width: 4vw;
   vertical-align: middle;
   cursor: pointer;
 }
@@ -68,20 +66,29 @@
 
 .marco-tabla{
   margin-left: 3%;
-  height: 80%;
-  width: 47.5%;
-  top: 23%;
+  height: 56%;
+  width: 39%;
+  top: 45%;
   overflow: auto;
   vertical-align:middle;
   position: absolute;
 }
 .marco-tabla2{
-  margin-left: 47.5%;
-  height: 80%;
-  width: 47.5%;
-  top: 23%;
+  margin-left: 56%;
+  height: 56%;
+  width:39%;
+  top: 45%;
   overflow: auto;
   vertical-align:middle;
+  position: absolute;
+}
+.marco-ultimo {
+  margin-left: 3%;
+  height: 20%;
+  width: 47.5%;
+  top:25%;
+  overflow: auto;
+  vertical-align: middle;
   position: absolute;
 }
 
@@ -91,24 +98,25 @@
   text-align:center;
   padding-top: 1%;
   padding-bottom: 1%;
-  width: 10%;
+  width: 14%;
 }
 
 
-.titulo-lista{
-  top: 14%;
+.nick-usuario{
+  top: 18%;
   left: 24%;
-  font-size: 250%;
-  display: inline-block;
-  position: fixed;
-}
-
-.artista-lista{
-  top: 20%;
-  left: 24%;
-  font-size: 100%;
+  font-size: 140%;
   font-style: italic;
   position: fixed;
+}
+
+.titulos{
+  font-size: 110%;
+}
+
+.titulos:hover{
+  cursor: pointer;
+  text-decoration: underline;
 }
 
 ::-webkit-scrollbar {

@@ -1,8 +1,7 @@
 <div *ngIf="vistaPodcast" class="vista-podcast">
   <img class="img-papel" (click)="borrar()" src="../../assets/trash.png"/>
   <div class="hayCanciones">
-    <!-- Se ha puesto la imagen por defecto, de momento, pero deberia ir la de la primera cancion. -->
-    <img class="img-lista" src="../../assets/ListaDefecto.png"/><div class="nombrePlaylist">PLAYLIST</div>
+    <img class="img-lista" src="../../assets/ListaDefecto.png"/><div class="nombrePlaylist">PODCAST</div>
   </div>
   <img title="Reproducir album" (click)="reproducir(listaMostrar.podcasts);"
        class="img-repr-lista" src="../../assets/play-album.png">

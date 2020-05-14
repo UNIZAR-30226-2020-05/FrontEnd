@@ -179,4 +179,9 @@ input {
   -webkit-box-shadow: inset 0 0 6px rgba(180, 180, 180, 0.5);
 }
 
+.nombre:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 

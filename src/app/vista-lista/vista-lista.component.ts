@@ -12,13 +12,13 @@ export class VistaListaComponent implements OnInit {
 
   aparecer:boolean;
 
-  listaMostrar: ListaCancion;
+  listaMostrar: ListaCancion= new ListaCancion();
 
   usuarioLog: User;
 
   play:boolean=false;
 
-  albumActual:Album;
+  albumActual:Album=new Album();
 
   constructor(public Servicio:ServicioComponentesService, private http:HttpClient) { }
 

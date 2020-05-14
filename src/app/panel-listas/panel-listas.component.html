@@ -3,13 +3,15 @@
   <p class="titleP">PODCAST</p>
   <p class="ListP" (click)="mostrarCrearP=true; mostrarFavP=false">
     <img class="addP" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>
-  <p class="fave" (click)="mostrarFavP=!mostrarFavP;Servicio.nextMessage3(false);Servicio.nextMessageVistaPodcast(false)">
+  <p class="fave" (click)="mostrarFavP=!mostrarFavP;Servicio.nextMessage3(false);Servicio.nextMessageVistaPodcast(false);
+    Servicio.activarVistaUsuario(false)">
     <img class= "favP" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
   <hr>
 <p class="titleL">PLAYLISTS</p>
 <p class="CrearList" (click)="mostrarCrearC=true;mostrarFav=false">
   <img class="iconoAñadir" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>&nbsp;
-<p class="fav" (click)="mostrarFav=!mostrarFav;Servicio.nextMessage3(false);Servicio.nextMessageVistaLista(false)">
+<p class="fav" (click)="mostrarFav=!mostrarFav;Servicio.nextMessage3(false);Servicio.nextMessageVistaLista(false);
+    Servicio.activarVistaUsuario(false)">
   <img class= "iconoFav" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
 </div>
 
@@ -24,7 +26,7 @@
 <table>
   <tbody>
     <tr>
-      <th class="titulo">{{cancion.name}}</th>
+      <th class="titulo" (click)="Servicio.cargarAlbum(cancion.album);Servicio.nextMessage3(true)">{{cancion.name}}</th>
       <th>
         <img  class="heart" (click)="addFav(listaFav.id,cancion.id)" src="./../assets/icons8-me-gusta-100.png">
       </th>
@@ -45,7 +47,7 @@
 <ul class="vertical-menu" >
   <li  *ngFor="let podcast of listasUserPodcast; first as primero">
     <a *ngIf="!primero" (click)="listaPulsadaPodcast(podcast.id);Servicio.nextMessageVistaPodcast(!okVistaPodcast);Servicio.nextMessageFavList(false);
-                              Servicio.nextMessage3(false)"> {{podcast.nombre}}</a>
+                              Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false)"> {{podcast.nombre}}</a>
   </li>
 </ul>
 
@@ -54,7 +56,7 @@
 <ul class="vertical-menu2" >
   <li  *ngFor="let playlist of listasUser; first as primero">
   <a *ngIf="!primero" (click)="enviarToVistaLista();listaPulsada(playlist.id);Servicio.nextMessageFavList(false);
-                              Servicio.nextMessage3(false)"> {{playlist.nombre}}</a>
+                              Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false)"> {{playlist.nombre}}</a>
   </li>
 </ul>
 

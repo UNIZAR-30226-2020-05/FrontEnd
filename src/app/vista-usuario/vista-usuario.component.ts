@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {Album, ListaCancion, User} from "../app.component";
+import {Album, Cancion, ListaCancion, ListaPodcast, User} from "../app.component";
 import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-vista-usuario',
@@ -11,19 +11,53 @@ import {HttpClient} from "@angular/common/http";
 export class VistaUsuarioComponent implements OnInit {
   aparecerUsuario:boolean;
 
-  listaMostrar: ListaCancion;
-
   usuarioLog: User;
 
   play:boolean=false;
 
-  albumActual:Album;
+  ultimAlbum: Album= new Album();
+
+  okVista:boolean=true;
+  okVistaPodcast:boolean=true;
+
+  listaOk:ListaCancion = new ListaCancion();
+  listaOkPodcast:ListaPodcast = new ListaPodcast();
 
   constructor(public Servicio:ServicioComponentesService, private http:HttpClient) { }
 
   ngOnInit(): void {
-    this.Servicio.sharedMessage.subscribe(message=> this.usuarioLog= message);
+    this.Servicio.sharedMessage.subscribe(message=> {this.usuarioLog= message;
+      if (message.id_ultima_reproduccion != null && message.minuto_ultima_reproduccion != null) {
+
+        const params = new HttpParams().set('name', '');
+        this.http.get(this.Servicio.URL_API + '/song/getByName', {params})
+          .subscribe(
+            (resp: Array<Cancion>) => {
+
+              let encontrado = false;
+              for (const cancionc of resp) {
+                if (!encontrado) {
+                  if (cancionc.id === message.id_ultima_reproduccion) {
+
+                    const params = new HttpParams().set('titulo', cancionc.album.toString());
+                    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
+                      .subscribe(
+                        (alb: Array<Album>) => {
+                          this.ultimAlbum= alb[0];
+                        }
+                      );
+                    encontrado = true;
+                  }
+                }
+              }
+
+            }
+          );
+      }
+    });
     this.Servicio.sharedMessageVistaUsuario.subscribe(vistaUsuario => this.aparecerUsuario= vistaUsuario);
+    this.Servicio.sharedMessageVistaLista.subscribe(vistaC => this.okVista= vistaC);
+    this.Servicio.sharedMessageVistaPodcast.subscribe(vista => this.okVistaPodcast = vista);
   }
 
   borrar(lista){
@@ -36,8 +70,18 @@ export class VistaUsuarioComponent implements OnInit {
     this.Servicio.nextMessage(this.usuarioLog);
   }
 
-  reproducir(lista){
-    this.Servicio.reproducirLista(lista);
-  }
+  listaPulsada(id: number){
+    const param = id.toString();
+    const params = new HttpParams().set('id', param);
+    this.http.get(this.Servicio.URL_API + '/listaCancion/get', {params}).subscribe( (resp: ListaCancion) =>
+    {this.listaOk=resp; this.Servicio.nextMessageObjLista(this.listaOk);});
 
+  }
+  listaPulsadaPodcast(id: number){
+    const param = id.toString();
+    const params = new HttpParams().set('id', param);
+    this.http.get(this.Servicio.URL_API + '/listaPodcast/get', {params}).subscribe( (resp: ListaPodcast) =>
+    {this.listaOkPodcast=resp; this.Servicio.nextMessageObjPodcast(this.listaOkPodcast);});
+
+  }
 }

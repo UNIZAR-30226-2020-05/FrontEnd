@@ -30,6 +30,8 @@ export class PanelSocialComponent implements OnInit {
 
   cancionAmigoActual: Cancion;
 
+  okVistaUsuario:boolean=true;
+
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
   }
 
@@ -40,6 +42,7 @@ export class PanelSocialComponent implements OnInit {
     //Recibe el objeto usuario, y actualiza cuando se cambia.
     this.Servicio.sharedMessage.subscribe(userRecibido => this.usuarioLogeado = userRecibido);
     this.cargarCanciones();
+    this.Servicio.sharedMessageVistaUsuario.subscribe(okVista => this.okVistaUsuario = okVista);
   }
 
   activarBusqueda() {

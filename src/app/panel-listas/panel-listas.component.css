@@ -111,6 +111,11 @@
   text-align: center;
   position: absolute;
 }
+.titulo:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .heart{
   border-radius: 20%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
   vertical-align: middle;
