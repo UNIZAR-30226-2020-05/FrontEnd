@@ -80,6 +80,7 @@ export class Podcast {
 
 export class PodcastRequest {
   nombre: string;
+  artista: string;
   fecha_subida: Date;
   duracion: number; //Duración del podcast (en segundos)
 }
@@ -141,6 +142,7 @@ export class Amigo {
   nick: string;
   nombre: string;
   apellidos: string;
+  avatar: string;
   ultimaCancion: string;
   artistaUltimaCancion: string;
 }

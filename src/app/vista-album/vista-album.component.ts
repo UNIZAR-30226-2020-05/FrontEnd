@@ -61,7 +61,7 @@ export class VistaAlbumComponent implements OnInit {
   }
 
   anyadirAlbumAlista(id_lista: number){
-    this.http.patch(this.Servicio.URL_API + '/listaCancion/addByAlbum/' + this.userActivo.lista_cancion[1].id,
+    this.http.patch(this.Servicio.URL_API + '/listaCancion/addByAlbum/' + id_lista,
       this.albActivo.id).subscribe(
       (resp: string) => {   this.vistaSelAlb = false} );
   }

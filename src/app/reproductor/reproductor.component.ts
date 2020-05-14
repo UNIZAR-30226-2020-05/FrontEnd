@@ -66,6 +66,10 @@ export class ReproductorComponent implements OnInit {
   ngOnInit(): void {
     this.activo = false;
 
+    this.Servicio.sharedMessage2.subscribe(message2 => {
+      this.cancion.pause(); // Si cierra sesión, debe parar la reproducción.
+    });
+
     /* Recibe y actualiza cancion o lista a reproducir */ // Así chuta. No tocar.
     this.Servicio.cancionActiva.subscribe((listCan)  => {
       if (listCan != null) {
@@ -127,9 +131,17 @@ export class ReproductorComponent implements OnInit {
 
   }
 
-  cargarAudio(orig: Cancion) {
-
-    this.cancion.src = this.Servicio.URL_API + '/song/play/' + orig.name;
+  cargarAudio(orig: Cancion) { // Recibe canciones y podcast CONVERTIDOS
+    let url: string;
+    if (orig.album === 'esPODCAST') {
+      // Detecta que es un podcast.
+      url = this.Servicio.URL_API + '/podcast/play/' + orig.name;
+    }
+    else {
+      // Es una cancion.
+      url = this.Servicio.URL_API + '/song/play/' + orig.name;
+    }
+    this.cancion.src = url;
     //this.cancion.currentTime = 0;
     this.temaEnCola = 'TestLong';
     this.cancion.load();
