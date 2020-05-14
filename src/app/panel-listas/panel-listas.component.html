@@ -59,7 +59,10 @@
 
 <ul class="vertical-menu2" >
   <li  *ngFor="let playlist of listasUser; first as primero">
-  <a *ngIf="!primero" (click)="enviarToVistaLista();listaPulsada(playlist.id);Servicio.nextMessageFavList(false);
+  <a *ngIf="!primero" (click)="
+  enviarToVistaLista();
+  listaPulsada(playlist.id);
+  Servicio.nextMessageFavList(false);
                               Servicio.nextMessage3(false)"> {{playlist.nombre}}</a>
   </li>
 </ul>

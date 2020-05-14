@@ -38,5 +38,14 @@
       <td class="texto-busqueda">{{artista.name}}</td>
     </tr>
   </table>
-  <p class="cabecera" *ngIf="numArtista == 0 && numAlbum == 0 && numCancion == 0">No se han encontrado resultados</p>
+  <p class="cabecera" *ngIf="noEncuentraLista == false">Lista encontrada</p>
+  <p class="texto-busqueda" *ngIf="noEncuentraLista == false"  (click)="
+  cancelarBusqueda();
+  enviarToVistaLista();
+  Servicio.nextMessageObjLista(this.listaEncontrada);
+  Servicio.nextMessageFavList(false);
+  Servicio.nextMessage3(false)"
+  >{{listaEncontrada.nombre}}</p>
+
+  <p class="cabecera" *ngIf="numArtista == 0 && numAlbum == 0 && numCancion == 0 && noEncuentraLista == true">No se han encontrado resultados</p>
 </div>
