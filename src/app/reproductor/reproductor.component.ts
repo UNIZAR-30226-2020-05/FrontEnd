@@ -118,8 +118,7 @@ export class ReproductorComponent implements OnInit {
               }
 
           );
-      }}
-        else if(userRecibido.tipo_ultima_reproduccion === 1) {
+      }} else if (userRecibido.tipo_ultima_reproduccion === 1) {
         { //Si es podcast. SIN PROBAR!!!!
 
           const params = new HttpParams().set('name', '');
@@ -131,20 +130,12 @@ export class ReproductorComponent implements OnInit {
                 for (const cancionc of resp) {
                   if (!encontrado) {
                     if (cancionc.id === userRecibido.id_ultima_reproduccion) {
-                      const params = new HttpParams().set('titulo', cancionc.album.toString());
-                      this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
-                        .subscribe(
-                          (alb: Array<Album>) => {
-                            this.Servicio.enviarAlbumPlay(alb[0]);
-                          }
-                        );
                       this.Servicio.enviarAlbumPlay('esPODCAST'); // Dibujar img podcast.
                       this.Servicio.reproducirPodcast(cancionc);
                       this.cancion.src = this.Servicio.URL_API + '/podcast/play/' + cancionc.name;
                       this.cancion.load();
                       console.log(this.cancion.currentTime + ' -- ' + this.cancion.duration);
                       this.cancion.currentTime = userRecibido.minuto_ultima_reproduccion;
-
                       encontrado = true;
                     }
                   }
