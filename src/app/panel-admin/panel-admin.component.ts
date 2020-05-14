@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Album, AlbumRequest, Artista, ArtistaRequest, CancionRequest, User, UserRequest} from '../app.component';
+import {Album, AlbumRequest, Artista, ArtistaRequest, CancionRequest, Podcast, PodcastRequest, User, UserRequest} from '../app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
 
@@ -24,6 +24,7 @@ export class PanelAdminComponent implements OnInit {
   gestAlbumDel: boolean;
   gestUsuario: boolean;
   gestCanciones: boolean;
+  gestPodcast: boolean;
 
   AgregadoNuevoAlbum: boolean;
 
@@ -54,8 +55,17 @@ export class PanelAdminComponent implements OnInit {
   cancionDuracion: string; // Se convierte en segundos.
   cancionFecha: Date;
 
+  podTitulo: string;
+  podAutor: string;
+  podDurac: string;
+  podFecha: Date;
+  podListaTodos: Array<Podcast>;
+  gestPodcastAdd: boolean;
+  podcastEliminado: number;
+
+
   fileCancionNom: string;
-  files: FileList;
+  files: FileList; // Para canciones Y podcast
 
   gestUserPromo: boolean;
   usuarioListaTodos: Array<User>;
@@ -67,6 +77,7 @@ export class PanelAdminComponent implements OnInit {
     this.cancionFecha = new Date();
     this.artistaUnico = true;
     this.gestCanciones = false;
+    this.gestPodcast = false;
   }
 
   ngOnInit(): void {
@@ -83,6 +94,7 @@ export class PanelAdminComponent implements OnInit {
     this.gestAlbum = false;
     this.gestArtista = true;
     this.gestCanciones = false;
+    this.gestPodcast = false;
     this.nuevoArtNom = '';
     this.nuevoArtImg = '';
     this.nuevoAgregado = false;
@@ -93,6 +105,7 @@ export class PanelAdminComponent implements OnInit {
     this.gestAlbum = false;
     this.gestArtista = false;
     this.gestCanciones = true;
+    this.gestPodcast = false;
   }
 
   vistaAlbum() {
@@ -100,6 +113,7 @@ export class PanelAdminComponent implements OnInit {
     this.gestAlbum = true;
     this.gestArtista = false;
     this.gestCanciones = false;
+    this.gestPodcast = false;
 
     this.nuevoAlbAutor = '';
     this.nuevoAlbAutorExiste = true;
@@ -112,6 +126,15 @@ export class PanelAdminComponent implements OnInit {
     this.gestAlbum = false;
     this.gestArtista = false;
     this.gestCanciones = false;
+    this.gestPodcast = false;
+  }
+
+  vistaPodcast() {
+    this.gestUsuario = false;
+    this.gestAlbum = false;
+    this.gestArtista = false;
+    this.gestCanciones = false;
+    this.gestPodcast = true;
   }
 
   existeArtista() {
@@ -198,7 +221,7 @@ export class PanelAdminComponent implements OnInit {
   }
 
   eliminarArtista() {
-    this.http.delete(this.Servicio.URL_API + '/artist/delete/'+ this.delArtisID).subscribe(
+    this.http.delete(this.Servicio.URL_API + '/artist/delete/' + this.delArtisID).subscribe(
       (resp: string) => { this.artistaEliminado = true; } );
   }
 
@@ -230,6 +253,20 @@ export class PanelAdminComponent implements OnInit {
     this.nuevoAlbumAgregado = true;
     this.http.post(this.Servicio.URL_API + '/album/add', nuevoAlbum).subscribe(
       (resp: string) => { this.AgregadoNuevoAlbum = true; } );
+  }
+
+  agregarPodcast() {
+
+    const nuevo: PodcastRequest = {
+      nombre: this.podTitulo,
+      artista: this.podAutor,
+      fecha_subida: this.podFecha,
+      duracion: this.transformarDuracion(this.podDurac) // Nickname
+    };
+
+    this.http.post(this.Servicio.URL_API + '/podcast/add', nuevo).subscribe(
+      (resp: string) => {} );
+
   }
 
   transformarDuracion(s: string) {
@@ -266,13 +303,28 @@ export class PanelAdminComponent implements OnInit {
       (resp: Array<User>) => { this.usuarioListaTodos = resp; } );
   }
 
+  cargarTodosPodcasts() {
+    this.http.get(this.Servicio.URL_API + '/podcast/getByName?name=').subscribe(
+      (resp: Array<Podcast>) => { this.podListaTodos = resp; } );
+  }
+
   eliminarUsuario(id: number) {
     this.http.delete(this.Servicio.URL_API + '/user/delete/' + id).subscribe(
       (resp: string) => { this.cargarTodosUsuarios(); } );
   }
 
+  eliminarPodcast(id: number) {
+    //this.http.delete(this.Servicio.URL_API + '/user/delete/' + id).subscribe(
+     // (resp: string) => { this.cargarTodosUsuarios(); } );
+  }
+
   subirCancion(nom: string) {
     this.uploadAapi(this.files.item(0), nom);
+    console.log(this.files.item(0));
+  }
+
+  subirPodcast(nom: string) {
+    this.uploadPodcastAapi(this.files.item(0), nom);
     console.log(this.files.item(0));
   }
 
@@ -284,7 +336,16 @@ export class PanelAdminComponent implements OnInit {
       (resp: string) => { console.log(resp)} );
   }
 
+  uploadPodcastAapi(file: File, nombre: string) {
+    const data: FormData = new FormData();
+    data.append('file', file);
+    data.append('nombre', nombre);
+    this.http.post(this.Servicio.URL_API + '/podcast/upload', data).subscribe(
+      (resp: string) => { console.log(resp); } );
+  }
+
   onFileChange(event) {
+    this.files = null;
     this.files = event.target.files;
     console.log(event);
   }

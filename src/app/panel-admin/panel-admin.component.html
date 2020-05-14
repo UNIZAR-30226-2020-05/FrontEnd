@@ -11,9 +11,11 @@
     <button (click)="vistaAlbum(); resetListaNuevoAlb(); nuevoAlbumAgregado= false; albumEliminado = false;">ÁLBUMES</button> <br/><br/>
     <button  (click)="vistaCanciones(); ">
       CANCIONES</button> <br/><br/>
+    <button  (click)="vistaPodcast(); gestPodcastAdd= true;">
+      PODCAST</button> <br/><br/>
     <button (click)="vistaUsuario(); cargarTodosUsuarios(); gestUserPromo=false; ">USUARIOS</button>
-    <hr/><br/>
-    <i *ngIf="gestArtista || gestAlbum || gestUsuario">    Opciones disponibles:
+
+    <i *ngIf="gestPodcast || gestArtista || gestAlbum || gestUsuario"><hr/><br/>    Opciones disponibles:
     </i><br/><br/>
 
     <div *ngIf="gestArtista">
@@ -34,11 +36,17 @@
         ELIMINAR</button>
     </div>
 
+    <div *ngIf="gestPodcast">
+      <button (click)="gestPodcastAdd=true">AGREGAR</button><br/><br/>
+      <button (click)="cargarTodosPodcasts(); gestPodcastAdd=false; " >ELIMINAR</button>
+    </div>
+
     <button *ngIf="gestAlbum" (click)="gestAlbumDel=false">AGREGAR</button><br/><br/>
     <button *ngIf="gestAlbum" (click)="gestAlbumDel=true; albumEliminado=false;busqTitulo=''" >ELIMINAR</button>
   </div>
 
-<div *ngIf="!gestCanciones && !gestArtista && !gestAlbum &&!gestUsuario"><br/><br/>Este panel permite añadir y eliminar artistas de la plataforma.<br/>
+<div *ngIf="!gestPodcast && !gestCanciones && !gestArtista && !gestAlbum && !gestUsuario">
+  <br/><br/>Este panel permite añadir y eliminar artistas de la plataforma.<br/>
   Crear álbumes de un artista (que debe estar registrado ya en la plataforma), eliminar álbumes.<br/>
   Eliminar usuarios de la plataforma, y establecer usuarios como administradores.<br/>
 </div>
@@ -183,5 +191,39 @@
     <button (click)="subirCancion(fileCancionNom)">Subir</button>
   </div>
 
+  <div *ngIf="gestPodcast">
+    <div *ngIf="gestPodcastAdd">
+      <i> Subir nuevo podcast </i><br/>
+      Titulo podcast: <br/>
+
+      <input  type="text" [(ngModel)]="podTitulo"><br/>
+
+      Autor podcast: <br/>
+      <input  type="text" [(ngModel)]="podAutor"><br/>
+
+      Duración:<br/>
+      <input  type="time" [(ngModel)]="podDurac"><br/>
+
+      Fecha Subida:<br/>
+      <input  type="date" [(ngModel)]="podFecha"><br/><br/>
+
+      <input type="file" (change)="onFileChange($event)"  >
+      <br/>
+      <button (click)="agregarPodcast(); subirPodcast(podTitulo)">Subir</button>
+    </div>
+    <div  *ngIf="!gestPodcastAdd">
+      Los podcast seleccionados se  eliminarán de la plataforma.<br>
+      <i style="vertical-align: middle" *ngFor="let podcast of podListaTodos">
+        <hr style="width: 50%"/><br/>
+        - {{podcast.name}} - {{podcast.artista}} [ID {{podcast.id}}]
+        &nbsp; &nbsp; &nbsp;
+        <button (click)="eliminarPodcast(podcast.id)">Eliminar</button><br/><br/>
+        <i>Podcast eliminado.</i>
+
+      </i><hr style="width: 50%"/>
+
+    </div>
+
+  </div>
 
 </div>

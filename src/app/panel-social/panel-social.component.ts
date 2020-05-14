@@ -142,11 +142,11 @@ export class PanelSocialComponent implements OnInit {
 
   mostrarLogin() {
     this.Servicio.nextMessage3(false); //Desactiva album
-    this.Servicio.nextMessage2(false); //Activa album
+    this.Servicio.nextMessage2(false); //Activa login
   }
 
   obtenerNombreUltCancion(am: Amigo) {
-    if (am.ultimaCancion != null) {
+    if (am.ultimaCancion !== '') {
       return am.ultimaCancion;
     }
     else {
@@ -155,7 +155,7 @@ export class PanelSocialComponent implements OnInit {
   }
 
   obtenerNombreUltArista(am: Amigo) {
-    if (am.artistaUltimaCancion != null) {
+    if (am.artistaUltimaCancion !== '') {
       return am.artistaUltimaCancion;
     }
     else {

@@ -169,7 +169,7 @@ export class ServicioComponentesService {
       fecha_subida: pod.fecha_subida,
       duracion: pod.duracion,
       artistas: new Array<string>(),
-      album: 'podcast'
+      album: 'esPODCAST'
     };
     const nuev = new Array<Cancion>();
     nuev.push(transform);
@@ -183,6 +183,23 @@ export class ServicioComponentesService {
 
   reproducirLista(cancionObj) {
     this.cancionObj.next(cancionObj);
+  }
+
+
+  reproducirListaPodcast(podList: Array<Podcast>) {
+    let listCan: Array<Cancion> = new Array<Cancion>();
+    for (let pod of podList){
+      const transform: Cancion = {
+        id: pod.id,
+        name: pod.name,
+        fecha_subida: pod.fecha_subida,
+        duracion: pod.duracion,
+        artistas: new Array<string>(),
+        album: 'esPODCAST'
+      };
+      listCan.push(transform);
+      this.reproducirLista(listCan);
+    }
   }
 
   nextMessageEdit(messageEdit) {

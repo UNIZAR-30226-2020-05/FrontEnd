@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
-import {Album, Cancion, User} from '../app.component';
+import {Album, Cancion, Podcast, User} from '../app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
 
@@ -66,7 +66,11 @@ export class ReproductorComponent implements OnInit {
   ngOnInit(): void {
     this.activo = false;
 
-    /* Recibe y actualiza cancion o lista a reproducir */ // Así chuta. No tocar.
+    this.Servicio.sharedMessage2.subscribe(message2 => {
+      this.cancion.pause(); // Si cierra sesión, debe parar la reproducción.
+    });
+
+    /* Recibe y actualiza cancion, podcast o lista a reproducir */ // Así chuta. No tocar.
     this.Servicio.cancionActiva.subscribe((listCan)  => {
       if (listCan != null) {
         /* Guarda la lista de reproducción */
@@ -82,38 +86,64 @@ export class ReproductorComponent implements OnInit {
     // Recibe el objeto usuario, y actualiza cuando se cambia.
     this.Servicio.sharedMessage.subscribe(userRecibido => {
       if (userRecibido.id_ultima_reproduccion != null && userRecibido.minuto_ultima_reproduccion != null) {
+        if(userRecibido.tipo_ultima_reproduccion === 0) { //Si es cancion
 
-        const params = new HttpParams().set('name', '');
-        this.http.get(this.Servicio.URL_API + '/song/getByName', {params})
-          .subscribe(
-            (resp: Array<Cancion>) => {
+          const params = new HttpParams().set('name', '');
+          this.http.get(this.Servicio.URL_API + '/song/getByName', {params})
+            .subscribe(
+              (resp: Array<Cancion>) => {
 
-              let encontrado = false;
-              for (const cancionc of resp) {
-                if (!encontrado) {
-                  if (cancionc.id === userRecibido.id_ultima_reproduccion) {
+                let encontrado = false;
+                for (const cancionc of resp) {
+                  if (!encontrado) {
+                    if (cancionc.id === userRecibido.id_ultima_reproduccion) {
+                      const params = new HttpParams().set('titulo', cancionc.album.toString());
+                      this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
+                        .subscribe(
+                          (alb: Array<Album>) => {
+                            this.Servicio.enviarAlbumPlay(alb[0]);
+                          }
+                        );
+                      this.Servicio.enviarAlbumPlay(cancionc.album);
+                      this.Servicio.reproducirCancion(cancionc);
+                      this.cancion.src = this.Servicio.URL_API + '/song/play/' + cancionc.name;
+                      this.cancion.load();
+                      console.log(this.cancion.currentTime + ' -- ' + this.cancion.duration);
+                      this.cancion.currentTime = userRecibido.minuto_ultima_reproduccion;
 
-                    const params = new HttpParams().set('titulo', cancionc.album.toString());
-                    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
-                      .subscribe(
-                        (alb: Array<Album>) => {
-                          this.Servicio.enviarAlbumPlay(alb[0]);
-                        }
-                      );
-                    this.Servicio.enviarAlbumPlay(cancionc.album);
-                    this.Servicio.reproducirCancion(cancionc);
-                    this.cancion.src = this.Servicio.URL_API + '/song/play/' + cancionc.name;
-                    this.cancion.load();
-                    console.log(this.cancion.currentTime + ' -- ' + this.cancion.duration);
-                    this.cancion.currentTime = userRecibido.minuto_ultima_reproduccion;
-
-                    encontrado = true;
+                      encontrado = true;
+                    }
                   }
                 }
               }
 
-            }
           );
+      }} else if (userRecibido.tipo_ultima_reproduccion === 1) {
+        { //Si es podcast. SIN PROBAR!!!!
+
+          const params = new HttpParams().set('name', '');
+          this.http.get(this.Servicio.URL_API + '/podcast/getByName', {params})
+            .subscribe(
+              (resp: Array<Podcast>) => {
+
+                let encontrado = false;
+                for (const cancionc of resp) {
+                  if (!encontrado) {
+                    if (cancionc.id === userRecibido.id_ultima_reproduccion) {
+                      this.Servicio.enviarAlbumPlay('esPODCAST'); // Dibujar img podcast.
+                      this.Servicio.reproducirPodcast(cancionc);
+                      this.cancion.src = this.Servicio.URL_API + '/podcast/play/' + cancionc.name;
+                      this.cancion.load();
+                      console.log(this.cancion.currentTime + ' -- ' + this.cancion.duration);
+                      this.cancion.currentTime = userRecibido.minuto_ultima_reproduccion;
+                      encontrado = true;
+                    }
+                  }
+                }
+              }
+
+            );
+        }
       }
       this.usuarioActual = userRecibido;
     });
@@ -127,9 +157,17 @@ export class ReproductorComponent implements OnInit {
 
   }
 
-  cargarAudio(orig: Cancion) {
-
-    this.cancion.src = this.Servicio.URL_API + '/song/play/' + orig.name;
+  cargarAudio(orig: Cancion) { // Recibe canciones y podcast CONVERTIDOS
+    let url: string;
+    if (orig.album === 'esPODCAST') {
+      // Detecta que es un podcast.
+      url = this.Servicio.URL_API + '/podcast/play/' + orig.name;
+    }
+    else {
+      // Es una cancion.
+      url = this.Servicio.URL_API + '/song/play/' + orig.name;
+    }
+    this.cancion.src = url;
     //this.cancion.currentTime = 0;
     this.temaEnCola = 'TestLong';
     this.cancion.load();
@@ -185,18 +223,21 @@ export class ReproductorComponent implements OnInit {
     this.actualizarUltimaEscucha(this.cancionActual);
   }
 
-  actualizarUltimaEscucha(can: Cancion) {
+  actualizarUltimaEscucha(can: Cancion) { // tipo_play 0 = CANCION, 1 = PODCAST
      const n: number = can.id;
      const data: FormData = new FormData();
      data.append('id_play', can.id.toString());
      data.append('minuto_play', this.posActual.toFixed());
-     data.append('tipo_play', '0');
+     if (this.cancionActual.album[0] === 'esPODCAST') {
+       data.append('tipo_play', '1');
+     }
+     else { data.append('tipo_play', '0');  }
      let usu: User = new User();
      this.Servicio.sharedMessage.subscribe(userRecibido => usu = userRecibido);
      console.log(usu);
      this.http.patch( this.Servicio.URL_API + '/user/modifyLastPlay/' + usu.id, data ).subscribe(
        (resp: string) => { console.log(resp); } );
-       /*{id_play: can.id, minuto_play: 0, tipo_play: 0} */
+
 
   }
 
