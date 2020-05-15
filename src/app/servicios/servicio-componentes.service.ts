@@ -29,6 +29,7 @@ export class ServicioComponentesService {
   central: boolean;
 
   vistaUsuario: boolean;
+  nomUsuario: string;
 
   vistaPodcast:boolean;
   objPodcast: ListaPodcast;
@@ -109,6 +110,10 @@ export class ServicioComponentesService {
   /*********PARA VISTA USUARIO*************/
   private messageVistaUsuario = new BehaviorSubject(this.vistaUsuario);
   sharedMessageVistaUsuario = this.messageVistaUsuario.asObservable();
+
+  /* Mensaje para pasar variable usuario a vista-usuario */
+  private messageNomUsuario = new BehaviorSubject(this.nomUsuario);
+  sharedMessageNomUsuario = this.messageNomUsuario.asObservable();
 
 
   /************** PARA PODCAST******************/
@@ -259,5 +264,9 @@ export class ServicioComponentesService {
 
   activarVistaUsuario(vistaUsuario){
     this.messageVistaUsuario.next(vistaUsuario);
+  }
+
+  nextMessageNomUsuario(usuario){
+    this.messageNomUsuario.next(usuario);
   }
 }

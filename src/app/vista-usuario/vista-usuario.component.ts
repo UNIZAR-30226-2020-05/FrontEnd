@@ -11,7 +11,8 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 export class VistaUsuarioComponent implements OnInit {
   aparecerUsuario:boolean;
 
-  usuarioLog: User;
+  usuario: User= new User();
+  usuarioLog :User = new User();
 
   play:boolean=false;
 
@@ -26,48 +27,53 @@ export class VistaUsuarioComponent implements OnInit {
   constructor(public Servicio:ServicioComponentesService, private http:HttpClient) { }
 
   ngOnInit(): void {
-    this.Servicio.sharedMessage.subscribe(message=> {this.usuarioLog= message;
-      if (message.id_ultima_reproduccion != null && message.minuto_ultima_reproduccion != null) {
+    this.Servicio.sharedMessageNomUsuario.subscribe(message=> {
+      const params= new HttpParams().set('nick',message);
+      this.http.get(this.Servicio.URL_API + '/user/get', {params}).subscribe( (resp: User)  => {
+        this.usuario = resp;
+        if (this.usuario.id_ultima_reproduccion != null && this.usuario.minuto_ultima_reproduccion != null) {
 
-        const params = new HttpParams().set('name', '');
-        this.http.get(this.Servicio.URL_API + '/song/getByName', {params})
-          .subscribe(
-            (resp: Array<Cancion>) => {
+          const params = new HttpParams().set('name', '');
+          this.http.get(this.Servicio.URL_API + '/song/getByName', {params})
+            .subscribe(
+              (resp: Array<Cancion>) => {
 
-              let encontrado = false;
-              for (const cancionc of resp) {
-                if (!encontrado) {
-                  if (cancionc.id === message.id_ultima_reproduccion) {
+                let encontrado = false;
+                for (const cancionc of resp) {
+                  if (!encontrado) {
+                    if (cancionc.id === this.usuario.id_ultima_reproduccion) {
 
-                    const params = new HttpParams().set('titulo', cancionc.album.toString());
-                    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
-                      .subscribe(
-                        (alb: Array<Album>) => {
-                          this.ultimAlbum= alb[0];
-                        }
-                      );
-                    encontrado = true;
+                      const params = new HttpParams().set('titulo', cancionc.album.toString());
+                      this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
+                        .subscribe(
+                          (alb: Array<Album>) => {
+                            this.ultimAlbum = alb[0];
+                          }
+                        );
+                      encontrado = true;
+                    }
                   }
                 }
-              }
 
-            }
-          );
-      }
+              }
+            );
+        }
+      });
     });
     this.Servicio.sharedMessageVistaUsuario.subscribe(vistaUsuario => this.aparecerUsuario= vistaUsuario);
     this.Servicio.sharedMessageVistaLista.subscribe(vistaC => this.okVista= vistaC);
     this.Servicio.sharedMessageVistaPodcast.subscribe(vista => this.okVistaPodcast = vista);
+    this.Servicio.sharedMessage.subscribe(usuariolog => this.usuarioLog = usuariolog);
   }
 
   borrar(lista){
     this.http.delete(this.Servicio.URL_API + '/listaCancion/delete/' + lista).subscribe((resp:string) => console.log(resp));
-    this.Servicio.nextMessage(this.usuarioLog);
+    this.Servicio.nextMessage(this.usuario);
   }
 
   borrarPodcast(lista){
     this.http.delete(this.Servicio.URL_API + '/listaPodcast/delete/' + lista).subscribe((resp:string) => console.log(resp));
-    this.Servicio.nextMessage(this.usuarioLog);
+    this.Servicio.nextMessage(this.usuario);
   }
 
   listaPulsada(id: number){

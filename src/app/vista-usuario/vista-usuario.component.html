@@ -1,7 +1,7 @@
 <div *ngIf="aparecerUsuario" class="vista-usuario">
-  <img class="img-Usuario" src="../../assets/profile-pics/{{usuarioLog.nombre_avatar}}"/>
-  <div class="nombreUsuario">{{usuarioLog.nombre}} {{usuarioLog.apellidos}}</div>
-  <div class="nick-usuario">{{usuarioLog.nick}}</div>
+  <img class="img-Usuario" src="../../assets/profile-pics/{{usuario.nombre_avatar}}"/>
+  <div class="nombreUsuario">{{usuario.nombre}} {{usuario.apellidos}}</div>
+  <div class="nick-usuario">{{usuario.nick}}</div>
   <div class="marco-ultimo">
     <table class="lista-playlist">
       <tr>
@@ -15,17 +15,18 @@
 
   <div class="marco-tabla">
     <table class="lista-playlist">
-      <tr *ngFor="let lista of usuarioLog.lista_cancion; let i = index;first as primero">
+      <tr *ngFor="let lista of usuario.lista_cancion; let i = index;first as primero">
         <td  class="listaGen"><img class="imgGenCancion" src="../../assets/ListaDefecto.png"/></td>
         <td  class="titulos" (click)=" Servicio.nextMessageVistaLista(!okVista);;listaPulsada(lista.id);
                               Servicio.activarVistaUsuario(false)">{{ lista.nombre }}</td>
-        <td><img *ngIf="!primero" class="img-papel2" (click)="borrar(lista.id)" src="../../assets/trash.png"/></td>
+        <td><span *ngIf="usuario.id==usuarioLog.id">
+          <img *ngIf="!primero" class="img-papel2" (click)="borrar(lista.id)" src="../../assets/trash.png"/></span> </td>
       </tr>
     </table>
   </div>
   <div class="marco-tabla2">
     <table class="lista-podcast">
-      <tr *ngFor="let podcast of usuarioLog.lista_podcast; let i = index; first as primero">
+      <tr *ngFor="let podcast of usuario.lista_podcast; let i = index; first as primero">
         <td  class="listaGen"><img class="imgGenCancion" src="../../assets/podcast1.jpg"/></td>
         <td  class="titulos" (click)="Servicio.nextMessageVistaPodcast(!okVistaPodcast);listaPulsadaPodcast(podcast.id);
           Servicio.activarVistaUsuario(false)">{{ podcast.nombre }}</td>
