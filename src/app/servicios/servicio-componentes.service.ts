@@ -126,7 +126,7 @@ export class ServicioComponentesService {
   sharedMessageObjPodcast = this.messageObjetoPodcast.asObservable();
 
   constructor(private http: HttpClient) {
-    this.URL_API = 'http://localhost:8080';
+    this.URL_API = 'http://3.22.247.114:8080';
     this.nuevo = new User();
     this.objLista = new ListaCancion();
     this.albumActiv = new Album();
