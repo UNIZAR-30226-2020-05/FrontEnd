@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "heroku-postbuild": "ng build --prod",
+  "heroku-postbuild": "ng build --prod --ssl true",
   "private": true,
   "dependencies": {
     "@angular/animations": "~9.0.3",
