@@ -49,7 +49,7 @@ export class PanelAdminComponent implements OnInit {
   busqTitulo: string;
   albumEliminado: boolean;
 
-  infoAgregado: string; //Almacena info de album agregado.
+  infoAgregado: string; // Almacena info de album agregado.
 
   cancionTitulo: string;
   cancionDuracion: string; // Se convierte en segundos.
@@ -314,8 +314,10 @@ export class PanelAdminComponent implements OnInit {
   }
 
   eliminarPodcast(id: number) {
-    //this.http.delete(this.Servicio.URL_API + '/user/delete/' + id).subscribe(
-     // (resp: string) => { this.cargarTodosUsuarios(); } );
+    this.http.delete(this.Servicio.URL_API + '/podcast/delete/' + id).subscribe(
+      (resp: string) => {
+        this.podcastEliminado = id;
+        this.cargarTodosUsuarios(); } );
   }
 
   subirCancion(nom: string) {

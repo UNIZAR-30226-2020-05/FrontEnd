@@ -35,7 +35,10 @@
 
   <!-- Contenido del album -->
  <div class="titulo-album">{{albActivo.titulo}}</div>
-  <div class="artista-album"><span class="enlace">{{albActivo.artista}}</span></div>
+  <div class="artista-album"><span class="enlace" (click)="
+              Servicio.cargarArtista(albActivo.artista);
+              Servicio.nextMessageArtista(true);
+              Servicio.nextMessage3(false)">{{albActivo.artista}}</span></div>
   <img *ngIf="reproduccAlbum!==albActivo.titulo" title="Reproducir album" (click)="repr(albActivo.canciones);
     reproduccAlbum=albActivo.titulo; Servicio.enviarAlbumPlay(albActivo)"
        class="img-repr-album" src="../../assets/play-album.png">
@@ -51,7 +54,10 @@
       <td  class="elemento-album">
         <img (click)="Servicio.reproducirCancion(cancion); reproduccAlbum='';Servicio.enviarAlbumPlay(albActivo)"
              title="Reproducir" class="img-play-album" src="../../assets/play-vector.svg"/></td>
-      <td  class="titulos-album">{{ cancion.name }}</td><td>{{albActivo.artista}}</td>
+      <td  class="titulos-album">{{ cancion.name }}</td><td (click)="
+              Servicio.cargarArtista(albActivo.artista);
+              Servicio.nextMessageArtista(true);
+              Servicio.nextMessage3(false)">{{albActivo.artista}}</td>
       <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
       <td><img class="img-play-album" (click)="vistaSelCan = true; cancionObjetivo = cancion.id;"
                title="Añadir a lista..." src="../../assets/addToList.png" ></td>

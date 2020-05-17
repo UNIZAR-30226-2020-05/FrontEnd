@@ -8,7 +8,10 @@
         <td  class="listaGen"><img class="imgGenCancion" src="{{ultimAlbum.caratula}}"/></td>
         <td  class="titulos" (click)="Servicio.cargarAlbum(ultimAlbum.titulo);Servicio.nextMessage3(true);
               Servicio.activarVistaUsuario(false)">{{ultimAlbum.titulo}}</td>
-        <td class="ultimoAlbumArtistas">{{ultimAlbum.artista}}</td>
+        <td class="ultimoAlbumArtistas" (click)="
+              Servicio.cargarArtista(ultimAlbum.artista);
+              Servicio.nextMessageArtista(true);
+              Servicio.activarVistaUsuario(false)">{{ultimAlbum.artista}}</td>
       </tr>
     </table>
   </div>

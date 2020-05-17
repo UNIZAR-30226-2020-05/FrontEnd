@@ -34,18 +34,34 @@
   <p class="cabecera" *ngIf="numArtista > 1">Artistas encontrados</p>
   <table *ngIf="numArtista != 0">
     <tr *ngFor="let artista of artistaEncontrado; let i = index">
-      <td><img class="foto-busqueda" src="{{artista.image_path}}"></td>
-      <td class="texto-busqueda">{{artista.name}}</td>
+      <td><img class="foto-busqueda" src="{{artista.image_path}}" (click)="
+      cancelarBusqueda();
+      Servicio.cargarArtista(artista.name);
+      Servicio.nextMessageArtista(true);"></td>
+      <td class="texto-busqueda" (click)="
+      cancelarBusqueda();
+      Servicio.cargarArtista(artista.name);
+      Servicio.nextMessageArtista(true);">{{artista.name}}</td>
     </tr>
   </table>
-  <p class="cabecera" *ngIf="noEncuentraLista == false">Lista encontrada</p>
-  <p class="texto-busqueda" *ngIf="noEncuentraLista == false"  (click)="
+  <p class="cabecera" *ngIf="numPodcast == 1">Podcast encontrado</p>
+  <p class="cabecera" *ngIf="numPodcast> 1">Podcasts encontrados</p>
+  <table *ngIf="numPodcast != 0">
+    <tr *ngFor="let podcast of podcastEncontrado; let i = index">
+      <td><img (click)="Servicio.reproducirPodcast(podcast);"
+               title="Reproducir" class="img-play-album" src="../../assets/play-vector.svg"/></td>
+      <!--<td><img class="foto-busqueda"  src="{{cancion.album.caratula}}"></td>-->
+      <!--<td><img class="foto-busqueda"  src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>-->
+      <td class="texto_cancion">{{podcast.name}}</td>
+    </tr>
+  </table>
+ <!-- <p class="texto-busqueda" *ngIf="noEncuentraLista == false"  (click)="
   cancelarBusqueda();
   enviarToVistaLista();
   Servicio.nextMessageObjLista(this.listaEncontrada);
   Servicio.nextMessageFavList(false);
   Servicio.nextMessage3(false)"
-  >{{listaEncontrada.nombre}}</p>
+  >{{listaEncontrada.nombre}}</p>-->
 
-  <p class="cabecera" *ngIf="numArtista == 0 && numAlbum == 0 && numCancion == 0 && noEncuentraLista == true">No se han encontrado resultados</p>
+  <p class="cabecera" *ngIf="numArtista == 0 && numAlbum == 0 && numCancion == 0 && numPodcast == 0 && noEncuentraLista == true && noEncuentraListaP == true">No se han encontrado resultados</p>
 </div>

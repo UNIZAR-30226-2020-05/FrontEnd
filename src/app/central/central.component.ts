@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {Album, ListaCancion, User} from '../app.component';
+import {Album, ListaCancion, Podcast, User} from '../app.component';
 
 
 @Component({
@@ -12,10 +12,10 @@ import {Album, ListaCancion, User} from '../app.component';
 export class CentralComponent implements OnInit {
   mostrar = true;
   usuarioLogeado: User; // Quien está en la plataforma
-  numPlaylist: number;
   recomendaciones: Array<Album>;
+  recomendacionesP: Array<Podcast>;
 
-  okVista:boolean = true;
+  okVista = true;
   listaOk: ListaCancion;
 
 
@@ -24,8 +24,6 @@ export class CentralComponent implements OnInit {
 
   ngOnInit(): void {
     this.mostrar = true;
-    this.Servicio.sharedMessage.subscribe(userRecibido => this.usuarioLogeado = userRecibido);
-    //this.Servicio.sharedMessageCentral.subscribe(messageCentral => this.mostrar = messageCentral);
     let params = new HttpParams().set('titulo', '');
 
     this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
@@ -35,19 +33,13 @@ export class CentralComponent implements OnInit {
           console.log(resp);
         }
       );
-    //this.numPlaylist = this.usuarioLogeado.lista_cancion.length;
-  //this.numPlaylist = 1;
+    params = new HttpParams().set('name', '');
+    this.http.get(this.Servicio.URL_API + '/podcast/getByName', {params})
+      .subscribe(
+        (resp: Array<Podcast>) => {
+          this.recomendacionesP = resp;
+          console.log(resp);
+        }
+      );
   }
-
-  enviarToVistaLista() {
-    this.Servicio.nextMessageVistaLista(this.okVista);
-  }
-
-  listaPulsada(id: number) {
-    const param = id.toString();
-    const params = new HttpParams().set('id', param);
-    this.http.get(this.Servicio.URL_API + '/listaCancion/get', {params}).subscribe( (resp: ListaCancion) => {this.listaOk=resp; this.Servicio.nextMessageObjLista(this.listaOk);});
-
-  }
-
 }
