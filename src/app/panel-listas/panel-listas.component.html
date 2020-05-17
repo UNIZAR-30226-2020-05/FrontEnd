@@ -38,7 +38,9 @@
       </th>
     </tr>-->
     <tr>
-      <th class="autor"> {{cancion.artistas}}</th>
+      <th class="autor" (click)="
+      Servicio.cargarArtista(cancion.artistas);
+      Servicio.nextMessageArtista(true);"> {{cancion.artistas}}</th>
     </tr>
   </tbody>
 </table>
