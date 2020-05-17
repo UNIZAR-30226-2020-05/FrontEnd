@@ -8,7 +8,7 @@
     </span>
 
     <img (click)="enviarToEdit()" title="Editar cuenta" class="icono-config" src="../../assets/ajustes.png"/>
-    <img (click)="mostrarLogin()" title="Cerrar Sesión" class="icono-logout" src="../../assets/logout.png"/>
+    <img (click)="mostrarLogin(); mostarBusquedaAmigos=false; " title="Cerrar Sesión" class="icono-logout" src="../../assets/logout.png"/>
 
   <hr>
   <br/>
@@ -20,12 +20,12 @@
   <div class="contenido-amigos">
   <table class="tabla-amig" *ngFor="let usu of usuarioLogeado.amigos">
     <tr>
-      <td rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
-      <td> <span (click)="Servicio.nextMessageNomUsuario(usu.nick);Servicio.activarVistaUsuario(!okVistaUsuario)">{{usu.nick}}</span></td><td><!--{{obtenerCancion(usuarioLogeado.id_ultima_reproduccion)}}-->
+      <td style="text-align: center; width: 15%;" rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/4.jpg"></td>
+      <td> <span class="enlace" (click)="Servicio.nextMessageNomUsuario(usu.nick);Servicio.activarVistaUsuario(true)">{{usu.nick}}</span></td><td><!--{{obtenerCancion(usuarioLogeado.id_ultima_reproduccion)}}-->
 
       </td>
     </tr>
-    <tr><span (click)="Servicio.nextMessageNomUsuario(usu.nick);Servicio.activarVistaUsuario(!okVistaUsuario)"> {{usu.nombre}} {{usu.apellidos}}</span><td><img  class="icono-papelera" src="../../assets/trash.png" title="Eliminar amigo"(click)="quitarAmigo(usu.id)"></td> </tr>
+    <tr><span class="enlace" (click)="Servicio.nextMessageNomUsuario(usu.nick);Servicio.activarVistaUsuario(true)"> {{usu.nombre}} {{usu.apellidos}}</span><td><img  class="icono-papelera" src="../../assets/trash.png" title="Eliminar amigo"(click)="quitarAmigo(usu.id)"></td> </tr>
     <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
       <i class="ultima-cancion"> &nbsp;
         <span class="enlace"  (click)="Servicio.cargarAlbum(cancionAmigoActual.album);

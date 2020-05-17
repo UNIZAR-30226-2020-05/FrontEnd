@@ -16,6 +16,7 @@ export class ServicioComponentesService {
   vistaAlbum: boolean;
   albumActiv: Album;
   albumCancionActiva: Album;
+  objAlbum:Album;
 
   vistaArtista: boolean;
   artistaActiv: Artista;
@@ -94,6 +95,7 @@ export class ServicioComponentesService {
   private messageList = new BehaviorSubject(this.lista);
   sharedMessageList = this.messageList.asObservable();
 
+  /******VISTA DE LISTA CANCION**************/
   /* Mensaje para pasar variable que active o desactive la vista-lista*/
   private messageVistaLista = new BehaviorSubject(this.vistaLista);
   sharedMessageVistaLista = this.messageVistaLista.asObservable();
@@ -102,6 +104,11 @@ export class ServicioComponentesService {
   private messageObjetoLista = new BehaviorSubject(this.objLista);
   sharedMessageObjLista = this.messageObjetoLista.asObservable();
 
+  /* Mensaje para pasar el objeto album */
+  private objetoAlbum = new BehaviorSubject(this.objAlbum);
+  sharedMessageobjAlbum = this.objetoAlbum.asObservable();
+
+/******** lOGO CERRAR VISTAS***********/
   /* Mensaje para poder ocultar vista de favoritos Canciones desde logo */
   private messageFavLista = new BehaviorSubject(this.favLista);
   sharedMessageFavLista = this.messageFavLista.asObservable();
@@ -145,6 +152,7 @@ export class ServicioComponentesService {
     this.albumActiv = new Album();
     this.albumCancionActiva = new Album();
     this.listaBorrar = new Array(ListaCancion);
+    this.objAlbum = new Album();
   }
 
   nextMessage(message) {
@@ -172,7 +180,23 @@ export class ServicioComponentesService {
         (album: Array<Album>) => {
           this.albumObj.next(album[0]);
         },
-        (erroro: string) => {
+        (erroro: string) => { console.log(erroro)
+        }
+      );
+  }
+
+  obtenerAlbum(nombre) {
+
+
+    const params = new HttpParams()
+      .set('titulo', nombre);
+
+    this.http.get(this.URL_API + '/album/getByTitulo', {params})
+      .subscribe(
+        (album: Array<Album>) => {
+          this.objetoAlbum.next(album[0]);
+        },
+        (erroro: string) => { console.log(erroro)
         }
       );
   }

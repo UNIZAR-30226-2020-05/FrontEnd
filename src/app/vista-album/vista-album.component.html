@@ -51,13 +51,13 @@
   <table class="lista-album">
 
     <tr *ngFor="let cancion of albActivo.canciones; let i = index">
+      <td  class="elemento-album">
+        <img (click)="Servicio.reproducirCancion(cancion); reproduccAlbum='';Servicio.enviarAlbumPlay(albActivo)"
+             title="Reproducir" class="img-play-album" src="../../assets/play-vector.svg"/></td>
       <td  class="titulos-album">{{ cancion.name }}</td><td (click)="
               Servicio.cargarArtista(albActivo.artista);
               Servicio.nextMessageArtista(true);
               Servicio.nextMessage3(false)">{{albActivo.artista}}</td>
-      <td  class="elemento-album">
-        <img (click)="Servicio.reproducirCancion(cancion); reproduccAlbum='';Servicio.enviarAlbumPlay(albActivo)"
-             title="Reproducir" class="img-play-album" src="../../assets/play-vector.svg"/></td>
       <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
       <td><img class="img-play-album" (click)="vistaSelCan = true; cancionObjetivo = cancion.id;"
                title="Añadir a lista..." src="../../assets/addToList.png" ></td>

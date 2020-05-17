@@ -1,14 +1,16 @@
 <div *ngIf="aparecer" class="vista-lista">
   <div *ngIf="listaMostrar.canciones.length==0">
-    <img class="img-lista" src="../../assets/ListaDefecto.png"/><div class="nombrePlaylist">PLAYLIST</div>
-  </div>
-  <img class="img-papel" (click)="borrar()" src="../../assets/trash.png"/>
-  <div *ngIf="listaMostrar.canciones.length>1">
     <!-- Se ha puesto la imagen por defecto, de momento, pero deberia ir la de la primera cancion. -->
-    <div *ngFor="let cancion of listaMostrar.canciones; first as primero">
-      <img  *ngIf="primero" class="img-lista" src="{{albumActual.caratula}}"/>{{Servicio.cargarAlbum(cancion.album)}}<div class="nombrePlaylist">PLAYLIST</div>
-    </div>
+    <img class="img-lista" src="../../assets/ListaDefecto.png"/>
   </div>
+
+  <img class="img-papel" (click)="borrar()" src="../../assets/trash.png"/>
+  <div *ngIf="listaMostrar.canciones.length>0">
+    <!-- Se ha puesto la imagen por defecto, de momento, pero deberia ir la de la primera cancion. -->
+      <img class="img-lista" src="{{albumActual.caratula}}"/>
+  </div>
+  <div class="nombrePlaylist">PLAYLIST</div>
+
   <img title="Reproducir album" (click)="reproducir(listaMostrar.canciones);"
        class="img-repr-lista" src="../../assets/play-album.png">
 

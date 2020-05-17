@@ -22,7 +22,7 @@ export class ReproductorComponent implements OnInit {
 
   // Posición de la cancion
   posActual: number;
-  usuarioActual: User;
+  usuarioActual: User = new User();
 
   public listaActiva: Array<Cancion>;
 
@@ -85,67 +85,69 @@ export class ReproductorComponent implements OnInit {
 
     // Recibe el objeto usuario, y actualiza cuando se cambia.
     this.Servicio.sharedMessage.subscribe(userRecibido => {
-      if (userRecibido.id_ultima_reproduccion != null && userRecibido.minuto_ultima_reproduccion != null) {
-        if(userRecibido.tipo_ultima_reproduccion === 0) { //Si es cancion
+      if (userRecibido.id !== this.usuarioActual.id) {
+        if (userRecibido.id_ultima_reproduccion != null &&
+          userRecibido.minuto_ultima_reproduccion != null) {
+          if (userRecibido.tipo_ultima_reproduccion === 0) { //Si es cancion
 
-          const params = new HttpParams().set('name', '');
-          this.http.get(this.Servicio.URL_API + '/song/getByName', {params})
-            .subscribe(
-              (resp: Array<Cancion>) => {
+            const params = new HttpParams().set('name', '');
+            this.http.get(this.Servicio.URL_API + '/song/getByName', {params})
+              .subscribe(
+                (resp: Array<Cancion>) => {
 
-                let encontrado = false;
-                for (const cancionc of resp) {
-                  if (!encontrado) {
-                    if (cancionc.id === userRecibido.id_ultima_reproduccion) {
-                      const params = new HttpParams().set('titulo', cancionc.album.toString());
-                      this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
-                        .subscribe(
-                          (alb: Array<Album>) => {
-                            this.Servicio.enviarAlbumPlay(alb[0]);
-                          }
-                        );
-                      this.Servicio.enviarAlbumPlay(cancionc.album);
-                      this.Servicio.reproducirCancion(cancionc);
-                      this.cancion.src = this.Servicio.URL_API + '/song/play/' + cancionc.name;
-                      this.cancion.load();
-                      console.log(this.cancion.currentTime + ' -- ' + this.cancion.duration);
-                      this.cancion.currentTime = userRecibido.minuto_ultima_reproduccion;
+                  let encontrado = false;
+                  for (const cancionc of resp) {
+                    if (!encontrado) {
+                      if (cancionc.id === userRecibido.id_ultima_reproduccion) {
+                        const params = new HttpParams().set('titulo', cancionc.album.toString());
+                        this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
+                          .subscribe(
+                            (alb: Array<Album>) => {
+                              this.Servicio.enviarAlbumPlay(alb[0]);
+                            }
+                          );
+                        this.Servicio.enviarAlbumPlay(cancionc.album);
+                        this.Servicio.reproducirCancion(cancionc);
+                        this.cancion.src = this.Servicio.URL_API + '/song/play/' + cancionc.name;
+                        this.cancion.load();
+                        console.log(this.cancion.currentTime + ' -- ' + this.cancion.duration);
+                        this.cancion.currentTime = userRecibido.minuto_ultima_reproduccion;
 
-                      encontrado = true;
+                        encontrado = true;
+                      }
                     }
                   }
                 }
-              }
+              );
+          }
+        } else if (userRecibido.tipo_ultima_reproduccion === 1) {
+          { //Si es podcast. SIN PROBAR!!!!
 
-          );
-      }} else if (userRecibido.tipo_ultima_reproduccion === 1) {
-        { //Si es podcast. SIN PROBAR!!!!
+            const params = new HttpParams().set('name', '');
+            this.http.get(this.Servicio.URL_API + '/podcast/getByName', {params})
+              .subscribe(
+                (resp: Array<Podcast>) => {
 
-          const params = new HttpParams().set('name', '');
-          this.http.get(this.Servicio.URL_API + '/podcast/getByName', {params})
-            .subscribe(
-              (resp: Array<Podcast>) => {
-
-                let encontrado = false;
-                for (const cancionc of resp) {
-                  if (!encontrado) {
-                    if (cancionc.id === userRecibido.id_ultima_reproduccion) {
-                      this.Servicio.enviarAlbumPlay('esPODCAST'); // Dibujar img podcast.
-                      this.Servicio.reproducirPodcast(cancionc);
-                      this.cancion.src = this.Servicio.URL_API + '/podcast/play/' + cancionc.name;
-                      this.cancion.load();
-                      console.log(this.cancion.currentTime + ' -- ' + this.cancion.duration);
-                      this.cancion.currentTime = userRecibido.minuto_ultima_reproduccion;
-                      encontrado = true;
+                  let encontrado = false;
+                  for (const cancionc of resp) {
+                    if (!encontrado) {
+                      if (cancionc.id === userRecibido.id_ultima_reproduccion) {
+                        this.Servicio.enviarAlbumPlay('esPODCAST'); // Dibujar img podcast.
+                        this.Servicio.reproducirPodcast(cancionc);
+                        this.cancion.src = this.Servicio.URL_API + '/podcast/play/' + cancionc.name;
+                        this.cancion.load();
+                        console.log(this.cancion.currentTime + ' -- ' + this.cancion.duration);
+                        this.cancion.currentTime = userRecibido.minuto_ultima_reproduccion;
+                        encontrado = true;
+                      }
                     }
                   }
                 }
-              }
-
-            );
+              );
+          }
         }
+        this.usuarioActual = userRecibido;
       }
-      this.usuarioActual = userRecibido;
     });
 
 
@@ -168,10 +170,9 @@ export class ReproductorComponent implements OnInit {
       url = this.Servicio.URL_API + '/song/play/' + orig.name;
     }
     this.cancion.src = url;
-    //this.cancion.currentTime = 0;
-    this.temaEnCola = 'TestLong';
     this.cancion.load();
     this.cancion.play();
+    this.activo = true;
     this.Servicio.establecerCancionActual(orig);
   }
 
@@ -228,10 +229,11 @@ export class ReproductorComponent implements OnInit {
      const data: FormData = new FormData();
      data.append('id_play', can.id.toString());
      data.append('minuto_play', this.posActual.toFixed());
-     if (this.cancionActual.album[0] === 'esPODCAST') {
+     if (this.cancionActual.album === 'esPODCAST') {
        data.append('tipo_play', '1');
+     } else {
+       data.append('tipo_play', '0');
      }
-     else { data.append('tipo_play', '0');  }
      let usu: User = new User();
      this.Servicio.sharedMessage.subscribe(userRecibido => usu = userRecibido);
      console.log(usu);

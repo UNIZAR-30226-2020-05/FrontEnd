@@ -218,7 +218,7 @@
         - {{podcast.name}} - {{podcast.artista}} [ID {{podcast.id}}]
         &nbsp; &nbsp; &nbsp;
         <button (click)="eliminarPodcast(podcast.id)">Eliminar</button><br/><br/>
-        <i>Podcast eliminado.</i>
+        <i *ngIf="podcast.id==podcastEliminado">Podcast eliminado.</i>
 
       </i><hr style="width: 50%"/>
 

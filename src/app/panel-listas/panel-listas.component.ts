@@ -119,7 +119,8 @@ export class PanelListasComponent implements OnInit {
     const param = id.toString();
     const params = new HttpParams().set('id', param);
     this.http.get(this.Servicio.URL_API + '/listaCancion/get', {params}).subscribe( (resp: ListaCancion) =>
-    {this.listaOk=resp; this.Servicio.nextMessageObjLista(this.listaOk);});
+    {this.listaOk=resp; this.Servicio.nextMessageObjLista(this.listaOk);
+    if(this.listaOk.canciones.length>0){this.Servicio.obtenerAlbum(this.listaOk.canciones[0].album)}});
 
   }
   listaPulsadaPodcast(id: number){
