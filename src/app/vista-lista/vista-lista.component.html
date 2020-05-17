@@ -22,7 +22,10 @@
         <td  class="listaGen"><img class="imgGenCancion" (click)="cargarCaratula(cancion.album);Servicio.reproducirCancion(cancion)"
                                    src="../../assets/play-vector.svg"/></td>
         <td  class="titulos-album" (click)="Servicio.cargarAlbum(cancion.album);Servicio.nextMessage3(true);
-          Servicio.nextMessageVistaLista(false)">{{ cancion.name }}</td><td>{{cancion.artistas}}</td>
+          Servicio.nextMessageVistaLista(false)">{{ cancion.name }}</td><td (click)="
+              Servicio.cargarArtista(cancion.artistas);
+              Servicio.nextMessageArtista(true);
+              Servicio.nextMessageVistaLista(false)">{{cancion.artistas}}</td>
         <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
         <td><img class="img-papel2" (click)="borrarCancion(cancion.id,listaMostrar.id)" src="../../assets/trash.png"/></td>
       </tr>

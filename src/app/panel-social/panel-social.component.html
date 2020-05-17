@@ -31,7 +31,9 @@
         <span class="enlace"  (click)="Servicio.cargarAlbum(cancionAmigoActual.album);
        Servicio.nextMessage3(true);">
           {{obtenerNombreUltCancion(usu)}}</span> ·
-        <span class="enlace">{{obtenerNombreUltArista(usu)}}</span>
+        <span class="enlace" (click)="
+              Servicio.cargarArtista(obtenerNombreUltArista(usu));
+              Servicio.nextMessageArtista(true);">{{obtenerNombreUltArista(usu)}}</span>
       </i> </td>
     </tr><br/>
 

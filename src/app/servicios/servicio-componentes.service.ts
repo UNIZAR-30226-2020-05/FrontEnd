@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {Album, Cancion, ListaCancion, ListaPodcast, Podcast, User, UserRequest} from '../app.component';
+import {Album, Cancion, ListaCancion, ListaPodcast, Podcast, User, UserRequest, Artista} from '../app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Injectable({
@@ -17,10 +17,13 @@ export class ServicioComponentesService {
   albumActiv: Album;
   albumCancionActiva: Album;
 
+  vistaArtista: boolean;
+  artistaActiv: Artista;
+
   editUser: boolean;
 
-  lista:ListaCancion;
-  vistaLista:boolean;
+  lista: ListaCancion;
+  vistaLista: boolean;
   objLista: ListaCancion;
   listaBorrar;
   favLista: boolean;
@@ -31,7 +34,7 @@ export class ServicioComponentesService {
   vistaUsuario: boolean;
   nomUsuario: string;
 
-  vistaPodcast:boolean;
+  vistaPodcast: boolean;
   objPodcast: ListaPodcast;
 
    /* --- Servicio reproducción de canciones ---- */
@@ -59,9 +62,19 @@ export class ServicioComponentesService {
   private albumObj = new BehaviorSubject(this.albumActiv);
   albumActivo = this.albumObj.asObservable();
 
-  /*Mensahe para enviar obj album a panel listas para vista de caratula pequeña */
+  /*Mensaje para enviar obj album a panel listas para vista de caratula pequeña */
   private albumCanActv = new BehaviorSubject(this.albumCancionActiva);
   albumReprod = this.albumCanActv.asObservable();
+
+  /* RELACIONADOS CON ARTISTA */
+
+  /* Mensaje para activar vista de artista */
+  private messageArtista = new BehaviorSubject(this.vistaArtista);
+  sharedMessageArtista = this.messageArtista.asObservable();
+
+  /* Mensaje para pasar el objeto album */
+  private artistaObj = new BehaviorSubject(this.artistaActiv);
+  artistaActivo = this.artistaObj.asObservable();
 
   /* ----------------------------------------------*/
   /* Mensaje para la cancion actual */
@@ -83,7 +96,7 @@ export class ServicioComponentesService {
 
   /* Mensaje para pasar variable que active o desactive la vista-lista*/
   private messageVistaLista = new BehaviorSubject(this.vistaLista);
-  sharedMessageVistaLista= this.messageVistaLista.asObservable();
+  sharedMessageVistaLista = this.messageVistaLista.asObservable();
 
   /*Mensjae para pasar objeto lista a vista-lista */
   private messageObjetoLista = new BehaviorSubject(this.objLista);
@@ -119,7 +132,7 @@ export class ServicioComponentesService {
   /************** PARA PODCAST******************/
   /* Mensaje para pasar variable que active o desactive la vista-podcast*/
   private messageVistaPodcast = new BehaviorSubject(this.vistaPodcast);
-  sharedMessageVistaPodcast= this.messageVistaPodcast.asObservable();
+  sharedMessageVistaPodcast = this.messageVistaPodcast.asObservable();
 
   /*Mensjae para pasar objeto lista podcast a vista-podcast */
   private messageObjetoPodcast = new BehaviorSubject(this.objPodcast);
@@ -146,6 +159,10 @@ export class ServicioComponentesService {
     this.message3.next(message3);
   }
 
+  nextMessageArtista(messageArtista) {
+    this.messageArtista.next(messageArtista);
+  }
+
   cargarAlbum(nombre) {
     const params = new HttpParams()
       .set('titulo', nombre);
@@ -156,6 +173,17 @@ export class ServicioComponentesService {
           this.albumObj.next(album[0]);
         },
         (erroro: string) => {
+        }
+      );
+  }
+  cargarArtista(nombre) {
+    const params = new HttpParams().set('name', nombre);
+    this.http.get(this.URL_API + '/artist/getByName', {params})
+      .subscribe(
+        (artista: Array<Artista>) => {
+          this.artistaObj.next(artista[0]);
+        },
+        (error: string) => {
         }
       );
   }
@@ -192,8 +220,8 @@ export class ServicioComponentesService {
 
 
   reproducirListaPodcast(podList: Array<Podcast>) {
-    let listCan: Array<Cancion> = new Array<Cancion>();
-    for (let pod of podList){
+    const listCan: Array<Cancion> = new Array<Cancion>();
+    for (const pod of podList) {
       const transform: Cancion = {
         id: pod.id,
         name: pod.name,
@@ -221,35 +249,35 @@ export class ServicioComponentesService {
 
   /* Sobre listas */
 
-  enviarLista(messageList){
+  enviarLista(messageList) {
     this.messageList.next(messageList);
   }
 
-  nextMessageVistaLista(messageVistaLista){
+  nextMessageVistaLista(messageVistaLista) {
     this.messageVistaLista.next(messageVistaLista);
   }
 
-  nextMessageObjLista(messageObjLista){
+  nextMessageObjLista(messageObjLista) {
     this.messageObjetoLista.next(messageObjLista);
   }
 
-  nextMessageVistaPodcast(messageVistaPodcast){
+  nextMessageVistaPodcast(messageVistaPodcast) {
     this.messageVistaPodcast.next(messageVistaPodcast);
   }
 
-  nextMessageObjPodcast(messageObjPodcast){
+  nextMessageObjPodcast(messageObjPodcast) {
     this.messageObjetoPodcast.next(messageObjPodcast);
   }
 
-  nextMessageFavList(favLista){
+  nextMessageFavList(favLista) {
     this.messageFavLista.next(favLista);
   }
 
-  nextMessageFavListP(favListaP){
+  nextMessageFavListP(favListaP) {
     this.messageFavListaP.next(favListaP);
   }
 
-  nextMessageListaBorrada(messageListaBorrar){
+  nextMessageListaBorrada(messageListaBorrar) {
     this.messageListaBorrar.next(messageListaBorrar);
   }
 
@@ -258,15 +286,15 @@ export class ServicioComponentesService {
   }*/
 
 
-  enviarAlbumPlay(albumCanActv){
+  enviarAlbumPlay(albumCanActv) {
     this.albumCanActv.next(albumCanActv);
   }
 
-  activarVistaUsuario(vistaUsuario){
+  activarVistaUsuario(vistaUsuario) {
     this.messageVistaUsuario.next(vistaUsuario);
   }
 
-  nextMessageNomUsuario(usuario){
+  nextMessageNomUsuario(usuario) {
     this.messageNomUsuario.next(usuario);
   }
 }

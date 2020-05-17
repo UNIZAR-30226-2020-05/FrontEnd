@@ -8,7 +8,9 @@
     <td class="nombreAlbum" style="margin-top: 10px" (click)="
       Servicio.cargarAlbum(album.titulo);
       Servicio.nextMessage3(true);">{{album.titulo}}</td>
-    <td class="autorAlbum" style="margin-top: 35px">{{album.artista}}</td>
+    <td class="autorAlbum" style="margin-top: 35px" (click)="
+      Servicio.cargarArtista(album.artista);
+      Servicio.nextMessageArtista(true);">{{album.artista}}</td>
   </tr>
 
 </div>

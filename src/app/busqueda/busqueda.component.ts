@@ -115,9 +115,14 @@ export class BusquedaComponent implements OnInit {
       this.http.get(this.Servicio.URL_API + '/listaCancion/get', {params})
         .subscribe(
           (resp: ListaCancion) => {
+            this.cancelarBusqueda();
             this.busquedaIniciadaLista = true;
             this.noEncuentraLista = false;
             this.listaEncontrada = resp;
+            this.Servicio.nextMessageVistaLista(!this.noEncuentraLista);
+            this.Servicio.nextMessageObjLista(this.listaEncontrada);
+            this.Servicio.nextMessageFavList(false);
+            this.Servicio.nextMessage3(false);
             console.log(resp);
           },
           (error: string) => {
@@ -126,9 +131,5 @@ export class BusquedaComponent implements OnInit {
           }
         );
     }
-  }
-
-  enviarToVistaLista() {
-    this.Servicio.nextMessageVistaLista(!this.noEncuentraLista);
   }
 }
