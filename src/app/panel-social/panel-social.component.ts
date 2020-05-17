@@ -140,9 +140,12 @@ export class PanelSocialComponent implements OnInit {
     //this.Servicio.nextMessageCentral(!this.editarUsuario);
   }
 
-  mostrarLogin() {
-    this.Servicio.nextMessage3(false); //Desactiva album
-    this.Servicio.nextMessage2(false); //Activa login
+  mostrarLogin() { // Gestionar TODOS los casos que pueden pasar.
+    this.Servicio.nextMessage3(false); // Desactiva album
+    this.Servicio.nextMessageVistaLista(false); // Desactiva vista de playlist.
+    this.Servicio.activarVistaUsuario(false); // Desactiva vista usuarios.
+    this.Servicio.nextMessageArtista(false); // Desactiva vista artista.
+    this.Servicio.nextMessage2(false); // Activa login
   }
 
   obtenerNombreUltCancion(am: Amigo) {
