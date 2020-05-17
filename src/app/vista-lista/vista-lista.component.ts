@@ -20,13 +20,15 @@ export class VistaListaComponent implements OnInit {
 
   albumActual:Album=new Album();
 
+  cancionPrimera:Cancion = new Cancion();
+
   constructor(public Servicio:ServicioComponentesService, private http:HttpClient) { }
 
   ngOnInit(): void {
     this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.aparecer = messageVistaLista);
     this.Servicio.sharedMessageObjLista.subscribe(messageObjLista=> this.listaMostrar = messageObjLista);
     this.Servicio.sharedMessage.subscribe(message=> this.usuarioLog= message);
-    this.Servicio.albumActivo.subscribe(albumObj => {if (albumObj!= null) {this.albumActual= albumObj;}});
+    this.Servicio.sharedMessageobjAlbum.subscribe(albumObj => {if (albumObj!= null) {this.albumActual= albumObj;}});
   }
 
   borrar(){
@@ -53,7 +55,6 @@ export class VistaListaComponent implements OnInit {
   cargarCaratula(cancion){
     this.Servicio.cargarAlbum(cancion);
     this.Servicio.enviarAlbumPlay(this.albumActual);
-    this.albumActual=null;
   }
 
   borrarCancion(cancion:number,lista:number){
