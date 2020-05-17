@@ -281,9 +281,9 @@ export class ServicioComponentesService {
     this.messageListaBorrar.next(messageListaBorrar);
   }
 
-  /*nextMessageCentral(messageCentral) {
+  nextMessageCentral(messageCentral) {
     this.messageCentral.next(messageCentral);
-  }*/
+  }
 
 
   enviarAlbumPlay(albumCanActv) {

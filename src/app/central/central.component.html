@@ -1,46 +1,28 @@
-<p class="recomendaciones">Novedades para ti</p>
-<div class="menuRecom2">
-  <!--Limit {{recomendaciones}} to: 10-->
-  <tr class="spaceUnder" *ngFor="let album of recomendaciones; let i = index">
-    <td><img class="imagenAlbum" src="{{album.caratula}}" (click)="
-      Servicio.cargarAlbum(album.titulo);
-      Servicio.nextMessage3(true);"></td>
-    <td class="nombreAlbum" style="margin-top: 10px" (click)="
-      Servicio.cargarAlbum(album.titulo);
-      Servicio.nextMessage3(true);">{{album.titulo}}</td>
-    <td class="autorAlbum" style="margin-top: 35px" (click)="
-      Servicio.cargarArtista(album.artista);
-      Servicio.nextMessageArtista(true);">{{album.artista}}</td>
-  </tr>
+<div *ngIf="mostrar">
+  <p class="recomendaciones">Novedades para ti</p>
+  <div class="menuRecom2">
+    <!--Limit {{recomendaciones}} to: 10-->
+    <tr class="spaceUnder" *ngFor="let album of recomendaciones; let i = index">
+      <td><img class="imagenAlbum" src="{{album.caratula}}" (click)="
+        Servicio.cargarAlbum(album.titulo);
+        Servicio.nextMessage3(true);"></td>
+      <td class="nombreAlbum" style="margin-top: 10px" (click)="
+        Servicio.cargarAlbum(album.titulo);
+        Servicio.nextMessage3(true);">{{album.titulo}}</td>
+      <td class="autorAlbum" style="margin-top: 35px" (click)="
+        Servicio.cargarArtista(album.artista);
+        Servicio.nextMessageArtista(true);">{{album.artista}}</td>
+    </tr>
 
-</div>
+  </div>
 
-<div class="menuRecom3">
-  <table>
-    <tr class="spaceUnder">
-      <td><img class="imagenAlbum" src="./../assets/podcast1.jpg"></td>
-      <td class="nombreAlbum" style="margin-top: 10px">Podcast</td>
-      <td class="autorAlbum" style="margin-top: 35px">Autor</td>
+  <div class="menuRecom3">
+    <tr class="spaceUnder" *ngFor="let podcast of recomendacionesP; let i = index">
+      <td><img class="imagenPodcast" src="./../assets/podcast1.jpg"></td>
+      <td class="nombrePodcast" style="margin-top: 10px">{{podcast.name}}</td>
+      <td class="autorPodcast" style="margin-top: 35px">{{podcast.artista}}</td>
+      <td><img (click)="Servicio.reproducirPodcast(podcast);"
+               title="Reproducir" class="img-play-album" src="../../assets/play-vector.svg"/></td>
     </tr>
-    <tr class="spaceUnder">
-      <td><img class="imagenAlbum" src="./../assets/podcast1.jpg"></td>
-      <td class="nombreAlbum" style="margin-top: 10px">Podcast</td>
-      <td class="autorAlbum" style="margin-top: 35px">Autor</td>
-    </tr>
-    <tr class="spaceUnder">
-      <td><img class="imagenAlbum" src="./../assets/podcast1.jpg"></td>
-      <td class="nombreAlbum" style="margin-top: 10px">Podcast</td>
-      <td class="autorAlbum" style="margin-top: 35px">Autor</td>
-    </tr>
-    <tr class="spaceUnder">
-      <td><img class="imagenAlbum" src="./../assets/podcast1.jpg"></td>
-      <td class="nombreAlbum" style="margin-top: 10px">Podcast</td>
-      <td class="autorAlbum" style="margin-top: 35px">Autor</td>
-    </tr>
-    <tr class="spaceUnder">
-      <td><img class="imagenAlbum" src="./../assets/podcast1.jpg"></td>
-      <td class="nombreAlbum" style="margin-top: 10px">Podcast</td>
-      <td class="autorAlbum" style="margin-top: 35px">Autor</td>
-    </tr>
-  </table>
+  </div>
 </div>
