@@ -15,8 +15,9 @@ export class CentralComponent implements OnInit {
   recomendaciones: Array<Album>;
   recomendacionesP: Array<Podcast>;
 
+  vistaSelPod: boolean;
+  podcastObjetivo: number;
   okVista = true;
-  listaOk: ListaCancion;
 
 
 
@@ -41,5 +42,12 @@ export class CentralComponent implements OnInit {
           console.log(resp);
         }
       );
+    this.Servicio.sharedMessage.subscribe(userRecibido => this.usuarioLogeado = userRecibido);
+  }
+
+  anyadirAlista( id_lista: number, id_c: number) {
+
+    this.http.patch(this.Servicio.URL_API + '/listaPodcast/add/' + id_lista, id_c).subscribe(
+      (resp: string) => { console.log(resp); this.Servicio.nextMessage(this.usuarioLogeado) } );
   }
 }

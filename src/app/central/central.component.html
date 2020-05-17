@@ -18,11 +18,25 @@
 
   <div class="menuRecom3">
     <tr class="spaceUnder" *ngFor="let podcast of recomendacionesP; let i = index">
-      <td><img class="imagenPodcast" src="./../assets/podcast1.jpg"></td>
+      <td><img class="imagenPodcast" src="./../assets/podcast2.jpg" (click)="vistaSelPod = true; podcastObjetivo = podcast.id;"></td>
       <td class="nombrePodcast" style="margin-top: 10px">{{podcast.name}}</td>
       <td class="autorPodcast" style="margin-top: 35px">{{podcast.artista}}</td>
       <td><img (click)="Servicio.reproducirPodcast(podcast);"
                title="Reproducir" class="img-play-album" src="../../assets/play-vector.svg"/></td>
     </tr>
+  </div>
+
+  <div *ngIf="vistaSelPod" class= "encima">
+    <div class="encuadre">
+      <label class="titulo-eleccion"><b>Añadir podcast a... </b></label>
+      <i *ngFor="let lista of usuarioLogeado.lista_podcast; let i = index">
+        <hr style="width: 50%"><br/>
+        <i class="enlace" (click)="anyadirAlista(lista.id, podcastObjetivo); vistaSelPod = false;">
+          {{lista.nombre}}</i>
+      </i>
+      <hr style="width: 50%"><br/><br/>
+      <button (click)="vistaSelPod = false">Cancelar</button>
+    </div>
+
   </div>
 </div>
