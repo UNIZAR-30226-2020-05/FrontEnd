@@ -25,15 +25,28 @@
 
       </td>
     </tr>
-    <tr><span class="enlace" (click)="Servicio.nextMessageNomUsuario(usu.nick);Servicio.activarVistaUsuario(true)"> {{usu.nombre}} {{usu.apellidos}}</span><td><img  class="icono-papelera" src="../../assets/trash.png" title="Eliminar amigo"(click)="quitarAmigo(usu.id)"></td> </tr>
-    <tr> <td></td> <td> <img width="10px"  src="../../assets/last.png">
-      <i class="ultima-cancion"> &nbsp;
-        <span class="enlace"  (click)="Servicio.cargarAlbum(cancionAmigoActual.album);
+    <tr><span class="enlace" (click)="Servicio.nextMessageNomUsuario(usu.nick);Servicio.activarVistaUsuario(true)">
+      {{usu.nombre}} {{usu.apellidos}}</span><td style="width: 4%; align-items: center">
+      <img  class="icono-papelera" src="../../assets/trash.png" title="Eliminar amigo"(click)="quitarAmigo(usu.id)"></td> </tr>
+    <tr> <td></td> <td>
+      <i class="ultima-cancion">
+        <span *ngIf="esCancion(usu.ultimaCancion)">
+          <img width="10px"  src="../../assets/last.png">&nbsp;
+        <span  class="enlace"  (click)="Servicio.cargarAlbum(cancionAmigoActual.album);
        Servicio.nextMessage3(true);">
-          {{obtenerNombreUltCancion(usu)}}</span> ·
+          {{obtenerNombreUltCancion(usu)}}</span>
+        ·
         <span class="enlace" (click)="
               Servicio.cargarArtista(obtenerNombreUltArista(usu));
               Servicio.nextMessageArtista(true);">{{obtenerNombreUltArista(usu)}}</span>
+        </span>
+        <span *ngIf="!esCancion(usu.ultimaCancion) " style="cursor: default">
+        <span>
+          <img width="12px"  src="../../assets/podcast-mini-icon.png">
+          {{obtenerNombreUltCancion(usu)}}</span>
+        ·
+        <span>{{obtenerNombreUltArista(usu)}}</span>
+        </span>
       </i> </td>
     </tr><br/>
 

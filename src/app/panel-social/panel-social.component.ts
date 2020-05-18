@@ -148,6 +148,15 @@ export class PanelSocialComponent implements OnInit {
     this.Servicio.nextMessage2(false); // Activa login
   }
 
+  esCancion(nombre: string) {
+    for (const can of this.listaCan) {
+      if (can.name === nombre) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   obtenerNombreUltCancion(am: Amigo) {
     if (am.ultimaCancion !== '') {
       return am.ultimaCancion;
