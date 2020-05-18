@@ -54,7 +54,10 @@ export class ReproductorComponent implements OnInit {
     }, 2000);
 
     setInterval(() => {
-      if (this.activo) {
+      if(this.cancion.paused) { // Evita actualizaciones fuera de repr.
+        this.activo = false;
+      }
+      if (this.activo) { // Check pausa
         this.actualizarUltimaEscucha(this.cancionActual);
       }
     }, 12000);
@@ -119,10 +122,9 @@ export class ReproductorComponent implements OnInit {
                   }
                 }
               );
-          }
-        } else if (userRecibido.tipo_ultima_reproduccion === 1) {
-          { //Si es podcast. SIN PROBAR!!!!
-
+          } else if (userRecibido.tipo_ultima_reproduccion === 1) {
+           //Si es podcast. SIN PROBAR!!!!
+            console.log(userRecibido.tipo_ultima_reproduccion);
             const params = new HttpParams().set('name', '');
             this.http.get(this.Servicio.URL_API + '/podcast/getByName', {params})
               .subscribe(
@@ -145,9 +147,8 @@ export class ReproductorComponent implements OnInit {
                 }
               );
           }
-        }
-        this.usuarioActual = userRecibido;
-      }
+          this.usuarioActual = userRecibido;
+      }}
     });
 
 
