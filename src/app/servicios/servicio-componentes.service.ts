@@ -16,10 +16,11 @@ export class ServicioComponentesService {
   vistaAlbum: boolean;
   albumActiv: Album;
   albumCancionActiva: Album;
-  objAlbum:Album;
+  objAlbum: Album;
 
   vistaArtista: boolean;
   artistaActiv: Artista;
+  albumesArtista: Array<Album>;
 
   editUser: boolean;
 
@@ -73,9 +74,13 @@ export class ServicioComponentesService {
   private messageArtista = new BehaviorSubject(this.vistaArtista);
   sharedMessageArtista = this.messageArtista.asObservable();
 
-  /* Mensaje para pasar el objeto album */
+  /* Mensaje para pasar el objeto artista */
   private artistaObj = new BehaviorSubject(this.artistaActiv);
   artistaActivo = this.artistaObj.asObservable();
+
+  /* Mensaje para pasar el objeto lista de albumes de artista */
+  private albumesArtistaObj = new BehaviorSubject(this.albumesArtista);
+  listaAlbumes = this.albumesArtistaObj.asObservable();
 
   /* ----------------------------------------------*/
   /* Mensaje para la cancion actual */
@@ -180,7 +185,7 @@ export class ServicioComponentesService {
         (album: Array<Album>) => {
           this.albumObj.next(album[0]);
         },
-        (erroro: string) => { console.log(erroro)
+        (erroro: string) => { console.log(erroro);
         }
       );
   }
@@ -196,7 +201,7 @@ export class ServicioComponentesService {
         (album: Array<Album>) => {
           this.objetoAlbum.next(album[0]);
         },
-        (erroro: string) => { console.log(erroro)
+        (erroro: string) => { console.log(erroro);
         }
       );
   }
@@ -211,7 +216,17 @@ export class ServicioComponentesService {
         }
       );
   }
-
+  cargarAlbumesArtista(id) {
+    const params = new HttpParams().set('id_artista', id);
+    this.http.get(this.URL_API + '/album/getByArtist', {params})
+      .subscribe(
+        (resp: Array<Album>) => {
+          this.albumesArtistaObj.next(resp);
+        },
+        (error: string) => {
+        }
+      );
+  }
   reproducirCancion(can: Cancion) {
     const nuev = new Array<Cancion>();
     nuev.push(can);
@@ -245,7 +260,7 @@ export class ServicioComponentesService {
 
   reproducirListaPodcast(podList: Array<Podcast>) {
     const listCan: Array<Cancion> = new Array<Cancion>();
-    for (const pod of podList) {
+    for(const pod of podList) {
       const transform: Cancion = {
         id: pod.id,
         name: pod.name,
@@ -321,4 +336,4 @@ export class ServicioComponentesService {
   nextMessageNomUsuario(usuario) {
     this.messageNomUsuario.next(usuario);
   }
-}
+};

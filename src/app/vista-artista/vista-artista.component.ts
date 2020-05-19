@@ -37,6 +37,17 @@ export class VistaArtistaComponent implements OnInit {
         i++;
       }*/
     });
+   /* const params = new HttpParams().set('id_artista', this.artistaActivo.id.toString());
+    this.http.get(this.Servicio.URL_API + '/album/getByArtist', {params})
+      .subscribe(
+        (resp: Array<Album>) => {
+          this.lisAlbum = resp;
+        },
+        (error: string) => {
+        }
+      );*/
+   this.Servicio.listaAlbumes.subscribe(albumesArtistaObj => {
+      this.lisAlbum = albumesArtistaObj; });
     this.Servicio.sharedMessageArtista.subscribe(messageArtista => this.mostrar = messageArtista);
   }
   /*getAlbum(titulo) {

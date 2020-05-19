@@ -7,15 +7,15 @@
     <br/>
     <table class="lista-album">
 
-      <tr *ngFor="let album of artistaActivo.albumes">
-       <!--<td><img class="foto-album" src="{{album.caratula}}" (click)="
+      <tr *ngFor="let album of lisAlbum">
+       <td><img class="foto-album" src="{{album.caratula}}" (click)="
              Servicio.cargarAlbum(album.titulo);
              Servicio.nextMessage3(true);
-             this.cerrar()"></td>-->
+             this.cerrar()"></td>
         <td class="titulos-album" (click)="
-             Servicio.cargarAlbum(album);
+             Servicio.cargarAlbum(album.titulo);
              Servicio.nextMessage3(true);
-             this.cerrar()">{{album}}</td>
+             this.cerrar()">{{album.titulo}}</td>
       </tr>
     </table>
   </div>

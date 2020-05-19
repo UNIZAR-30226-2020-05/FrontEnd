@@ -10,7 +10,9 @@
         Servicio.cargarAlbum(album.titulo);
         Servicio.nextMessage3(true);">{{album.titulo}}</td>
       <td class="autorAlbum" style="margin-top: 35px" (click)="
-        Servicio.cargarArtista(album.artista);
+        obtenerArtista(album.artista);
+        Servicio.cargarArtista(elArtista.name);
+        Servicio.cargarAlbumesArtista(elArtista.id);
         Servicio.nextMessageArtista(true);">{{album.artista}}</td>
     </tr>
 
