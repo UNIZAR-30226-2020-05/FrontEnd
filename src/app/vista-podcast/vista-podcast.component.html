@@ -1,10 +1,10 @@
 <div *ngIf="vistaPodcast" class="vista-podcast">
-  <img class="img-papel" (click)="borrar()" src="../../assets/trash.png"/>
+  <img class="img-papel" title="Borrar lista" (click)="borrar()" src="../../assets/trash.png"/>
   <div class="hayCanciones">
     <img class="img-lista" src="../../assets/ListaDefecto.png"/><div class="nombrePlaylist">PODCAST</div>
   </div>
-  <img title="Reproducir album" (click)="reproducir(listaMostrar.podcasts);"
-       class="img-repr-lista" src="../../assets/play-album.png">
+  <img title="Reproducir lista" (click)="reproducir(listaMostrar.podcasts);"
+       class="img-repr-lista" src="../../assets/playLista.png">
 
   <div class="titulo-lista">{{listaMostrar.nombre}} #{{listaMostrar.id}}</div>
   <div class="artista-lista">{{usuarioLog.nick}}</div>
@@ -16,7 +16,7 @@
         <td  class="titulos-album" (click)="
           Servicio.nextMessageVistaPodcast(false)">{{ podcast.name }}</td><td>{{podcast.artista}}</td>
         <td>{{sacarTiempo(podcast.duracion)}}</td><td>Pista {{i+1}}</td>
-        <td><img class="img-papel2" (click)="borrarPodcast(podcast.id,listaMostrar.id)" src="../../assets/trash.png"/></td>
+        <td><img title ="Borrar podcast" class="img-papel2"  (click)="borrarPodcast(podcast.id,listaMostrar.id)" src="../../assets/trash.png"/></td>
       </tr>
     </table>
   </div>
