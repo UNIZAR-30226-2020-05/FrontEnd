@@ -86,10 +86,10 @@ p{
 }
 
 .icono-papelera {
-  right: 0%;
+  right: 2%;
   position: relative;
   width: 16px;
-  vertical-align: center;
+  align-items: center;
   cursor: pointer;
 }
 

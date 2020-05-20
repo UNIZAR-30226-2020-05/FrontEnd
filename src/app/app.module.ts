@@ -17,6 +17,7 @@ import { PanelAdminComponent } from './panel-admin/panel-admin.component';
 import { VistaListaComponent } from './vista-lista/vista-lista.component';
 import { VistaUsuarioComponent } from './vista-usuario/vista-usuario.component';
 import { VistaPodcastComponent } from './vista-podcast/vista-podcast.component';
+import { VistaArtistaComponent } from './vista-artista/vista-artista.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { VistaPodcastComponent } from './vista-podcast/vista-podcast.component';
     VistaListaComponent,
     VistaUsuarioComponent,
     VistaPodcastComponent,
+    VistaArtistaComponent,
   ],
   imports: [
     BrowserModule,

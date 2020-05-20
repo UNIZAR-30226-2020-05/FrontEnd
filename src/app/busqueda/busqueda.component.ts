@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {User, Cancion, Album, Artista, ListaCancion} from '../app.component';
+import {User, Cancion, Album, Artista, ListaCancion, Podcast, ListaPodcast} from '../app.component';
 
 
 @Component({
@@ -26,11 +26,20 @@ export class BusquedaComponent implements OnInit {
   noEncuentraArtista: boolean;
   artistaEncontrado: Array<Artista>;
   numArtista: number;
+  // Busca podcast
+  busquedaIniciadaPod: boolean;
+  noEncuentraPodcast: boolean;
+  podcastEncontrado: Array<Podcast>;
+  numPodcast: number;
 
   inicio: string;
   busquedaIniciadaLista: boolean;
   noEncuentraLista: boolean;
   listaEncontrada: ListaCancion;
+
+  busquedaIniciadaListaP: boolean;
+  noEncuentraListaP: boolean;
+  listaPEncontrada: ListaPodcast;
 
   buscado: string;
   buscado1: string;
@@ -108,6 +117,21 @@ export class BusquedaComponent implements OnInit {
             this.noEncuentraArtista = true;
           }
         );
+
+      this.http.get(this.Servicio.URL_API + '/podcast/getByName', {params})
+        .subscribe(
+          (resp: Array<Podcast>) => {
+            this.busquedaIniciadaPod = true;
+            this.noEncuentraPodcast = false;
+            this.numPodcast = resp.length;
+            this.podcastEncontrado = resp;
+            console.log(resp);
+          },
+          (error: string) => {
+            this.busquedaIniciadaPod = true;
+            this.noEncuentraPodcast = true;
+          }
+        );
     } else {
       this.mostrarBusqueda = true;
       this.buscado1 = this.buscado.substr(1);
@@ -115,9 +139,14 @@ export class BusquedaComponent implements OnInit {
       this.http.get(this.Servicio.URL_API + '/listaCancion/get', {params})
         .subscribe(
           (resp: ListaCancion) => {
+            this.cancelarBusqueda();
             this.busquedaIniciadaLista = true;
             this.noEncuentraLista = false;
             this.listaEncontrada = resp;
+            this.Servicio.nextMessageVistaLista(!this.noEncuentraLista);
+            this.Servicio.nextMessageObjLista(this.listaEncontrada);
+            this.Servicio.nextMessageFavList(false);
+            this.Servicio.nextMessage3(false);
             console.log(resp);
           },
           (error: string) => {
@@ -125,10 +154,27 @@ export class BusquedaComponent implements OnInit {
             this.noEncuentraLista = true;
           }
         );
-    }
-  }
 
-  enviarToVistaLista() {
-    this.Servicio.nextMessageVistaLista(!this.noEncuentraLista);
+      if (this.noEncuentraLista == true) {
+        this.http.get(this.Servicio.URL_API + '/listaPodcast/get', {params})
+          .subscribe(
+            (resp: ListaPodcast) => {
+              this.cancelarBusqueda();
+              this.busquedaIniciadaListaP = true;
+              this.noEncuentraListaP = false;
+              this.listaPEncontrada = resp;
+              this.Servicio.nextMessageVistaPodcast(!this.noEncuentraListaP);
+              this.Servicio.nextMessageObjPodcast(this.listaPEncontrada);
+              this.Servicio.nextMessageFavListP(false);
+              this.Servicio.nextMessage3(false);
+              console.log(resp);
+            },
+            (error: string) => {
+              this.busquedaIniciadaLista = true;
+              this.noEncuentraLista = true;
+            }
+          );
+      }
+    }
   }
 }

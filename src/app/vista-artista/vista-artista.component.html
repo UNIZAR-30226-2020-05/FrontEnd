@@ -1,0 +1,22 @@
+<div *ngIf="mostrar" class="vista-artista">
+
+  <img class="img-artista" src="{{artistaActivo.image_path}}"/><div class="etiqueta-artista">ARTISTA</div>
+
+  <div class="nombre-artista">{{artistaActivo.name}}</div>
+  <div class="marco-tabla">
+    <br/>
+    <table class="lista-album">
+
+      <tr *ngFor="let album of lisAlbum">
+       <td><img class="foto-album" src="{{album.caratula}}" (click)="
+             Servicio.cargarAlbum(album.titulo);
+             Servicio.nextMessage3(true);
+             this.cerrar()"></td>
+        <td class="titulos-album" (click)="
+             Servicio.cargarAlbum(album.titulo);
+             Servicio.nextMessage3(true);
+             this.cerrar()">{{album.titulo}}</td>
+      </tr>
+    </table>
+  </div>
+</div>
