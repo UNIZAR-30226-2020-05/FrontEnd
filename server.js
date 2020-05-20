@@ -7,6 +7,7 @@ const app = express();
 
 app.use(function(req,res,next){
   res.header("Acces-Control-Allow-Origin", '*');
+  next();
 });
 
 // Serve only the static files form the dist directory
