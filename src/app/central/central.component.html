@@ -3,7 +3,7 @@
   <div class="menuRecom2">
     <!--Limit {{recomendaciones}} to: 10-->
     <tr class="spaceUnder" *ngFor="let album of recomendaciones; let i = index">
-      <td><img class="imagenAlbum" src="{{album.caratula}}" (click)="
+      <td><img class="imagenAlbum" src="{{Servicio.URL_API+album.caratula}}" (click)="
         Servicio.cargarAlbum(album.titulo);
         Servicio.nextMessage3(true);"></td>
       <td class="nombreAlbum" style="margin-top: 10px" (click)="
