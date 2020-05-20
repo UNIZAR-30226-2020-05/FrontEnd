@@ -22,32 +22,9 @@ export class VistaArtistaComponent implements OnInit {
 
     this.Servicio.artistaActivo.subscribe(artistaObj => {
       this.artistaActivo = artistaObj;
-      /*let i = 0;
-      for (const albumDeLista of this.artistaActivo.albumes) {
-        const params = new HttpParams().set('titulo', albumDeLista);
-
-        this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
-          .subscribe(
-            (resp: Array<Album>) => {
-              this.lisAlbum[i] = resp[0];
-            },
-            (error: string) => {
-            }
-          );
-        i++;
-      }*/
     });
-   /* const params = new HttpParams().set('id_artista', this.artistaActivo.id.toString());
-    this.http.get(this.Servicio.URL_API + '/album/getByArtist', {params})
-      .subscribe(
-        (resp: Array<Album>) => {
-          this.lisAlbum = resp;
-        },
-        (error: string) => {
-        }
-      );*/
-   this.Servicio.listaAlbumes.subscribe(albumesArtistaObj => {
-      this.lisAlbum = albumesArtistaObj; });
+   /*this.Servicio.listaAlbumes.subscribe(albumesArtistaObj => {
+      this.lisAlbum = albumesArtistaObj; });*/
     this.Servicio.sharedMessageArtista.subscribe(messageArtista => this.mostrar = messageArtista);
   }
   /*getAlbum(titulo) {
