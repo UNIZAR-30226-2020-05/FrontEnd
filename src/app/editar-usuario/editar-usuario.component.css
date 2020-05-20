@@ -9,6 +9,7 @@
   color: aliceblue;
   float: left;
   padding-left: 2%;
+  font-family: Roboto, serif;
 }
 
 ::-webkit-scrollbar {
