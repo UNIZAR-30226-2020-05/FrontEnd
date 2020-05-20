@@ -71,7 +71,7 @@ export class PanelAdminComponent implements OnInit {
   usuarioListaTodos: Array<User>;
   usuarioEliminado: number;
 
-  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
+  constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
     this.nuevoAlbCanc = new Array<CancionRequest>();
     this.usuarioLogeadoAd = new User();
     this.cancionFecha = new Date();
@@ -245,7 +245,7 @@ export class PanelAdminComponent implements OnInit {
     const nuevoAlbum: AlbumRequest = {
       id_artista: this.nuevoAlbAutorID,
       titulo: this.nuevoAlbTitulo,
-      caratula: this.nuevoAlbCarat,
+      caratula: this.nuevoAlbCarat + '.jpg',
       canciones: this.nuevoAlbCanc
     }
 

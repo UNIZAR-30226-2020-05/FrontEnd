@@ -63,7 +63,7 @@
 
    URL imagen: <br/>
     <input  type="text" [(ngModel)]="nuevoArtImg"><br/><br/>
-    <img src="{{nuevoArtImg}}" class="img-artista"/><br/><br/>
+    <img src="{{Servicio.URL_API+'/imagenes/artistas/'+nuevoArtImg+'.jpg'}}" class="img-artista"/><br/><br/>
 
     <button class="denegado" *ngIf="!nuevoAgregado && !artistaOk()">Añadir</button>
     <button *ngIf="!nuevoAgregado && artistaOk()" (click)="agregarArtista()">Añadir</button> &nbsp;
@@ -100,7 +100,7 @@
     <input  type="text" [(ngModel)]="nuevoAlbTitulo" (focusin)="existeArtista()"
             (focusout)="existeArtista()"><br/>
 
-    URL Caratula: <br/>
+    Nombre Caratula (sin extensión): <br/>
     <input  type="text" [(ngModel)]="nuevoAlbCarat"><br/><br/>
 
     Establecer canciones que contiene ({{nuevoAlbCanc.length}} actualmente)<br/><br/>
@@ -121,7 +121,7 @@
     </div>
     <div *ngIf="nuevoAlbumAgregado"><br/>
       Agregado al sistema: <br/><br/>
-      <img src="{{nuevoAlbCarat}}" class="img-crea-album"/><br/><br/>
+      <img src="{{Servicio.URL_API+'/imagenes/albums/'+nuevoAlbCarat}}" class="img-crea-album"/><br/><br/>
       Álbum <i>{{nuevoAlbTitulo}}</i> de
       <i>{{nuevoAlbAutor}}</i><br/>
       que contiene:<br/>
