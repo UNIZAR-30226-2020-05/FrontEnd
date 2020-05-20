@@ -19,8 +19,8 @@ export class ServicioComponentesService {
 
   editUser: boolean;
 
-  lista:ListaCancion;
-  vistaLista:boolean;
+  lista: ListaCancion;
+  vistaLista: boolean;
   objLista: ListaCancion;
   listaBorrar;
   favLista: boolean;
@@ -31,7 +31,7 @@ export class ServicioComponentesService {
   vistaUsuario: boolean;
   nomUsuario: string;
 
-  vistaPodcast:boolean;
+  vistaPodcast: boolean;
   objPodcast: ListaPodcast;
 
    /* --- Servicio reproducción de canciones ---- */
@@ -83,7 +83,7 @@ export class ServicioComponentesService {
 
   /* Mensaje para pasar variable que active o desactive la vista-lista*/
   private messageVistaLista = new BehaviorSubject(this.vistaLista);
-  sharedMessageVistaLista= this.messageVistaLista.asObservable();
+  sharedMessageVistaLista = this.messageVistaLista.asObservable();
 
   /*Mensjae para pasar objeto lista a vista-lista */
   private messageObjetoLista = new BehaviorSubject(this.objLista);
@@ -119,14 +119,14 @@ export class ServicioComponentesService {
   /************** PARA PODCAST******************/
   /* Mensaje para pasar variable que active o desactive la vista-podcast*/
   private messageVistaPodcast = new BehaviorSubject(this.vistaPodcast);
-  sharedMessageVistaPodcast= this.messageVistaPodcast.asObservable();
+  sharedMessageVistaPodcast = this.messageVistaPodcast.asObservable();
 
   /*Mensjae para pasar objeto lista podcast a vista-podcast */
   private messageObjetoPodcast = new BehaviorSubject(this.objPodcast);
   sharedMessageObjPodcast = this.messageObjetoPodcast.asObservable();
 
   constructor(private http: HttpClient) {
-    this.URL_API = 'https://3.22.247.114:8443';
+    this.URL_API = 'https://3.18.169.143:8443';
     this.nuevo = new User();
     this.objLista = new ListaCancion();
     this.albumActiv = new Album();
@@ -192,8 +192,8 @@ export class ServicioComponentesService {
 
 
   reproducirListaPodcast(podList: Array<Podcast>) {
-    let listCan: Array<Cancion> = new Array<Cancion>();
-    for (let pod of podList){
+    const listCan: Array<Cancion> = new Array<Cancion>();
+    for (const pod of podList) {
       const transform: Cancion = {
         id: pod.id,
         name: pod.name,
@@ -221,35 +221,35 @@ export class ServicioComponentesService {
 
   /* Sobre listas */
 
-  enviarLista(messageList){
+  enviarLista(messageList) {
     this.messageList.next(messageList);
   }
 
-  nextMessageVistaLista(messageVistaLista){
+  nextMessageVistaLista(messageVistaLista) {
     this.messageVistaLista.next(messageVistaLista);
   }
 
-  nextMessageObjLista(messageObjLista){
+  nextMessageObjLista(messageObjLista) {
     this.messageObjetoLista.next(messageObjLista);
   }
 
-  nextMessageVistaPodcast(messageVistaPodcast){
+  nextMessageVistaPodcast(messageVistaPodcast) {
     this.messageVistaPodcast.next(messageVistaPodcast);
   }
 
-  nextMessageObjPodcast(messageObjPodcast){
+  nextMessageObjPodcast(messageObjPodcast) {
     this.messageObjetoPodcast.next(messageObjPodcast);
   }
 
-  nextMessageFavList(favLista){
+  nextMessageFavList(favLista) {
     this.messageFavLista.next(favLista);
   }
 
-  nextMessageFavListP(favListaP){
+  nextMessageFavListP(favListaP) {
     this.messageFavListaP.next(favListaP);
   }
 
-  nextMessageListaBorrada(messageListaBorrar){
+  nextMessageListaBorrada(messageListaBorrar) {
     this.messageListaBorrar.next(messageListaBorrar);
   }
 
@@ -258,15 +258,15 @@ export class ServicioComponentesService {
   }*/
 
 
-  enviarAlbumPlay(albumCanActv){
+  enviarAlbumPlay(albumCanActv) {
     this.albumCanActv.next(albumCanActv);
   }
 
-  activarVistaUsuario(vistaUsuario){
+  activarVistaUsuario(vistaUsuario) {
     this.messageVistaUsuario.next(vistaUsuario);
   }
 
-  nextMessageNomUsuario(usuario){
+  nextMessageNomUsuario(usuario) {
     this.messageNomUsuario.next(usuario);
   }
 }
