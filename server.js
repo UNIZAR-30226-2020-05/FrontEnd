@@ -1,14 +1,15 @@
 //Install express server
 const express = require('express');
 const path = require('path');
-//const cors = require('cors');
+const cors = require('cors');
 
 const app = express();
 
-app.use(function(req,res,next){
+app.use(cors());
+/*app.use(function(req,res,next){
   res.header("Acces-Control-Allow-Origin", '*');
   next();
-});
+});*/
 
 // Serve only the static files form the dist directory
 app.use(express.static(__dirname + '/dist/FrontEnd'));
