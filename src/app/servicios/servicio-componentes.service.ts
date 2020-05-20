@@ -151,7 +151,7 @@ export class ServicioComponentesService {
   sharedMessageObjPodcast = this.messageObjetoPodcast.asObservable();
 
   constructor(private http: HttpClient) {
-    this.URL_API = 'http://3.22.247.114:8080';
+    this.URL_API = 'https://3.18.169.143:8443';
     this.nuevo = new User();
     this.objLista = new ListaCancion();
     this.albumActiv = new Album();
@@ -260,7 +260,7 @@ export class ServicioComponentesService {
 
   reproducirListaPodcast(podList: Array<Podcast>) {
     const listCan: Array<Cancion> = new Array<Cancion>();
-    for(const pod of podList) {
+    for (const pod of podList) {
       const transform: Cancion = {
         id: pod.id,
         name: pod.name,
@@ -336,4 +336,4 @@ export class ServicioComponentesService {
   nextMessageNomUsuario(usuario) {
     this.messageNomUsuario.next(usuario);
   }
-};
+}
