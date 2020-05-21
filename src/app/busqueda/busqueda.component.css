@@ -118,3 +118,37 @@
   -webkit-box-shadow: inset 0 0 6px rgba(180, 180, 180, 0.5);
 }
 
+.encima{
+  z-index: 1;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color:rgba(11,29,25,0.95);
+  font-family: Roboto, serif;
+}
+.encuadre {
+  padding: 10%;
+  color:aliceblue;
+  alignment: center;
+  text-align: center
+}
+.titulo-eleccion {
+  font-size: 50px;
+}
+button{
+  cursor: pointer;
+}
+.enlace:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.img-add-list{
+  height: 25px;
+  padding-right: 5%;
+  padding-bottom: 10px;
+  cursor: pointer;
+  margin-left: 5px;
+}
