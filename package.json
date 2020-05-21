@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
-  "heroku-postbuild": "ng build --prod",
+  "heroku-postbuild": "ng build --prod --output-path build",
   "private": true,
   "dependencies": {
     "@angular/animations": "^9.0.7",
@@ -26,6 +26,7 @@
     "tslib": "^1.13.0",
     "typescript": "~3.7.5",
     "cors": "^2.8.5",
+    "cors-anywhere": "^0.4.3",
     "zone.js": "^0.10.3"
   },
   "devDependencies": {
