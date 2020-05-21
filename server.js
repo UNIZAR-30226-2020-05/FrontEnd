@@ -2,11 +2,12 @@
 const express = require('express');
 const path = require('path');
 const cors_proxy = require('cors-anywhere');
-const a = true;
-if (a){
 
+const a = false;
+
+if (a){
   var host = process.env.HOST || '0.0.0.0';
-  var port = process.env.Port || 8080;
+  var port = process.env.Port || 4200;
   cors_proxy.createServer(
     {
       originWhitelist: [],
