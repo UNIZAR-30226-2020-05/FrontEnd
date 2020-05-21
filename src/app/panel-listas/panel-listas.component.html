@@ -20,7 +20,7 @@
 
 <!-- /****** CUADRADO DE FOTO CANCION ACTUAL *****/ -->
 <!--<div class="cuadrado" ></div> -->
-<img class="cuadrado" src="{{album.caratula}}">
+<img class="cuadrado" src="{{Servicio.URL_API + album.caratula}}">
 
 <!-- /********* TABLA PARA NOMBRE CANCION Y AUTOR DE CANCION ACTUAL ***********/ -->
 <table>
@@ -49,7 +49,8 @@
 <ul class="vertical-menu" >
   <li  *ngFor="let podcast of listasUserPodcast; first as primero">
     <a *ngIf="!primero" (click)="listaPulsadaPodcast(podcast.id);Servicio.nextMessageVistaPodcast(!okVistaPodcast);Servicio.nextMessageFavList(false);
-                              Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false)"> {{podcast.nombre}}</a>
+                              Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false);
+                              Servicio.nextMessageArtista(false)"> {{podcast.nombre}}</a>
   </li>
 </ul>
 
@@ -58,7 +59,8 @@
 <ul class="vertical-menu2" >
   <li  *ngFor="let playlist of listasUser; first as primero">
   <a *ngIf="!primero" (click)="enviarToVistaLista();listaPulsada(playlist.id);Servicio.nextMessageFavList(false);
-                              Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false)"> {{playlist.nombre}}</a>
+                              Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false);
+                              Servicio.nextMessageArtista(false)"> {{playlist.nombre}}</a>
   </li>
 </ul>
 
@@ -90,23 +92,22 @@
 <div *ngIf="mostrarFav" class= "favoritos">
   <div class="container2">
     <div class="misFavs"></div>
-    <img title="Reproducir lista" (click)="reproducir(listaFav.canciones);"
-         class="img-repr-lista" src="../../assets/playLista.png">
+    <span *ngIf="listaFav.canciones.length>0" (click)="reproducir(listaFav.canciones);"><img title="Reproducir lista"
+         class="img-repr-lista" src="../../assets/playLista.png"></span>
     <nav class="menuCSS3">
       <ul>
         <li><a href="#"><img class="iconOrden" src="../../assets/icons8-flechas-de-ordenar-100.png"></a>
           <ul>
-            <li><a href="#" (click)="porFecha=true">Últimas añadidas</a></li>
+            <li><a href="#" (click)="porFecha=true;ordenarFecha()">Últimas añadidas</a></li>
             <li><a href="#" (click)="porArtista=true">Por artista</a></li>
             <li><a href="#" (click)="porNombre=true">Por nombre</a></li>
           </ul>
         </li>
       </ul>
     </nav>
-    <div *ngIf="porFecha">{{ordenarFecha()}}</div>
     <div class="marco-tabla">
       <table class="lista-playlist">
-        <tr *ngFor="let cancion of listaFav.canciones; let i = index">
+        <tr *ngFor="let cancion of listaOrdenada; let i = index">
           <td  class="listaGen">
             <img class="imgGenCancion" (click)="Servicio.cargarAlbum(cancion.album);Servicio.reproducirCancion(cancion);Servicio.enviarAlbumPlay(albAct)"
                                      src="../../assets/play-vector.svg"/></td>
@@ -126,8 +127,8 @@
 <div *ngIf="mostrarFavP" class= "favoritos">
   <div class="container2">
     <div class="misFavs"></div>
-    <img title="Reproducir lista" (click)="reproducir(listaFavPodcast.podcasts);"
-         class="img-repr-lista" src="../../assets/playLista.png">
+    <span *ngIf="listaFavPodcast.podcasts.length >0" (click)="reproducir(listaFavPodcast.podcasts);"><img  title="Reproducir lista"
+                                                                                                            class="img-repr-lista" src="../../assets/playLista.png"></span>
     <!-- <nav class="menuDesplegable">
        <ul>
          <li><img class="iconOrden" src="../../assets/icons8-flechas-de-ordenar-100.png">
@@ -137,7 +138,7 @@
              <li><a (click)="porNombre=true">Por nombre</a></li>
            </ul>
          </li>
-       </ul>
+       </ul></span>
      </nav>-->
     <div class="marco-tabla">
       <table class="lista-playlist">
