@@ -50,7 +50,7 @@
     <tr *ngFor="let podcast of podcastEncontrado; let i = index">
       <td><img (click)="Servicio.reproducirPodcast(podcast);"
                title="Reproducir" class="img-play-album" src="../../assets/play-vector.svg"/></td>
-      <td><img class="img-play-album" (click)="vistaSelPod = true; podcastObjetivo = podcast.id;"
+      <td><img class="img-add-list" (click)="vistaSelPod = true; podcastObjetivo = podcast.id;"
                title="Añadir a lista..." src="../../assets/addToList.png" ></td>
       <!--<td><img class="foto-busqueda"  src="{{cancion.album.caratula}}"></td>-->
       <!--<td><img class="foto-busqueda"  src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>-->
