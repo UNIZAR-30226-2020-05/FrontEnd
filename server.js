@@ -2,26 +2,41 @@
 const express = require('express');
 const path = require('path');
 const cors_proxy = require('cors-anywhere');
+const a = true;
+if (a){
 
-const app = express();
+  var host = process.env.HOST || '0.0.0.0';
+  var port = process.env.Port || 8080;
+  cors_proxy.createServer(
+    {
+      originWhitelist: [],
+      requireHeader: ['origin', 'x-requested-with'],
+      removeHeaders: ['cookie', 'cookie2']
+    }
+  ).listen(port, host, function(){
+    console.log('Running CORS Anywhere on ' + host + ':' + port);
+  })
+}
+else{
+  const app = express();
 
-// Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/FrontEnd'));
+  app.use('/api', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+    next();
+  });
 
-app.get('/*', function(req,res) {
-  res.sendFile(path.join(__dirname+'/dist/FrontEnd/index.html'));
-});
+  app.use('/', indexRouter);
+  app.use('/users', usersRouter);
+  app.use('/api', apiRoutes);
 
-/*app.use(function(req,res,next){
-  res.header("Acces-Control-Allow-Origin", '*');
-  next();
-});*/
-app.use(cors_proxy.createServer(
-  {
-    originWhitelist: [],
-    requireHeader: ['origin', 'x-requested-with'],
-    removeHeaders: ['cookie', 'cookie2']
-  }));
+  // Serve only the static files form the dist directory
+  app.use(express.static(__dirname + '/dist/FrontEnd'));
+
+  app.get('/*', function(req,res) {
+    res.sendFile(path.join(__dirname+'/dist/FrontEnd/index.html'));
+  });
 
 // Start the app by listening on the default Heroku port
-app.listen(process.env.PORT || 8080);
+  app.listen(process.env.PORT || 8080);
+}
