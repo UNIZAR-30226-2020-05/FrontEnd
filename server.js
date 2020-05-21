@@ -26,11 +26,11 @@ else{
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
   });
-
+/*
   app.use('/', indexRouter);
   app.use('/users', usersRouter);
   app.use('/api', apiRoutes);
-
+*/
   // Serve only the static files form the dist directory
   app.use(express.static(__dirname + '/dist/FrontEnd'));
 
