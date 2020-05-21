@@ -1,7 +1,5 @@
 <div *ngIf="mostrar" class="vista-artista">
-
-  <img class="img-artista" src="{{artistaActivo.image_path}}"/><div class="etiqueta-artista">ARTISTA</div>
-
+  <img class="img-artista" src="{{Servicio.URL_API+artistaActivo.image_path}}"/><div class="etiqueta-artista">ARTISTA</div>
   <div class="nombre-artista">{{artistaActivo.name}}</div>
   <div class="marco-tabla">
     <br/>
