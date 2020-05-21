@@ -20,7 +20,7 @@
 
 <!-- /****** CUADRADO DE FOTO CANCION ACTUAL *****/ -->
 <!--<div class="cuadrado" ></div> -->
-<img class="cuadrado" src="{{album.caratula}}">
+<img class="cuadrado" src="{{Servicio.URL_API+ album.caratula}}">
 
 <!-- /********* TABLA PARA NOMBRE CANCION Y AUTOR DE CANCION ACTUAL ***********/ -->
 <table>
@@ -68,7 +68,7 @@
 <div *ngIf="mostrarCrearC" class= "crear">
   <div class="container">
     <label class="nueva"><b>Crear nueva lista </b></label>
-    <input type="nombre" placeholder="Nombre nueva lista" name="name" required [(ngModel)]="nombreLista">
+    <input type="nombre" placeholder="Nombre nueva lista" name="name" required  [(ngModel)]="nombreLista">
   </div>
   <button (click)="mostrarCrearC=false" class="cancel">Cancelar</button>
   <button (click)="mostrarCrearC=false; nuevaListaCanciones()" class="aceptar">Crear</button>
@@ -79,7 +79,7 @@
 <div *ngIf="mostrarCrearP" class= "crear">
   <div class="container">
     <label class="nueva"><b>Crear nueva lista </b></label>
-    <input type="nombre" placeholder="Nombre nueva lista" name="name" required [(ngModel)]="nombreListaPodcast">
+    <input type="nombre" placeholder="Nombre nueva lista" name="name" required minlength="1" [(ngModel)]="nombreListaPodcast">
   </div>
   <button (click)="mostrarCrearP=false" class="cancel">Cancelar</button>
   <button (click)="mostrarCrearP=false;nuevaListaPodcast()" class="aceptar">Crear</button>
@@ -90,8 +90,8 @@
 <div *ngIf="mostrarFav" class= "favoritos">
   <div class="container2">
     <div class="misFavs"></div>
-    <img title="Reproducir album" (click)="reproducir(listaFav.canciones);"
-         class="img-repr-lista" src="../../assets/play-album.png">
+    <img title="Reproducir lista" (click)="reproducir(listaFav.canciones);"
+         class="img-repr-lista" src="../../assets/playLista.png">
     <nav class="menuCSS3">
       <ul>
         <li><a href="#"><img class="iconOrden" src="../../assets/icons8-flechas-de-ordenar-100.png"></a>
@@ -126,8 +126,8 @@
 <div *ngIf="mostrarFavP" class= "favoritos">
   <div class="container2">
     <div class="misFavs"></div>
-    <img title="Reproducir album" (click)="reproducir(listaFavPodcast.podcasts);"
-         class="img-repr-lista" src="../../assets/play-album.png">
+    <img title="Reproducir lista" (click)="reproducir(listaFavPodcast.podcasts);"
+         class="img-repr-lista" src="../../assets/playLista.png">
     <!-- <nav class="menuDesplegable">
        <ul>
          <li><img class="iconOrden" src="../../assets/icons8-flechas-de-ordenar-100.png">

@@ -44,11 +44,19 @@ export class BusquedaComponent implements OnInit {
   buscado: string;
   buscado1: string;
 
+  usuarioLogeado: User; // Quien está en la plataforma
+  vistaSelPod: boolean;
+  podcastObjetivo: number;
+
+
+
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
   }
 
   ngOnInit(): void {
     this.mostrarBusqueda = false;
+    this.Servicio.sharedMessage.subscribe(userRecibido => this.usuarioLogeado = userRecibido);
+
   }
 
   cancelarBusqueda() {
@@ -176,5 +184,10 @@ export class BusquedaComponent implements OnInit {
           );
       }
     }
+  }
+  anyadirAlista( id_lista: number, id_c: number) {
+
+    this.http.patch(this.Servicio.URL_API + '/listaPodcast/add/' + id_lista, id_c).subscribe(
+      (resp: string) => { console.log(resp); this.Servicio.nextMessage(this.usuarioLogeado); } );
   }
 }

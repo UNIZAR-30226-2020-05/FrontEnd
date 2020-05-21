@@ -32,7 +32,7 @@ export class CentralComponent implements OnInit {
     this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
       .subscribe(
         (resp: Array<Album>) => {
-          this.recomendaciones = resp;
+          this.recomendaciones = resp.reverse();
           console.log(resp);
         }
       );
@@ -40,7 +40,7 @@ export class CentralComponent implements OnInit {
     this.http.get(this.Servicio.URL_API + '/podcast/getByName', {params})
       .subscribe(
         (resp: Array<Podcast>) => {
-          this.recomendacionesP = resp;
+          this.recomendacionesP = resp.reverse();
           console.log(resp);
         }
       );

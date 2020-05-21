@@ -4,15 +4,15 @@
     <img class="img-lista" src="../../assets/ListaDefecto.png"/>
   </div>
 
-  <img class="img-papel" (click)="borrar()" src="../../assets/trash.png"/>
+  <img class="img-papel" title="Borrar lista"(click)="borrar()" src="../../assets/trash.png"/>
   <div *ngIf="listaMostrar.canciones.length>0">
     <!-- Se ha puesto la imagen por defecto, de momento, pero deberia ir la de la primera cancion. -->
-      <img class="img-lista" src="{{albumActual.caratula}}"/>
+      <img class="img-lista" src="{{Servicio.URL_API + albumActual.caratula}}"/>
   </div>
   <div class="nombrePlaylist">PLAYLIST</div>
 
-  <img title="Reproducir album" (click)="reproducir(listaMostrar.canciones);"
-       class="img-repr-lista" src="../../assets/play-album.png">
+  <img title="Reproducir lista" (click)="reproducir(listaMostrar.canciones);"
+       class="img-repr-lista" src="../../assets/playLista.png">
 
 
 
@@ -29,7 +29,7 @@
               Servicio.nextMessageArtista(true);
               Servicio.nextMessageVistaLista(false)">{{cancion.artistas}}</td>
         <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
-        <td><img class="img-papel2" (click)="borrarCancion(cancion.id,listaMostrar.id)" src="../../assets/trash.png"/></td>
+        <td><img class="img-papel2" title="Borrar cancion" (click)="borrarCancion(cancion.id,listaMostrar.id)" src="../../assets/trash.png"/></td>
       </tr>
     </table>
   </div>
