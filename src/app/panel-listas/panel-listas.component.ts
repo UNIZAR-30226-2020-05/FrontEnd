@@ -93,26 +93,33 @@ export class PanelListasComponent implements OnInit {
 
 
   nuevaListaCanciones(){
-    const lista: ListaCancionRequest = {
-      id_usuario: this.usuario.id,
-      nombre: this.nombreLista,
-    };
+    if (this.nombreLista.length != 0) {
+      const lista: ListaCancionRequest = {
+        id_usuario: this.usuario.id,
+        nombre: this.nombreLista,
+      };
 
-    this.http.post(this.Servicio.URL_API + '/listaCancion/create', lista).subscribe(
-      (resp: ListaCancion) => { console.log(resp); this.usuario.lista_cancion.push(resp)});
-
-
+      this.http.post(this.Servicio.URL_API + '/listaCancion/create', lista).subscribe(
+          (resp: ListaCancion) => {
+            console.log(resp);
+            this.usuario.lista_cancion.push(resp)
+          });
+    }
   }
 
   nuevaListaPodcast(){
-    const lista: ListaPodcastRequest = {
-      id_usuario: this.usuario.id,
-      nombre: this.nombreListaPodcast,
-    };
+    if ( this.nombreListaPodcast.length != 0) {
+      const lista: ListaPodcastRequest = {
+        id_usuario: this.usuario.id,
+        nombre: this.nombreListaPodcast,
+      };
 
-    this.http.post(this.Servicio.URL_API + '/listaPodcast/create', lista).subscribe(
-      (resp: ListaPodcast) => { console.log(resp); this.usuario.lista_podcast.push(resp)});
-
+      this.http.post(this.Servicio.URL_API + '/listaPodcast/create', lista).subscribe(
+          (resp: ListaPodcast) => {
+            console.log(resp);
+            this.usuario.lista_podcast.push(resp)
+          });
+    }
   }
 
   listaPulsada(id: number){

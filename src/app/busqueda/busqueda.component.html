@@ -20,7 +20,7 @@
   <p class="cabecera" *ngIf="numAlbum > 1">Álbumes encontrados</p>
   <table *ngIf="numAlbum != 0">
     <tr *ngFor="let album of albumEncontrado; let i = index">
-      <td><img class="foto-busqueda" src="{{album.caratula}}" (click)="
+      <td><img class="foto-busqueda" src="{{Servicio.URL_API+album.caratula}}" (click)="
       cancelarBusqueda();
       Servicio.cargarAlbum(album.titulo);
       Servicio.nextMessage3(true);"></td>
@@ -34,7 +34,7 @@
   <p class="cabecera" *ngIf="numArtista > 1">Artistas encontrados</p>
   <table *ngIf="numArtista != 0">
     <tr *ngFor="let artista of artistaEncontrado; let i = index">
-      <td><img class="foto-busqueda" src="{{artista.image_path}}" (click)="
+      <td><img class="foto-busqueda" src="{{Servicio.URL_API+artista.image_path}}" (click)="
       cancelarBusqueda();
       Servicio.cargarArtista(artista.name);
       Servicio.nextMessageArtista(true);"></td>
@@ -50,6 +50,8 @@
     <tr *ngFor="let podcast of podcastEncontrado; let i = index">
       <td><img (click)="Servicio.reproducirPodcast(podcast);"
                title="Reproducir" class="img-play-album" src="../../assets/play-vector.svg"/></td>
+      <td><img class="img-add-list" (click)="vistaSelPod = true; podcastObjetivo = podcast.id;"
+               title="Añadir a lista..." src="../../assets/addToList.png" ></td>
       <!--<td><img class="foto-busqueda"  src="{{cancion.album.caratula}}"></td>-->
       <!--<td><img class="foto-busqueda"  src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>-->
       <td class="texto_cancion">{{podcast.name}}</td>
@@ -64,4 +66,19 @@
   >{{listaEncontrada.nombre}}</p>-->
 
   <p class="cabecera" *ngIf="numArtista == 0 && numAlbum == 0 && numCancion == 0 && numPodcast == 0 && noEncuentraLista == true && noEncuentraListaP == true">No se han encontrado resultados</p>
+
+</div>
+
+<div *ngIf="vistaSelPod" class= "encima">
+  <div class="encuadre">
+    <label class="titulo-eleccion"><b>Añadir podcast a... </b></label>
+    <i *ngFor="let lista of usuarioLogeado.lista_podcast; let i = index">
+      <hr style="width: 50%"><br/>
+      <i class="enlace" (click)="anyadirAlista(lista.id, podcastObjetivo); vistaSelPod = false;">
+        {{lista.nombre}}</i>
+    </i>
+    <hr style="width: 50%"><br/><br/>
+    <button (click)="vistaSelPod = false">Cancelar</button>
+  </div>
+
 </div>
