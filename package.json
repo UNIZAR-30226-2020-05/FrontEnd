@@ -38,6 +38,7 @@
     "@types/node": "^12.12.41",
     "codelyzer": "^5.2.2",
     "cors": "^2.8.5",
+    "cors-anywhere": "^0.4.3",
     "jasmine-core": "~3.5.0",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.3.0",
