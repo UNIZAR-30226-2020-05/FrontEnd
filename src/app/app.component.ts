@@ -151,7 +151,7 @@ export class Album {
   id: number;
   titulo: string;
   caratula: string;
-  artista: Artista;
+  artista: string;
   canciones: Array<Cancion>;
 
   constructor() {

@@ -61,7 +61,7 @@
     <input  type="text" [(ngModel)]="nuevoArtNom" (focusin)="existeArtista()"
             (focusout)="existeArtista()"><br/><br/>
 
-   URL imagen: <br/>
+   Nombre Imagen (sin extensión): <br/>
     <input  type="text" [(ngModel)]="nuevoArtImg"><br/><br/>
     <img src="{{Servicio.URL_API+'/imagenes/artistas/'+nuevoArtImg+'.jpg'}}" class="img-artista"/><br/><br/>
 
