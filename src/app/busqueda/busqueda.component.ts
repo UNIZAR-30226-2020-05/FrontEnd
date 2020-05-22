@@ -56,11 +56,14 @@ export class BusquedaComponent implements OnInit {
   ngOnInit(): void {
     this.mostrarBusqueda = false;
     this.Servicio.sharedMessage.subscribe(userRecibido => this.usuarioLogeado = userRecibido);
+    this.Servicio.sharedMessageBusq.subscribe(messageBusq => this.mostrarBusqueda = messageBusq);
 
   }
 
   cancelarBusqueda() {
     this.mostrarBusqueda = false;
+    this.Servicio.nextMessageCentral(true);
+
   }
 
   buscarContenido() {
@@ -73,6 +76,8 @@ export class BusquedaComponent implements OnInit {
     this.busquedaIniciadaLista = false;
     this.noEncuentraLista = true;
     this.inicio = this.buscado.charAt(0);
+    this.Servicio.nextMessageCentral(false);
+
 
     if (this.inicio != '#') {
       this.mostrarBusqueda = true;
