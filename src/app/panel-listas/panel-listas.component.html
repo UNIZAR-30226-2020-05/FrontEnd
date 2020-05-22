@@ -92,27 +92,28 @@
 <div *ngIf="mostrarFav" class= "favoritos">
   <div class="container2">
     <div class="misFavs"></div>
-    <span *ngIf="listaOrdenada.length>0" (click)="reproducir(listaFav.canciones);"><img title="Reproducir lista"
+    <span *ngIf="listaFav.canciones.length>0" (click)="reproducir(listaFav.canciones);"><img title="Reproducir lista"
          class="img-repr-lista" src="../../assets/playLista.png"></span>
     <nav class="menuCSS3">
       <ul>
         <li><a href="#"><img class="iconOrden" src="../../assets/icons8-flechas-de-ordenar-100.png"></a>
           <ul>
-            <li><a href="#" (click)="porFecha=true;ordenarFecha()">Últimas añadidas</a></li>
-            <li><a href="#" (click)="porArtista=true">Por artista</a></li>
-            <li><a href="#" (click)="porNombre=true">Por nombre</a></li>
+            <li><a href="#" (click)="ordenarFecha()">Últimas añadidas</a></li>
+            <li><a href="#" (click)="ordenarArtista()">Por artista</a></li>
+            <li><a href="#" (click)="ordenarPorNombre()">Por nombre</a></li>
           </ul>
         </li>
       </ul>
     </nav>
     <div class="marco-tabla">
       <table class="lista-playlist">
-        <tr *ngFor="let cancion of listaOrdenada; let i = index">
+        <tr *ngFor="let cancion of listaFav.canciones; let i = index">
           <td  class="listaGen">
             <img class="imgGenCancion" (click)="Servicio.cargarAlbum(cancion.album);Servicio.reproducirCancion(cancion);Servicio.enviarAlbumPlay(albAct)"
                                      src="../../assets/play-vector.svg"/></td>
           <td  class="titulos-album" (click)="Servicio.cargarAlbum(cancion.album);Servicio.nextMessage3(true);
-          Servicio.nextMessageFavList(false)">{{ cancion.name }}</td><td>{{cancion.artistas}}</td>
+          Servicio.nextMessageFavList(false)">{{ cancion.name }}</td><td><span class="artista" (click)="Servicio.cargarArtista(cancion.artistas);
+          Servicio.nextMessageArtista(true);mostrarFav=false">{{cancion.artistas}}</span> </td>
           <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
           <td><img class="img-papel" (click)="borrarCancion(cancion.id)" src="../../assets/trash.png"/></td>
         </tr>

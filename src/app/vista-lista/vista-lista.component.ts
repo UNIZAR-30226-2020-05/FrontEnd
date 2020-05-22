@@ -31,6 +31,20 @@ export class VistaListaComponent implements OnInit {
     this.Servicio.sharedMessage.subscribe(message=> this.usuarioLog= message);
    // this.Servicio.sharedMessageobjAlbum.subscribe(albumObj => {if (albumObj!= null) {this.albumActual= albumObj;}});
     this.Servicio.sharedMessageUsuarioAList.subscribe(usuario => this.usuario = usuario);
+    if(this.listaMostrar.canciones.length>0) {
+      const params = new HttpParams()
+        .set('titulo', this.listaMostrar.canciones[0].album);
+
+      this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
+        .subscribe(
+          (album: Array<Album>) => {
+            this.albumActual = album[0];
+            console.log("Recibido");
+          },
+          (erroro: string) => {
+            console.log(erroro);
+          });
+    }
   }
 
   borrar(){
@@ -65,19 +79,4 @@ export class VistaListaComponent implements OnInit {
 
   }
 
-  obtenerAlbum(){
-    const params = new HttpParams()
-      .set('titulo', this.listaMostrar.canciones[0].album);
-
-    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
-      .subscribe(
-        (album: Array<Album>) => {
-          this.albumActual = album[0];
-        },
-        (erroro: string) => {
-          console.log(erroro);
-        }
-      );
-
-  }
 }

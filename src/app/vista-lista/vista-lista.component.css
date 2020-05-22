@@ -125,3 +125,8 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
+.artista:hover{
+  cursor: pointer;
+  text-decoration: underline;
+}
