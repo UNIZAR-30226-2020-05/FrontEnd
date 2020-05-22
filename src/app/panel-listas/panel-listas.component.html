@@ -20,7 +20,7 @@
 
 <!-- /****** CUADRADO DE FOTO CANCION ACTUAL *****/ -->
 <!--<div class="cuadrado" ></div> -->
-<img class="cuadrado" src="{{Servicio.URL_API + album.caratula}}">
+<img class="cuadrado" src="{{Servicio.URL_API+album.caratula}}">
 
 <!-- /********* TABLA PARA NOMBRE CANCION Y AUTOR DE CANCION ACTUAL ***********/ -->
 <table>
@@ -50,7 +50,7 @@
   <li  *ngFor="let podcast of listasUserPodcast; first as primero">
     <a *ngIf="!primero" (click)="listaPulsadaPodcast(podcast.id);Servicio.nextMessageVistaPodcast(!okVistaPodcast);Servicio.nextMessageFavList(false);
                               Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false);
-                              Servicio.nextMessageArtista(false)"> {{podcast.nombre}}</a>
+                              Servicio.nextMessageArtista(false);Servicio.nextMessageUsuarioList(usuario)"> {{podcast.nombre}}</a>
   </li>
 </ul>
 
@@ -60,7 +60,7 @@
   <li  *ngFor="let playlist of listasUser; first as primero">
   <a *ngIf="!primero" (click)="enviarToVistaLista();listaPulsada(playlist.id);Servicio.nextMessageFavList(false);
                               Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false);
-                              Servicio.nextMessageArtista(false)"> {{playlist.nombre}}</a>
+                              Servicio.nextMessageArtista(false);Servicio.nextMessageUsuarioList(usuario)"> {{playlist.nombre}}</a>
   </li>
 </ul>
 

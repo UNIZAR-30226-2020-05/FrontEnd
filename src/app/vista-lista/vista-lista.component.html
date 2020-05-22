@@ -1,14 +1,16 @@
 <div *ngIf="aparecer" class="vista-lista">
-  <div *ngIf="listaMostrar.canciones.length==0">
+  <div *ngIf="listaMostrar.canciones.length==0 || listaMostrar.nombre=='Favoritos'">
     <!-- Se ha puesto la imagen por defecto, de momento, pero deberia ir la de la primera cancion. -->
     <img class="img-lista" src="../../assets/ListaDefecto.png"/>
   </div>
 
-  <img class="img-papel" title="Borrar lista"(click)="borrar()" src="../../assets/trash.png"/>
-  <div *ngIf="listaMostrar.canciones.length>0">
+  <span *ngIf="usuario.id==usuarioLog.id"> <img class="img-papel" title="Borrar lista"(click)="borrar()" src="../../assets/trash.png"/></span>
+  <div *ngIf="listaMostrar.canciones.length>0 && listaMostrar.nombre!='Favoritos'">
+    {{obtenerAlbum()}}
     <!-- Se ha puesto la imagen por defecto, de momento, pero deberia ir la de la primera cancion. -->
-      <img class="img-lista" src="{{Servicio.URL_API + albumActual.caratula}}"/>
+      <img class="img-lista" src="{{Servicio.URL_API+albumActual.caratula}}"/>
   </div>
+
   <div class="nombrePlaylist">PLAYLIST</div>
 
   <span *ngIf="listaMostrar.canciones.length>0" (click)="reproducir(listaMostrar.canciones);"><img title="Reproducir lista"
@@ -16,8 +18,8 @@
 
 
 
-  <div class="titulo-lista">{{listaMostrar.nombre}} #{{listaMostrar.id}}</div>
-  <div class="artista-lista">{{usuarioLog.nick}}</div>
+  <div class="titulo-lista">{{listaMostrar.nombre}}<span *ngIf="listaMostrar.nombre!='Favoritos'"> #{{listaMostrar.id}}</span></div>
+  <div class="artista-lista" >{{usuario.nick}}</div>
   <div class="marco-tabla">
     <table class="lista-playlist">
       <tr *ngFor="let cancion of listaMostrar.canciones; let i = index">
@@ -29,7 +31,7 @@
               Servicio.nextMessageArtista(true);
               Servicio.nextMessageVistaLista(false)">{{cancion.artistas}}</td>
         <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
-        <td><img class="img-papel2" title="Borrar cancion" (click)="borrarCancion(cancion.id,listaMostrar.id)" src="../../assets/trash.png"/></td>
+        <td><span *ngIf="usuarioLog.id==usuario.id"> <img class="img-papel2" title="Borrar cancion" (click)="borrarCancion(cancion.id,listaMostrar.id)" src="../../assets/trash.png"/></span></td>
       </tr>
     </table>
   </div>
