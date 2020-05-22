@@ -12,7 +12,9 @@ export class EditarUsuarioComponent implements OnInit {
   @Input() mostrar; // Muestra la pantalla de cambio de contraseña
   public aBorrar; // Muestra la pantalla de confirmación de eliminación de cuenta
   public passCambiada; // Muestra el mensaje de información de cambio de password
-  public imageSeleccion;
+  public imageCambiada;
+  public algoCambia;
+  public imageSeleccion = 0;
   public login: true;
 
   @Output() messageEvent = new EventEmitter<boolean>();
@@ -36,6 +38,10 @@ export class EditarUsuarioComponent implements OnInit {
     this.mostrar = false;
     this.aBorrar = false;
     this.passCambiada = false;
+    this.imageCambiada = false;
+    this.algoCambia = false;
+    this.Servicio.nextMessageCentral(true);
+
     // this.Servicio.sharedMessageCentral.subscribe(messageCentral => this.mostrar = messageCentral);
   }
   // Para mostrar la pantalla de borrado de usuario
@@ -54,7 +60,7 @@ export class EditarUsuarioComponent implements OnInit {
     this.id = this.usuarioLog.id;
     this.http.delete(this.Servicio.URL_API + '/user/delete/' + this.id).subscribe(
       (resp: string) => { console.log(resp); } );
-    this.Servicio.nextMessage2(this.login);
+    this.Servicio.nextMessage2(false);
     this.mostrar = false;
     this.aBorrar = false;
   }
@@ -64,22 +70,36 @@ export class EditarUsuarioComponent implements OnInit {
   }
   // Cambia la contraseña del usuario
   cambio() {
-    this.id = this.usuarioLog.id;
-    this.http.patch(this.Servicio.URL_API + '/user/modifyPass/' + this.id, btoa(this.passN)).subscribe(
-      (resp: string) => { console.log(resp); } );
+    if (this.contrasenaBien()) {
+      this.id = this.usuarioLog.id;
+      this.http.patch(this.Servicio.URL_API + '/user/modifyPass/' + this.id, btoa(this.passN)).subscribe(
+        (resp: string) => { console.log(resp); } );
+      this.passCambiada = true;
+    }
+    if (this.imageSeleccion != 0) {
+      this.http.patch(this.Servicio.URL_API + '/user/setAvatar/' + this.usuarioLog.id, this.imageSeleccion + '.jpg').subscribe(
+        (resp: string) => { console.log(resp);
+          this.Servicio.nextMessage(resp);
+        } );
+      this.imageCambiada = true;
+    }
+    this.algoCambia = true;
     this.mostrar = false;
-    this.passCambiada = true;
+
   }
   // Cambia a la pantalla de información de cambio de contraseña
   finalCambio() {
     this.passCambiada = false;
+    this.imageCambiada = false;
+    this.algoCambia = false;
+    this.imageSeleccion = 0;
+    this.Servicio.nextMessageCentral(true);
   }
+
   ngOnInit(): void {
-    this.mostrar = false;
     this.aBorrar = false;
     this.passCambiada = false;
     this.Servicio.sharedMessageEdit.subscribe(messageEdit => this.mostrar = messageEdit);
     this.Servicio.sharedMessage.subscribe(message => this.usuarioLog = message);
-    this.imageSeleccion = this.usuarioLog.nombre_avatar;
   }
 }

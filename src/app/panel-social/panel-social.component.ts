@@ -137,7 +137,7 @@ export class PanelSocialComponent implements OnInit {
   enviarToEdit() {
     this.Servicio.nextMessageEdit(this.editarUsuario);
     this.Servicio.nextMessage3(!this.editarUsuario);
-    //this.Servicio.nextMessageCentral(!this.editarUsuario);
+    this.Servicio.nextMessageCentral(!this.editarUsuario);
   }
 
   mostrarLogin() { // Gestionar TODOS los casos que pueden pasar.
