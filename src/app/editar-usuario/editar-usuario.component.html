@@ -25,8 +25,8 @@
   Repita la contraseña:<br/>
   <input  type="password" id="regPass2" name="regPass2" [(ngModel)]="passN2"><br/><br/>
   <button (click)="borrarUsuario()" class="botonBorrar">Borrar usuario</button>
-  <button *ngIf="contrasenaBien()" (click)="cambio()" class="botonConfirmar">Confirmar</button>
-  <button *ngIf="!contrasenaBien()" disabled class="denegado">Confirmar</button>
+  <button *ngIf="contrasenaBien() || imageSeleccion != 0" (click)="cambio()" class="botonConfirmar">Confirmar</button>
+  <button *ngIf="!contrasenaBien() && imageSeleccion == 0" disabled class="denegado">Confirmar</button>
   <button (click)="cancelarEdit()" class="botonCancelar">Cancelar</button>
 </div>
 
@@ -37,7 +37,10 @@
   <button (click)="cancelaBorrado()" class="botonBorrar">Cancelar</button>
 </div>
 
-<div *ngIf="passCambiada" class="editar">
-  <p class="textoBorrar">Su contraseña ha sido modificada correctamente</p>
+<div *ngIf="algoCambia" class="editar">
+  <p *ngIf="passCambiada && !imageCambiada" class="textoBorrar">Su contraseña ha sido modificada correctamente</p>
+  <p *ngIf="imageCambiada && !passCambiada" class="textoBorrar">Su avatar ha sido modificado correctamente</p>
+  <p *ngIf="passCambiada && imageCambiada" class="textoBorrar">Su contraseña y avatar han sido modificados correctamente</p>
+
   <button (click)="finalCambio()" class="botonConfirmar">Aceptar</button>
 </div>

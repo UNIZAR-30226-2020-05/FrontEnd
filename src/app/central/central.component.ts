@@ -26,6 +26,8 @@ export class CentralComponent implements OnInit {
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) { }
 
   ngOnInit(): void {
+    this.Servicio.sharedMessageCentral.subscribe(messageCentral => this.mostrar = messageCentral);
+
     this.mostrar = true;
     let params = new HttpParams().set('titulo', '');
 
