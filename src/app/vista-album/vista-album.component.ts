@@ -1,5 +1,5 @@
 import {Component, OnInit,Input, Output} from '@angular/core';
-import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
+import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
 import {Album, User} from '../app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 

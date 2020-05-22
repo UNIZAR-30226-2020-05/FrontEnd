@@ -213,7 +213,7 @@ export class PanelAdminComponent implements OnInit {
 
     const nuevo: ArtistaRequest = {
       nombre: this.nuevoArtNom,
-      imagen: this.nuevoArtImg
+      imagen: this.nuevoArtImg + '.jpg'
     };
 
     this.http.post(this.Servicio.URL_API + '/artist/add', nuevo).subscribe(

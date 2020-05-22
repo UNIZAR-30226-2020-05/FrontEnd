@@ -34,6 +34,8 @@ export class ServicioComponentesService {
 
   central: boolean;
 
+  busq: boolean;
+
   vistaUsuario: boolean;
   nomUsuario: string;
 
@@ -135,6 +137,9 @@ export class ServicioComponentesService {
   /* Mensaje para pasar variable a la vista central */
   private messageCentral = new BehaviorSubject(this.central);
   sharedMessageCentral = this.messageCentral.asObservable();
+
+  private messageBusq = new BehaviorSubject(this.busq);
+  sharedMessageBusq = this.messageBusq.asObservable();
 
   /*********PARA VISTA USUARIO*************/
   private messageVistaUsuario = new BehaviorSubject(this.vistaUsuario);
@@ -329,6 +334,9 @@ export class ServicioComponentesService {
     this.messageCentral.next(messageCentral);
   }
 
+  nextMessageBusq(messageBusq) {
+    this.messageBusq.next(messageBusq);
+  }
 
   enviarAlbumPlay(albumCanActv) {
     this.albumCanActv.next(albumCanActv);
