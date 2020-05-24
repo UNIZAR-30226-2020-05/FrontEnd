@@ -66,7 +66,7 @@ export class PanelListasComponent implements OnInit {
       if(message != null){this.usuario=message; this.listaFav=this.usuario.lista_cancion[0];this.listaMantener=this.usuario.lista_cancion[0];this.listasUser=this.usuario.lista_cancion;
       this.listaFavPodcast= this.usuario.lista_podcast[0];this.listasUserPodcast=this.usuario.lista_podcast}
     });
-    this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.okVista=messageVistaLista);
+    this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.okVista = messageVistaLista);
     this.Servicio.sharedMessageObjLista.subscribe(messageObjLista => this.listaOk = messageObjLista);
     this.Servicio.sharedMessageVistaPodcast.subscribe(messageVistaPodcast => this.okVistaPodcast=messageVistaPodcast);
     this.Servicio.sharedMessageObjPodcast.subscribe(messageObjPodcast => this.listaOkPodcast = messageObjPodcast);

@@ -1,6 +1,6 @@
 import {Component, OnInit,Input, Output} from '@angular/core';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
-import {Album, User} from '../app.component';
+import {Album, ListaCancion, User} from '../app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Component({
@@ -57,13 +57,14 @@ export class VistaAlbumComponent implements OnInit {
   anyadirAlista( id_lista: number, id_c: number) {
 
     this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + id_lista, id_c).subscribe(
-      (resp: string) => { console.log(resp); this.Servicio.nextMessage(this.userActivo) } );
+      (resp: ListaCancion) => { console.log(resp); this.userActivo.lista_cancion[0]=resp;this.Servicio.nextMessage(this.userActivo) } );
   }
 
   anyadirAlbumAlista(id_lista: number){
     this.http.patch(this.Servicio.URL_API + '/listaCancion/addByAlbum/' + id_lista,
       this.albActivo.id).subscribe(
-      (resp: string) => {   this.vistaSelAlb = false} );
+      (resp: ListaCancion) => {   this.vistaSelAlb = false;
+        if(resp.nombre == 'Favoritos'){this.userActivo.lista_cancion[0]=resp;this.Servicio.nextMessage(this.userActivo)} });
   }
 
   repr(alb) {
