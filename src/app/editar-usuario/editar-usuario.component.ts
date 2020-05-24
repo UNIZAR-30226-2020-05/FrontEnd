@@ -97,9 +97,13 @@ export class EditarUsuarioComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.aBorrar = false;
-    this.passCambiada = false;
+    // this.aBorrar = false;
+    // this.passCambiada = false;
     this.Servicio.sharedMessageEdit.subscribe(messageEdit => this.mostrar = messageEdit);
+    this.Servicio.sharedMessageEdit2.subscribe(messageEdit2 => this.algoCambia = messageEdit2);
+    this.Servicio.sharedMessageEdit2.subscribe(messageEdit2 => this.passCambiada = messageEdit2);
+    this.Servicio.sharedMessageEdit2.subscribe(messageEdit2 => this.imageCambiada = messageEdit2);
+    this.Servicio.sharedMessageEdit2.subscribe(messageEdit2 => this.aBorrar = messageEdit2);
     this.Servicio.sharedMessage.subscribe(message => this.usuarioLog = message);
   }
 }

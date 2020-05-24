@@ -31,8 +31,14 @@ export class VistaPodcastComponent implements OnInit {
   }
 
   borrar() {
-    this.http.delete(this.Servicio.URL_API + '/listaPodcast/delete/' + this.listaMostrar.id).subscribe((resp: string) => console.log(resp));
-    this.Servicio.nextMessage(this.usuarioLog);
+    this.http.delete(this.Servicio.URL_API + '/listaPodcast/delete/' + this.listaMostrar.id).subscribe((resp: string) => { console.log(resp);
+    for( var i=0; i< this.usuarioLog.lista_podcast.length - 1;i++){
+      if(this.usuarioLog.lista_podcast[i].id==this.listaMostrar.id){
+        this.usuarioLog.lista_podcast.slice(i-1,1);
+      }
+    }
+    this.Servicio.nextMessageListaBorrada(this.usuarioLog.lista_podcast)});
+
   }
 
   sacarTiempo(n: number) {
@@ -53,7 +59,7 @@ export class VistaPodcastComponent implements OnInit {
   }
 
   reproducir(lista) {
-    this.Servicio.reproducirLista(lista);
+    this.Servicio.reproducirListaPodcast(lista);
   }
 
 

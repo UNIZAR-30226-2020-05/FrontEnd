@@ -48,6 +48,7 @@ export class BusquedaComponent implements OnInit {
   vistaSelPod: boolean;
   podcastObjetivo: number;
 
+  albumDeCancion: Album;
 
 
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
@@ -76,8 +77,17 @@ export class BusquedaComponent implements OnInit {
     this.busquedaIniciadaLista = false;
     this.noEncuentraLista = true;
     this.inicio = this.buscado.charAt(0);
-    this.Servicio.nextMessageCentral(false);
-
+    this.Servicio.nextMessage3(false); // Desactiva album
+    this.Servicio.nextMessageVistaLista(false); // Desactiva vista de playlist.
+    this.Servicio.activarVistaUsuario(false); // Desactiva vista usuarios.
+    this.Servicio.nextMessageArtista(false); // Desactiva vista artista.
+    this.Servicio.nextMessageEdit(false);
+    this.Servicio.nextMessageCentral(true); // Desactiva central
+    this.Servicio.nextMessageEdit2(false);
+    this.Servicio.nextMessageFavListP(false);
+    this.Servicio.nextMessageVistaLista(false);
+    this.Servicio.nextMessageVistaPodcast(false);
+    this.Servicio.nextMessageFavList(false);
 
     if (this.inicio != '#') {
       this.mostrarBusqueda = true;
@@ -194,5 +204,12 @@ export class BusquedaComponent implements OnInit {
 
     this.http.patch(this.Servicio.URL_API + '/listaPodcast/add/' + id_lista, id_c).subscribe(
       (resp: string) => { console.log(resp); this.Servicio.nextMessage(this.usuarioLogeado); } );
+  }
+  pasarCaratula(nombre){
+    this.Servicio.cargarAlbum(nombre);
+    this.Servicio.albumActivo.subscribe(albumObj => {
+      this.albumDeCancion = albumObj;
+      this.Servicio.enviarAlbumPlay(this.albumDeCancion);
+    });
   }
 }
