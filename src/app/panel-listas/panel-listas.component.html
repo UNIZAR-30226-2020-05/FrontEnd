@@ -1,6 +1,6 @@
 <!--/********** PANEL IZQUIERDO ************/ -->
 <div class="panel">
-  <p class="titleP">PODCAST</p>
+  <p class="titleP">PODCASTS</p>
   <p class="ListP" (click)="mostrarCrearP=true; mostrarFavP=false">
     <img class="addP" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>
   <p class="fave" (click)="mostrarFavP=!mostrarFavP;
@@ -81,7 +81,7 @@
 
 <!--************* PANTALLA CREAR LISTA PLAYLIST ******/-->
 
-<div *ngIf="mostrarCrearC" class= "crear">
+<div *ngIf="mostrarCrearC" class= "CrearList">
   <div class="container">
     <label class="nueva"><b>Crear nueva lista </b></label>
     <input type="nombre" placeholder="Nombre nueva lista" name="name" required  [(ngModel)]="nombreLista">
@@ -92,7 +92,7 @@
 
 <!--************* PANTALLA CREAR LISTA PODCAST ******/-->
 
-<div *ngIf="mostrarCrearP" class= "crear">
+<div *ngIf="mostrarCrearP" class= "CrearList">
   <div class="container">
     <label class="nueva"><b>Crear nueva lista </b></label>
     <input type="nombre" placeholder="Nombre nueva lista" name="name" autocomplete="off" [(ngModel)]="nombreListaPodcast">
