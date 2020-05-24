@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
 import {ListaCancion, User, Cancion, Album} from "../app.component";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-vista-lista',
@@ -14,7 +14,8 @@ export class VistaListaComponent implements OnInit {
 
   listaMostrar: ListaCancion= new ListaCancion();
 
-  usuarioLog: User;
+  usuarioLog: User = new User();
+  usuario: User = new User();
 
   play:boolean=false;
 
@@ -28,7 +29,22 @@ export class VistaListaComponent implements OnInit {
     this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.aparecer = messageVistaLista);
     this.Servicio.sharedMessageObjLista.subscribe(messageObjLista=> this.listaMostrar = messageObjLista);
     this.Servicio.sharedMessage.subscribe(message=> this.usuarioLog= message);
-    this.Servicio.sharedMessageobjAlbum.subscribe(albumObj => {if (albumObj!= null) {this.albumActual= albumObj;}});
+   // this.Servicio.sharedMessageobjAlbum.subscribe(albumObj => {if (albumObj!= null) {this.albumActual= albumObj;}});
+    this.Servicio.sharedMessageUsuarioAList.subscribe(usuario => this.usuario = usuario);
+    if(this.listaMostrar.canciones.length>0) {
+      const params = new HttpParams()
+        .set('titulo', this.listaMostrar.canciones[0].album);
+
+      this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
+        .subscribe(
+          (album: Array<Album>) => {
+            this.albumActual = album[0];
+            console.log("Recibido");
+          },
+          (erroro: string) => {
+            console.log(erroro);
+          });
+    }
   }
 
   borrar(){
@@ -62,4 +78,5 @@ export class VistaListaComponent implements OnInit {
     {console.log(resp); this.listaMostrar=resp});
 
   }
+
 }

@@ -324,7 +324,7 @@ button:hover {
   top: 10.5%;
   left: 14%;
   width: 61%;
-  height: 62%;
+  height: 65%;
   background-color: #0b1d19;
   font-family: Roboto, serif;
 }
@@ -377,7 +377,7 @@ button:hover {
 
 .marco-tabla{
   margin-left: -10%;
-  height: 80%;
+  height: 75%;
   width: 95%;
   top: 23%;
   overflow: auto;
@@ -424,6 +424,10 @@ button:hover {
   cursor: pointer;
   width: 1.5vw;
   vertical-align: middle;
+}
+.artista:hover{
+cursor: pointer;
+  text-decoration: underline;
 }
 
 

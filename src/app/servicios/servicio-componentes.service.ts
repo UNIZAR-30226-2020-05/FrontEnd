@@ -30,6 +30,7 @@ export class ServicioComponentesService {
   listaBorrar;
   favLista: boolean;
   favListaP: boolean;
+  usuarioList:User = new User();
 
   central: boolean;
 
@@ -115,6 +116,9 @@ export class ServicioComponentesService {
   private objetoAlbum = new BehaviorSubject(this.objAlbum);
   sharedMessageobjAlbum = this.objetoAlbum.asObservable();
 
+  private usuarioLista = new BehaviorSubject(this.usuarioList);
+  sharedMessageUsuarioAList = this.usuarioLista.asObservable();
+
 /******** lOGO CERRAR VISTAS***********/
   /* Mensaje para poder ocultar vista de favoritos Canciones desde logo */
   private messageFavLista = new BehaviorSubject(this.favLista);
@@ -151,7 +155,7 @@ export class ServicioComponentesService {
   private messageVistaPodcast = new BehaviorSubject(this.vistaPodcast);
   sharedMessageVistaPodcast = this.messageVistaPodcast.asObservable();
 
-  /*Mensjae para pasar objeto lista podcast a vista-podcast */
+  /*Mensaje para pasar objeto lista podcast a vista-podcast */
   private messageObjetoPodcast = new BehaviorSubject(this.objPodcast);
   sharedMessageObjPodcast = this.messageObjetoPodcast.asObservable();
 
@@ -163,6 +167,7 @@ export class ServicioComponentesService {
     this.albumCancionActiva = new Album();
     this.listaBorrar = new Array(ListaCancion);
     this.objAlbum = new Album();
+    this.usuarioList = new User();
   }
 
   nextMessage(message) {
@@ -265,7 +270,7 @@ export class ServicioComponentesService {
 
   reproducirListaPodcast(podList: Array<Podcast>) {
     const listCan: Array<Cancion> = new Array<Cancion>();
-    for (const pod of podList) {
+    for(const pod of podList) {
       const transform: Cancion = {
         id: pod.id,
         name: pod.name,
@@ -344,4 +349,8 @@ export class ServicioComponentesService {
   nextMessageNomUsuario(usuario) {
     this.messageNomUsuario.next(usuario);
   }
-}
+
+  nextMessageUsuarioList(usuario){
+    this.usuarioLista.next(usuario);
+  }
+};

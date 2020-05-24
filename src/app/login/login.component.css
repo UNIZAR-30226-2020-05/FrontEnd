@@ -20,11 +20,11 @@
   margin-left: 40%;
   margin-top: 20%;
   font-size: 130%;
+
 }
 .passw{
-  position: absolute;
-  margin-left: 38.6%;
-  margin-top: 0.8%;
+  margin-left: 40%;
+  margin-top: 100%;
   font-size: 130%;
 }
 /* Full-width inputs */
@@ -33,13 +33,14 @@ input[type=text]{
   margin-top: 1%;
   margin-left: 40%;
   margin-right: 100%;
+  margin-bottom: 2%;
   display: block;
   border: none;
   box-sizing: border-box;
 }
 input[type=password]{
   padding: 0.75% 1.2%;
-  margin-top: 3.5%;
+  margin-top: 1%;
   margin-left: 40%;
   margin-right: 100%;
   display: block;
@@ -80,17 +81,8 @@ button:hover {
   color:aliceblue;
 }
 
-
 /* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-    display: block;
-    float: none;
-  }
-  .cancelbtn {
-    width:50%;
-  }
-}
+
 
 .datosMal{
   position: absolute;
