@@ -28,7 +28,7 @@ export class VistaAlbumComponent implements OnInit {
     this.reproduccAlbum = '';
   }
 
-  show:boolean;
+  show: boolean;
   ngOnInit(): void {
     //Flag para saber cuando activar la vista de album
     this.Servicio.sharedMessage3.subscribe(message3 => this.show = message3);

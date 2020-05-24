@@ -9,7 +9,8 @@
   <p class="cabecera" *ngIf="numCancion > 1">Canciones encontradas</p>
   <table *ngIf="numCancion != 0">
     <tr *ngFor="let cancion of cancionEncontrada; let i = index" class="loBuscado">
-      <td><img (click)="Servicio.reproducirCancion(cancion);Servicio.enviarAlbumPlay(cancion.album)"
+      <td><img (click)="Servicio.reproducirCancion(cancion);
+      pasarCaratula(cancion.album);"
                title="Reproducir" class="img-play-album" src="../../assets/play-vector.svg"/></td>
       <!--<td><img class="foto-busqueda"  src="{{cancion.album.caratula}}"></td>-->
       <!--<td><img class="foto-busqueda"  src="./../assets/album/Led_Zeppelin-Led_Zeppelin_IV-Frontal.jpg"></td>-->
