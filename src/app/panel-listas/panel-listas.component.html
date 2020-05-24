@@ -81,9 +81,9 @@
 <div *ngIf="mostrarCrearP" class= "crear">
   <div class="container">
     <label class="nueva"><b>Crear nueva lista </b></label>
-    <input type="nombre" placeholder="Nombre nueva lista" name="name" required minlength="1" [(ngModel)]="nombreListaPodcast">
+    <input type="nombre" placeholder="Nombre nueva lista" name="name" autocomplete="off" [(ngModel)]="nombreListaPodcast">
   </div>
-  <button (click)="mostrarCrearP=false" class="cancel">Cancelar</button>
+  <button (click)="mostrarCrearP=false;nombreListaPodcast=null" class="cancel">Cancelar</button>
   <button (click)="mostrarCrearP=false;nuevaListaPodcast()" class="aceptar">Crear</button>
 </div>
 

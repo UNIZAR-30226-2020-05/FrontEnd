@@ -78,7 +78,7 @@ export class PanelListasComponent implements OnInit {
     this.Servicio.sharedMessageFavLista.subscribe(favLista => this.mostrarFav = favLista);
     this.Servicio.sharedMessageFavListaP.subscribe(favListaP => this.mostrarFavP = favListaP);
     this.Servicio.albumActivo.subscribe(album => this.albAct=album);
-    this.Servicio.sharedMessageBorrarLista.subscribe(lista => this.usuario.lista_cancion=lista);
+    this.Servicio.sharedMessageBorrarLista.subscribe(lista => this.listasUserPodcast = lista);
 
 
 
@@ -119,6 +119,7 @@ export class PanelListasComponent implements OnInit {
             console.log(resp);
             this.usuario.lista_podcast.push(resp)
           });
+      this.nombreListaPodcast=null;
     }
   }
 
@@ -156,7 +157,7 @@ export class PanelListasComponent implements OnInit {
     return s;
   }
   reproducir(lista){
-    this.Servicio.reproducirLista(lista);
+    this.Servicio.reproducirListaPodcast(lista);
   }
 
   borrarCancion(cancion:number){

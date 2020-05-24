@@ -165,7 +165,7 @@ export class ServicioComponentesService {
     this.objLista = new ListaCancion();
     this.albumActiv = new Album();
     this.albumCancionActiva = new Album();
-    this.listaBorrar = new Array(ListaCancion);
+    this.listaBorrar = new Array(ListaPodcast);
     this.objAlbum = new Album();
     this.usuarioList = new User();
   }
