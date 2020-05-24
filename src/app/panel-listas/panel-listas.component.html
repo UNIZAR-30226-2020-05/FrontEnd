@@ -81,7 +81,7 @@
 
 <!--************* PANTALLA CREAR LISTA PLAYLIST ******/-->
 
-<div *ngIf="mostrarCrearC" class= "CrearList">
+<div *ngIf="mostrarCrearC" class= "crear">
   <div class="container">
     <label class="nueva"><b>Crear nueva lista </b></label>
     <input type="nombre" placeholder="Nombre nueva lista" name="name" required  [(ngModel)]="nombreLista">
@@ -92,7 +92,7 @@
 
 <!--************* PANTALLA CREAR LISTA PODCAST ******/-->
 
-<div *ngIf="mostrarCrearP" class= "CrearList">
+<div *ngIf="mostrarCrearP" class= "crear">
   <div class="container">
     <label class="nueva"><b>Crear nueva lista </b></label>
     <input type="nombre" placeholder="Nombre nueva lista" name="name" autocomplete="off" [(ngModel)]="nombreListaPodcast">
