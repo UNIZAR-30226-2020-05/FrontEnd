@@ -11,6 +11,7 @@ import {
 } from "../app.component";
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
 import {subscribeToResult} from "rxjs/internal-compatibility";
+import {NumberFormatStyle} from "@angular/common";
 
 
 @Component({
@@ -49,10 +50,7 @@ export class PanelListasComponent implements OnInit {
   listasUser;
   listasUserPodcast;
 
-  porFecha:boolean=false;
-  porArtista:boolean=false;
-  porNombre:boolean=false;
-  listaOrdenada: Array<Cancion>;
+ listaMantener: ListaCancion = new ListaCancion();
 
   enFav:boolean;
   noEnFav:boolean;
@@ -65,10 +63,10 @@ export class PanelListasComponent implements OnInit {
 
   ngOnInit(): void {
     this.Servicio.sharedMessage.subscribe(message => {
-      if(message != null){this.usuario=message; this.listaFav=this.usuario.lista_cancion[0];this.listasUser=this.usuario.lista_cancion;
+      if(message != null){this.usuario=message; this.listaFav=this.usuario.lista_cancion[0];this.listaMantener=this.usuario.lista_cancion[0];this.listasUser=this.usuario.lista_cancion;
       this.listaFavPodcast= this.usuario.lista_podcast[0];this.listasUserPodcast=this.usuario.lista_podcast}
     });
-    this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.okVista=messageVistaLista);
+    this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.okVista = messageVistaLista);
     this.Servicio.sharedMessageObjLista.subscribe(messageObjLista => this.listaOk = messageObjLista);
     this.Servicio.sharedMessageVistaPodcast.subscribe(messageVistaPodcast => this.okVistaPodcast=messageVistaPodcast);
     this.Servicio.sharedMessageObjPodcast.subscribe(messageObjPodcast => this.listaOkPodcast = messageObjPodcast);
@@ -81,6 +79,8 @@ export class PanelListasComponent implements OnInit {
     this.Servicio.sharedMessageFavListaP.subscribe(favListaP => this.mostrarFavP = favListaP);
     this.Servicio.albumActivo.subscribe(album => this.albAct=album);
     this.Servicio.sharedMessageBorrarLista.subscribe(lista => this.usuario.lista_cancion=lista);
+
+
 
   }
   newMessage() {
@@ -177,8 +177,26 @@ export class PanelListasComponent implements OnInit {
   }
 
   ordenarFecha(){
-    this.listaOrdenada=this.listaFav.canciones;
-   this.listaOrdenada=this.listaOrdenada.reverse();
+    this.listaFav.canciones=this.listaMantener.canciones.reverse();
 
+  }
+
+
+
+  ordenarArtista(){
+
+    this.listaFav.canciones.sort((a, b) => {
+      if (a.artistas < b.artistas) return -1;
+      else if (a.artistas > b.artistas) return 1;
+      else return 0;
+    });
+  }
+
+  ordenarPorNombre(){
+    this.listaFav.canciones.sort((a, b) => {
+      if (a.name < b.name) return -1;
+      else if (a.name > b.name) return 1;
+      else return 0;
+    });
   }
 }

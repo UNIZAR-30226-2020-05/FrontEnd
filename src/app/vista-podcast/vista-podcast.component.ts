@@ -14,11 +14,11 @@ export class VistaPodcastComponent implements OnInit {
 
   listaMostrar: ListaPodcast;
 
-  usuarioLog: User;
+  usuarioLog: User = new User();
+  usuario: User = new User();
 
   play: boolean = false;
 
-  albumActual: Album;
 
   constructor(public Servicio: ServicioComponentesService, private http: HttpClient) {
   }
@@ -27,11 +27,7 @@ export class VistaPodcastComponent implements OnInit {
     this.Servicio.sharedMessageVistaPodcast.subscribe(messageVistaPodcast => this.vistaPodcast = messageVistaPodcast);
     this.Servicio.sharedMessageObjPodcast.subscribe(messageObjPodcast => this.listaMostrar = messageObjPodcast);
     this.Servicio.sharedMessage.subscribe(message => this.usuarioLog = message);
-    this.Servicio.albumActivo.subscribe(albumObj => {
-      if (albumObj != null) {
-        this.albumActual = albumObj;
-      }
-    });
+    this.Servicio.sharedMessageUsuarioAList.subscribe(usuario => this.usuario = usuario);
   }
 
   borrar() {
@@ -60,11 +56,6 @@ export class VistaPodcastComponent implements OnInit {
     this.Servicio.reproducirLista(lista);
   }
 
-  cargarCaratula(cancion) {
-    this.Servicio.cargarAlbum(cancion);
-    this.Servicio.enviarAlbumPlay(this.albumActual);
-    this.albumActual = null;
-  }
 
   borrarPodcast(podcast: number, lista: number) {
     this.http.patch(this.Servicio.URL_API + '/listaPodcast/deletePodcast/' + lista, podcast).subscribe((resp: ListaPodcast) => {

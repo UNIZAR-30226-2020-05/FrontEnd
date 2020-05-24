@@ -40,7 +40,8 @@ export class ReproductorComponent implements OnInit {
     setInterval(() => {
       this.posActual = this.cancion.currentTime;
       this.duracionActual = this.cancion.duration;
-      if (this.cancion.ended && this.listaActiva.length < 2) {
+      if ((this.cancion.ended && this.listaActiva.length < 2) ||
+        (this.cancion.ended && this.listaActiva.length > 2 && !this.hayAdelante())) {
         this.cancion.currentTime = 0; // Vuelve al principio
         this.cancion.load(); const aux = this.cancion.src;
         this.cancion.src = aux;
@@ -240,8 +241,6 @@ export class ReproductorComponent implements OnInit {
      console.log(usu);
      this.http.patch( this.Servicio.URL_API + '/user/modifyLastPlay/' + usu.id, data ).subscribe(
        (resp: string) => { console.log(resp); } );
-
-
   }
 
 

@@ -27,6 +27,7 @@ export class PanelSocialComponent implements OnInit {
 
   usuarioBuscado: User;
   listaCan: Array<Cancion>;
+  listaAlbums: Array<Album> = new Array<Album>();
 
   cancionAmigoActual: Cancion;
 
@@ -43,6 +44,7 @@ export class PanelSocialComponent implements OnInit {
     this.Servicio.sharedMessage.subscribe(userRecibido => this.usuarioLogeado = userRecibido);
     this.cargarCanciones();
     this.Servicio.sharedMessageVistaUsuario.subscribe(okVista => this.okVistaUsuario = okVista);
+    this.cargarAlbums();
   }
 
   activarBusqueda() {
@@ -103,19 +105,37 @@ export class PanelSocialComponent implements OnInit {
   }
 
   /* --- Servicio de API --- */
+  cargarAlbums() {
 
-  obtenerCancion(id: number) {
+    const params = new HttpParams()
+      .set('titulo', '');
 
-    let encontrado = false;
-    for (const cancionc of this.listaCan) {
-      if (!encontrado) {
-        if (id === cancionc.id) {
-          this.cancionAmigoActual = cancionc;
-          encontrado = true;
+    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
+      .subscribe(
+        (resp: Array<Album>) => {
+          this.listaAlbums = resp;
+          console.log(this.listaAlbums);
+        },
+        (erroro: string) => { console.log(erroro);
+        }
+      );
+  }
+
+  buscarAlbum(canc: string, artista: string) {
+    for (const alb of this.listaAlbums) {
+      if (alb.artista === artista) {
+        for (const can of alb.canciones) {
+          console.log(can.name);
+          if (can.name === canc) {
+            this.Servicio.cargarAlbum(alb.titulo);
+            this.mostrarVistaAlbum();
+            break;
+          }
         }
       }
     }
   }
+
 
   /* Utiliza el objeto usuario, que contiene el usuario objetivo a ser agregado */
   agregarAmigo() {
@@ -146,6 +166,44 @@ export class PanelSocialComponent implements OnInit {
     this.Servicio.activarVistaUsuario(false); // Desactiva vista usuarios.
     this.Servicio.nextMessageArtista(false); // Desactiva vista artista.
     this.Servicio.nextMessage2(false); // Activa login
+    this.Servicio.nextMessageEdit(false);
+    this.Servicio.nextMessageCentral(true); // Desactiva central
+  }
+
+  mostrarVistaUsuario() { // Gestionar TODOS los casos que pueden pasar.
+    this.Servicio.nextMessage3(false); // Desactiva album
+    this.Servicio.nextMessageVistaLista(false); // Desactiva vista de playlist.
+    this.Servicio.activarVistaUsuario(true); // Desactiva vista usuarios.
+    this.Servicio.nextMessageArtista(false); // Desactiva vista artista.
+    this.Servicio.nextMessageCentral(false); // Desactiva central
+    this.Servicio.nextMessageFavList(false);
+    this.Servicio.nextMessageFavListP(false);
+    this.Servicio.nextMessageVistaLista(false);
+    this.Servicio.nextMessageVistaPodcast(false);
+  }
+
+  mostrarVistaArtista() { // Gestionar TODOS los casos que pueden pasar.
+    this.Servicio.nextMessage3(false); // Desactiva album
+    this.Servicio.nextMessageVistaLista(false); // Desactiva vista de playlist.
+    this.Servicio.activarVistaUsuario(false); // Desactiva vista usuarios.
+    this.Servicio.nextMessageArtista(true); // Desactiva vista artista.
+    this.Servicio.nextMessageCentral(false); // Desactiva central
+    this.Servicio.nextMessageFavList(false);
+    this.Servicio.nextMessageFavListP(false);
+    this.Servicio.nextMessageVistaLista(false);
+    this.Servicio.nextMessageVistaPodcast(false);
+  }
+
+  mostrarVistaAlbum() { // Gestionar TODOS los casos que pueden pasar.
+    this.Servicio.nextMessage3(true); // Desactiva album
+    this.Servicio.nextMessageVistaLista(false); // Desactiva vista de playlist.
+    this.Servicio.activarVistaUsuario(false); // Desactiva vista usuarios.
+    this.Servicio.nextMessageArtista(false); // Desactiva vista artista.
+    this.Servicio.nextMessageCentral(false); // Desactiva central
+    this.Servicio.nextMessageFavList(false);
+    this.Servicio.nextMessageFavListP(false);
+    this.Servicio.nextMessageVistaLista(false);
+    this.Servicio.nextMessageVistaPodcast(false);
   }
 
   esCancion(nombre: string) {
