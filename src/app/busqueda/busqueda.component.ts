@@ -48,6 +48,7 @@ export class BusquedaComponent implements OnInit {
   vistaSelPod: boolean;
   podcastObjetivo: number;
 
+  albumDeCancion: Album;
 
 
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
@@ -194,5 +195,11 @@ export class BusquedaComponent implements OnInit {
 
     this.http.patch(this.Servicio.URL_API + '/listaPodcast/add/' + id_lista, id_c).subscribe(
       (resp: string) => { console.log(resp); this.Servicio.nextMessage(this.usuarioLogeado); } );
+  }
+  pasarCaratula(nombre){
+    this.Servicio.cargarAlbum(nombre);
+    this.Servicio.albumActivo.subscribe(albumObj => {
+      this.albumDeCancion = albumObj;
+    });
   }
 }
