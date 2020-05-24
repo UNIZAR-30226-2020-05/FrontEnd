@@ -240,8 +240,6 @@ export class ReproductorComponent implements OnInit {
      console.log(usu);
      this.http.patch( this.Servicio.URL_API + '/user/modifyLastPlay/' + usu.id, data ).subscribe(
        (resp: string) => { console.log(resp); } );
-
-
   }
 
 
