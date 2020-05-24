@@ -16,20 +16,18 @@
 
     Puedes agregar usuarios a tu lista desde el botón inferior.</p>
 
-  <!-- Construir lista con un ngFor  *ngIf="!listaVacia" class="listaAmigos"--->
+  <!-- CONTENIDO LISTA DE AMIGOS"--->
   <div class="contenido-amigos">
   <table class="tabla-amig" *ngFor="let usu of usuarioLogeado.amigos">
     <tr>
       <td style="text-align: center; width: 15%;" rowspan="2"><img class="foto-perfil" src="../../assets/profile-pics/{{usu.avatar}}"></td>
       <td> <span class="enlace" (click)="
-      Servicio.nextMessageNomUsuario(usu.nick);Servicio.activarVistaUsuario(true);
-       Servicio.nextMessage3(false); Servicio.nextMessageCentral(false);"
+      Servicio.nextMessageNomUsuario(usu.nick);mostrarVistaUsuario()"
       >{{usu.nick}}</span></td><td>
 
       </td>
     </tr>
-    <tr><span class="enlace" (click)="Servicio.nextMessageNomUsuario(usu.nick);
-    Servicio.activarVistaUsuario(true); Servicio.nextMessageCentral(false);">
+    <tr><span class="enlace" (click)="Servicio.nextMessageNomUsuario(usu.nick);mostrarVistaUsuario()">
       {{usu.nombre}} {{usu.apellidos}}</span><td style="width: 4%; align-items: center">
       <img  class="icono-papelera" src="../../assets/trash.png" title="Eliminar amigo"(click)="quitarAmigo(usu.id)"></td> </tr>
     <tr> <td></td> <td>
@@ -40,8 +38,8 @@
           {{obtenerNombreUltCancion(usu)}}</span>
         ·
         <span class="enlace" (click)="
-              Servicio.cargarArtista(obtenerNombreUltArista(usu));
-              Servicio.nextMessageArtista(true);">{{obtenerNombreUltArista(usu)}}</span>
+              Servicio.cargarArtista(obtenerNombreUltArista(usu));mostrarVistaArtista()">
+          {{obtenerNombreUltArista(usu)}}</span>
         </span>
         <span *ngIf="!esCancion(usu.ultimaCancion) " style="cursor: default">
         <span>
