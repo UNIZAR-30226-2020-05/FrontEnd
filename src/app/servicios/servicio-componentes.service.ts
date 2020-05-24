@@ -350,7 +350,7 @@ export class ServicioComponentesService {
     this.messageNomUsuario.next(usuario);
   }
 
-  nextMessageUsuarioList(usuario){
+  nextMessageUsuarioList(usuario) {
     this.usuarioLista.next(usuario);
   }
-};
+}

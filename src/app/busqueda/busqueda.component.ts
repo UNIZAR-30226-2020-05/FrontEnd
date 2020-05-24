@@ -200,6 +200,7 @@ export class BusquedaComponent implements OnInit {
     this.Servicio.cargarAlbum(nombre);
     this.Servicio.albumActivo.subscribe(albumObj => {
       this.albumDeCancion = albumObj;
+      this.Servicio.enviarAlbumPlay(this.albumDeCancion);
     });
   }
 }
