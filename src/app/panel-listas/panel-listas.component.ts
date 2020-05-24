@@ -89,6 +89,8 @@ export class PanelListasComponent implements OnInit {
 
   enviarToVistaLista(){
     this.Servicio.nextMessageVistaLista(!this.okVista);
+    this.Servicio.nextMessageCentral(!this.okVista);
+    this.Servicio.nextMessageVistaPodcast(false);
   }
 
 

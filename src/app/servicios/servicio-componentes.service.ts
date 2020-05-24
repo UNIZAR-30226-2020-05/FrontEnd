@@ -23,6 +23,7 @@ export class ServicioComponentesService {
   albumesArtista: Array<Album>;
 
   editUser: boolean;
+  editUser2: boolean;
 
   lista: ListaCancion;
   vistaLista: boolean;
@@ -97,6 +98,9 @@ export class ServicioComponentesService {
   /* Mensaje para pasar variable a editar usuario */
   private messageEdit = new BehaviorSubject(this.editUser);
   sharedMessageEdit = this.messageEdit.asObservable();
+
+  private messageEdit2 = new BehaviorSubject(this.editUser2);
+  sharedMessageEdit2 = this.messageEdit2.asObservable();
 
   /************RELACIONADOS CON PANEL LISTAS ****************/
   /* Mensaje para pasar variable a panel Listas de lista */
@@ -286,6 +290,10 @@ export class ServicioComponentesService {
 
   nextMessageEdit(messageEdit) {
     this.messageEdit.next(messageEdit);
+  }
+  nextMessageEdit2(messageEdit2) {
+    this.messageEdit2.next(messageEdit2);
+
   }
 
   establecerLogin(usuario: User) {

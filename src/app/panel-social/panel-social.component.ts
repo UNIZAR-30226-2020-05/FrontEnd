@@ -154,10 +154,20 @@ export class PanelSocialComponent implements OnInit {
       });
   }
 
-  enviarToEdit() {
-    this.Servicio.nextMessageEdit(this.editarUsuario);
-    this.Servicio.nextMessage3(!this.editarUsuario);
-    this.Servicio.nextMessageCentral(!this.editarUsuario);
+  mostrarEdit() {
+    this.Servicio.nextMessage3(false); // Desactiva album
+    this.Servicio.nextMessageVistaLista(false); // Desactiva vista de playlist.
+    this.Servicio.activarVistaUsuario(false); // Desactiva vista usuarios.
+    this.Servicio.nextMessageArtista(false); // Desactiva vista artista.
+    this.Servicio.nextMessageEdit(true);
+    this.Servicio.nextMessageCentral(false); // Desactiva central
+    this.Servicio.nextMessageBusq(false);
+    this.Servicio.nextMessageEdit2(false);
+    this.Servicio.nextMessageFavListP(false);
+    this.Servicio.nextMessageVistaLista(false);
+    this.Servicio.nextMessageVistaPodcast(false);
+    this.Servicio.nextMessageFavList(false);
+
   }
 
   mostrarLogin() { // Gestionar TODOS los casos que pueden pasar.
@@ -167,7 +177,14 @@ export class PanelSocialComponent implements OnInit {
     this.Servicio.nextMessageArtista(false); // Desactiva vista artista.
     this.Servicio.nextMessage2(false); // Activa login
     this.Servicio.nextMessageEdit(false);
-    this.Servicio.nextMessageCentral(true); // Desactiva central
+    this.Servicio.nextMessageCentral(false); // Desactiva central
+    this.Servicio.nextMessageBusq(false);
+    this.Servicio.nextMessageEdit2(false);
+    this.Servicio.nextMessageFavListP(false);
+    this.Servicio.nextMessageVistaLista(false);
+    this.Servicio.nextMessageVistaPodcast(false);
+    this.Servicio.nextMessageFavList(false);
+
   }
 
   mostrarVistaUsuario() { // Gestionar TODOS los casos que pueden pasar.
@@ -177,6 +194,9 @@ export class PanelSocialComponent implements OnInit {
     this.Servicio.nextMessageArtista(false); // Desactiva vista artista.
     this.Servicio.nextMessageCentral(false); // Desactiva central
     this.Servicio.nextMessageFavList(false);
+    this.Servicio.nextMessageEdit(false);
+    this.Servicio.nextMessageEdit2(false);
+    this.Servicio.nextMessageBusq(false);
     this.Servicio.nextMessageFavListP(false);
     this.Servicio.nextMessageVistaLista(false);
     this.Servicio.nextMessageVistaPodcast(false);
@@ -186,16 +206,19 @@ export class PanelSocialComponent implements OnInit {
     this.Servicio.nextMessage3(false); // Desactiva album
     this.Servicio.nextMessageVistaLista(false); // Desactiva vista de playlist.
     this.Servicio.activarVistaUsuario(false); // Desactiva vista usuarios.
-    this.Servicio.nextMessageArtista(true); // Desactiva vista artista.
+    this.Servicio.nextMessageArtista(true); // Activa vista artista.
     this.Servicio.nextMessageCentral(false); // Desactiva central
     this.Servicio.nextMessageFavList(false);
+    this.Servicio.nextMessageEdit(false);
+    this.Servicio.nextMessageEdit2(false);
+    this.Servicio.nextMessageBusq(false);
     this.Servicio.nextMessageFavListP(false);
     this.Servicio.nextMessageVistaLista(false);
     this.Servicio.nextMessageVistaPodcast(false);
   }
 
   mostrarVistaAlbum() { // Gestionar TODOS los casos que pueden pasar.
-    this.Servicio.nextMessage3(true); // Desactiva album
+    this.Servicio.nextMessage3(true); // Activa album
     this.Servicio.nextMessageVistaLista(false); // Desactiva vista de playlist.
     this.Servicio.activarVistaUsuario(false); // Desactiva vista usuarios.
     this.Servicio.nextMessageArtista(false); // Desactiva vista artista.
@@ -204,6 +227,9 @@ export class PanelSocialComponent implements OnInit {
     this.Servicio.nextMessageFavListP(false);
     this.Servicio.nextMessageVistaLista(false);
     this.Servicio.nextMessageVistaPodcast(false);
+    this.Servicio.nextMessageEdit(false);
+    this.Servicio.nextMessageEdit2(false);
+    this.Servicio.nextMessageBusq(false);
   }
 
   esCancion(nombre: string) {

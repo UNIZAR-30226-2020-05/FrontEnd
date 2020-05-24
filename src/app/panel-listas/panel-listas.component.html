@@ -3,15 +3,23 @@
   <p class="titleP">PODCAST</p>
   <p class="ListP" (click)="mostrarCrearP=true; mostrarFavP=false">
     <img class="addP" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>
-  <p class="fave" (click)="mostrarFavP=!mostrarFavP;Servicio.nextMessage3(false);Servicio.nextMessageVistaPodcast(false);
-    Servicio.activarVistaUsuario(false)">
+  <p class="fave" (click)="mostrarFavP=!mostrarFavP;
+    Servicio.nextMessage3(false);
+    Servicio.nextMessageVistaPodcast(false);
+    Servicio.activarVistaUsuario(false);
+    Servicio.nextMessageCentral(!mostrarFavP);
+    mostrarFav = false">
     <img class= "favP" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
   <hr>
 <p class="titleL">PLAYLISTS</p>
 <p class="CrearList" (click)="mostrarCrearC=true;mostrarFav=false">
   <img class="iconoAñadir" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>&nbsp;
-<p class="fav" (click)="mostrarFav=!mostrarFav;Servicio.nextMessage3(false);Servicio.nextMessageVistaLista(false);
-    Servicio.activarVistaUsuario(false)">
+<p class="fav" (click)="mostrarFav=!mostrarFav;
+    Servicio.nextMessage3(false);
+    Servicio.nextMessageVistaLista(false);
+    Servicio.activarVistaUsuario(false);
+    Servicio.nextMessageCentral(!mostrarFav);
+    mostrarFavP = false;">
   <img class= "iconoFav" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
 </div>
 
@@ -50,7 +58,11 @@
   <li  *ngFor="let podcast of listasUserPodcast; first as primero">
     <a *ngIf="!primero" (click)="listaPulsadaPodcast(podcast.id);Servicio.nextMessageVistaPodcast(!okVistaPodcast);Servicio.nextMessageFavList(false);
                               Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false);
-                              Servicio.nextMessageArtista(false);Servicio.nextMessageUsuarioList(usuario)"> {{podcast.nombre}}</a>
+                              Servicio.nextMessageArtista(false);Servicio.nextMessageUsuarioList(usuario);
+                              Servicio.nextMessageCentral(!okVistaPodcast);
+                              Servicio.nextMessageVistaLista(false);
+                              mostrarFavP = false;
+                              mostrarFav = false;"> {{podcast.nombre}}</a>
   </li>
 </ul>
 
@@ -60,7 +72,9 @@
   <li  *ngFor="let playlist of listasUser; first as primero">
   <a *ngIf="!primero" (click)="enviarToVistaLista();listaPulsada(playlist.id);Servicio.nextMessageFavList(false);
                               Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false);
-                              Servicio.nextMessageArtista(false);Servicio.nextMessageUsuarioList(usuario)"> {{playlist.nombre}}</a>
+                              Servicio.nextMessageArtista(false);Servicio.nextMessageUsuarioList(usuario);
+                              mostrarFavP = false;
+                              mostrarFav = false;"> {{playlist.nombre}}</a>
   </li>
 </ul>
 

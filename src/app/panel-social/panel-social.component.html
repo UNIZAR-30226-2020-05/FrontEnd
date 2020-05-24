@@ -1,13 +1,11 @@
 <div class="panel-social">
   <hr>
   <p class="nombre-user">
-    <span class="nombre" (click)="Servicio.nextMessageNomUsuario(usuarioLogeado.nick);Servicio.activarVistaUsuario(!okVistaUsuario);Servicio.nextMessage3(false);
-        Servicio.nextMessageFavList(false);Servicio.nextMessageFavListP(false);
-         Servicio.nextMessageVistaLista(false);Servicio.nextMessageVistaPodcast(false)">
+    <span class="nombre" (click)="Servicio.nextMessageNomUsuario(usuarioLogeado.nick);mostrarVistaUsuario()">
       <img class="foto-perfil" src="../../assets/profile-pics/{{usuarioLogeado.nombre_avatar}}"/>{{usuarioLogeado.nick}}
     </span>
 
-    <img (click)="enviarToEdit()" title="Editar cuenta" class="icono-config" src="../../assets/ajustes.png"/>
+    <img (click)="mostrarEdit()" title="Editar cuenta" class="icono-config" src="../../assets/ajustes.png"/>
     <img (click)="mostrarLogin(); mostarBusquedaAmigos=false; " title="Cerrar Sesión" class="icono-logout" src="../../assets/logout.png"/>
 
   <hr>
