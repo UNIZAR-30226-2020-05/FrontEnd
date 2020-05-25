@@ -38,7 +38,8 @@ export class PanelListasComponent implements OnInit {
   listaOkPodcast: ListaPodcast;
 
   cancion: Cancion;
-  idLista: number;
+  idListaBorrada: number;
+  numListasBorradas: number;
 
   listaBorrar: ListaCancion;
 
@@ -63,8 +64,12 @@ export class PanelListasComponent implements OnInit {
 
   ngOnInit(): void {
     this.Servicio.sharedMessage.subscribe(message => {
-      if(message != null){this.usuario=message; this.listaFav=this.usuario.lista_cancion[0];this.listaMantener=this.usuario.lista_cancion[0];this.listasUser=this.usuario.lista_cancion;
-      this.listaFavPodcast= this.usuario.lista_podcast[0];this.listasUserPodcast=this.usuario.lista_podcast}
+      if(message != null){this.usuario=message;
+      this.listaFav=this.usuario.lista_cancion[0];
+      this.listaMantener=this.usuario.lista_cancion[0];
+      this.listasUser=this.usuario.lista_cancion;
+      this.listaFavPodcast= this.usuario.lista_podcast[0];
+      this.listasUserPodcast=this.usuario.lista_podcast}
     });
     this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.okVista = messageVistaLista);
     this.Servicio.sharedMessageObjLista.subscribe(messageObjLista => this.listaOk = messageObjLista);
@@ -79,8 +84,7 @@ export class PanelListasComponent implements OnInit {
     this.Servicio.sharedMessageFavListaP.subscribe(favListaP => this.mostrarFavP = favListaP);
     this.Servicio.albumActivo.subscribe(album => this.albAct=album);
     this.Servicio.sharedMessageBorrarLista.subscribe(lista => this.listasUserPodcast = lista);
-
-
+    this.Servicio.sharedMessageidList.subscribe(lista => this.idListaBorrada = lista);
 
   }
   newMessage() {
@@ -201,5 +205,8 @@ export class PanelListasComponent implements OnInit {
       else if (a.name > b.name) return 1;
       else return 0;
     });
+  }
+  consola() {
+    console.log(this.usuario);
   }
 }

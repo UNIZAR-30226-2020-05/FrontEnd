@@ -70,7 +70,7 @@
 
 <ul class="vertical-menu2" >
   <li  *ngFor="let playlist of listasUser; first as primero">
-  <a *ngIf="!primero" (click)="enviarToVistaLista();listaPulsada(playlist.id);Servicio.nextMessageFavList(false);
+  <a *ngIf="!primero && playlist.id != idListaBorrada" (click)="enviarToVistaLista();listaPulsada(playlist.id);Servicio.nextMessageFavList(false);
                               Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false);
                               Servicio.nextMessageArtista(false);Servicio.nextMessageUsuarioList(usuario);
                               mostrarFavP = false;

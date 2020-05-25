@@ -47,9 +47,12 @@ export class VistaListaComponent implements OnInit {
     }
   }
 
-  borrar(){
+  borrar() {
+    this.Servicio.nextMessageBorrarLista(this.listaMostrar.id);
     this.http.delete(this.Servicio.URL_API + '/listaCancion/delete/' + this.listaMostrar.id).subscribe((resp:string) => console.log(resp));
     this.Servicio.nextMessage(this.usuarioLog);
+    this.aparecer = false;
+    this.Servicio.nextMessageCentral(true);
   }
 
   sacarTiempo(n: number) {
