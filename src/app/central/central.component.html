@@ -13,13 +13,11 @@
         Servicio.nextMessage3(true);
         Servicio.nextMessageCentral(false);">{{album.titulo}}</td>
       <td class="autorAlbum" style="margin-top: 35px" (click)="
-        Servicio.cargarArtista(album.artista);
+        obtenerArtista(album.artista);
         Servicio.nextMessageArtista(true);
         Servicio.nextMessageCentral(false);">{{album.artista}}</td>
     </tr>
-<!--obtenerArtista(album.artista);
-        Servicio.cargarArtista(elArtista.name);
-        Servicio.cargarAlbumesArtista(elArtista.id);-->
+
   </div>
 
   <div class="menuRecom3">
