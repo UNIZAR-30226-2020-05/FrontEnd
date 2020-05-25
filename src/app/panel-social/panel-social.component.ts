@@ -177,7 +177,7 @@ export class PanelSocialComponent implements OnInit {
     this.Servicio.nextMessageArtista(false); // Desactiva vista artista.
     this.Servicio.nextMessage2(false); // Activa login
     this.Servicio.nextMessageEdit(false);
-    this.Servicio.nextMessageCentral(false); // Desactiva central
+    this.Servicio.nextMessageCentral(true); // Lo activa para que aparezca en el siguiente login.
     this.Servicio.nextMessageBusq(false);
     this.Servicio.nextMessageEdit2(false);
     this.Servicio.nextMessageFavListP(false);
