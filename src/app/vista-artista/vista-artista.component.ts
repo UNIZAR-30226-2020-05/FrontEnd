@@ -23,9 +23,13 @@ export class VistaArtistaComponent implements OnInit {
     this.Servicio.artistaActivo.subscribe(artistaObj => {
       this.artistaActivo = artistaObj;
     });
-   /*this.Servicio.listaAlbumes.subscribe(albumesArtistaObj => {
-      this.lisAlbum = albumesArtistaObj; });*/
+    this.Servicio.listaAlbumes.subscribe(albumesArtistaObj => {
+      this.lisAlbum = albumesArtistaObj; });
     this.Servicio.sharedMessageArtista.subscribe(messageArtista => this.mostrar = messageArtista);
+  }
+  consola(){
+    console.log(this.artistaActivo);
+    console.log(this.lisAlbum);
   }
   /*getAlbum(titulo) {
     const params = new HttpParams().set('titulo', titulo);
