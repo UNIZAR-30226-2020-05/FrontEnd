@@ -70,4 +70,7 @@ export class VistaAlbumComponent implements OnInit {
   repr(alb) {
     this.Servicio.reproducirLista(alb);
   }
+  consola(){
+    console.log(this.albActivo);
+  }
 }

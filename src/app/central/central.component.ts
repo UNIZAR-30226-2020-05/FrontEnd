@@ -64,10 +64,13 @@ export class CentralComponent implements OnInit {
       .subscribe(
         (resp: Array<Artista>) => {
           this.elArtista = resp[0];
+          this.Servicio.cargarArtista(this.elArtista.name);
+          this.Servicio.cargarAlbumesArtista(this.elArtista.id);
           console.log(resp);
         },
         (error: string) => {
         }
       );
-}
+
+  }
 }
