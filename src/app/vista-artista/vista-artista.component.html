@@ -6,7 +6,7 @@
     <table class="lista-album">
 
       <tr *ngFor="let album of lisAlbum">
-       <td><img class="foto-album" src="{{album.caratula}}" (click)="
+       <td><img class="foto-album" src="{{Servicio.URL_API+album.caratula}}" (click)="
              Servicio.cargarAlbum(album.titulo);
              Servicio.nextMessage3(true);
              this.cerrar()"></td>

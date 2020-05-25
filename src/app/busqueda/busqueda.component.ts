@@ -205,11 +205,19 @@ export class BusquedaComponent implements OnInit {
     this.http.patch(this.Servicio.URL_API + '/listaPodcast/add/' + id_lista, id_c).subscribe(
       (resp: string) => { console.log(resp); this.Servicio.nextMessage(this.usuarioLogeado); } );
   }
-  pasarCaratula(nombre){
-    this.Servicio.cargarAlbum(nombre);
-    this.Servicio.albumActivo.subscribe(albumObj => {
-      this.albumDeCancion = albumObj;
-      this.Servicio.enviarAlbumPlay(this.albumDeCancion);
-    });
+  pasarCaratula(nombre) {
+    // Carga localmente los datos el album
+    const params = new HttpParams()
+      .set('titulo', nombre);
+
+    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
+      .subscribe(
+        (album: Array<Album>) => {
+          // Manda dibujar la caratula del album recibido
+          this.Servicio.enviarAlbumPlay(album[0]);
+        },
+        (erroro: string) => { console.log(erroro);
+        }
+      );
   }
 }
