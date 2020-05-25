@@ -110,6 +110,7 @@ export class PanelListasComponent implements OnInit {
             console.log(resp);
             this.usuario.lista_cancion.push(resp)
           });
+      this.nombreLista=null;
     }
   }
 
@@ -165,6 +166,9 @@ export class PanelListasComponent implements OnInit {
   reproducir(lista){
     this.Servicio.reproducirListaPodcast(lista);
   }
+  reproducirListaCanciones(lista){
+    this.Servicio.reproducirLista(lista);
+  }
 
   borrarCancion(cancion:number){
     this.http.patch(this.Servicio.URL_API + '/listaCancion/deleteSong/' + this.listaFav.id, cancion).subscribe((resp:ListaCancion) =>
@@ -208,5 +212,19 @@ export class PanelListasComponent implements OnInit {
   }
   consola() {
     console.log(this.usuario);
+  }
+  cargarCaratula(cancion){
+    const params = new HttpParams()
+      .set('titulo', cancion);
+
+    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
+      .subscribe(
+        (album: Array<Album>) => {
+          // Manda dibujar la caratula del album recibido
+          this.Servicio.enviarAlbumPlay(album[0]);
+        },
+        (erroro: string) => { console.log(erroro);
+        }
+      );
   }
 }
