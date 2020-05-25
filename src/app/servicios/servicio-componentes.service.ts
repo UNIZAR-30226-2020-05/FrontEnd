@@ -116,7 +116,7 @@ export class ServicioComponentesService {
   private messageObjetoLista = new BehaviorSubject(this.objLista);
   sharedMessageObjLista = this.messageObjetoLista.asObservable();
 
-  /* Mensaje para pasar el objeto album */
+  /* Mensaje para pasar el album de la primera cancion */
   private objetoAlbum = new BehaviorSubject(this.objAlbum);
   sharedMessageobjAlbum = this.objetoAlbum.asObservable();
 

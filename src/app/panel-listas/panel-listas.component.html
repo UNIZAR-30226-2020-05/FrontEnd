@@ -28,13 +28,14 @@
 
 <!-- /****** CUADRADO DE FOTO CANCION ACTUAL *****/ -->
 <!--<div class="cuadrado" ></div> -->
-<img class="cuadrado" src="{{Servicio.URL_API+album.caratula}}">
+<span *ngIf="cancion.album =='esPODCAST'"><img class="cuadrado" src="../../assets/podcast1.jpg"> </span>
+<span *ngIf="cancion.album !='esPODCAST'"><img class="cuadrado" src="{{Servicio.URL_API+album.caratula}}"> </span>
 
 <!-- /********* TABLA PARA NOMBRE CANCION Y AUTOR DE CANCION ACTUAL ***********/ -->
 <table>
   <tbody>
     <tr>
-      <th class="titulo" (click)="Servicio.cargarAlbum(cancion.album);Servicio.nextMessage3(true)">{{cancion.name}}</th>
+      <th class="titulo" (click)="Servicio.nextMessage3(true)">{{cancion.name}}</th>
       <th>
         <img  class="heart" (click)="addFav(listaFav.id,cancion.id)" src="./../assets/icons8-me-gusta-100.png">
       </th>
@@ -86,7 +87,7 @@
     <label class="nueva"><b>Crear nueva lista </b></label>
     <input type="nombre" placeholder="Nombre nueva lista" name="name" required  [(ngModel)]="nombreLista">
   </div>
-  <button (click)="mostrarCrearC=false" class="cancel">Cancelar</button>
+  <button (click)="mostrarCrearC=false;nombreLista=null" class="cancel">Cancelar</button>
   <button (click)="mostrarCrearC=false; nuevaListaCanciones()" class="aceptar">Crear</button>
 </div>
 
@@ -106,7 +107,7 @@
 <div *ngIf="mostrarFav" class= "favoritos">
   <div class="container2">
     <div class="misFavs"></div>
-    <span *ngIf="listaFav.canciones.length>0" (click)="reproducir(listaFav.canciones);"><img title="Reproducir lista"
+    <span *ngIf="listaFav.canciones.length>0" (click)="reproducirListaCanciones(listaFav.canciones);"><img title="Reproducir lista"
          class="img-repr-lista" src="../../assets/playLista.png"></span>
     <nav class="menuCSS3">
       <ul>
@@ -123,7 +124,7 @@
       <table class="lista-playlist">
         <tr *ngFor="let cancion of listaFav.canciones; let i = index">
           <td  class="listaGen">
-            <img class="imgGenCancion" (click)="Servicio.cargarAlbum(cancion.album);Servicio.reproducirCancion(cancion);Servicio.enviarAlbumPlay(albAct)"
+            <img class="imgGenCancion" (click)="cargarCaratula(cancion.album);Servicio.reproducirCancion(cancion)"
                                      src="../../assets/play-vector.svg"/></td>
           <td  class="titulos-album" (click)="Servicio.cargarAlbum(cancion.album);Servicio.nextMessage3(true);
           Servicio.nextMessageFavList(false)">{{ cancion.name }}</td><td><span class="artista" (click)="Servicio.cargarArtista(cancion.artistas);

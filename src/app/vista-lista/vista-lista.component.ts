@@ -29,22 +29,8 @@ export class VistaListaComponent implements OnInit {
     this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.aparecer = messageVistaLista);
     this.Servicio.sharedMessageObjLista.subscribe(messageObjLista=> this.listaMostrar = messageObjLista);
     this.Servicio.sharedMessage.subscribe(message=> this.usuarioLog= message);
-   // this.Servicio.sharedMessageobjAlbum.subscribe(albumObj => {if (albumObj!= null) {this.albumActual= albumObj;}});
+    this.Servicio.sharedMessageobjAlbum.subscribe(albumObj => {if (albumObj!= null) {this.albumActual= albumObj;}});
     this.Servicio.sharedMessageUsuarioAList.subscribe(usuario => this.usuario = usuario);
-    if(this.listaMostrar.canciones.length>0) {
-      const params = new HttpParams()
-        .set('titulo', this.listaMostrar.canciones[0].album);
-
-      this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
-        .subscribe(
-          (album: Array<Album>) => {
-            this.albumActual = album[0];
-            console.log("Recibido");
-          },
-          (erroro: string) => {
-            console.log(erroro);
-          });
-    }
   }
 
   borrar(){
@@ -69,8 +55,19 @@ export class VistaListaComponent implements OnInit {
   }
 
   cargarCaratula(cancion){
-    this.Servicio.cargarAlbum(cancion);
-    this.Servicio.enviarAlbumPlay(this.albumActual);
+    // Carga localmente los datos el album
+    const params = new HttpParams()
+      .set('titulo', cancion);
+
+    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
+      .subscribe(
+        (album: Array<Album>) => {
+          // Manda dibujar la caratula del album recibido
+          this.Servicio.enviarAlbumPlay(album[0]);
+        },
+        (erroro: string) => { console.log(erroro);
+        }
+      );
   }
 
   borrarCancion(cancion:number,lista:number){
