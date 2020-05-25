@@ -8,6 +8,13 @@
     Servicio.nextMessageVistaPodcast(false);
     Servicio.activarVistaUsuario(false);
     Servicio.nextMessageCentral(!mostrarFavP);
+    Servicio.nextMessageVistaLista(false);
+    Servicio.activarVistaUsuario(false);
+    Servicio.nextMessageArtista(false);
+    Servicio.nextMessageEdit(false);
+    Servicio.nextMessageCentral(true);
+    Servicio.nextMessageBusq(false);
+    Servicio.nextMessageEdit2(false);
     mostrarFav = false">
     <img class= "favP" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
   <hr>
@@ -19,6 +26,13 @@
     Servicio.nextMessageVistaLista(false);
     Servicio.activarVistaUsuario(false);
     Servicio.nextMessageCentral(!mostrarFav);
+    Servicio.nextMessageVistaLista(false);
+    Servicio.activarVistaUsuario(false);
+    Servicio.nextMessageArtista(false);
+    Servicio.nextMessageEdit(false);
+    Servicio.nextMessageCentral(true);
+    Servicio.nextMessageBusq(false);
+    Servicio.nextMessageEdit2(false);
     mostrarFavP = false;">
   <img class= "iconoFav" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
 </div>
@@ -57,11 +71,16 @@
 <!-- vista lista de podcast -->
 <ul class="vertical-menu" >
   <li  *ngFor="let podcast of listasUserPodcast; first as primero">
-    <a *ngIf="!primero" (click)="listaPulsadaPodcast(podcast.id);Servicio.nextMessageVistaPodcast(!okVistaPodcast);Servicio.nextMessageFavList(false);
-                              Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false);
-                              Servicio.nextMessageArtista(false);Servicio.nextMessageUsuarioList(usuario);
+    <a *ngIf="!primero" (click)="listaPulsadaPodcast(podcast.id);
+                              Servicio.nextMessageVistaPodcast(!okVistaPodcast);
+                              Servicio.nextMessageFavList(false);
+                              Servicio.nextMessage3(false);
+                              Servicio.activarVistaUsuario(false);
+                              Servicio.nextMessageArtista(false);
+                              Servicio.nextMessageUsuarioList(usuario);
                               Servicio.nextMessageCentral(!okVistaPodcast);
                               Servicio.nextMessageVistaLista(false);
+                              Servicio.nextMessageBusq(false);
                               mostrarFavP = false;
                               mostrarFav = false;"> {{podcast.nombre}}</a>
   </li>
@@ -71,9 +90,14 @@
 
 <ul class="vertical-menu2" >
   <li  *ngFor="let playlist of usuario.lista_cancion; first as primero">
-  <a *ngIf="!primero && playlist.id != idListaBorrada" (click)="enviarToVistaLista();listaPulsada(playlist.id);Servicio.nextMessageFavList(false);
-                              Servicio.nextMessage3(false);Servicio.activarVistaUsuario(false);
-                              Servicio.nextMessageArtista(false);Servicio.nextMessageUsuarioList(usuario);
+  <a *ngIf="!primero && playlist.id != idListaBorrada" (click)="enviarToVistaLista();
+                              listaPulsada(playlist.id);
+                              Servicio.nextMessageFavList(false);
+                              Servicio.nextMessage3(false);
+                              Servicio.activarVistaUsuario(false);
+                              Servicio.nextMessageArtista(false);
+                              Servicio.nextMessageUsuarioList(usuario);
+                              Servicio.nextMessageBusq(false);
                               mostrarFavP = false;
                               mostrarFav = false;"> {{playlist.nombre}}</a>
   </li>
@@ -163,7 +187,7 @@
             <img class="imgGenCancion" (click)="Servicio.reproducirPodcast(podcast)"
                  src="../../assets/play-vector.svg"/></td>
           <td  class="titulos-album" (click)="Servicio.nextMessage3(true);
-        Servicio.nextMessageFavList(false)">{{ podcast.name }}</td><td>{{podcast.artista}}</td>
+                Servicio.nextMessageFavList(false)">{{ podcast.name }}</td><td>{{podcast.artista}}</td>
           <td>{{sacarTiempo(podcast.duracion)}}</td><td>Pista {{i+1}}</td>
           <td><img class="img-papel" (click)="borrarPodcast(podcast.id)" src="../../assets/trash.png"/></td>
         </tr>

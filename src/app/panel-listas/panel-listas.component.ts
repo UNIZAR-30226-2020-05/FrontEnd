@@ -180,20 +180,15 @@ export class PanelListasComponent implements OnInit {
     this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + this.listaFav.id, cancion).subscribe(
       (lista:ListaCancion) => {if(lista.nombre=='Favoritos'){this.enFav=true} else{this.noEnFav=true}});
   }
-
   borrarPodcast(podcast:number){
     this.http.patch(this.Servicio.URL_API + '/listaPodcast/deletePodcast/' + this.listaFavPodcast.id, podcast).subscribe((resp:ListaPodcast) =>
     {console.log(resp); this.listaFavPodcast=resp});
 
   }
-
   ordenarFecha(){
     this.listaFav.canciones=this.listaMantener.canciones.reverse();
 
   }
-
-
-
   ordenarArtista(){
 
     this.listaFav.canciones.sort((a, b) => {
@@ -209,9 +204,6 @@ export class PanelListasComponent implements OnInit {
       else if (a.name > b.name) return 1;
       else return 0;
     });
-  }
-  consola() {
-    console.log(this.usuario);
   }
   cargarCaratula(cancion){
     const params = new HttpParams()
