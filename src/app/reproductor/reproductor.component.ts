@@ -193,6 +193,7 @@ export class ReproductorComponent implements OnInit {
   avanzarLista() { // Así no peta
     if (this.posicion + 1 < this.listaActiva.length) {
       this.posicion += 1;
+      this.actualizarCaratula(this.listaActiva[this.posicion].album);
       this.cargarAudio(this.listaActiva[this.posicion]);
       this.cancionActual = this.listaActiva[this.posicion];
       this.cancion.load();
@@ -200,9 +201,27 @@ export class ReproductorComponent implements OnInit {
     }
   }
 
+  actualizarCaratula(cancion: string) {
+
+    const params = new HttpParams()
+      .set('titulo', cancion);
+
+    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
+      .subscribe(
+        (album: Array<Album>) => {
+          // Manda dibujar la caratula del album recibido
+          this.Servicio.enviarAlbumPlay(album[0]);
+        },
+        (erroro: string) => { console.log(erroro);
+        }
+      );
+
+  }
+
   retrocederLista() {
     if (this.posicion > 0) {
       this.posicion -= 1;
+      this.actualizarCaratula(this.listaActiva[this.posicion].album);
       this.cargarAudio(this.listaActiva[this.posicion]);
       this.cancionActual = this.listaActiva[this.posicion];
       this.cancion.load();

@@ -389,7 +389,6 @@ export class PanelAdminComponent implements OnInit {
   limpiarDatosSubida() {
     this.fileCancionNom = '';
     this.fileListaResults.length = 0;
-    this.files = new FileList();
     this.subidaEnCurso = false;
   }
 
