@@ -38,7 +38,8 @@ export class PanelListasComponent implements OnInit {
   listaOkPodcast: ListaPodcast;
 
   cancion: Cancion;
-  idLista: number;
+  idListaBorrada: number;
+  numListasBorradas: number;
 
   listaBorrar: ListaCancion;
 
@@ -63,17 +64,19 @@ export class PanelListasComponent implements OnInit {
 
   ngOnInit(): void {
     this.Servicio.sharedMessage.subscribe(message => {
-      if(message != null){this.usuario=message; this.listaFav=this.usuario.lista_cancion[0];this.listaMantener=this.usuario.lista_cancion[0];this.listasUser=this.usuario.lista_cancion;
-      this.listaFavPodcast= this.usuario.lista_podcast[0];this.listasUserPodcast=this.usuario.lista_podcast}
+      if(message != null){this.usuario=message;
+      this.listaFav=this.usuario.lista_cancion[0];
+      this.listaMantener=this.usuario.lista_cancion[0];
+      this.listasUser=this.usuario.lista_cancion;
+      this.listaFavPodcast= this.usuario.lista_podcast[0];
+      this.listasUserPodcast=this.usuario.lista_podcast}
     });
     this.Servicio.sharedMessageVistaLista.subscribe(messageVistaLista => this.okVista = messageVistaLista);
     this.Servicio.sharedMessageObjLista.subscribe(messageObjLista => this.listaOk = messageObjLista);
     this.Servicio.sharedMessageVistaPodcast.subscribe(messageVistaPodcast => this.okVistaPodcast=messageVistaPodcast);
     this.Servicio.sharedMessageObjPodcast.subscribe(messageObjPodcast => this.listaOkPodcast = messageObjPodcast);
 
-    this.Servicio.canActiva.subscribe((cancionObj) => {
-      this.cancion = cancionObj;
-    });
+    this.Servicio.canActiva.subscribe((cancionObj) => this.cancion = cancionObj);
     this.Servicio.albumReprod.subscribe((albumCanActv) => {
       if (albumCanActv != null) { (this.album = albumCanActv); }
     });
@@ -81,8 +84,7 @@ export class PanelListasComponent implements OnInit {
     this.Servicio.sharedMessageFavListaP.subscribe(favListaP => this.mostrarFavP = favListaP);
     this.Servicio.albumActivo.subscribe(album => this.albAct=album);
     this.Servicio.sharedMessageBorrarLista.subscribe(lista => this.listasUserPodcast = lista);
-
-
+    this.Servicio.sharedMessageidList.subscribe(lista => this.idListaBorrada = lista);
 
   }
   newMessage() {
@@ -108,7 +110,6 @@ export class PanelListasComponent implements OnInit {
             console.log(resp);
             this.usuario.lista_cancion.push(resp)
           });
-      this.nombreLista=null;
     }
   }
 
@@ -165,10 +166,6 @@ export class PanelListasComponent implements OnInit {
     this.Servicio.reproducirListaPodcast(lista);
   }
 
-  reproducirListaCanciones(lista){
-    this.Servicio.reproducirLista(lista);
-  }
-
   borrarCancion(cancion:number){
     this.http.patch(this.Servicio.URL_API + '/listaCancion/deleteSong/' + this.listaFav.id, cancion).subscribe((resp:ListaCancion) =>
     {console.log(resp); this.listaFav=resp});
@@ -209,19 +206,7 @@ export class PanelListasComponent implements OnInit {
       else return 0;
     });
   }
-
-  cargarCaratula(cancion){
-    const params = new HttpParams()
-      .set('titulo', cancion);
-
-    this.http.get(this.Servicio.URL_API + '/album/getByTitulo', {params})
-      .subscribe(
-        (album: Array<Album>) => {
-          // Manda dibujar la caratula del album recibido
-          this.Servicio.enviarAlbumPlay(album[0]);
-        },
-        (erroro: string) => { console.log(erroro);
-        }
-      );
+  consola() {
+    console.log(this.usuario);
   }
 }

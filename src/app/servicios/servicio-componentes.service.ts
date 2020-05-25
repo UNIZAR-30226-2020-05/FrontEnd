@@ -32,6 +32,7 @@ export class ServicioComponentesService {
   favLista: boolean;
   favListaP: boolean;
   usuarioList:User = new User();
+  idLista: number;
 
   central: boolean;
 
@@ -123,7 +124,11 @@ export class ServicioComponentesService {
   private usuarioLista = new BehaviorSubject(this.usuarioList);
   sharedMessageUsuarioAList = this.usuarioLista.asObservable();
 
-/******** lOGO CERRAR VISTAS***********/
+  private idListaBorrada = new BehaviorSubject(this.idLista);
+  sharedMessageidList = this.idListaBorrada.asObservable();
+
+
+  /******** lOGO CERRAR VISTAS***********/
   /* Mensaje para poder ocultar vista de favoritos Canciones desde logo */
   private messageFavLista = new BehaviorSubject(this.favLista);
   sharedMessageFavLista = this.messageFavLista.asObservable();
@@ -336,6 +341,10 @@ export class ServicioComponentesService {
 
   nextMessageListaBorrada(messageListaBorrar) {
     this.messageListaBorrar.next(messageListaBorrar);
+  }
+
+  nextMessageBorrarLista(messageIdListaBorrada) {
+    this.idListaBorrada.next(messageIdListaBorrada);
   }
 
   nextMessageCentral(messageCentral) {

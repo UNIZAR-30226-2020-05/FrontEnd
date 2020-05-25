@@ -1,7 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {Album, AlbumRequest, Artista, ArtistaRequest, CancionRequest, Podcast, PodcastRequest, User, UserRequest} from '../app.component';
-import {HttpClient, HttpParams} from '@angular/common/http';
+import {
+  Album,
+  AlbumRequest,
+  Artista,
+  ArtistaRequest,
+  Cancion,
+  CancionRequest,
+  Podcast,
+  PodcastRequest,
+  User
+} from '../app.component';
+import {HttpClient, HttpEventType, HttpParams} from '@angular/common/http';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
+import {map} from 'rxjs/operators';
 
 
 @Component({
@@ -63,9 +74,11 @@ export class PanelAdminComponent implements OnInit {
   gestPodcastAdd: boolean;
   podcastEliminado: number;
 
-
+  fileListaResults: Array<Cancion> = new Array<Cancion>();
   fileCancionNom: string;
   files: FileList; // Para canciones Y podcast
+  fileProgreso: number;
+  subidaEnCurso: boolean;
 
   gestUserPromo: boolean;
   usuarioListaTodos: Array<User>;
@@ -80,8 +93,24 @@ export class PanelAdminComponent implements OnInit {
     this.gestPodcast = false;
   }
 
+  comprobarExisteCanc(nom: string) {
+
+    const params = new HttpParams().set('name', this.fileCancionNom);
+
+
+    this.http.get(this.Servicio.URL_API + '/song/getByName', {params})
+      .subscribe(
+        (resp: Array<Cancion>) => {
+         this.fileListaResults = resp;
+        },
+        (error: string) => {
+        }
+      );
+
+  }
+
   ngOnInit(): void {
-    //Recibe el objeto usuario, y actualiza cuando se cambia.
+    // Recibe el objeto usuario, y actualiza cuando se cambia.
     this.Servicio.sharedMessage.subscribe(message => this.usuarioLogeadoAd = message);
   }
 
@@ -106,6 +135,7 @@ export class PanelAdminComponent implements OnInit {
     this.gestArtista = false;
     this.gestCanciones = true;
     this.gestPodcast = false;
+    this.subidaEnCurso = false;
   }
 
   vistaAlbum() {
@@ -176,7 +206,7 @@ export class PanelAdminComponent implements OnInit {
     + this.nuevoAlbAutor + '< br /> que contiene:< br />';
     const i = 0;
     for (const cancion of this.nuevoAlbCanc) {
-      this.infoAgregado += 'Pista '+ i + cancion.nombre + ' - ' + cancion.duracion
+      this.infoAgregado += 'Pista ' + i + cancion.nombre + ' - ' + cancion.duracion
         + 's.< br />';
     }
   }
@@ -232,7 +262,7 @@ export class PanelAdminComponent implements OnInit {
       duracion: this.transformarDuracion(this.cancionDuracion)// this.cancionDuracion PASAR A ENTERO
     };
     this.nuevoAlbCanc.push(nueva);
-    //Limpiar param de cancion i.
+    // Limpiar param de cancion i.
     this.cancionTitulo = '';
     this.cancionDuracion = '';
   }
@@ -321,6 +351,7 @@ export class PanelAdminComponent implements OnInit {
   }
 
   subirCancion(nom: string) {
+    this.subidaEnCurso = true;
     this.uploadAapi(this.files.item(0), nom);
     console.log(this.files.item(0));
   }
@@ -334,8 +365,32 @@ export class PanelAdminComponent implements OnInit {
     const data: FormData = new FormData();
     data.append('file', file);
     data.append('nombre', nombre);
-    this.http.post(this.Servicio.URL_API + '/song/upload', data).subscribe(
+    this.http.post(this.Servicio.URL_API + '/song/upload', data, {
+      reportProgress: true, observe: 'events'
+    }).pipe(map((event) => {
+
+      switch (event.type) {
+
+        case HttpEventType.UploadProgress:
+          this.fileProgreso = Math.round(100 * event.loaded / event.total);
+          if (this.fileProgreso === 100) {this.limpiarDatosSubida();}
+          return { status: 'progress' };
+
+        case HttpEventType.Response:
+          return event.body;
+        default:
+          return `Unhandled event: ${event.type}`;
+      }
+    }))
+      .subscribe(
       (resp: string) => { console.log(resp)} );
+  }
+
+  limpiarDatosSubida() {
+    this.fileCancionNom = '';
+    this.fileListaResults.length = 0;
+    this.files = new FileList();
+    this.subidaEnCurso = false;
   }
 
   uploadPodcastAapi(file: File, nombre: string) {
