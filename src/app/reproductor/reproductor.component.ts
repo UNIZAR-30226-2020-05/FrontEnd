@@ -18,6 +18,7 @@ export class ReproductorComponent implements OnInit {
   duracionActual;
   logeado;
 
+  deLogin: boolean;
 
 
   // Posición de la cancion
@@ -48,6 +49,11 @@ export class ReproductorComponent implements OnInit {
       }
     }, 300);
 
+    //setInterval(() => {
+
+   // });
+   // }, 2000);
+
     setInterval(() => {
       if ((this.posActual === this.duracionActual) && this.cancion.ended) {
         this.avanzarLista();
@@ -71,8 +77,12 @@ export class ReproductorComponent implements OnInit {
     this.activo = false;
 
     this.Servicio.sharedMessage2.subscribe(message2 => {
+      if (message2 === false) { this.deLogin = true; console.log(this.deLogin); console.log(message2); }});
+
+    this.Servicio.sharedMessage2.subscribe(message2 => {
       this.cancion.pause(); // Si cierra sesión, debe parar la reproducción.
     });
+
 
     /* Recibe y actualiza cancion, podcast o lista a reproducir */ // Así chuta. No tocar.
     this.Servicio.cancionActiva.subscribe((listCan)  => {
@@ -89,7 +99,12 @@ export class ReproductorComponent implements OnInit {
 
     // Recibe el objeto usuario, y actualiza cuando se cambia.
     this.Servicio.sharedMessage.subscribe(userRecibido => {
-      if (userRecibido.id !== this.usuarioActual.id) {
+      console.log(this.deLogin)
+      if (this.deLogin/*userRecibido.id !== this.usuarioActual.id ||
+        userRecibido.id_ultima_reproduccion !== this.usuarioActual.id_ultima_reproduccion
+       || (userRecibido.id_ultima_reproduccion == this.usuarioActual.id_ultima_reproduccion
+          && userRecibido.minuto_ultima_reproduccion != this.usuarioActual.minuto_ultima_reproduccion) */
+      ) {
         if (userRecibido.id_ultima_reproduccion != null &&
           userRecibido.minuto_ultima_reproduccion != null) {
           if (userRecibido.tipo_ultima_reproduccion === 0) { //Si es cancion
@@ -150,6 +165,7 @@ export class ReproductorComponent implements OnInit {
           }
           this.usuarioActual = userRecibido;
       }}
+      this.deLogin = false;
     });
 
 

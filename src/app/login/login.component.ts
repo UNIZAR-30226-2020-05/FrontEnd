@@ -24,15 +24,16 @@ export class LoginComponent implements OnInit {
 
   @Output() messageEvent = new EventEmitter<boolean>();
 
-  constructor(private http: HttpClient, private Servicio: ServicioComponentesService) {
-    this.nomUsuario='';
-    this.contrasena='';
+  constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
+    this.nomUsuario = '';
+    this.contrasena = '';
   }
 
   ngOnInit(): void {
     this.logeado=false;
+    this.Servicio.nextMessage2(false);
     this.Servicio.nextMessage(this.usuario);
-    this.Servicio.sharedMessage2.subscribe(message2 => this.logeado=message2);
+    this.Servicio.sharedMessage2.subscribe(message2 => this.logeado = message2);
   }
 
   sendMessageFather(){
