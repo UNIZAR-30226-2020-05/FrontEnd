@@ -77,7 +77,7 @@ export class ReproductorComponent implements OnInit {
     this.activo = false;
 
     this.Servicio.sharedMessage2.subscribe(message2 => {
-      if (message2 === false) { this.deLogin = true; console.log(this.deLogin); console.log(message2); }});
+      if (message2 === false) { this.deLogin = true; }});
 
     this.Servicio.sharedMessage2.subscribe(message2 => {
       this.cancion.pause(); // Si cierra sesión, debe parar la reproducción.
@@ -99,7 +99,6 @@ export class ReproductorComponent implements OnInit {
 
     // Recibe el objeto usuario, y actualiza cuando se cambia.
     this.Servicio.sharedMessage.subscribe(userRecibido => {
-      console.log(this.deLogin)
       if (this.deLogin/*userRecibido.id !== this.usuarioActual.id ||
         userRecibido.id_ultima_reproduccion !== this.usuarioActual.id_ultima_reproduccion
        || (userRecibido.id_ultima_reproduccion == this.usuarioActual.id_ultima_reproduccion
@@ -129,7 +128,6 @@ export class ReproductorComponent implements OnInit {
                         this.Servicio.reproducirCancion(cancionc);
                         this.cancion.src = this.Servicio.URL_API + '/song/play/' + cancionc.name;
                         this.cancion.load();
-                        console.log(this.cancion.currentTime + ' -- ' + this.cancion.duration);
                         this.cancion.currentTime = userRecibido.minuto_ultima_reproduccion;
 
                         encontrado = true;
@@ -139,8 +137,7 @@ export class ReproductorComponent implements OnInit {
                 }
               );
           } else if (userRecibido.tipo_ultima_reproduccion === 1) {
-           //Si es podcast. SIN PROBAR!!!!
-            console.log(userRecibido.tipo_ultima_reproduccion);
+           //Si es podcast.
             const params = new HttpParams().set('name', '');
             this.http.get(this.Servicio.URL_API + '/podcast/getByName', {params})
               .subscribe(
@@ -154,7 +151,6 @@ export class ReproductorComponent implements OnInit {
                         this.Servicio.reproducirPodcast(cancionc);
                         this.cancion.src = this.Servicio.URL_API + '/podcast/play/' + cancionc.name;
                         this.cancion.load();
-                        console.log(this.cancion.currentTime + ' -- ' + this.cancion.duration);
                         this.cancion.currentTime = userRecibido.minuto_ultima_reproduccion;
                         encontrado = true;
                       }
@@ -230,7 +226,7 @@ export class ReproductorComponent implements OnInit {
 
 
   playPause() {
-    console.log(this.listaActiva);
+
     if (this.cancion.paused) {
       this.cancion.play();
       this.activo = true;
@@ -254,9 +250,8 @@ export class ReproductorComponent implements OnInit {
      }
      let usu: User = new User();
      this.Servicio.sharedMessage.subscribe(userRecibido => usu = userRecibido);
-     console.log(usu);
      this.http.patch( this.Servicio.URL_API + '/user/modifyLastPlay/' + usu.id, data ).subscribe(
-       (resp: string) => { console.log(resp); } );
+       (resp: string) => {} );
   }
 
 
