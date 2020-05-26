@@ -224,6 +224,7 @@ export class ServicioComponentesService {
         }
       );
   }
+
   cargarArtista(nombre) {
     const params = new HttpParams().set('name', nombre);
     this.http.get(this.URL_API + '/artist/getByName', {params})

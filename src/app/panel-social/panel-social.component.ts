@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {HttpClient, HttpParams, HttpClientModule, HttpResponse, HttpErrorResponse} from '@angular/common/http';
-import {User, Amigo, Cancion, Album} from '../app.component';
+import {User, Amigo, Cancion, Album, Artista} from '../app.component';
 import {error} from '@angular/compiler/src/util';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
 
@@ -253,5 +253,20 @@ export class PanelSocialComponent implements OnInit {
     else {
       return 'Ultimo artista';
     }
+  }
+
+
+
+  cargarArtista(art: string) {
+    const params = new HttpParams().set('name', art);
+    this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
+        .subscribe(
+            (resp: Array<Artista>) => {
+              this.Servicio.cargarAlbumesArtista(resp[0].id);
+              this.Servicio.cargarArtista(art);
+            },
+            (erroro: string) => {
+            }
+        );
   }
 }
