@@ -36,7 +36,7 @@
   <!-- Contenido del album -->
  <div class="titulo-album">{{albActivo.titulo}}</div>
   <div class="artista-album"><span class="enlace" (click)="
-              Servicio.cargarArtista(albActivo.artista);
+              cargarArtista(albActivo.artista);
               Servicio.nextMessageArtista(true);
               Servicio.nextMessage3(false)">{{albActivo.artista}}</span></div>
   <img *ngIf="reproduccAlbum!==albActivo.titulo" title="Reproducir album" (click)="repr(albActivo.canciones);

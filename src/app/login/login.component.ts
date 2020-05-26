@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
       (resp:User) => { this.logeado=true;this.usuario=resp;this.correctoNick= resp.nick;console.log(resp.nick);
         //this.Servicio.establecerLogin(resp);
         this.Servicio.nextMessage(resp);
+        this.Servicio.nextMessage2(true);
         },
       (error:string)=> {this.aviso=true;});
 

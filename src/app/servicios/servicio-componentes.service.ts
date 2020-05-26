@@ -268,9 +268,9 @@ export class ServicioComponentesService {
       artistas: new Array<string>(),
       album: 'esPODCAST'
     };
+    transform.artistas[0] = pod.artista;
     const nuev = new Array<Cancion>();
     nuev.push(transform);
-    console.log(nuev);
     this.reproducirLista(nuev);
   }
 
@@ -285,7 +285,7 @@ export class ServicioComponentesService {
 
   reproducirListaPodcast(podList: Array<Podcast>) {
     const listCan: Array<Cancion> = new Array<Cancion>();
-    for(const pod of podList) {
+    for (const pod of podList) {
       const transform: Cancion = {
         id: pod.id,
         name: pod.name,
@@ -294,6 +294,7 @@ export class ServicioComponentesService {
         artistas: new Array<string>(),
         album: 'esPODCAST'
       };
+      transform.artistas[0] = pod.artista;
       listCan.push(transform);
       this.reproducirLista(listCan);
     }
