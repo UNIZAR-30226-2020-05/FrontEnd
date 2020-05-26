@@ -59,7 +59,7 @@ export class PanelListasComponent implements OnInit {
 
 
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
-    this.album.caratula="https://i.dlpng.com/static/png/6331252_preview.png";
+    this.album.caratula="/imagenes/albums/album_default.png";
 
   }
 
