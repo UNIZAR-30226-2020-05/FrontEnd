@@ -80,7 +80,6 @@ export class PanelSocialComponent implements OnInit {
           this.busqIniciada = true;
           this.noEncuentra = false;
           this.usuarioBuscado = resp;
-          console.log(resp.nick);
         },
         (erroro: string) => {
           this.busqIniciada = true;
@@ -114,10 +113,8 @@ export class PanelSocialComponent implements OnInit {
       .subscribe(
         (resp: Array<Album>) => {
           this.listaAlbums = resp;
-          console.log(this.listaAlbums);
         },
-        (erroro: string) => { console.log(erroro);
-        }
+        (erroro: string) => {}
       );
   }
 
@@ -125,7 +122,6 @@ export class PanelSocialComponent implements OnInit {
     for (const alb of this.listaAlbums) {
       if (alb.artista === artista) {
         for (const can of alb.canciones) {
-          console.log(can.name);
           if (can.name === canc) {
             this.Servicio.cargarAlbum(alb.titulo);
             this.mostrarVistaAlbum();

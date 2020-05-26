@@ -82,7 +82,7 @@ export class BusquedaComponent implements OnInit {
     this.Servicio.activarVistaUsuario(false); // Desactiva vista usuarios.
     this.Servicio.nextMessageArtista(false); // Desactiva vista artista.
     this.Servicio.nextMessageEdit(false);
-    this.Servicio.nextMessageCentral(true); // Desactiva central
+    this.Servicio.nextMessageCentral(false); // Desactiva central
     this.Servicio.nextMessageEdit2(false);
     this.Servicio.nextMessageFavListP(false);
     this.Servicio.nextMessageVistaLista(false);

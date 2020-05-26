@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Album, ListaCancion, ListaPodcast, User} from "../app.component";
 import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Component({
   selector: 'app-vista-podcast',
@@ -32,13 +32,25 @@ export class VistaPodcastComponent implements OnInit {
 
   borrar() {
     this.http.delete(this.Servicio.URL_API + '/listaPodcast/delete/' + this.listaMostrar.id).subscribe((resp: string) => { console.log(resp);
-    for( var i=0; i< this.usuarioLog.lista_podcast.length - 1;i++){
-      if(this.usuarioLog.lista_podcast[i].id==this.listaMostrar.id){
-        this.usuarioLog.lista_podcast.slice(i-1,1);
+      const params = new HttpParams()
+        .set('nick', this.usuarioLog.nick);
+      this.http.get(this.Servicio.URL_API + '/user/get', {params})
+        .subscribe(
+          (resp: User) => {
+            this.Servicio.nextMessage(resp);
+          },
+          (erroro: string) => {
+          }
+        );
+    for (var i = 0; i < this.usuarioLog.lista_podcast.length - 1; i++){
+      if(this.usuarioLog.lista_podcast[i].id == this.listaMostrar.id){
+        this.usuarioLog.lista_podcast.slice(i - 1, 1);
       }
     }
     this.Servicio.nextMessageListaBorrada(this.usuarioLog.lista_podcast)});
-
+    this.Servicio.nextMessage(this.usuarioLog);
+    this.vistaPodcast = false;
+    this.Servicio.nextMessageCentral(true);
   }
 
   sacarTiempo(n: number) {
