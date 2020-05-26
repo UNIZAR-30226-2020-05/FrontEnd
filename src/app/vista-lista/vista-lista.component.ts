@@ -36,23 +36,20 @@ export class VistaListaComponent implements OnInit {
   borrar() {
     this.Servicio.nextMessageBorrarLista(this.listaMostrar.id);
     this.http.delete(this.Servicio.URL_API + '/listaCancion/delete/' + this.listaMostrar.id).subscribe((resp: string) => {
-      console.log(resp);
+      const params = new HttpParams()
+        .set('nick', this.usuarioLog.nick);
+      this.http.get(this.Servicio.URL_API + '/user/get', {params})
+        .subscribe(
+          (resp: User) => {
+            this.Servicio.nextMessage(resp);
+            //this.Servicio.nextMessage(this.usuarioLog);
+            this.aparecer = false;
+            this.Servicio.nextMessageCentral(true);
+          },
+          (erroro: string) => {
+          }
+        );
     });
-
-    const params = new HttpParams()
-      .set('nick', this.usuarioLog.nick);
-    this.http.get(this.Servicio.URL_API + '/user/get', {params})
-      .subscribe(
-        (resp: User) => {
-          this.Servicio.nextMessage(resp);
-        },
-        (erroro: string) => {
-        }
-      );
-
-    this.Servicio.nextMessage(this.usuarioLog);
-    this.aparecer = false;
-    this.Servicio.nextMessageCentral(true);
   }
 
   sacarTiempo(n: number) {

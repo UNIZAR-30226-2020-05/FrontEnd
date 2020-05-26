@@ -220,4 +220,18 @@ export class BusquedaComponent implements OnInit {
         }
       );
   }
+
+  cargarArtista(art: string) {
+    const params = new HttpParams().set('name', art);
+    this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
+      .subscribe(
+        (resp: Array<Artista>) => {
+          this.Servicio.cargarAlbumesArtista(resp[0].id);
+          this.Servicio.cargarArtista(art);
+          this.Servicio.nextMessageArtista(true);
+        },
+        (erroro: string) => {
+        }
+      );
+  }
 }
