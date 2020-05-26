@@ -16,14 +16,12 @@
 }
 
 .etiqueta-artista{
-  top: 9%;
+  top: 10%;
   left: 22%;
   position: fixed;
-  border-style: solid;
-  border-color: #b4b4b4;
-  border-inline-start-width: 8px;
-  width: fit-content;
-
+  border-style: outset;
+  border-color: white;
+  padding: 2px;
 }
 
 .foto-album{
@@ -45,7 +43,7 @@
 }
 
 .nombre-artista{
-  top: 13%;
+  top: 15%;
   left: 22%;
   font-size: 34px;
   display: inline-block;

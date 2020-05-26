@@ -35,15 +35,12 @@
 }
 
 .nombrePlaylist{
-  top: 10.5%;
-  left: 24%;
+  top: 10%;
+  left: 23%;
   position: fixed;
-  border-style: solid;
-  border-color: #b4b4b4;
-  /*border-inline-start-width: 8px;*/
-  width: fit-content;
-  font-size: 90%;
-
+  border-style: outset;
+  border-color: white;
+  padding: 2px;
 }
 
 .imgGenCancion{
@@ -81,16 +78,16 @@
 
 
 .titulo-lista{
-  top: 14%;
-  left: 24%;
+  top: 15%;
+  left: 23%;
   font-size: 250%;
   display: inline-block;
   position: fixed;
 }
 
 .artista-lista{
-  top: 20%;
-  left: 24%;
+  top: 22%;
+  left: 23%;
   font-size: 100%;
   font-style: italic;
   position: fixed;
