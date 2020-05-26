@@ -49,7 +49,8 @@
 <table>
   <tbody>
     <tr>
-      <th class="titulo" (click)="Servicio.nextMessage3(true)">{{cancion.name}}</th>
+      <th class="titulo" (click)="Servicio.cargarAlbum(cancion.album);
+      mostrarVistaAlbum()">{{cancion.name}}</th>
       <th>
         <img  class="heart" (click)="addFav(listaFav.id,cancion.id)" src="./../assets/icons8-me-gusta-100.png">
       </th>
@@ -62,7 +63,7 @@
     </tr>-->
     <tr>
       <th class="autor" (click)="
-      Servicio.cargarArtista(cancion.artistas);
+      cargarArtista(cancion.artistas[0]);
       Servicio.nextMessageArtista(true);"> {{cancion.artistas}}</th>
     </tr>
   </tbody>
@@ -151,7 +152,8 @@
             <img class="imgGenCancion" (click)="cargarCaratula(cancion.album);Servicio.reproducirCancion(cancion)"
                                      src="../../assets/play-vector.svg"/></td>
           <td  class="titulos-album" (click)="Servicio.cargarAlbum(cancion.album);Servicio.nextMessage3(true);
-          Servicio.nextMessageFavList(false)">{{ cancion.name }}</td><td><span class="artista" (click)="Servicio.cargarArtista(cancion.artistas);
+          Servicio.nextMessageFavList(false)">{{ cancion.name }}</td><td><span class="artista"
+          (click)="cargarArtista(cancion.artistas[0]);
           Servicio.nextMessageArtista(true);mostrarFav=false">{{cancion.artistas}}</span> </td>
           <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
           <td><img class="img-papel" (click)="borrarCancion(cancion.id)" src="../../assets/trash.png"/></td>
