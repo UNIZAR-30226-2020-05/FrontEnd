@@ -51,7 +51,7 @@ export class PanelListasComponent implements OnInit {
   listasUser;
   listasUserPodcast;
 
-  listaMantener: ListaCancion = new ListaCancion();
+  listaMantener: Array<Cancion> =new Array<Cancion>();
   listaMantener2: ListaPodcast = new ListaPodcast();
 
   enFav:boolean=false;
@@ -67,8 +67,6 @@ export class PanelListasComponent implements OnInit {
     this.Servicio.sharedMessage.subscribe(message => {
       if(message != null){this.usuario=message;
       this.listaFav=this.usuario.lista_cancion[0];
-      this.listaMantener=this.usuario.lista_cancion[0];
-        this.listaMantener2=this.usuario.lista_podcast[0];
       this.listasUser=this.usuario.lista_cancion;
       this.listaFavPodcast= this.usuario.lista_podcast[0];
       this.listasUserPodcast=this.usuario.lista_podcast}
@@ -152,7 +150,7 @@ export class PanelListasComponent implements OnInit {
   addFav(id_lista:number,id_cancion: number){
 
     this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + id_lista, id_cancion).subscribe( (resp:ListaCancion) =>{
-    console.log(resp);this.listaFav=resp;this.Servicio.nextMessage(this.usuario)});
+    console.log(resp);this.listaFav=resp;this.enFav=true});
   }
 
   addFavPodcast(id_lista:number,id_cancion: number){
@@ -180,7 +178,7 @@ export class PanelListasComponent implements OnInit {
 
   borrarCancion(cancion:number){
     this.http.patch(this.Servicio.URL_API + '/listaCancion/deleteSong/' + this.listaFav.id, cancion).subscribe((resp:ListaCancion) =>
-    {console.log(resp); this.listaFav=resp});
+    {console.log(resp); this.listaFav=resp;this.enFav=false});
 
   }
 
@@ -191,7 +189,7 @@ export class PanelListasComponent implements OnInit {
 
   }
   ordenarFecha(){
-    this.listaFav.canciones=this.listaMantener.canciones.reverse();
+    this.listaFav.canciones=this.listaFav.canciones.reverse();
 
   }
   ordenarArtista(){
@@ -211,7 +209,7 @@ export class PanelListasComponent implements OnInit {
     });
   }
   ordenarFechaP(){
-    this.listaFavPodcast.podcasts=this.listaMantener2.podcasts.reverse();
+    this.listaFavPodcast.podcasts=this.listaFavPodcast.podcasts.reverse();
 
   }
 

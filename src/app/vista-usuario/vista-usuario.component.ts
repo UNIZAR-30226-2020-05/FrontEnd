@@ -54,6 +54,7 @@ export class VistaUsuarioComponent implements OnInit {
                               this.ultimAlbum = alb[0];
                             }
                           );
+                        this.esPodcast=false;
                         encontrado = true;
                       }
                     }

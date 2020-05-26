@@ -4,7 +4,7 @@
     <img class="img-lista" src="../../assets/ListaDefecto.png"/>
   </div>
 
-  <span *ngIf="usuario.id==usuarioLog.id"> <img class="img-papel" title="Borrar lista"(click)="borrar()" src="../../assets/trash.png"/></span>
+  <span *ngIf="usuario.id==usuarioLog.id && listaMostrar.nombre!='Favoritos'"> <img class="img-papel" title="Borrar lista"(click)="borrar()" src="../../assets/trash.png"/></span>
   <div *ngIf="listaMostrar.canciones.length>0 && listaMostrar.nombre!='Favoritos'">
     <!-- Se ha puesto la imagen por defecto, de momento, pero deberia ir la de la primera cancion. -->
       <img class="img-lista" src="{{Servicio.URL_API+albumActual.caratula}}"/>

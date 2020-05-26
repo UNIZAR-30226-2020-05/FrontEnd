@@ -1,5 +1,5 @@
 <div *ngIf="vistaPodcast" class="vista-podcast">
-  <span *ngIf="usuario.id==usuarioLog.id"><img class="img-papel" title="Borrar lista" (click)="borrar()" src="../../assets/trash.png"/></span>
+  <span *ngIf="usuario.id==usuarioLog.id && listaMostrar.nombre!='Favoritos'"><img class="img-papel" title="Borrar lista" (click)="borrar()" src="../../assets/trash.png"/></span>
   <div class="hayCanciones">
     <img class="img-lista" src="../../assets/ListaDefectoPodcast.png"/><div class="nombrePlaylist">PODCAST</div>
   </div>

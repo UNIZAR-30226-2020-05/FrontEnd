@@ -3,7 +3,7 @@
   <p class="titleP">PODCAST</p>
   <p class="ListP" (click)="mostrarCrearP=true; mostrarFavP=false">
     <img class="addP" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>
-  <p class="fave" (click)="mostrarFavP=!mostrarFavP;
+  <p class="fave" (click)="mostrarFavP=true;
     Servicio.nextMessage3(false);
     Servicio.nextMessageVistaPodcast(false);
     Servicio.activarVistaUsuario(false);
@@ -21,7 +21,7 @@
 <p class="titleL">PLAYLISTS</p>
 <p class="CrearList" (click)="mostrarCrearC=true;mostrarFav=false">
   <img class="iconoAñadir" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>&nbsp;
-<p class="fav" (click)="mostrarFav=!mostrarFav;
+<p class="fav" (click)="mostrarFav=true;
     Servicio.nextMessage3(false);
     Servicio.nextMessageVistaLista(false);
     Servicio.activarVistaUsuario(false);
@@ -65,10 +65,10 @@
         </span>
       <span *ngIf="cancion.album!='esPODCAST'">
           <span *ngIf="enFav==true">
-            <img class="heart" (click)="borrarCancion(cancion.id)" src="./../assets/icons8-Ya-me-gusta-.png">
+            <img class="heart" (click)="borrarCancion(cancion.id);enFav=false" src="./../assets/icons8-Ya-me-gusta-.png">
           </span>
           <span *ngIf="enFav==false">
-             <img  class="heart" (click)="addFav(listaFav.id,cancion.id);Servicio.comprobarSienFav(cancion,usuario)" src="./../assets/icons8-me-gusta-100.png">
+             <img  class="heart" (click)="addFav(listaFav.id,cancion.id)" src="./../assets/icons8-me-gusta-100.png">
           </span>
         </span>
 
