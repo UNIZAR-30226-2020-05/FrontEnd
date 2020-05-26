@@ -156,7 +156,7 @@ export class PanelListasComponent implements OnInit {
   addFavPodcast(id_lista:number,id_cancion: number){
 
     this.http.patch(this.Servicio.URL_API + '/listaPodcast/add/' + id_lista, id_cancion).subscribe( (resp:ListaPodcast) =>{
-      console.log(resp);this.listaFavPodcast=resp});
+      console.log(resp);this.listaFavPodcast=resp;this.enFav=true});
   }
   sacarTiempo(n: number) {
     let s = '';
@@ -185,7 +185,7 @@ export class PanelListasComponent implements OnInit {
 
   borrarPodcast(podcast:number){
     this.http.patch(this.Servicio.URL_API + '/listaPodcast/deletePodcast/' + this.listaFavPodcast.id, podcast).subscribe((resp:ListaPodcast) =>
-    {console.log(resp); this.listaFavPodcast=resp});
+    {console.log(resp); this.listaFavPodcast=resp;this.enFav=false});
 
   }
   ordenarFecha(){
