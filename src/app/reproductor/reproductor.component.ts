@@ -94,7 +94,9 @@ export class ReproductorComponent implements OnInit {
         this.posicion = 0;
         this.cancionActual = aux;
         this.cargarAudio(aux);
-        }
+        if (listCan[0].album !== 'esPODCAST') {
+          this.actualizarCaratula(listCan[0].album);
+        }}
       });
 
     // Recibe el objeto usuario, y actualiza cuando se cambia.
