@@ -292,4 +292,5 @@ export class PanelListasComponent implements OnInit {
     this.Servicio.nextMessageBusq(false);
   }
 
+
 }

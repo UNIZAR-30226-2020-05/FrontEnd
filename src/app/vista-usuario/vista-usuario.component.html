@@ -16,9 +16,7 @@
           <td  class="titulos" (click)="Servicio.cargarAlbum(ultimAlbum.titulo);Servicio.nextMessage3(true);
               Servicio.activarVistaUsuario(false)">{{ultimAlbum.titulo}}</td>
           <td class="ultimoAlbumArtistas" (click)="
-              Servicio.cargarArtista(ultimAlbum.artista);
-              Servicio.nextMessageArtista(true);
-              Servicio.activarVistaUsuario(false)">{{ultimAlbum.artista}}</td>
+              cargarArtista(ultimAlbum.artista)">{{ultimAlbum.artista}}</td>
         </span>
 
       </tr>

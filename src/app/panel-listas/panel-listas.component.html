@@ -50,7 +50,8 @@
   <tbody>
   <tr>
     <th>
-      <span *ngIf="cancion.album!='esPODCAST'" class="titulo" (click)="Servicio.nextMessage3(true)">{{cancion.name}}</span>
+      <span *ngIf="cancion.album!='esPODCAST'" class="titulo" (click)="Servicio.cargarAlbum(cancion.album);
+        mostrarVistaAlbum()">{{cancion.name}}</span>
       <span *ngIf="cancion.album=='esPODCAST'" class="tituloP">{{cancion.name}}</span>
     </th>
     <th>
@@ -73,17 +74,11 @@
 
     </th>
   </tr>
-  <!-- <tr>
-     <th>
-           <img *ngIf="enFav" class="heart" (click)="borrarCancion(cancion.id)" src="./../assets/icons8-Ya-me-gusta.png">
-           *ngIf="noEnFav"
-     </th>
-   </tr>-->
+
   <tr>
     <th>
         <span *ngIf="cancion.album!='esPODCAST'" class="autor" (click)="
-        Servicio.cargarArtista(cancion.artistas);
-        Servicio.nextMessageArtista(true);"> {{cancion.artistas}}</span>
+        cargarArtista(cancion.artistas[0])"> {{cancion.artistas}}</span>
       <span class="autorP" *ngIf="cancion.album=='esPODCAST'"> {{cancion.artistas}}</span>
     </th>
   </tr>
