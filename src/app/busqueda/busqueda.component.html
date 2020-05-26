@@ -37,12 +37,10 @@
     <tr *ngFor="let artista of artistaEncontrado; let i = index">
       <td><img class="foto-busqueda" src="{{Servicio.URL_API+artista.image_path}}" (click)="
       cancelarBusqueda();
-      Servicio.cargarArtista(artista.name);
-      Servicio.nextMessageArtista(true);"></td>
+      cargarArtista(artista.name);"></td>
       <td class="texto-busqueda" (click)="
       cancelarBusqueda();
-      Servicio.cargarArtista(artista.name);
-      Servicio.nextMessageArtista(true);">{{artista.name}}</td>
+       cargarArtista(artista.name);">{{artista.name}}</td>
     </tr>
   </table>
   <p class="cabecera" *ngIf="numPodcast == 1">Podcast encontrado</p>

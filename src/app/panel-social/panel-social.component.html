@@ -35,8 +35,8 @@
         <span  class="enlace"  (click)="buscarAlbum(usu.ultimaCancion,usu.artistaUltimaCancion);">
           {{obtenerNombreUltCancion(usu)}}</span>
         ·
-        <span class="enlace" (click)="
-              Servicio.cargarArtista(obtenerNombreUltArista(usu));mostrarVistaArtista()">
+        <span class="enlace" (click)="cargarArtista(usu.artistaUltimaCancion);
+              mostrarVistaArtista()">
           {{obtenerNombreUltArista(usu)}}</span>
         </span>
         <span *ngIf="!esCancion(usu.ultimaCancion) " style="cursor: default">
