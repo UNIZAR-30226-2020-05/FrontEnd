@@ -184,11 +184,25 @@
   </div>
 
   <div *ngIf="gestCanciones">
-      <i> Subir archivo asociado a canción</i>
-    <input  type="text" [(ngModel)]="fileCancionNom"><br/>
-    <input type="file" (change)="onFileChange($event)"  >
+    Subir archivo asociado a canción:<br/>
+      <i>El nombre debe ser igual a la canción registrada, respetando mayúsculas</i><br/>
+    <input  type="text" (ngModelChange)="comprobarExisteCanc(fileCancionNom)" [(ngModel)]="fileCancionNom"><br/>
+
     <br/>
-    <button (click)="subirCancion(fileCancionNom)">Subir</button>
+    Coincidencias cercanas:<br/>
+    <i *ngFor="let canc of fileListaResults | slice:0:10; let i = index"
+    style="cursor: pointer" (click)="fileCancionNom=canc.name">
+      "{{canc.name}}" de {{canc.artistas[0]}}<br/>
+    </i>
+    <br/><br/>
+    <input type="file" style="width: 420px" (change)="onFileChange($event)"  >
+    <br/>   <br/>
+    <button (click)="subirCancion(fileCancionNom)">Subir</button><br/>
+    <i *ngIf="subidaEnCurso">
+      <span *ngIf="fileProgreso!=100">Subiendo canción, por favor espere...</span><br/>
+      <i style="font-size: 25px">{{fileProgreso}}% OK</i>
+
+    </i>
   </div>
 
   <div *ngIf="gestPodcast">

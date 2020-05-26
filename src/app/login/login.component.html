@@ -8,10 +8,12 @@
     <label class="passw"><b>Contraseña</b></label>
     <input type="password" placeholder="Contraseña" name="psw" required [(ngModel)]="contrasena" (click)="aviso=false">
 
-    <button (click)="comprobar()" type="submit">Iniciar sesión</button>
+    <button (mouseenter)="Servicio.nextMessage2(false);"
+      (click)="comprobar(); Servicio.nextMessage2(true);" type="submit">Iniciar sesión</button>
   </div>
 
-    <button (click)="logeado=true; sendMessageFather() " type="button" class="regbtn">Registrarse</button>
+    <button
+      (click)="logeado=true; sendMessageFather() " type="button" class="regbtn">Registrarse</button>
    <!-- <span class="psw"> <a href="#">contraseña?</a></span> -->
 
   <div *ngIf="aviso" class="datosMal">

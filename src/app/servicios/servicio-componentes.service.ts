@@ -32,6 +32,7 @@ export class ServicioComponentesService {
   favLista: boolean;
   favListaP: boolean;
   usuarioList:User = new User();
+  idLista: number;
 
   central: boolean;
 
@@ -116,14 +117,18 @@ export class ServicioComponentesService {
   private messageObjetoLista = new BehaviorSubject(this.objLista);
   sharedMessageObjLista = this.messageObjetoLista.asObservable();
 
-  /* Mensaje para pasar el objeto album */
+  /* Mensaje para pasar el album de la primera cancion */
   private objetoAlbum = new BehaviorSubject(this.objAlbum);
   sharedMessageobjAlbum = this.objetoAlbum.asObservable();
 
   private usuarioLista = new BehaviorSubject(this.usuarioList);
   sharedMessageUsuarioAList = this.usuarioLista.asObservable();
 
-/******** lOGO CERRAR VISTAS***********/
+  private idListaBorrada = new BehaviorSubject(this.idLista);
+  sharedMessageidList = this.idListaBorrada.asObservable();
+
+
+  /******** lOGO CERRAR VISTAS***********/
   /* Mensaje para poder ocultar vista de favoritos Canciones desde logo */
   private messageFavLista = new BehaviorSubject(this.favLista);
   sharedMessageFavLista = this.messageFavLista.asObservable();
@@ -336,6 +341,10 @@ export class ServicioComponentesService {
 
   nextMessageListaBorrada(messageListaBorrar) {
     this.messageListaBorrar.next(messageListaBorrar);
+  }
+
+  nextMessageBorrarLista(messageIdListaBorrada) {
+    this.idListaBorrada.next(messageIdListaBorrada);
   }
 
   nextMessageCentral(messageCentral) {

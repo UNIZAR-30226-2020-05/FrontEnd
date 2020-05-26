@@ -5,13 +5,22 @@
   <div class="marco-ultimo">
     <table class="lista-playlist">
       <tr>
-        <td  class="listaGen"><img class="imgGenCancion" src="{{Servicio.URL_API+ultimAlbum.caratula}}"/></td>
-        <td  class="titulos" (click)="Servicio.cargarAlbum(ultimAlbum.titulo);Servicio.nextMessage3(true);
+        <span *ngIf="esPodcast==true">
+          <td  class="listaGen"><img class="imgGenCancion" src="../../assets/podcast1.jpg"/></td>
+          <td  class="titulos">{{podcast.name}}</td>
+          <td class="ultimoAlbumArtistas">{{podcast.artista}}</td>
+        </span>
+
+        <span *ngIf="esPodcast==false">
+          <td  class="listaGen"><img class="imgGenCancion" src="{{Servicio.URL_API+ultimAlbum.caratula}}"/></td>
+          <td  class="titulos" (click)="Servicio.cargarAlbum(ultimAlbum.titulo);Servicio.nextMessage3(true);
               Servicio.activarVistaUsuario(false)">{{ultimAlbum.titulo}}</td>
-        <td class="ultimoAlbumArtistas" (click)="
+          <td class="ultimoAlbumArtistas" (click)="
               Servicio.cargarArtista(ultimAlbum.artista);
               Servicio.nextMessageArtista(true);
               Servicio.activarVistaUsuario(false)">{{ultimAlbum.artista}}</td>
+        </span>
+
       </tr>
     </table>
   </div>
