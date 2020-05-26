@@ -188,6 +188,7 @@ export class ReproductorComponent implements OnInit {
     this.cancion.play();
     this.activo = true;
     this.Servicio.establecerCancionActual(orig);
+    this.Servicio.comprobarSienFav(orig,this.usuarioActual);
   }
 
   avanzarLista() { // Así no peta

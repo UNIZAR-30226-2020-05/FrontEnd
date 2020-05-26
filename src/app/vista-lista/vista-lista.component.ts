@@ -90,4 +90,28 @@ export class VistaListaComponent implements OnInit {
 
   }
 
+  ordenarFecha(){
+    this.listaMostrar.canciones=this.listaMostrar.canciones.reverse();
+
+  }
+
+
+
+  ordenarArtista(){
+
+    this.listaMostrar.canciones.sort((a, b) => {
+      if (a.artistas < b.artistas) return -1;
+      else if (a.artistas > b.artistas) return 1;
+      else return 0;
+    });
+  }
+
+  ordenarPorNombre(){
+    this.listaMostrar.canciones.sort((a, b) => {
+      if (a.name < b.name) return -1;
+      else if (a.name > b.name) return 1;
+      else return 0;
+    });
+  }
+
 }

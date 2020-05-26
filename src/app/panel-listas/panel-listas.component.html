@@ -48,24 +48,45 @@
 <!-- /********* TABLA PARA NOMBRE CANCION Y AUTOR DE CANCION ACTUAL ***********/ -->
 <table>
   <tbody>
-    <tr>
-      <th class="titulo" (click)="Servicio.cargarAlbum(cancion.album);
-      mostrarVistaAlbum()">{{cancion.name}}</th>
-      <th>
-        <img  class="heart" (click)="addFav(listaFav.id,cancion.id)" src="./../assets/icons8-me-gusta-100.png">
-      </th>
-    </tr>
-   <!-- <tr>
-      <th>
-            <img *ngIf="enFav" class="heart" (click)="borrarCancion(cancion.id)" src="./../assets/icons8-Ya-me-gusta.png">
-            *ngIf="noEnFav"
-      </th>
-    </tr>-->
-    <tr>
-      <th class="autor" (click)="
-      cargarArtista(cancion.artistas[0]);
-      Servicio.nextMessageArtista(true);"> {{cancion.artistas}}</th>
-    </tr>
+  <tr>
+    <th>
+      <span *ngIf="cancion.album!='esPODCAST'" class="titulo" (click)="Servicio.nextMessage3(true)">{{cancion.name}}</span>
+      <span *ngIf="cancion.album=='esPODCAST'" class="tituloP">{{cancion.name}}</span>
+    </th>
+    <th>
+        <span *ngIf="cancion.album=='esPODCAST'">
+          <span *ngIf="enFav==true">
+            <img class="heart" (click)="borrarPodcast(cancion.id)" src="./../assets/icons8-Ya-me-gusta-.png">
+          </span>
+          <span *ngIf="enFav==false">
+             <img  class="heart" (click)="addFavPodcast(listaFavPodcast.id,cancion.id)" src="./../assets/icons8-me-gusta-100.png">
+          </span>
+        </span>
+      <span *ngIf="cancion.album!='esPODCAST'">
+          <span *ngIf="enFav==true">
+            <img class="heart" (click)="borrarCancion(cancion.id)" src="./../assets/icons8-Ya-me-gusta-.png">
+          </span>
+          <span *ngIf="enFav==false">
+             <img  class="heart" (click)="addFav(listaFav.id,cancion.id);Servicio.comprobarSienFav(cancion,usuario)" src="./../assets/icons8-me-gusta-100.png">
+          </span>
+        </span>
+
+    </th>
+  </tr>
+  <!-- <tr>
+     <th>
+           <img *ngIf="enFav" class="heart" (click)="borrarCancion(cancion.id)" src="./../assets/icons8-Ya-me-gusta.png">
+           *ngIf="noEnFav"
+     </th>
+   </tr>-->
+  <tr>
+    <th>
+        <span *ngIf="cancion.album!='esPODCAST'" class="autor" (click)="
+        Servicio.cargarArtista(cancion.artistas);
+        Servicio.nextMessageArtista(true);"> {{cancion.artistas}}</span>
+      <span class="autorP" *ngIf="cancion.album=='esPODCAST'"> {{cancion.artistas}}</span>
+    </th>
+  </tr>
   </tbody>
 </table>
 <!--/****************** MENUS VERTICALES DE PLAYLIST Y PODCAST ********************/-->
@@ -73,7 +94,7 @@
 <ul class="vertical-menu" >
   <li  *ngFor="let podcast of listasUserPodcast; first as primero">
     <a *ngIf="!primero" (click)="listaPulsadaPodcast(podcast.id);
-                              Servicio.nextMessageVistaPodcast(!okVistaPodcast);
+                              Servicio.nextMessageVistaPodcast(true);
                               Servicio.nextMessageFavList(false);
                               Servicio.nextMessage3(false);
                               Servicio.activarVistaUsuario(false);
@@ -170,26 +191,26 @@
   <div class="container2">
     <div class="misFavs"></div>
     <span *ngIf="listaFavPodcast.podcasts.length >0" (click)="reproducir(listaFavPodcast.podcasts);"><img  title="Reproducir lista"
-                                                                                                            class="img-repr-lista" src="../../assets/playLista.png"></span>
-    <!-- <nav class="menuDesplegable">
-       <ul>
-         <li><img class="iconOrden" src="../../assets/icons8-flechas-de-ordenar-100.png">
-           <ul>
-             <li><a (click)="porFecha=true">Por fecha de subida</a></li>
-             <li><a (click)="porArtista=true">Por artista</a></li>
-             <li><a (click)="porNombre=true">Por nombre</a></li>
-           </ul>
-         </li>
-       </ul></span>
-     </nav>-->
+                                                                                                           class="img-repr-lista" src="../../assets/playLista.png"></span>
+    <nav class="menuCSS3">
+      <ul>
+        <li><a href="#"><img class="iconOrden" src="../../assets/icons8-flechas-de-ordenar-100.png"></a>
+          <ul>
+            <li><a href="#" (click)="ordenarFechaP()">Últimas añadidas</a></li>
+            <li><a href="#" (click)="ordenarArtistaP()">Por artista</a></li>
+            <li><a href="#" (click)="ordenarPorNombreP()">Por nombre</a></li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
     <div class="marco-tabla">
       <table class="lista-playlist">
         <tr *ngFor="let podcast of listaFavPodcast.podcasts; let i = index">
           <td  class="listaGen">
             <img class="imgGenCancion" (click)="Servicio.reproducirPodcast(podcast)"
                  src="../../assets/play-vector.svg"/></td>
-          <td  class="titulos-album" (click)="Servicio.nextMessage3(true);
-                Servicio.nextMessageFavList(false)">{{ podcast.name }}</td><td>{{podcast.artista}}</td>
+          <td  class="titulos-albumP" (click)="
+        Servicio.nextMessageFavList(false)">{{ podcast.name }}</td><td>{{podcast.artista}}</td>
           <td>{{sacarTiempo(podcast.duracion)}}</td><td>Pista {{i+1}}</td>
           <td><img class="img-papel" (click)="borrarPodcast(podcast.id)" src="../../assets/trash.png"/></td>
         </tr>
@@ -199,4 +220,3 @@
     <label class="usuario"><b>{{usuario.nick}}</b></label>
   </div>
 </div>
-

@@ -82,4 +82,28 @@ export class VistaPodcastComponent implements OnInit {
     });
 
   }
+  ordenarFecha(){
+    this.listaMostrar.podcasts=this.listaMostrar.podcasts.reverse();
+
+  }
+
+
+
+  ordenarArtista(){
+
+    this.listaMostrar.podcasts.sort((a, b) => {
+      if (a.artista < b.artista) return -1;
+      else if (a.artista > b.artista) return 1;
+      else return 0;
+    });
+  }
+
+  ordenarPorNombre(){
+    this.listaMostrar.podcasts.sort((a, b) => {
+      if (a.name < b.name) return -1;
+      else if (a.name > b.name) return 1;
+      else return 0;
+    });
+  }
+
 }
