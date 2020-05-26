@@ -19,11 +19,9 @@
   top: 9%;
   left: 22%;
   position: fixed;
-  border-style: solid;
-  border-color: #b4b4b4;
-  border-inline-start-width: 8px;
-  width: fit-content;
-
+  border-style: outset;
+  border-color: white;
+  padding: 2px;
 }
 
 .titulo-eleccion {
@@ -81,7 +79,6 @@
 }
 
 .lista-album{
-
   overflow: auto;
   width: 90%;
   height: 30%;
@@ -110,7 +107,7 @@
 }
 
 .titulo-album{
-  top: 13%;
+  top: 14%;
   left: 22%;
   font-size: 34px;
   display: inline-block;
@@ -118,7 +115,7 @@
 }
 
 .artista-album{
-  top: 18%;
+  top: 19%;
   left: 22%;
   font-size: 28px;
   font-style: italic;
