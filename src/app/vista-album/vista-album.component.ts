@@ -1,6 +1,6 @@
 import {Component, OnInit,Input, Output} from '@angular/core';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
-import {Album, ListaCancion, User} from '../app.component';
+import {Album, Artista, ListaCancion, User} from '../app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Component({
@@ -73,4 +73,18 @@ export class VistaAlbumComponent implements OnInit {
   consola(){
     console.log(this.albActivo);
   }
+
+  cargarArtista(art: string) {
+    const params = new HttpParams().set('name', art);
+    this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
+      .subscribe(
+        (resp: Array<Artista>) => {
+          this.Servicio.cargarAlbumesArtista(resp[0].id);
+          this.Servicio.cargarArtista(art);
+        },
+        (erroro: string) => {
+        }
+      );
+  }
+
 }
