@@ -115,6 +115,16 @@
   cursor: pointer;
   text-decoration: underline;
 }
+.tituloP{
+  font-family: Roboto, serif;
+  font-size: 105%;
+  color: aliceblue;
+  bottom: 4%;
+  float: left;
+  margin-left: 17.3%;
+  text-align: center;
+  position: absolute;
+}
 
 .heart{
   border-radius: 20%; /*Ajustar dependiendo dle estilo. Material design dice 50%. */
@@ -129,6 +139,17 @@
 }
 
 .autor{
+  font-family: Roboto, serif;
+  font-weight: lighter;
+  font-size: 100%;
+  color: aliceblue;
+  bottom: 2%;
+  float: left;
+  margin-left: 17.3%;
+  text-align: center;
+  position: absolute;
+}
+.autorP{
   font-family: Roboto, serif;
   font-weight: lighter;
   font-size: 100%;

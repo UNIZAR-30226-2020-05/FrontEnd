@@ -15,6 +15,18 @@
   <span *ngIf="listaMostrar.canciones.length>0" (click)="cargarCaratula(listaMostrar.canciones[0].album);reproducir(listaMostrar.canciones);"><img title="Reproducir lista"
        class="img-repr-lista" src="../../assets/playLista.png"></span>
 
+  <nav class="menuCSS3">
+    <ul>
+      <li><a href="#"><img class="iconOrden" src="../../assets/icons8-flechas-de-ordenar-100.png"></a>
+        <ul>
+          <li><a href="#" (click)="ordenarFecha()">Últimas añadidas</a></li>
+          <li><a href="#" (click)="ordenarArtista()">Por artista</a></li>
+          <li><a href="#" (click)="ordenarPorNombre()">Por nombre</a></li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
 
 
   <div class="titulo-lista">{{listaMostrar.nombre}}<span *ngIf="listaMostrar.nombre!='Favoritos'"> #{{listaMostrar.id}}</span></div>

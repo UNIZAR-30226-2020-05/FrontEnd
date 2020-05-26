@@ -12,6 +12,7 @@ import {
 import {HttpClient, HttpParams, HttpClientModule} from '@angular/common/http';
 import {subscribeToResult} from "rxjs/internal-compatibility";
 import {NumberFormatStyle} from "@angular/common";
+import {compareNumbers} from "@angular/compiler-cli/src/diagnostics/typescript_version";
 
 
 @Component({
@@ -52,9 +53,10 @@ export class PanelListasComponent implements OnInit {
   listasUserPodcast;
 
  listaMantener: ListaCancion = new ListaCancion();
+  listaMantener2: ListaPodcast = new ListaPodcast();
 
-  enFav:boolean;
-  noEnFav:boolean;
+  enFav:boolean=false;
+  noEnFav:boolean=false;
 
 
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
@@ -67,6 +69,7 @@ export class PanelListasComponent implements OnInit {
       if(message != null){this.usuario=message;
       this.listaFav=this.usuario.lista_cancion[0];
       this.listaMantener=this.usuario.lista_cancion[0];
+      this.listaMantener2=this.usuario.lista_podcast[0];
       this.listasUser=this.usuario.lista_cancion;
       this.listaFavPodcast= this.usuario.lista_podcast[0];
       this.listasUserPodcast=this.usuario.lista_podcast}
@@ -75,8 +78,7 @@ export class PanelListasComponent implements OnInit {
     this.Servicio.sharedMessageObjLista.subscribe(messageObjLista => this.listaOk = messageObjLista);
     this.Servicio.sharedMessageVistaPodcast.subscribe(messageVistaPodcast => this.okVistaPodcast=messageVistaPodcast);
     this.Servicio.sharedMessageObjPodcast.subscribe(messageObjPodcast => this.listaOkPodcast = messageObjPodcast);
-
-    this.Servicio.canActiva.subscribe((cancionObj) => this.cancion = cancionObj);
+    this.Servicio.canActiva.subscribe((cancionObj) =>  this.cancion = cancionObj);
     this.Servicio.albumReprod.subscribe((albumCanActv) => {
       if (albumCanActv != null) { (this.album = albumCanActv); }
     });
@@ -85,6 +87,7 @@ export class PanelListasComponent implements OnInit {
     this.Servicio.albumActivo.subscribe(album => this.albAct=album);
     this.Servicio.sharedMessageBorrarLista.subscribe(lista => this.listasUserPodcast = lista);
     this.Servicio.sharedMessageidList.subscribe(lista => this.idListaBorrada = lista);
+    this.Servicio.sharedMessageComprobar.subscribe(esta => this.enFav= esta);
 
   }
   newMessage() {
@@ -92,7 +95,7 @@ export class PanelListasComponent implements OnInit {
   }
 
   enviarToVistaLista(){
-    this.Servicio.nextMessageVistaLista(!this.okVista);
+    this.Servicio.nextMessageVistaLista(true);
     this.Servicio.nextMessageCentral(!this.okVista);
     this.Servicio.nextMessageVistaPodcast(false);
   }
@@ -146,10 +149,15 @@ export class PanelListasComponent implements OnInit {
 
   }
 
-  addFav(id_lista:number,id_cancion: number){
+  addFav(lista,cancion){
 
-    this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + id_lista, id_cancion).subscribe( (resp:ListaCancion) =>{
-    console.log(resp);this.listaFav=resp});
+    this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + lista.id, cancion.id).subscribe( (resp:ListaCancion) =>{
+    console.log(resp);this.listaFav=resp;this.usuario.lista_cancion[0]=resp;this.Servicio.nextMessage(this.usuario)});
+  }
+  addFavPodcast(id_lista:number,id_cancion: number){
+
+    this.http.patch(this.Servicio.URL_API + '/listaPodcast/add/' + id_lista, id_cancion).subscribe( (resp:ListaPodcast) =>{
+      console.log(resp);this.listaFavPodcast=resp});
   }
 
   sacarTiempo(n: number) {
@@ -176,10 +184,7 @@ export class PanelListasComponent implements OnInit {
 
   }
 
-  comprobarSienFav(cancion:number){
-    this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + this.listaFav.id, cancion).subscribe(
-      (lista:ListaCancion) => {if(lista.nombre=='Favoritos'){this.enFav=true} else{this.noEnFav=true}});
-  }
+
 
   borrarPodcast(podcast:number){
     this.http.patch(this.Servicio.URL_API + '/listaPodcast/deletePodcast/' + this.listaFavPodcast.id, podcast).subscribe((resp:ListaPodcast) =>
@@ -210,6 +215,31 @@ export class PanelListasComponent implements OnInit {
       else return 0;
     });
   }
+  ordenarFechaP(){
+    this.listaFavPodcast.podcasts=this.listaMantener2.podcasts.reverse();
+
+  }
+
+
+
+  ordenarArtistaP(){
+
+    this.listaFavPodcast.podcasts.sort((a, b) => {
+      if (a.artista < b.artista) return -1;
+      else if (a.artista > b.artista) return 1;
+      else return 0;
+    });
+  }
+
+  ordenarPorNombreP(){
+    this.listaFavPodcast.podcasts.sort((a, b) => {
+      if (a.name < b.name) return -1;
+      else if (a.name > b.name) return 1;
+      else return 0;
+    });
+  }
+
+
   consola() {
     console.log(this.usuario);
   }
