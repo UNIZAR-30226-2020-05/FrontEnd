@@ -7,8 +7,8 @@
       <tr>
         <span *ngIf="esPodcast==true">
           <td  class="listaGen"><img class="imgGenCancion" src="../../assets/podcast1.jpg"/></td>
-          <td  class="titulos">{{podcast.name}}</td>
-          <td class="ultimoAlbumArtistas">{{podcast.artista}}</td>
+          <td  class="titulosP">{{podcast.name}}</td>
+          <td class="ultimoAlbumArtistasP">{{podcast.artista}}</td>
         </span>
 
         <span *ngIf="esPodcast==false">
@@ -39,7 +39,7 @@
   <div class="marco-tabla2">
     <table class="lista-podcast">
       <tr *ngFor="let podcast of usuario.lista_podcast; let i = index; first as primero">
-        <td  class="listaGen"><img class="imgGenCancion" src="../../assets/podcast1.jpg"/></td>
+        <td  class="listaGen"><img class="imgGenCancion" src="../../assets/ListaDefectoPodcast.png"/></td>
         <td  class="titulos" (click)="Servicio.nextMessageVistaPodcast(!okVistaPodcast);listaPulsadaPodcast(podcast.id);
           Servicio.activarVistaUsuario(false);Servicio.nextMessageUsuarioList(usuario)">{{ podcast.nombre }}</td>
         <td><span *ngIf="usuario.id==usuarioLog.id">
