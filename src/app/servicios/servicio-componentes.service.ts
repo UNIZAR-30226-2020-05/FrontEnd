@@ -44,6 +44,8 @@ export class ServicioComponentesService {
   vistaPodcast: boolean;
   objPodcast: ListaPodcast;
 
+  esta:boolean;
+
    /* --- Servicio reproducción de canciones ---- */
 
   listaReprActiva: Cancion[]; // Así chuta. No tocar.
@@ -107,6 +109,9 @@ export class ServicioComponentesService {
   /* Mensaje para pasar variable a panel Listas de lista */
   private messageList = new BehaviorSubject(this.lista);
   sharedMessageList = this.messageList.asObservable();
+
+  private comprobar = new BehaviorSubject(this.esta);
+  sharedMessageComprobar = this.comprobar.asObservable();
 
   /******VISTA DE LISTA CANCION**************/
   /* Mensaje para pasar variable que active o desactive la vista-lista*/
@@ -370,5 +375,37 @@ export class ServicioComponentesService {
 
   nextMessageUsuarioList(usuario) {
     this.usuarioLista.next(usuario);
+  }
+
+  comprobarSienFav(cancion,usuario){
+    if(cancion.album != 'esPODCAST'){ //es cancion
+      let encontrado=false;
+      for( const cancionc of usuario.lista_cancion[0].canciones ){
+        if(!encontrado){
+          if(cancionc.id == cancion.id){
+            encontrado=true;
+            this.comprobar.next(true);
+          }
+        }
+      }
+      if(encontrado==false){
+        this.comprobar.next(false);
+      }
+    }
+    else{
+      let encontrado=false;
+      for( const podcastc of usuario.lista_podcast[0].podcasts ){
+        if(!encontrado){
+          if(podcastc.id == cancion.id){
+            encontrado=true;
+            this.comprobar.next(true);
+          }
+        }
+      }
+      if(encontrado==false){
+        this.comprobar.next(false);
+      }
+    }
+
   }
 }
