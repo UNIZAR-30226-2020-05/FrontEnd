@@ -19,11 +19,9 @@
   top: 9%;
   left: 22%;
   position: fixed;
-  border-style: solid;
-  border-color: #b4b4b4;
-  border-inline-start-width: 8px;
-  width: fit-content;
-
+  border-style: outset;
+  border-color: white;
+  padding: 2px;
 }
 
 .titulo-eleccion {
