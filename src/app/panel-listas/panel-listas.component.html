@@ -1,36 +1,34 @@
 <!--/********** PANEL IZQUIERDO ************/ -->
 <div class="panel">
   <p class="titleP">PODCAST</p>
-  <p class="ListP" (click)="mostrarCrearP=true; mostrarFavP=false">
+  <p class="ListP" (click)="mostrarCrearP=true; mostrarFavP=false; Servicio.nextMessageBusq(false);">
     <img class="addP" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>
-  <p class="fave" (click)="mostrarFavP=!mostrarFavP;
+  <p class="fave" (click)="mostrarFavP=true;
     Servicio.nextMessage3(false);
     Servicio.nextMessageVistaPodcast(false);
     Servicio.activarVistaUsuario(false);
-    Servicio.nextMessageCentral(!mostrarFavP);
+    Servicio.nextMessageCentral(false);
     Servicio.nextMessageVistaLista(false);
     Servicio.activarVistaUsuario(false);
     Servicio.nextMessageArtista(false);
     Servicio.nextMessageEdit(false);
-    Servicio.nextMessageCentral(true);
     Servicio.nextMessageBusq(false);
     Servicio.nextMessageEdit2(false);
     mostrarFav = false">
     <img class= "favP" src="./../assets/icons8-lista-de-deseos-96.png"> Favoritos</p>
   <hr>
 <p class="titleL">PLAYLISTS</p>
-<p class="CrearList" (click)="mostrarCrearC=true;mostrarFav=false">
+<p class="CrearList" (click)="mostrarCrearC=true;mostrarFav=false; Servicio.nextMessageBusq(false);">
   <img class="iconoAñadir" src="../../assets/icons8-agregar-propiedad-96.png"> Crear lista</p>&nbsp;
-<p class="fav" (click)="mostrarFav=!mostrarFav;
+<p class="fav" (click)="mostrarFav=true;
     Servicio.nextMessage3(false);
     Servicio.nextMessageVistaLista(false);
     Servicio.activarVistaUsuario(false);
-    Servicio.nextMessageCentral(!mostrarFav);
+    Servicio.nextMessageCentral(false);
     Servicio.nextMessageVistaLista(false);
     Servicio.activarVistaUsuario(false);
     Servicio.nextMessageArtista(false);
     Servicio.nextMessageEdit(false);
-    Servicio.nextMessageCentral(true);
     Servicio.nextMessageBusq(false);
     Servicio.nextMessageEdit2(false);
     mostrarFavP = false;">
@@ -50,7 +48,8 @@
   <tbody>
   <tr>
     <th>
-      <span *ngIf="cancion.album!='esPODCAST'" class="titulo" (click)="Servicio.nextMessage3(true)">{{cancion.name}}</span>
+      <span *ngIf="cancion.album!='esPODCAST'" class="titulo" (click)="Servicio.cargarAlbum(cancion.album);
+        mostrarVistaAlbum()">{{cancion.name}}</span>
       <span *ngIf="cancion.album=='esPODCAST'" class="tituloP">{{cancion.name}}</span>
     </th>
     <th>
@@ -63,27 +62,21 @@
           </span>
         </span>
       <span *ngIf="cancion.album!='esPODCAST'">
-          <span *ngIf="enFav==true">
+          <span *ngIf="enFavC==true">
             <img class="heart" (click)="borrarCancion(cancion.id)" src="./../assets/icons8-Ya-me-gusta-.png">
           </span>
-          <span *ngIf="enFav==false">
-             <img  class="heart" (click)="addFav(listaFav.id,cancion.id);Servicio.comprobarSienFav(cancion,usuario)" src="./../assets/icons8-me-gusta-100.png">
+          <span *ngIf="enFavC==false">
+             <img  class="heart" (click)="addFav(listaFav.id,cancion.id)" src="./../assets/icons8-me-gusta-100.png">
           </span>
         </span>
 
     </th>
   </tr>
-  <!-- <tr>
-     <th>
-           <img *ngIf="enFav" class="heart" (click)="borrarCancion(cancion.id)" src="./../assets/icons8-Ya-me-gusta.png">
-           *ngIf="noEnFav"
-     </th>
-   </tr>-->
+
   <tr>
     <th>
         <span *ngIf="cancion.album!='esPODCAST'" class="autor" (click)="
-        Servicio.cargarArtista(cancion.artistas);
-        Servicio.nextMessageArtista(true);"> {{cancion.artistas}}</span>
+        cargarArtista(cancion.artistas[0])"> {{cancion.artistas}}</span>
       <span class="autorP" *ngIf="cancion.album=='esPODCAST'"> {{cancion.artistas}}</span>
     </th>
   </tr>
@@ -100,7 +93,7 @@
                               Servicio.activarVistaUsuario(false);
                               Servicio.nextMessageArtista(false);
                               Servicio.nextMessageUsuarioList(usuario);
-                              Servicio.nextMessageCentral(!okVistaPodcast);
+                              Servicio.nextMessageCentral(false);
                               Servicio.nextMessageVistaLista(false);
                               Servicio.nextMessageBusq(false);
                               mostrarFavP = false;
@@ -118,6 +111,7 @@
                               Servicio.nextMessage3(false);
                               Servicio.activarVistaUsuario(false);
                               Servicio.nextMessageArtista(false);
+                              Servicio.nextMessageCentral(false);
                               Servicio.nextMessageUsuarioList(usuario);
                               Servicio.nextMessageBusq(false);
                               mostrarFavP = false;

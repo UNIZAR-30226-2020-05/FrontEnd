@@ -84,7 +84,7 @@ export class ReproductorComponent implements OnInit {
     });
 
 
-    /* Recibe y actualiza cancion, podcast o lista a reproducir */ // Así chuta. No tocar.
+    /* Recibe y actualiza cancion, podcast o lista a reproducir */
     this.Servicio.cancionActiva.subscribe((listCan)  => {
       if (listCan != null) {
         /* Guarda la lista de reproducción */
@@ -94,7 +94,9 @@ export class ReproductorComponent implements OnInit {
         this.posicion = 0;
         this.cancionActual = aux;
         this.cargarAudio(aux);
-        }
+        if (listCan[0].album !== 'esPODCAST') {
+          this.actualizarCaratula(listCan[0].album);
+        }}
       });
 
     // Recibe el objeto usuario, y actualiza cuando se cambia.
@@ -159,8 +161,9 @@ export class ReproductorComponent implements OnInit {
                 }
               );
           }
-          this.usuarioActual = userRecibido;
+
       }}
+      this.usuarioActual = userRecibido;
       this.deLogin = false;
     });
 
@@ -188,7 +191,11 @@ export class ReproductorComponent implements OnInit {
     this.cancion.play();
     this.activo = true;
     this.Servicio.establecerCancionActual(orig);
-    this.Servicio.comprobarSienFav(orig,this.usuarioActual);
+    console.log(this.usuarioActual);console.log(orig);
+    if (this.usuarioActual.lista_podcast.length > 0 &&
+      this.usuarioActual.lista_cancion.length > 0) {
+      this.Servicio.comprobarSienFav(orig, this.usuarioActual); ///--aver
+    }
   }
 
   avanzarLista() { // Así no peta

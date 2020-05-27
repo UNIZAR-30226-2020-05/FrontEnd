@@ -4,7 +4,7 @@
     <img class="img-lista" src="../../assets/ListaDefecto.png"/>
   </div>
 
-  <span *ngIf="usuario.id==usuarioLog.id"> <img class="img-papel" title="Borrar lista"(click)="borrar()" src="../../assets/trash.png"/></span>
+  <span *ngIf="usuario.id==usuarioLog.id && listaMostrar.nombre!='Favoritos'"> <img class="img-papel" title="Borrar lista"(click)="borrar()" src="../../assets/trash.png"/></span>
   <div *ngIf="listaMostrar.canciones.length>0 && listaMostrar.nombre!='Favoritos'">
     <!-- Se ha puesto la imagen por defecto, de momento, pero deberia ir la de la primera cancion. -->
       <img class="img-lista" src="{{Servicio.URL_API+albumActual.caratula}}"/>
@@ -36,11 +36,8 @@
       <tr *ngFor="let cancion of listaMostrar.canciones; let i = index">
         <td  class="listaGen"><img class="imgGenCancion" (click)="cargarCaratula(cancion.album);Servicio.reproducirCancion(cancion)"
                                    src="../../assets/play-vector.svg"/></td>
-        <td  class="titulos-album" (click)="Servicio.cargarAlbum(cancion.album);Servicio.nextMessage3(true);
-          Servicio.nextMessageVistaLista(false)">{{ cancion.name }}</td><td> <span class="artista"(click)="
-              Servicio.cargarArtista(cancion.artistas);
-              Servicio.nextMessageArtista(true);
-              Servicio.nextMessageVistaLista(false)">{{cancion.artistas}}</span></td>
+        <td  class="titulos-album" (click)="Servicio.cargarAlbum(cancion.album);mostrarVistaAlbum()">{{ cancion.name }}</td><td> <span class="artista"(click)="
+              cargarArtista(cancion.artistas[0])">{{cancion.artistas}}</span></td>
         <td>{{sacarTiempo(cancion.duracion)}}</td><td>Pista {{i+1}}</td>
         <td><span *ngIf="usuarioLog.id==usuario.id"> <img class="img-papel2" title="Borrar cancion" (click)="borrarCancion(cancion.id,listaMostrar.id)" src="../../assets/trash.png"/></span></td>
       </tr>
