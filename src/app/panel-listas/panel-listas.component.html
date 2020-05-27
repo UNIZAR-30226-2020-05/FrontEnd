@@ -62,10 +62,10 @@
           </span>
         </span>
       <span *ngIf="cancion.album!='esPODCAST'">
-          <span *ngIf="enFav==true">
-            <img class="heart" (click)="borrarCancion(cancion.id);enFav=false" src="./../assets/icons8-Ya-me-gusta-.png">
+          <span *ngIf="enFavC==true">
+            <img class="heart" (click)="borrarCancion(cancion.id)" src="./../assets/icons8-Ya-me-gusta-.png">
           </span>
-          <span *ngIf="enFav==false">
+          <span *ngIf="enFavC==false">
              <img  class="heart" (click)="addFav(listaFav.id,cancion.id)" src="./../assets/icons8-me-gusta-100.png">
           </span>
         </span>

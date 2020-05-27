@@ -57,7 +57,8 @@ export class VistaAlbumComponent implements OnInit {
   anyadirAlista( id_lista: number, id_c: number) {
 
     this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + id_lista, id_c).subscribe(
-      (resp: ListaCancion) => { console.log(resp); this.userActivo.lista_cancion[0]=resp;this.Servicio.nextMessage(this.userActivo) } );
+      (resp: ListaCancion) => { console.log(resp);
+      if(resp.nombre == 'Favoritos'){this.userActivo.lista_cancion[0]=resp;this.Servicio.nextMessage(this.userActivo);this.Servicio.enviarFav(true)} } );
   }
 
   anyadirAlbumAlista(id_lista: number){
