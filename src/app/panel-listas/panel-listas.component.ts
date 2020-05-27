@@ -51,24 +51,22 @@ export class PanelListasComponent implements OnInit {
   listasUser;
   listasUserPodcast;
 
-  listaMantener: ListaCancion = new ListaCancion();
+  listaMantener: Array<Cancion> =new Array<Cancion>();
   listaMantener2: ListaPodcast = new ListaPodcast();
 
   enFav:boolean=false;
-  noEnFav:boolean=false;
+  enFavC:boolean=false;
 
 
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
-    this.album.caratula="https://i.dlpng.com/static/png/6331252_preview.png";
-
+    this.album.caratula="/imagenes/albums/album_default.png";
   }
 
   ngOnInit(): void {
     this.Servicio.sharedMessage.subscribe(message => {
       if(message != null){this.usuario=message;
       this.listaFav=this.usuario.lista_cancion[0];
-      this.listaMantener=this.usuario.lista_cancion[0];
-        this.listaMantener2=this.usuario.lista_podcast[0];
+      this.enFav = false;
       this.listasUser=this.usuario.lista_cancion;
       this.listaFavPodcast= this.usuario.lista_podcast[0];
       this.listasUserPodcast=this.usuario.lista_podcast}
@@ -88,6 +86,7 @@ export class PanelListasComponent implements OnInit {
     this.Servicio.sharedMessageBorrarLista.subscribe(lista => this.listasUserPodcast = lista);
     this.Servicio.sharedMessageidList.subscribe(lista => this.idListaBorrada = lista);
     this.Servicio.sharedMessageComprobar.subscribe(esta => this.enFav= esta);
+    this.Servicio.sharedMessageComprobarC.subscribe(estaC => this.enFavC= estaC);
 
   }
   newMessage() {
@@ -152,13 +151,13 @@ export class PanelListasComponent implements OnInit {
   addFav(id_lista:number,id_cancion: number){
 
     this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + id_lista, id_cancion).subscribe( (resp:ListaCancion) =>{
-    console.log(resp);this.listaFav=resp;this.Servicio.nextMessage(this.usuario)});
+    console.log(resp);this.listaFav=resp;this.enFavC=true;this.usuario.lista_cancion[0]=resp;this.Servicio.nextMessage(this.usuario)});
   }
 
   addFavPodcast(id_lista:number,id_cancion: number){
 
     this.http.patch(this.Servicio.URL_API + '/listaPodcast/add/' + id_lista, id_cancion).subscribe( (resp:ListaPodcast) =>{
-      console.log(resp);this.listaFavPodcast=resp});
+      console.log(resp);this.listaFavPodcast=resp;this.enFav=true;this.usuario.lista_podcast[0]=resp;this.Servicio.nextMessage(this.usuario)});
   }
   sacarTiempo(n: number) {
     let s = '';
@@ -180,18 +179,20 @@ export class PanelListasComponent implements OnInit {
 
   borrarCancion(cancion:number){
     this.http.patch(this.Servicio.URL_API + '/listaCancion/deleteSong/' + this.listaFav.id, cancion).subscribe((resp:ListaCancion) =>
-    {console.log(resp); this.listaFav=resp});
+    {console.log(resp); this.listaFav=resp;
+    if(cancion == this.cancion.id){this.enFavC=false}this.usuario.lista_cancion[0]=resp;this.Servicio.nextMessage(this.usuario)});
 
   }
 
 
   borrarPodcast(podcast:number){
     this.http.patch(this.Servicio.URL_API + '/listaPodcast/deletePodcast/' + this.listaFavPodcast.id, podcast).subscribe((resp:ListaPodcast) =>
-    {console.log(resp); this.listaFavPodcast=resp});
+    {console.log(resp); this.listaFavPodcast=resp;
+    if(podcast == this.cancion.id){this.enFav=false}this.usuario.lista_podcast[0]=resp;this.Servicio.nextMessage(this.usuario)});
 
   }
   ordenarFecha(){
-    this.listaFav.canciones=this.listaMantener.canciones.reverse();
+    this.listaFav.canciones=this.listaFav.canciones.reverse();
 
   }
   ordenarArtista(){
@@ -211,7 +212,7 @@ export class PanelListasComponent implements OnInit {
     });
   }
   ordenarFechaP(){
-    this.listaFavPodcast.podcasts=this.listaMantener2.podcasts.reverse();
+    this.listaFavPodcast.podcasts=this.listaFavPodcast.podcasts.reverse();
 
   }
 
@@ -291,5 +292,6 @@ export class PanelListasComponent implements OnInit {
     this.Servicio.nextMessageEdit2(false);
     this.Servicio.nextMessageBusq(false);
   }
+
 
 }

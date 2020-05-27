@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ServicioComponentesService} from "../servicios/servicio-componentes.service";
-import {ListaCancion, User, Cancion, Album} from "../app.component";
+import {ListaCancion, User, Cancion, Album, Artista} from "../app.component";
 import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Component({
@@ -114,4 +114,46 @@ export class VistaListaComponent implements OnInit {
     });
   }
 
+  cargarArtista(art: string) {
+    const params = new HttpParams().set('name', art);
+    this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
+      .subscribe(
+        (resp: Array<Artista>) => {
+          this.Servicio.cargarAlbumesArtista(resp[0].id);
+          this.Servicio.cargarArtista(art);
+          this.mostrarVistaArtista()
+        },
+        (erroro: string) => {
+        }
+      );
+  }
+
+  mostrarVistaArtista() { // Gestionar TODOS los casos que pueden pasar.
+    this.Servicio.nextMessage3(false); // Desactiva album
+    this.Servicio.nextMessageVistaLista(false); // Desactiva vista de playlist.
+    this.Servicio.activarVistaUsuario(false); // Desactiva vista usuarios.
+    this.Servicio.nextMessageArtista(true); // Activa vista artista.
+    this.Servicio.nextMessageCentral(false); // Desactiva central
+    this.Servicio.nextMessageFavList(false);
+    this.Servicio.nextMessageEdit(false);
+    this.Servicio.nextMessageEdit2(false);
+    this.Servicio.nextMessageBusq(false);
+    this.Servicio.nextMessageFavListP(false);
+    this.Servicio.nextMessageVistaLista(false);
+    this.Servicio.nextMessageVistaPodcast(false);
+  }
+  mostrarVistaAlbum() { // Gestionar TODOS los casos que pueden pasar.
+    this.Servicio.nextMessage3(true); // Activa album
+    this.Servicio.nextMessageVistaLista(false); // Desactiva vista de playlist.
+    this.Servicio.activarVistaUsuario(false); // Desactiva vista usuarios.
+    this.Servicio.nextMessageArtista(false); // Desactiva vista artista.
+    this.Servicio.nextMessageCentral(false); // Desactiva central
+    this.Servicio.nextMessageFavList(false);
+    this.Servicio.nextMessageFavListP(false);
+    this.Servicio.nextMessageVistaLista(false);
+    this.Servicio.nextMessageVistaPodcast(false);
+    this.Servicio.nextMessageEdit(false);
+    this.Servicio.nextMessageEdit2(false);
+    this.Servicio.nextMessageBusq(false);
+  }
 }

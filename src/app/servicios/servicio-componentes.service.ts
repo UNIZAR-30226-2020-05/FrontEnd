@@ -45,6 +45,7 @@ export class ServicioComponentesService {
   objPodcast: ListaPodcast;
 
   esta:boolean;
+  estaC:boolean;
 
    /* --- Servicio reproducción de canciones ---- */
 
@@ -112,6 +113,9 @@ export class ServicioComponentesService {
 
   private comprobar = new BehaviorSubject(this.esta);
   sharedMessageComprobar = this.comprobar.asObservable();
+
+  private comprobarC = new BehaviorSubject(this.estaC);
+  sharedMessageComprobarC = this.comprobarC.asObservable();
 
   /******VISTA DE LISTA CANCION**************/
   /* Mensaje para pasar variable que active o desactive la vista-lista*/
@@ -268,9 +272,9 @@ export class ServicioComponentesService {
       artistas: new Array<string>(),
       album: 'esPODCAST'
     };
+    transform.artistas[0] = pod.artista;
     const nuev = new Array<Cancion>();
     nuev.push(transform);
-    console.log(nuev);
     this.reproducirLista(nuev);
   }
 
@@ -285,7 +289,7 @@ export class ServicioComponentesService {
 
   reproducirListaPodcast(podList: Array<Podcast>) {
     const listCan: Array<Cancion> = new Array<Cancion>();
-    for(const pod of podList) {
+    for (const pod of podList) {
       const transform: Cancion = {
         id: pod.id,
         name: pod.name,
@@ -294,6 +298,7 @@ export class ServicioComponentesService {
         artistas: new Array<string>(),
         album: 'esPODCAST'
       };
+      transform.artistas[0] = pod.artista;
       listCan.push(transform);
       this.reproducirLista(listCan);
     }
@@ -384,12 +389,12 @@ export class ServicioComponentesService {
         if(!encontrado){
           if(cancionc.id == cancion.id){
             encontrado=true;
-            this.comprobar.next(true);
+            this.comprobarC.next(true);
           }
         }
       }
       if(encontrado==false){
-        this.comprobar.next(false);
+        this.comprobarC.next(false);
       }
     }
     else{
@@ -408,4 +413,13 @@ export class ServicioComponentesService {
     }
 
   }
+
+  enviarFav(fav){
+    this.comprobarC.next(fav);
+  }
+
+  enviarFavP(fav){
+    this.comprobar.next(fav);
+  }
+
 }

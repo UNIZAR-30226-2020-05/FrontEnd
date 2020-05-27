@@ -55,6 +55,7 @@ export class CentralComponent implements OnInit {
       (resp: ListaPodcast) => {
           if( id_lista==this.usuarioLogeado.lista_podcast[0].id){
               this.usuarioLogeado.lista_podcast[0]=resp;
+              this.Servicio.enviarFavP(true);
           }
           this.Servicio.nextMessage(this.usuarioLogeado); } );
   }

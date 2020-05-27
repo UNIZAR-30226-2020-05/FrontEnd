@@ -1,6 +1,6 @@
 import {Component, OnInit,Input, Output} from '@angular/core';
 import {ServicioComponentesService} from '../servicios/servicio-componentes.service';
-import {Album, ListaCancion, User} from '../app.component';
+import {Album, Artista, ListaCancion, User} from '../app.component';
 import {HttpClient, HttpParams} from '@angular/common/http';
 
 @Component({
@@ -57,7 +57,8 @@ export class VistaAlbumComponent implements OnInit {
   anyadirAlista( id_lista: number, id_c: number) {
 
     this.http.patch(this.Servicio.URL_API + '/listaCancion/add/' + id_lista, id_c).subscribe(
-      (resp: ListaCancion) => { console.log(resp); this.userActivo.lista_cancion[0]=resp;this.Servicio.nextMessage(this.userActivo) } );
+      (resp: ListaCancion) => { console.log(resp);
+      if(resp.nombre == 'Favoritos'){this.userActivo.lista_cancion[0]=resp;this.Servicio.nextMessage(this.userActivo);this.Servicio.enviarFav(true)} } );
   }
 
   anyadirAlbumAlista(id_lista: number){
@@ -73,4 +74,18 @@ export class VistaAlbumComponent implements OnInit {
   consola(){
     console.log(this.albActivo);
   }
+
+  cargarArtista(art: string) {
+    const params = new HttpParams().set('name', art);
+    this.http.get(this.Servicio.URL_API + '/artist/getByName', {params})
+      .subscribe(
+        (resp: Array<Artista>) => {
+          this.Servicio.cargarAlbumesArtista(resp[0].id);
+          this.Servicio.cargarArtista(art);
+        },
+        (erroro: string) => {
+        }
+      );
+  }
+
 }

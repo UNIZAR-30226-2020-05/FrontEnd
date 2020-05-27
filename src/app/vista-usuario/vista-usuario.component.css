@@ -46,7 +46,6 @@
 .imgGenCancion{
   width: 4vw;
   vertical-align: middle;
-  cursor: pointer;
 }
 
 .lista-playlist{
@@ -120,6 +119,11 @@
   text-decoration: underline;
 }
 
+.titulosP{
+  font-size: 110%;
+  top:5%;
+}
+
 ::-webkit-scrollbar {
   width: 13px;
 }
@@ -150,6 +154,7 @@
   text-decoration: underline;
 }
 
-.ultimoAlbumArtistas{
+.ultimoAlbumArtistas:hover{
   cursor: pointer;
+  text-decoration: underline;
 }
