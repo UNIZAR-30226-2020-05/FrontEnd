@@ -60,13 +60,13 @@ export class PanelListasComponent implements OnInit {
 
   constructor(private http: HttpClient, public Servicio: ServicioComponentesService) {
     this.album.caratula="/imagenes/albums/album_default.png";
-
   }
 
   ngOnInit(): void {
     this.Servicio.sharedMessage.subscribe(message => {
       if(message != null){this.usuario=message;
       this.listaFav=this.usuario.lista_cancion[0];
+      this.enFav = false;
       this.listasUser=this.usuario.lista_cancion;
       this.listaFavPodcast= this.usuario.lista_podcast[0];
       this.listasUserPodcast=this.usuario.lista_podcast}

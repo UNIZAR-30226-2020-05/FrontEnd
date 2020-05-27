@@ -38,11 +38,9 @@
   top: 10.5%;
   left: 24%;
   position: fixed;
-  border-style: solid;
-  border-color: #b4b4b4;
-  /*border-inline-start-width: 8px;*/
-  width: fit-content;
-  font-size: 90%;
+  border-style: outset;
+  border-color: white;
+  padding: 2px;
 
 }
 
